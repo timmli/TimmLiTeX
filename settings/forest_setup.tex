@@ -1,0 +1,46 @@
+\usepackage{forest}
+
+\makeatletter
+
+\@ifpackagelater{forest}{2016/01/01}
+{\useforestlibrary{linguistics}}
+{}
+
+\@ifpackagelater{forest}{2016/01/01}
+{\newcommand{\forestPreamble}{default preamble}} % version >=2 of forest
+  {\newcommand{\forestPreamble}{.style}} % version <=1 of forest
+
+\makeatother
+  
+\forestset{
+  \forestPreamble ={
+	% % .style={ % version <=1 of forest
+	% default preamble={ % version >=2 of forest    
+		for tree={
+			parent anchor=south, 
+			child anchor=north,
+			% align=center,			% bad: adds space below label
+			fit=rectangle,
+			base=top,				% vertical orientation of nodes
+			% inner sep=3,			% necesssary?
+			begin draw/.code={\begin{tikzpicture}[baseline=(current bounding box.center)]},
+			}},
+    sn edges/.style={for tree={parent anchor=south, child anchor=north}},
+    red subtree/.style={for tree={text=red},for descendants={edge=red}},
+    black subtree/.style={for tree={text=black},for descendants={edge=black}},
+    gray subtree/.style={for tree={text=gray},for descendants={edge=gray}},
+    vcenter/.style={begin draw/.code={\begin{tikzpicture}[baseline=(current bounding box.center)]}},
+      empty nodes/.style={	% from the forest manual
+        for tree={
+          % calign=fixed edge angles,
+          yshift=1ex},
+        delay={where content={}{shape=coordinate,for parent={for children={anchor=north}}}{}}},
+      derivation tree/.style={.style={
+          for tree={parent anchor={},child anchor={},font=\ttfamily}}},
+      dt label/.style 2 args={
+        edge label={node[midway,font=\ttfamily\scriptsize, #1]{#2}},},
+    }
+
+   
+
+    

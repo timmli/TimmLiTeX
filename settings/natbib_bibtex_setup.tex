@@ -1,0 +1,11 @@
+\usepackage{natbib}
+\setlength{\bibsep}{0mm}
+%\setcitestyle{notesep={: }} 
+\bibpunct[: ]{(}{)}{;}{a}{}{;}
+\bibliographystyle{bst/unified}
+
+\newcommand{\insertBib}{
+	\bibliography{references}
+}
+
+\let\cite=\citet 	% in order to prevent inconsistencies between \cite and \citet

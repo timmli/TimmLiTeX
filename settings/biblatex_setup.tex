@@ -1,0 +1,105 @@
+\newcommand{\mycitestyle}{bst/sp-authoryear-comp}
+\makeatletter
+\@ifclassloaded{beamer}{\renewcommand{\mycitestyle}{numeric-comp}}{}
+\makeatother
+
+\usepackage[
+  natbib=true,
+  style=bst/biblatex-sp-unified,
+  citestyle=\mycitestyle,
+  %refsection=chapter,
+  maxbibnames=99,
+  isbn=false,
+  doi=false,
+  eprint=false,
+  %backend=biber,
+  backend=bibtex,
+  % sorting=ydnt,  % sort in descending chronological order
+  indexing=cite,
+  labelnumber,  % for numeric bibliography in beamer
+  %toc=bib    % make bibliography appear in toc, incompatible with beamer
+  ]{biblatex}
+\renewcommand{\postnotedelim}{: }%
+\renewcommand{\multicitedelim}{\addsemicolon\space}%
+\renewcommand{\compcitedelim}{\multicitedelim}%
+\DeclareFieldFormat{postnote}{#1}%
+
+%% beamer settings
+\makeatletter
+\@ifclassloaded{beamer}{  
+  \DeclareFieldFormat{labelnumberwidth}{[#1]}
+  \defbibenvironment{bibliography}  % from numeric.bbx
+      {\list
+        {\printtext[labelnumberwidth]{%
+          \printfield{prefixnumber}%
+          \printfield{labelnumber}}}
+        {\setlength{\labelwidth}{\labelnumberwidth}%
+            \setlength{\leftmargin}{\labelwidth}%
+            \setlength{\labelsep}{1em}%
+            \addtolength{\leftmargin}{1em}%
+            \setlength{\itemsep}{\bibitemsep}%
+            \setlength{\parsep}{\bibparsep}}%
+            \renewcommand*{\makelabel}[1]{\hss##1}}
+      {\endlist}
+      {\item}
+    % \DeclareCiteCommand{\supercite}[\mkbibsuperscript]{
+    %   \iffieldundef{prenote}
+    %     {}
+  %     {\BibliographyWarning{Ignoring prenote argument}}%
+  %   \iffieldundef{postnote}
+  %     {}
+  %     {\BibliographyWarning{Ignoring postnote argument}}}
+    %   {\usebibmacro{citeindex}%
+  %      \color{gray}\bibopenbracket\usebibmacro{cite}\bibclosebracket}
+    %   {\supercitedelim}
+    %   {}
+    \DeclareCiteCommand{\supercite}[\mkbibsuperscript]
+      {\color{gray} % added color
+      \usebibmacro{cite:init}%
+      \let\multicitedelim=\supercitedelim
+      \iffieldundef{prenote}
+        {}
+        {\BibliographyWarning{Ignoring prenote argument}}%
+      \iffieldundef{postnote}
+        {}
+        {\BibliographyWarning{Ignoring postnote argument}}%
+      \bibopenbracket}%
+      {\usebibmacro{citeindex}%
+       \usebibmacro{cite:comp}}
+      {}
+      {\usebibmacro{cite:dump}\bibclosebracket}
+
+  \DeclareCiteCommand{\citeauthor}  % from sp-authoryear-comp.cbx; to add hyperref link  
+    {\boolfalse{citetracker}%
+     \boolfalse{pagetracker}%
+     \usebibmacro{prenote}}
+    {\ifciteindex
+       {\indexnames{labelname}}
+       {}%
+     \printtext[bibhyperref]{\printnames{labelname}}}
+    {\multicitedelim}
+    {\usebibmacro{postnote}}
+
+  \DeclareCiteCommand{\citeyear}  % from sp-authoryear-comp.cbx; to add hyperref link  
+    {\boolfalse{citetracker}%
+     \boolfalse{pagetracker}%
+     \usebibmacro{prenote}}
+    {\printfield[bibhyperref]{year}}
+    {\multicitedelim}
+    {\usebibmacro{postnote}}
+}{}
+\makeatother
+
+
+
+\addbibresource[datatype=bibtex]{references.bib}
+
+\newcommand{\insertBib}{
+  \printbibliography[
+    %notkeyword=this
+    ] 
+}
+
+\let\cite=\citet  % in order to prevent inconsistencies between \cite and \citet
+\newcommand{\citeauthoryear}[1]{\citeauthor{#1} (\citeyear{#1})}
+\newcommand{\citealtauthoryear}[1]{\citeauthor{#1} \citeyear{#1}}

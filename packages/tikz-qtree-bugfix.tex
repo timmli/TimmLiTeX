@@ -1,0 +1,47 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% tikz-qtree bugfix by Andrew Stacey  
+\makeatletter
+ 
+\def\unwind@subpic#1{%
+% is #1 the current picture?
+\edef\subpicid{#1}%
+\ifx\subpicid\pgfpictureid
+% yes, we're done
+\else
+% does #1 have a parent picture?
+\expandafter\ifx\csname pgf@sh@pi@#1\endcsname\relax
+% no, the original node was not inside the current picture
+\pgf@xa=\pgf@x
+\pgf@ya=\pgf@y
+\pgfsys@getposition{\pgfpictureid}\pgf@shape@current@pos
+\pgf@process{\pgfpointorigin\pgf@shape@current@pos}%
+\advance\pgf@xa by-\pgf@x%
+\advance\pgf@ya by-\pgf@y%
+\pgf@process{\pgfpointorigin\subpic@parent@pos}%
+\advance\pgf@xa by \pgf@x%
+\advance\pgf@ya by \pgf@y%
+\pgf@x=\pgf@xa
+\pgf@y=\pgf@ya
+\else
+% yes, apply transform, save picture location, and move up to parent picture
+\pgfsys@getposition{\csname pgf@sh@pi@#1\endcsname}\subpic@parent@pos%
+{%
+  \pgfsettransform{\csname pgf@sh@nt@#1\endcsname}%
+  \pgf@pos@transform{\pgf@x}{\pgf@y}%
+  \global\pgf@x=\pgf@x
+  \global\pgf@y=\pgf@y
+}%
+\unwind@subpic{\csname pgf@sh@pi@#1\endcsname}%
+\fi
+\fi
+}
+
+
+\def\pgf@shape@interpictureshift#1{%
+\def\subpic@parent@pos{\pgfpointorigin}%
+\unwind@subpic{\csname pgf@sh@pi@#1\endcsname}%
+}
+
+\makeatother
+% tikz-qtree bugfix by Andrew Stacey 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

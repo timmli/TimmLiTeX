@@ -1,0 +1,75 @@
+\usepackage{listings}
+
+\lstset{basicstyle=\ttfamily,tabsize=2,breaklines=true}
+\usepackage{color}
+\definecolor{lightgray}{gray}{0.7}
+
+\lstnewenvironment{xmg}{%
+  \lstset{language=,
+    numbers=left,numbersep=8pt,numberstyle=\color{lightgray},
+    %frame=l,
+    basicstyle=\small\ttfamily,%
+    xleftmargin=0.7cm,framexleftmargin=12pt,%
+    framerule=0.5mm,rulecolor=\color{lightgray},%
+    escapeinside={|\%}{\%|},%
+    commentstyle=\color{lightgray},
+    literate={->}{{{\textbf{->}}}}1 {\{}{{{\textbf{\{}}}}1 {\}}{{{\textbf{\}}}}}1 {\;}{{{\textbf{;}}}}1 {|}{{{\textbf{|}}}}1 {=}{{{\textbf{=}}}}1 {[}{{{\textbf{[}}}}1 {]}{{{\textbf{]}}}}1 {<}{{{\textbf{<}}}}1 {>}{{{\textbf{>}}}}1 {!}{{{\textbf{!}}}}1 {?}{{{\textbf{?}}}}1 {*=}{{{\textbf{*=}}}}1,% 
+    morekeywords={node,type,feature,include,class,import,export,declare,syn,sem,frame,morph,value, use, with, dims}}}{}
+
+\lstnewenvironment{duelme}{%
+  \lstset{language=,
+    numbers=left,numbersep=8pt,numberstyle=\color{lightgray},
+    %frame=l,
+    basicstyle=\small\ttfamily,%
+    xleftmargin=0.7cm,framexleftmargin=12pt,%
+    framerule=0.5mm,rulecolor=\color{lightgray},%
+    escapeinside={|\%}{\%|},%
+    commentstyle=\color{lightgray},     morekeywords={PATERN,NAME,POS,PATTERN,MAPPING,EXAMPLE,MWE,SENTENCE,DESCRIPTION,COMMENT,LISTA,LISTB,SUBJECT,OBJECT,MODIFIER,RPRON,CONJUGATION,POLARITY,EXPRESSION,CL}}}{}
+
+\lstnewenvironment{patr-listing}{%
+  \lstset{language=,
+  numbers=left,numbersep=8pt,numberstyle=\color{lightgray},
+  % frame=l,
+  basicstyle=\small\ttfamily,%
+  xleftmargin=0.7cm,framexleftmargin=12pt,%
+  framerule=0.5mm,rulecolor=\color{lightgray},%
+  escapeinside={|\%}{\%|},%
+  commentstyle=\color{lightgray},
+  literate={:}{{{\textbf{:}}}}1 {\{}{{{\textbf{\{}}}}1 {\}}{{{\textbf{\}}}}}1 {=}{{{\textbf{=}}}}1 {[}{{{\textbf{[}}}}1 {]}{{{\textbf{]}}}}1 {<}{{{\textbf{<}}}}1 {>}{{{\textbf{>}}}}1 {!}{{{\textbf{!}}}}1, 
+  morekeywords={Define,as,Word}}}{}
+
+
+\newcommand{\ixmg}{%
+  \lstinline[language=,keepspaces,%
+      literate={->}{{{\textbf{->}}}}1 {\{}{{{\textbf{\{}}}}1 {\}}{{{\textbf{\}}}}}1 {\;}{{{\textbf{;}}}}1 {|}{{{\textbf{|}}}}1 {=}{{{\textbf{=}}}}1 {[}{{{\textbf{[}}}}1 {]}{{{\textbf{]}}}}1 {<}{{{\textbf{<}}}}1 {>}{{{\textbf{>}}}}1 {!}{{{\textbf{!}}}}1 {?}{{{\textbf{?}}}}1 {*=}{{{\textbf{*=}}}}1,%
+      morekeywords={node,type,feature,include,class,import,export,declare,syn,sem,frame,morph,value, use, with, dims}
+      ]}
+
+% \lstset{
+%   basicstyle=\small\ttfamily,       
+%   %stepnumber=1,
+%   tabsize=2,
+%   breaklines=true,
+%   linewidth=\textwidth,
+%   escapeinside={<ESC>}{</ESC>},
+%   %prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\rhookswarrow}},
+%   %postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\rcurvearrowse\space}}
+%   }           
+
+%   \lstnewenvironment{xmg}{%
+%   \lstset{
+%     language=,
+%     frame=l,
+%     basicstyle=\normalsize\ttfamily,%
+%     xleftmargin=0.6cm,framexleftmargin=0.3cm,%
+%     framerule=0.5mm,rulecolor=\color{lightgray},%
+%     escapeinside={<ESC>}{</ESC>},%
+%     commentstyle=\color{lightgray},
+%     literate={->}{{{\textbf{->}}}}1 {\{}{{{\textbf{\{}}}}1 {\}}{{{\textbf{\}}}}}1 {\;}{{{\textbf{;}}}}1 {|}{{{\textbf{|}}}}1 {=}{{{\textbf{=}}}}1 {[}{{{\textbf{[}}}}1 {]}{{{\textbf{]}}}}1 {<}{{{\textbf{<}}}}1 {>}{{{\textbf{>}}}}1 {!}{{{\textbf{!}}}}1 {?}{{{\textbf{?}}}}1 {*=}{{{\textbf{*=}}}}1,% 
+%     morekeywords={node,type,feature,include,class,import,export,declare,syn,sem,value, use, with, dims,frame,morph}}}{}
+
+% \newcommand{\ixmg}{%
+%   \lstinline[language=,keepspaces,%
+%       literate={->}{{{\textbf{->}}}}1 {\{}{{{\textbf{\{}}}}1 {\}}{{{\textbf{\}}}}}1 {\;}{{{\textbf{;}}}}1 {|}{{{\textbf{|}}}}1 {=}{{{\textbf{=}}}}1 {[}{{{\textbf{[}}}}1 {]}{{{\textbf{]}}}}1 {<}{{{\textbf{<}}}}1 {>}{{{\textbf{>}}}}1 {!}{{{\textbf{!}}}}1 {?}{{{\textbf{?}}}}1 {*=}{{{\textbf{*=}}}}1,%
+%       morekeywords={node,type,feature,include,class,import,export,declare,syn,sem,value, use, with, dims,frame,morph}
+%       ]}

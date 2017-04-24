@@ -1,0 +1,66 @@
+% input UTF8, to be compiled with PDFLaTeX
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   Preamble (do not change)  % 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[11pt,twoside]{scrartcl}
+
+%% Encoding, fonts, language
+\input{settings/pdflatex_setup.tex}
+
+\input{settings/scrarticle_setup.tex}
+
+\input{settings/biblatex_setup.tex}
+
+\usepackage{linguex}	% for linguistic examples
+\usepackage{tipa}	% for phonetic symbols
+\input{settings/avm_setup.tex}
+\input{settings/forest_setup.tex}
+
+\usepackage{url}
+
+\usepackage{lipsum}
+
+\begin{document}
+
+%%%%%%%%%%%%%
+%   Title   % 
+%%%%%%%%%%%%%
+
+\subject{Essay}
+\title{Titel over two \newlineTitle lines}	% change title
+\author{Max Mustermann}	% change name
+\affiliation{
+		Matrikelnummer: 123456789\\	% change Matrikelnummer
+		\url{mustermann@phil.hhu.de}\\	% change email address
+		Seminar: Complexity in grammar, Heinrich-Heine-Universität, WS 2015/2016}
+
+\maketitle 
+
+%%%%%%%%%%%%%%%%%%%%%%
+%   Document start   % 
+%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Information about the template}
+
+\input{README.tex}
+
+\input{examples/master-examples}
+
+\section{Blindtext}
+
+\lipsum
+
+
+%%%%%%%%%%%%%%%%%%%
+%   Document end  % 
+%%%%%%%%%%%%%%%%%%%
+
+\insertBib
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

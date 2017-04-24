@@ -1,0 +1,32 @@
+\begin{frame}
+  \frametitle{Overlays}
+  {\small 
+
+    Explicit specification of overlays:
+    \begin{itemize}
+    \item \color<2>{red}{Changing colors ...}
+    \item \alert<3>{Alert mode ...} 
+    \item \textbf<4>{Changing the font face ...}
+    \item \only<-5>{Changing existence ...} 
+    \item \visible<-6>{Changing visability ...}
+    \item \uncover<7->{Uncovering from grey ...}
+    \item \alt<8>{Specifying alternations ...}{... in one instruction}
+    \end{itemize}
+
+    \vfill
+    {\tt $\backslash$pause[<number>]} separates two overlays.
+
+    \vfill
+    Overlays in list environments:
+    \begin{itemize}
+    \item<9-> First item
+    \item<alert@10> Second item with alert
+    \item Alternatively, list environments can have an overlay option such as {\tt <+-> } or {\tt <+- alert@ +>}.
+    \end{itemize}
+
+    \vfill
+    Remember that you can declare overlays in the frame options.
+    \hyperlink{frameoptions}{\beamerbutton{The frame environment}}
+
+  }
+\end{frame}

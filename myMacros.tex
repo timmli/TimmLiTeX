@@ -1,0 +1,55 @@
+%%%%%%%%%%%%%%%%%%%%%%
+%   TODONOTES        % 
+%%%%%%%%%%%%%%%%%%%%%%
+ 
+\usepackage{soul}   % for text highlighting
+\usepackage[textsize=scriptsize,textwidth=2.5cm]{todonotes}
+\newcommand{\todoregion}[2]{\hl{#1}\todo{#2}}    
+
+%%%%%%%%%%%%%%%%%%%%%%
+%   MISCELLANEOUS    % 
+%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+    \node[shape=circle,draw,inner sep=.15ex] (char) {#1};}}
+\newcommand{\svar}[1]
+   {\setbox2=\hbox{$\scriptstyle #1$}\lower.2ex\vbox{\hrule
+     \hbox{\vrule\kern1.25pt 
+     \vbox{\kern1.25pt\box2\kern1.25pt}\kern1.25pt\vrule}\hrule}}
+\newcommand{\ssvar}[1]
+   {\setbox2=\hbox{\scalebox{.7}{$#1$}}\lower.3ex\vbox{\hrule
+     \hbox{\vrule\kern1pt 
+     \vbox{\kern1pt\box2\kern1pt}\kern1pt\vrule}\hrule}}
+\newcommand{\anvar}{\rule{0.4em}{0.4pt}\,}
+\newcommand{\trace}[0]{\raisebox{1pt}{\underline{$~~~$}}}
+
+\newcommand{\prule}[3]{
+      $\begin{array}{c} #1\\ \hline
+                        #2\end{array} ~~ #3$}
+
+\newcommand{\minitab}[2][c]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
+
+\newlength{\stmueTmp}
+\newcommand*{\hspaceThis}[1]{\settowidth{\stmueTmp}{#1}\hspace*{\stmueTmp}}
+
+\newenvironment{changemargin}[2]{%
+  \begin{list}{}{%
+    \setlength{\topsep}{0pt}%
+    \setlength{\leftmargin}{#1}%
+    \setlength{\rightmargin}{#2}%
+    \setlength{\listparindent}{\parindent}%
+    \setlength{\itemindent}{\parindent}%
+    \setlength{\parsep}{\parskip}%
+  }%
+  \item[]}{\end{list}}
+
+\newcommand{\bsp}[1]{\textit{#1}}
+\newcommand{\am}{\parallel}
+\newcommand{\unify}{\sqcup}
+
+  
+% \newtheorem{definition}{Definition}
+% \newtheorem{corollary}{Corollary}
+% \newtheorem{theorem}{Theorem}
+
+%\newcommand\redout{\bgroup\markoverwith{\textcolor{red}{\rule[.4ex]{2pt}{1pt}}}\ULon}

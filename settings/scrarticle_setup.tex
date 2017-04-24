@@ -1,0 +1,62 @@
+\usepackage{datetime}
+\usepackage{ifdraft}
+
+\newcommand{\newlineTitle}{\\}
+
+\usepackage{scrpage2}
+\ohead{\headmark}
+\chead{}
+\ihead{}
+\ifdraft{\ifoot[]{Draft of \today, \currenttime\ -- comments are welcome!}}{}
+\cfoot{}
+\ofoot[]{\pagemark}
+\pagestyle{scrheadings}
+
+\makeatletter
+
+\def\affiliation#1{\gdef\@affiliation{#1}}
+
+\lehead{\@author}
+\rohead{\renewcommand{\newlineTitle}{}\@title}
+
+% quotes are indented at one side only.
+\renewenvironment{quote}
+{\list{}{\rightmargin0pt\leftmargin8mm}%{\rightmargin\leftmargin}%
+\item\relax}
+{\endlist}
+
+
+% quotations are indented at one side only
+% there is no indentation at the beginning of the quote
+\renewenvironment{quotation}
+{\list{}{\listparindent 1.5em%
+    % \itemindent    \listparindent
+    % \rightmargin   \leftmargin
+    \parsep        \z@ \@plus\p@}%
+\item\relax}
+{\endlist}
+
+\renewcommand{\maketitle}{
+  \thispagestyle{plain}
+  {\raggedright
+    \ifdraft{\Large (Draft of \today, \currenttime)\par}{}%
+    {\huge\sffamily%
+      \ifx\@subject\empty\else{(\@subject) }\fi%
+      \textbf{\@title}\\[2ex]\par}
+    {\Large\@author \\}%
+    \@ifundefined{@affiliation}{}
+    { \vspace*{1ex}%
+      \large\@affiliation \\}}%
+
+  % \vspace*{\baselineskip}%
+  % \ifx\@epigram\empty%
+  % \else {\epigraph{\@epigram\\[-5ex]}{\@epigramsource}% 
+  % \epigram{}\epigramsource{}}% 
+  % \fi%
+  \vspace*{-3ex}
+  \begin{quote}
+    \abstract
+  \end{quote}
+} 
+
+\makeatother

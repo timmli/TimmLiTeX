@@ -1,0 +1,94 @@
+%%%%%%%%%%%%%%%%%%%%%%%%
+%   BEAMER SETTINGS    % 
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\usefonttheme{serif}
+%\renewcommand*{\ttdefault}{cmtt}
+
+\definecolor{HHUblue}{HTML}{006AB3}
+\setbeamercolor{structure}{fg=HHUblue}
+
+\setbeamerfont{frametitle}{family=\sffamily}
+\setbeamerfont{title}{family=\sffamily}
+\setbeamerfont{block title}{family=\sffamily}
+
+\usetheme{Copenhagen} % Boadilla
+\usecolortheme{default}   % beaver
+\usefonttheme{default}		% default | professionalfonts | serif | structurebold | structureitalicserif | structuresmallcapsserif
+\useinnertheme{default} 	% circles | default | inmargin | rectangles | rounded
+\useoutertheme{default}	% default | infolines | miniframes | shadow | sidebar | smoothbars | smoothtree | split | tree
+
+%\setbeamercovered{transparent}				% for transparent overlays
+\setbeamercovered{invisible}				% for non-transparent overlays
+\setbeamertemplate{navigation symbols}{}	% no navigation symbols
+\setbeamertemplate{headline}[default]		% no headline
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{section in toc}[]
+\setbeamertemplate{subsection in toc}[]
+\setbeamertemplate{itemize items}[square]
+\setbeamertemplate{enumerate items}[square]
+%\setbeamertemplate{blocks}[default]		% rectangular blocks
+%\setbeamersize{text margin left=10pt,text margin right=10pt}
+
+%% Bibliography style (http://tex.stackexchange.com/questions/97615/article-style-bibliography-in-beamer-class)
+\setbeamertemplate{frametitle continuation}[from second]
+% Now get rid of all the colours
+\setbeamercolor*{bibliography entry title}{fg=black}
+\setbeamercolor*{bibliography entry author}{fg=black}
+\setbeamercolor*{bibliography entry location}{fg=black}
+\setbeamercolor*{bibliography entry note}{fg=black}
+% and kill the abominable icon
+\setbeamertemplate{bibliography item}{\insertbiblabel}  % insert label from bib(la)tex
+\AtBeginDocument{
+  \renewcommand*{\bibfont}{\scriptsize}
+}
+
+\tikzset{% makes available \only and \alt inside paths
+  only/.code args={<#1>#2}{\only<#1>{\pgfkeysalso{#2}}},
+  alt/.code args={<#1>#2#3}{\alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}}}
+}
+
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+    \pgfsetfillopacity{0}\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,left]{author in head/foot}%
+      \usebeamerfont{author in head/foot}\pgfsetfillopacity{1}\color{gray}\hspace*{2ex}\insertshortauthor~~(\insertshortinstitute)
+    \end{beamercolorbox}%
+    \pgfsetfillopacity{0}\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+      %\usebeamerfont{title in head/foot}\pgfsetfillopacity{1}\insertshorttitle
+    \end{beamercolorbox}%
+    \pgfsetfillopacity{0}\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+      \usebeamerfont{date in head/foot}\pgfsetfillopacity{1}\insertshortdate{}\color{gray}\hspace*{2em}
+      \insertframenumber{} %/ \inserttotalframenumber
+      \hspace*{2ex}
+    \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+
+\newcommand{\separationframe}[1]{
+\begin{frame}
+\frametitle{}
+
+\begin{center}
+  \LARGE 
+  \settowidth{\stmueTmp}{ #1 }
+    \begin{minipage}{\stmueTmp}
+    \begin{block}{}
+    \begin{center}
+    %\usebeamercolor[fg]{frametitle}
+    #1
+    \end{center}
+    \end{block}
+    \end{minipage}
+\end{center}
+
+\end{frame}
+}
+
+\newcommand\framecite[1]{
+\vskip-2ex
+\hfill #1%
+\vskip-3.3ex ~
+}

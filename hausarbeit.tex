@@ -1,0 +1,126 @@
+% input UTF8, to be compiled with PDFLaTeX
+
+\documentclass[
+			   	 11pt,
+			   	 bibliography=totoc,
+			   	 numbers=noenddot,
+			   	 %draft
+			  	]{scrbook}
+
+%%%%%%%%%%%%%%%%%
+%   Packages    % 
+%%%%%%%%%%%%%%%%%
+
+\usepackage{datetime}
+
+% Font & Encoding
+\usepackage{libertine}
+\usepackage[T1]{tipa}		% IPA symbols 
+\usepackage[libertine]{newtxmath}
+\usepackage{microtype}		% micro-typographic aspects of the fonts
+\usepackage[T1]{fontenc}	% special fonts, e.g. for German umlaute
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
+\usepackage[scaled=0.83]{beramono}  % for monospaced font
+
+% Language
+\usepackage[ngerman]{babel}	% uncomment for German
+
+% Trees and graphics
+\usepackage{graphics,tikz}
+\usepackage{multirow}		% similar to \multicolumn
+
+% Symbols
+\usepackage{latexsym,amsmath,amssymb,wasysym}
+\usepackage{marvosym}		% for thunderbolt and Euro symbol
+\usepackage{ulem}			% to cross out text
+\normalem
+\usepackage{url}
+\urlstyle{sf}
+
+% Linguistics
+\usepackage{linguex}
+\usepackage[inference]{semantic} % for CCG 
+\usepackage{packages/ccg} 
+\usepackage{tipa}
+\input{settings/avm_setup.tex}
+\input{settings/forest_setup.tex}
+
+% BibTex
+\usepackage{natbib}
+\setcitestyle{notesep={: $\!$}} 
+
+% Hyperrefs in PDF 
+\usepackage[bookmarks=true,bookmarksopen=true,%
+  hyperindex=true,%
+  breaklinks=true,
+  draft=false,plainpages=false,
+  pdfauthor={},%
+  pdfkeywords={},%
+  ]{hyperref}
+\hypersetup{colorlinks=false, pdfborder={0 0 0}}
+
+\usepackage{lipsum}
+
+%%%%%%%%%%%%%%
+%   Macros   % 
+%%%%%%%%%%%%%%
+
+\input{myMacros}   % the content of myMacros.tex goes here
+
+
+%%%%%%%%%%%%%
+%   Title   % 
+%%%%%%%%%%%%%
+
+\subject{Hausarbeit}
+\title{Titel}
+\author{{\LARGE Max Mustermann} \\
+		\\
+		Matrikelnummer: 123456789\\
+		\url{mustermann@phil.hhu.de}\\ 
+		Heinrich-Heine-Universität Düsseldorf\\}  
+\date{\ddmmyyyydate\today, \currenttime}
+\publishers{Seminarangaben}
+
+
+%%%%%%%%%%%%%%%%
+%   Document   % 
+%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\maketitle
+\frontmatter
+\tableofcontents
+\mainmatter 
+
+\chapter{Information about this template}
+
+\input{README.tex}
+
+\chapter{\LaTeX\ Examples}
+
+\input{examples/master-examples.tex}
+
+\chapter{Blindtext}
+
+\lipsum
+
+\section{Blindtext section}
+
+\lipsum
+
+%%%%%%%%%%%%%%%%%%% 
+%  Document end   % 
+%%%%%%%%%%%%%%%%%%% 
+
+\bibliographystyle{bst/unified}
+\bibliography{references}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
