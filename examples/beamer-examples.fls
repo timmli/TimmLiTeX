@@ -1,6 +1,0 @@
-PWD c:/Users/timm/Dropbox/Forschung/latex/templates/6152107tbwnck/examples
-INPUT c:/texlive/2016/texmf.cnf
-INPUT c:/texlive/2016/texmf-dist/web2c/texmf.cnf
-INPUT c:/texlive/2016/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT ./beamer-examples.tex
-OUTPUT beamer-examples.log
