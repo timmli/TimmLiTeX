@@ -1,0 +1,3 @@
+[submodule "bst/biblatex-sp-unified"]
+	path = bst/biblatex-sp-unified
+	url = https://github.com/semprag/biblatex-sp-unified.git
