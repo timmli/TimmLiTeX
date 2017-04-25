@@ -1,11 +1,11 @@
-\newcommand{\mycitestyle}{bst/sp-authoryear-comp}
+\newcommand{\mycitestyle}{bst/biblatex-sp-unified/cbx/sp-authoryear-comp}
 \makeatletter
 \@ifclassloaded{beamer}{\renewcommand{\mycitestyle}{numeric-comp}}{}
 \makeatother
 
 \usepackage[
   natbib=true,
-  style=bst/biblatex-sp-unified,
+  style=bst/biblatex-sp-unified/bbx/biblatex-sp-unified,
   citestyle=\mycitestyle,
   %refsection=chapter,
   maxbibnames=99,
