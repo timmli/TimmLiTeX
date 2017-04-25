@@ -1,0 +1,50 @@
+% input UTF8, to be compiled with PDFLaTeX
+
+\documentclass[
+11pt,
+bibliography=totoc,
+numbers=noenddot,
+% draft
+]{scrbook}
+
+\usepackage{datetime}
+
+%%%%%%%%%%%%%%%%% 
+% Settings    % 
+%%%%%%%%%%%%%%%%% 
+
+%% Encoding, fonts, language
+\input{settings/pdflatex_setup}
+
+%% Trees and graphics
+\usepackage{graphics}
+\input{settings/tikz_setup}
+\input{settings/forest_setup} % for linguex: no dash within the label
+% \usepackage{arydshln} 		% for dashed horizontal lines in tables (incompatible with avm)
+\usepackage{multirow}   % similar to \multicolumn
+
+%% Symbols
+\usepackage{latexsym,amsmath,amssymb,wasysym}
+\usepackage{marvosym}   % for thunderbolt symbol
+\usepackage{ulem}     % to cross out text
+\normalem
+\usepackage{url}
+\urlstyle{sf}
+
+%% Linguistics
+\usepackage{linguex}
+\renewcommand{\firstrefdash}{}
+\input{settings/avm_setup}
+% \usepackage[inference]{semantic} % for CCG 
+% \usepackage{packages/ccg}
+\usepackage{tipa}
+
+%% Bibliography
+\input{settings/biblatex_setup} 
+% \input{settings/natbib_bibtex_setup} 
+
+%% Hyperrefs in PDF 
+\input{settings/hyperrefs_setup}
+
+%% for blindtext
+\usepackage{lipsum}
