@@ -25,8 +25,9 @@
 %   MISCELLANEOUS    % 
 %%%%%%%%%%%%%%%%%%%%%%
 
-\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
-    \node[shape=circle,draw,inner sep=.15ex] (char) {#1};}}
+\newcommand{\circled}[1]{\textcircled{\raisebox{-0.9pt}{#1}}}
+% \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+%     \node[shape=circle,draw,inner sep=.15ex] (char) {#1};}}
 \newcommand{\svar}[1]
    {\setbox2=\hbox{$\scriptstyle #1$}\lower.2ex\vbox{\hrule
      \hbox{\vrule\kern1.25pt 
@@ -57,14 +58,9 @@
     \setlength{\parsep}{\parskip}%
   }%
   \item[]}{\end{list}}
-
-\newcommand{\bsp}[1]{\textit{#1}}
-\newcommand{\am}{\parallel}
-\newcommand{\unify}{\sqcup}
-
   
 % \newtheorem{definition}{Definition}
 % \newtheorem{corollary}{Corollary}
 % \newtheorem{theorem}{Theorem}
 
-%\newcommand\redout{\bgroup\markoverwith{\textcolor{red}{\rule[.4ex]{2pt}{1pt}}}\ULon}
+\newcommand\redout{\bgroup\markoverwith{\textcolor{red}{\rule[.4ex]{2pt}{1pt}}}\ULon}
