@@ -1,0 +1,22 @@
+#+TITLE: Titel
+#+SUBTITLE: Subtitle
+#+AUTHOR: John Doe
+#+EMAIL: 
+#+DATE: 
+#+BEAMER_HEADER: \date[shortdate]{17.05.2017}
+#+BEAMER_HEADER: \institute[HHU]{Heinrich-Heine-Universität Düsseldorf}
+#+BEAMER_HEADER: \titlegraphic{\includegraphics[height=1cm]{graphics/sfb-logo-quer} \hfil \includegraphics[height=1cm]{graphics/hhu-logo}}	% Logo on title slide
+#+LANGUAGE:  en
+#+OPTIONS:   H:2 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t ':t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+STARTUP: beamer
+#+LATEX_CLASS: tl-beamer
+#+LATEX_HEADER: \input{myMacros}
+#+COLUMNS: %40ITEM %10TAGS %9BEAMER_act(Overlays) %4BEAMER_col(Col) %20BEAMER_opt(Options)
+
+
+* Section
+
+** Slide
+
+*** Block
