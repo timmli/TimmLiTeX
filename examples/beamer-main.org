@@ -20,3 +20,15 @@
 ** Slide
 
 *** Block
+
+* References                                                :B_ignoreheading:
+:PROPERTIES:
+:BEAMER_env: ignoreheading
+:END:
+
+** References
+:PROPERTIES:
+:beamer_opt: allowframebreaks
+:END:
+
+\insertBib
