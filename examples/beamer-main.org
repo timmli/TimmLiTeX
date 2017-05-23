@@ -14,6 +14,29 @@
 #+LATEX_HEADER: \input{myMacros}
 #+COLUMNS: %40ITEM %10TAGS %9BEAMER_act(Overlays) %4BEAMER_col(Col) %20BEAMER_opt(Options)
 
+#+BEGIN_EXPORT latex
+% \AtBeginSection[]{
+%   \begin{frame}
+%   \vfill
+%   \centering
+%   \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+%   \usebeamerfont{title}\insertsectionhead\par%
+%   \end{beamercolorbox}
+%   \vfill
+%   \end{frame}
+% }
+\AtBeginSection[]
+{
+\begin{frame}<beamer>{Outline}
+\tableofcontents[
+currentsection
+]
+\end{frame}
+}
+
+\let\mypause\pause
+#+END_EXPORT
+
 
 * Section
 
