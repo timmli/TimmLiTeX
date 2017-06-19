@@ -9,7 +9,7 @@
 % ngerman,
 % handout,	% remove overlays
 compress,
-% xcolor=table, % doesn't play well together with ccg.sty
+xcolor=table, % doesn't play well together with ccg.sty
 dvipsnames,
 ]{beamer}
 
@@ -70,4 +70,4 @@ dvipsnames,
   \end{textblock}
 }
 
-\usepackage{packages/tl-ccg}
+% \usepackage{packages/tl-ccg}
