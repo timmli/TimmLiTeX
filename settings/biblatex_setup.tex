@@ -1,6 +1,7 @@
 \newcommand{\mycitestyle}{bst/biblatex-sp-unified/cbx/sp-authoryear-comp}
 \makeatletter
 \@ifclassloaded{beamer}{\renewcommand{\mycitestyle}{numeric-comp}}{}
+\@ifclassloaded{tikzposter}{\renewcommand{\mycitestyle}{numeric-comp}}{}
 \makeatother
 
 \usepackage[
@@ -90,7 +91,69 @@
 }{}
 \makeatother
 
+%% tikzposter settings
+\makeatletter
+\@ifclassloaded{tikzposter}{  
+\DeclareFieldFormat{labelnumberwidth}{#1}
+\defbibenvironment{bibliography}
+{\footnotesize\noindent}
+{\unspace}
+{}
+\renewbibmacro*{begentry}{%
+\textbf{\color{HHUblue}%
+\printtext[labelnumberwidth]{%
+[\printfield{prefixnumber}%
+\printfield{labelnumber}]}%
+\space
+%\setunit{\addspace}
+}}
+\renewcommand*{\finentrypunct}{\addperiod\space}
 
+\DeclareCiteCommand{\supercite}[\mkbibsuperscript]
+{\color{gray} % added color
+\usebibmacro{cite:init}%
+\let\multicitedelim=\supercitedelim
+\iffieldundef{prenote}
+{}
+{\BibliographyWarning{Ignoring prenote argument}}%
+\iffieldundef{postnote}
+{}
+{\BibliographyWarning{Ignoring postnote argument}}%
+\bibopenbracket}%
+{\usebibmacro{citeindex}%
+\usebibmacro{cite:comp}}
+{}
+{\usebibmacro{cite:dump}\bibclosebracket}
+
+\DeclareCiteCommand{\citeauthor}  % from sp-authoryear-comp.cbx; to add hyperref link  
+{\boolfalse{citetracker}%
+\boolfalse{pagetracker}%
+\usebibmacro{prenote}}
+{\ifciteindex
+{\indexnames{labelname}}
+{}%
+\printtext[bibhyperref]{\printnames{labelname}}}
+{\multicitedelim}
+{\usebibmacro{postnote}}
+
+\DeclareCiteCommand{\citeyear}  % from sp-authoryear-comp.cbx; to add hyperref link  
+{\boolfalse{citetracker}%
+\boolfalse{pagetracker}%
+\usebibmacro{prenote}}
+{\printfield[bibhyperref]{year}}
+{\multicitedelim}
+{\usebibmacro{postnote}}
+}{}
+\makeatother
+
+
+%% tl-abstract settings
+\makeatletter
+\@ifclassloaded{tl-abstract}{
+\defbibenvironment{bibliography}{\noindent}{\unspace}{\xspace$\bullet$\xspace}
+}
+{}
+\makeatother
 
 \addbibresource[datatype=bibtex]{references.bib}
 
