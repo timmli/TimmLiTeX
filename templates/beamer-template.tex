@@ -1,11 +1,21 @@
 % -*- coding: utf-8 -*-
 
-%%%%%%%%%%%%%%%%%%%%%%%%
-%       PREAMBLE       %
-%%%%%%%%%%%%%%%%%%%%%%%% 
+\newcommand{\FontSize}{11pt}
+\newcommand{\DocumentType}{article}
 
-\input{preambles/beamer-preamble.tex}
+\documentclass[
+% 8pt, 9pt, 10pt, 11pt, 12pt, 14pt, 17pt, 20pt
+% serif,
+% table, % for table coloring
+% draft,
+% ngerman,
+% handout,	% remove overlays
+compress,
+xcolor=table,
+dvipsnames,
+]{beamer}
 
+\input{settings/beamer-preamble.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%% 
 %    CUSTOM MACROS     %
@@ -15,8 +25,6 @@
 \definecolor{myblue}{rgb}{0,0,0.70}
 \definecolor{myred}{rgb}{0.8,0,0}
 \definecolor{mydarkgreen}{rgb}{0,0.55,0}
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % HEADER
@@ -29,7 +37,6 @@
 \date[]{\today}
 %\logo{\pgfimage[width=2cm,height=1cm]{logo-emmy}}			% Logo on all slides (pdf,png,jpg,eps)
 \titlegraphic{\includegraphics[height=1cm]{graphics/sfb-logo-quer} \hfil \includegraphics[height=1cm]{graphics/hhu-logo}}	% Logo on title slide
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SLIDES

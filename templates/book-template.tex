@@ -1,8 +1,16 @@
-%%%%%%%%%%%%%%%%%%%%%%%% 
-%       PREAMBLE       %
-%%%%%%%%%%%%%%%%%%%%%%%% 
+\newcommand{\FontSize}{11pt}
+\newcommand{\DocumentType}{article}
 
-\input{preambles/book-preamble}
+\documentclass[
+\FontSize,
+bibliography=totoc,
+numbers=noenddot,
+% draft
+]{scrbook}
+
+\usepackage{datetime}
+
+\input{settings/standard-preamble}
 
 %%%%%%%%%%%%%%
 %   Macros   % 

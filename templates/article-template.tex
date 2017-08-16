@@ -1,15 +1,21 @@
-%%%%%%%%%%%%%%%%%%%%%%%% 
-%       PREAMBLE       %
-%%%%%%%%%%%%%%%%%%%%%%%% 
+\newcommand{\FontSize}{11pt}
+\newcommand{\DocumentType}{article}
 
-\input{preambles/article-preamble}
+\documentclass[
+\FontSize,
+draft,
+twoside
+]{scrartcl}
+
+\input{settings/scrarticle-settings}
+
+\input{settings/standard-preamble}
 
 %%%%%%%%%%%%%%
 %   Macros   % 
 %%%%%%%%%%%%%%
 
 \input{myMacros}
-
 
 %%%%%%%%%%%%%
 %   Title   % 
@@ -19,7 +25,6 @@
 \subject{Text type}
 \author{Max Mustermann}
 \affiliation{Affiliation, \url{some@email.address}}  
-
 
 %%%%%%%%%%%%%%%%%%% 
 % Document start  % 
@@ -42,7 +47,6 @@ This is an abstract: \lipsum[1]
 \section{Blindtext}
 
 \lipsum
-
 
 %%%%%%%%%%%%%%%%%%% 
 % Document end    % 

@@ -1,0 +1,77 @@
+\documentclass[
+11pt,
+bibliography=totoc,
+numbers=noenddot,
+% draft
+]{scrbook}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%% 
+%       PREAMBLE       %
+%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\input{settings/hausarbeit-settings}
+
+
+%%%%%%%%%%%%%%
+%   Macros   % 
+%%%%%%%%%%%%%%
+
+\input{myMacros}   % the content of myMacros.tex goes here
+
+
+%%%%%%%%%%%%%
+%   Title   % 
+%%%%%%%%%%%%%
+
+\subject{Hausarbeit}
+\title{Titel}
+\author{{\LARGE Max Mustermann} \\
+		\\
+		Matrikelnummer: 123456789\\
+		\url{mustermann@phil.hhu.de}\\ 
+		Heinrich-Heine-Universität Düsseldorf\\}  
+\date{\ddmmyyyydate\today, \currenttime}
+\publishers{Seminarangaben}
+
+
+%%%%%%%%%%%%%%%%
+%   Document   % 
+%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\maketitle
+\frontmatter
+\tableofcontents
+\mainmatter 
+
+\chapter{Information about this template}
+
+\input{README.tex}
+
+\chapter{\LaTeX\ Examples}
+
+\input{examples/master-examples.tex}
+
+\chapter{Blindtext}
+
+\lipsum
+
+\section{Blindtext section}
+
+\lipsum
+
+%%%%%%%%%%%%%%%%%%% 
+%  Document end   % 
+%%%%%%%%%%%%%%%%%%% 
+
+\bibliographystyle{bst/unified}
+\bibliography{references}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

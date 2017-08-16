@@ -1,0 +1,460 @@
+\usepackage{tipa}
+
+%% Encoding, fonts, language
+%%%%%%%%%%%%%%%%%%%%%%%%
+%   PDFLATEX SETTINGS  % 
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Font & Encoding
+\usepackage{libertine}
+\usepackage[libertine]{newtxmath}
+\usepackage[scaled=0.8]{beramono}  % for monospaced font
+\usepackage{microtype}		% micro-typographic aspects of the fonts
+\usepackage[T1]{fontenc}	% special fonts, e.g. for German umlaute
+%% incompabtible with Biblatex
+% \usepackage{ucs}
+% \usepackage[utf8x]{inputenc}
+%% compatible with Biblatex
+\usepackage[utf8]{inputenc}
+
+%% Language
+%\usepackage[german]{babel}
+%\usepackage{german}
+\usepackage[english]{babel}
+
+\usepackage{etex} 
+\usepackage{graphics}
+%%%%%%%%%%%%%%%%%%%%%%
+%   TIKZ SETTINGS    % 
+%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{tikz}
+\usepackage{tikz-dependency}
+
+\tikzset{every tree node/.style={align=center,anchor=north}}	% to allow linebreaks
+\usetikzlibrary{calc} % for positioning arrows with ($(t.center)-(1,0)$)
+\usetikzlibrary{shapes,decorations}
+\usetikzlibrary{backgrounds,fit}
+\usetikzlibrary{arrows}
+\usetikzlibrary{matrix}
+\usetikzlibrary{positioning}
+\usetikzlibrary{automata}
+\usetikzlibrary{tikzmark}
+
+% Define box and box title style (see http://www.texample.net/tikz/examples/boxes-with-text-and-math/)
+\tikzstyle{mybox} = [draw=gray, very thick,
+    rectangle, rounded corners, inner sep=10pt, inner ysep=17pt,yshift=3pt]
+\tikzstyle{fancytitle} =[draw=gray, very thick, fill=white,
+    rectangle, rounded corners, inner sep=5pt, inner ysep=5pt]
+\tikzstyle{mydouble} = [double distance=1pt]
+    
+\tikzset{
+    %Define standard arrow tip
+    >=stealth',
+    %Define style for boxes
+    box/.style={
+           rectangle,
+           rounded corners,
+           draw=black, very thick,
+           text width=10em,
+           minimum height=2em,
+           text centered},
+    % Define arrow style
+    arrow/.style={
+           ->,
+           thick,
+           	shorten <=2pt,
+           shorten >=2pt,}
+}
+
+\newcommand\centertikz[1]{\tikz[baseline=(current bounding box.center)]{#1}}
+\newcommand\tikzcenter{baseline=(current bounding box.center)}
+\newcommand\tikztop{baseline=(current bounding box.north)}
+
+\newcommand\tikztreeset[1]{\matrix [matrix of nodes,left delimiter=\{,right delimiter=\}](set){#1};}
+%%%%%%%%%%%%%%%%%%%%%%%
+%   FOREST SETTINGS   % 
+%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{forest}
+
+\makeatletter
+
+\@ifpackagelater{forest}{2016/01/01}
+{\useforestlibrary{linguistics}}
+{}
+
+\@ifpackagelater{forest}{2016/01/01}
+{\newcommand{\forestPreamble}{default preamble}} % version >=2 of forest
+{\newcommand{\forestPreamble}{.style}} % version <=1 of forest
+
+\makeatother
+
+\forestset{
+  \forestPreamble ={
+    % .style={ % version <=1 of forest
+    % default preamble={ % version >=2 of forest    
+		for tree={
+			parent anchor=south, 
+			child anchor=north,
+			% align=center,			% bad: adds space below label
+			fit=rectangle,
+			base=top,				% vertical orientation of nodes
+			% inner sep=3,			% necesssary?
+			begin draw/.code={\begin{tikzpicture}[baseline=(current bounding box.center)]},
+    }},
+  sn edges/.style={for tree={parent anchor=south, child anchor=north}},
+  red subtree/.style={for tree={text=red},for descendants={edge=red}},
+  black subtree/.style={for tree={text=black},for descendants={edge=black}},
+  blue subtree/.style={for tree={text=blue},for descendants={edge=blue}},
+  green subtree/.style={for tree={text=green},for descendants={edge=green}},
+  gray subtree/.style={for tree={text=gray},for descendants={edge=gray}},
+  vcenter/.style={begin draw/.code={\begin{tikzpicture}[baseline=(current bounding box.center)]}},
+  empty nodes/.style={	% from the forest manual
+    for tree={
+      % calign=fixed edge angles,
+      yshift=1ex},
+    delay={where content={}{shape=coordinate,for parent={for children={anchor=north}}}{}}},
+  derivation tree/.style={.style={
+      for tree={parent anchor={},child anchor={},font=\ttfamily}}},
+  dt label/.style 2 args={
+    edge label={node[midway,font=\ttfamily\scriptsize, #1]{#2}},},
+  %% for drawing STUG sequences
+  </.style={ % draw horizontal line to predecessor
+    no edge,
+    before drawing tree={tikz+={\draw[dashed](!)--(!p);}}
+  },
+  >/.style={ % draw horizontal line to successor
+    no edge,
+    before drawing tree={tikz+={\draw[dashed](!)--(!n);}}
+  },
+  t/.style={calign with current}, % trunk 
+  lex/.style={                    % terminal nodes with lexical material
+    no edge,
+    for parent={l sep=0ex},
+    yshift=3ex,
+    draw=gray,
+    content={\textit{##1}}},
+  c/.style n args=1{            % visual link with argument
+    % edge label={node[xshift={0.8em},scale=0.8,fill=white,draw,inner sep=.10ex,circle]{#1}}
+    % tikz={\node[yshift={1.5ex},scale=0.8,fill=white,draw,inner sep=.10ex,circle, right=-0.5em of .east]  {1};}
+    label={[yshift={0.5ex},scale=.8,circle, draw, fill=white, inner sep=.1ex, label distance=-.65em, anchor=west]north east:#1}
+  }  
+}
+
+
+\usepackage{url}
+\usepackage{amsmath,amssymb,amsfonts,marvosym}
+\usepackage{ulem}			% to cross out text
+\normalem
+
+\usepackage{ragged2e}
+\let\raggedright=\RaggedRight
+
+% \usepackage{tipa}
+\usepackage{linguex}   % must be loaded below \usepackage[T1]{fontenc}
+\AtBeginDocument{
+  \setlength{\Exlabelsep}{0em}		% for linguex examples
+  \setlength{\SubExleftmargin}{1,5em}	% for linguex examples
+  \renewcommand\eachwordone{\sffamily}	% for glossing with linguex
+  \renewcommand\eachwordtwo{\sffamily}	% for glossing with linguex
+  % \setlength{\Extopsep}{1ex}   % vertical margin in linguex examples
+}
+%%%%%%%%%%%%%%%%%%%%%%
+%   AVM SETTINGS     % 
+%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{packages/avm}
+
+\avmoptions{center} 
+\avmfont{\scshape}
+\avmvalfont{\normalfont}
+\avmsortfont{\normalfont\itshape}
+
+\newenvironment{topbot}{   	% more flexible than /newcommand ?
+	\avmvskip{0.2ex} 
+	\hspace{-1.5em}
+	\begin{avm}
+	\avml
+	}
+	%%%
+	{
+	\avmr
+    \end{avm}
+    \hspace{-0.5em}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%   BEAMER SETTINGS    % 
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\usefonttheme{serif}
+%\renewcommand*{\ttdefault}{cmtt}
+
+\definecolor{HHUblue}{HTML}{006AB3}
+\setbeamercolor{structure}{fg=HHUblue}
+
+\setbeamerfont{frametitle}{family=\sffamily}
+\setbeamerfont{title}{family=\sffamily}
+\setbeamerfont{block title}{family=\sffamily}
+
+\usetheme{Copenhagen} % Boadilla
+\usecolortheme{default}   % beaver
+\usefonttheme{default}		% default | professionalfonts | serif | structurebold | structureitalicserif | structuresmallcapsserif
+\useinnertheme{default} 	% circles | default | inmargin | rectangles | rounded
+\useoutertheme{default}	% default | infolines | miniframes | shadow | sidebar | smoothbars | smoothtree | split | tree
+
+%\setbeamercovered{transparent}				% for transparent overlays
+\setbeamercovered{invisible}				% for non-transparent overlays
+\setbeamertemplate{navigation symbols}{}	% no navigation symbols
+\setbeamertemplate{headline}[default]		% no headline
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{section in toc}[]
+\setbeamertemplate{subsection in toc}[]
+\setbeamertemplate{itemize items}[square]
+\setbeamertemplate{enumerate items}[square]
+%\setbeamertemplate{blocks}[default]		% rectangular blocks
+%\setbeamersize{text margin left=10pt,text margin right=10pt}
+
+%% Bibliography style (http://tex.stackexchange.com/questions/97615/article-style-bibliography-in-beamer-class)
+\setbeamertemplate{frametitle continuation}[from second]
+% Now get rid of all the colours
+\setbeamercolor*{bibliography entry title}{fg=black}
+\setbeamercolor*{bibliography entry author}{fg=black}
+\setbeamercolor*{bibliography entry location}{fg=black}
+\setbeamercolor*{bibliography entry note}{fg=black}
+% and kill the abominable icon
+\setbeamertemplate{bibliography item}{\insertbiblabel}  % insert label from bib(la)tex
+\AtBeginDocument{
+  \renewcommand*{\bibfont}{\scriptsize}
+}
+
+\tikzset{% makes available \only and \alt inside paths
+  only/.code args={<#1>#2}{\only<#1>{\pgfkeysalso{#2}}},
+  alt/.code args={<#1>#2#3}{\alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}}}
+}
+
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+    \pgfsetfillopacity{0}\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,left]{author in head/foot}%
+      \usebeamerfont{author in head/foot}\pgfsetfillopacity{1}\color{gray}\hspace*{2ex}\insertshortauthor~~(\insertshortinstitute)
+    \end{beamercolorbox}%
+    \pgfsetfillopacity{0}\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+      \usebeamerfont{title in head/foot}\pgfsetfillopacity{1}\insertshorttitle
+    \end{beamercolorbox}%
+    \pgfsetfillopacity{0}\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\pgfsetfillopacity{1}\color{gray}\insertshortdate{}\hspace*{2em}
+      \insertframenumber{} %/ \inserttotalframenumber
+      \hspace*{2ex}
+    \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+
+\newcommand{\separationframe}[1]{
+\begin{frame}
+\frametitle{}
+
+\begin{center}
+  \LARGE 
+  \settowidth{\stmueTmp}{ #1 }
+    \begin{minipage}{\stmueTmp}
+    \begin{block}{}
+    \begin{center}
+    %\usebeamercolor[fg]{frametitle}
+    #1
+    \end{center}
+    \end{block}
+    \end{minipage}
+\end{center}
+
+\end{frame}
+}
+
+\newcommand\framecite[1]{
+\vskip-2ex
+\hfill #1%
+\vskip-3.3ex ~
+}
+
+%% Bibliography
+
+%% BibLaTeX
+%%%%%%%%%%%%%%%%%%%%%%%%
+%   BIBLATEX SETTINGS  % 
+%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\mycitestyle}{bst/biblatex-sp-unified/cbx/sp-authoryear-comp}
+\makeatletter
+\@ifclassloaded{beamer}{\renewcommand{\mycitestyle}{numeric-comp}}{}
+\@ifclassloaded{tikzposter}{\renewcommand{\mycitestyle}{numeric-comp}}{}
+\makeatother
+
+\usepackage[
+  natbib=true,
+  style=bst/biblatex-sp-unified/bbx/biblatex-sp-unified,
+  citestyle=\mycitestyle,
+  %refsection=chapter,
+  maxbibnames=99,
+  isbn=false,
+  doi=false,
+  eprint=false,
+  %backend=biber,
+  backend=biber,
+  % sorting=ydnt,  % sort in descending chronological order
+  indexing=cite,
+  labelnumber,  % for numeric bibliography in beamer
+  %toc=bib    % make bibliography appear in toc, incompatible with beamer
+  ]{biblatex}
+\renewcommand{\postnotedelim}{: }%
+\renewcommand{\multicitedelim}{\addsemicolon\space}%
+\renewcommand{\compcitedelim}{\multicitedelim}%
+\DeclareFieldFormat{postnote}{#1}%
+
+%% beamer settings
+\makeatletter
+\@ifclassloaded{beamer}{  
+  \DeclareFieldFormat{labelnumberwidth}{[#1]}
+  \defbibenvironment{bibliography}  % from numeric.bbx
+      {\list
+        {\printtext[labelnumberwidth]{%
+          \printfield{prefixnumber}%
+          \printfield{labelnumber}}}
+        {\setlength{\labelwidth}{\labelnumberwidth}%
+            \setlength{\leftmargin}{\labelwidth}%
+            \setlength{\labelsep}{1em}%
+            \addtolength{\leftmargin}{1em}%
+            \setlength{\itemsep}{\bibitemsep}%
+            \setlength{\parsep}{\bibparsep}}%
+            \renewcommand*{\makelabel}[1]{\hss##1}}
+      {\endlist}
+      {\item}
+    % \DeclareCiteCommand{\supercite}[\mkbibsuperscript]{
+    %   \iffieldundef{prenote}
+    %     {}
+  %     {\BibliographyWarning{Ignoring prenote argument}}%
+  %   \iffieldundef{postnote}
+  %     {}
+  %     {\BibliographyWarning{Ignoring postnote argument}}}
+    %   {\usebibmacro{citeindex}%
+  %      \color{gray}\bibopenbracket\usebibmacro{cite}\bibclosebracket}
+    %   {\supercitedelim}
+    %   {}
+    \DeclareCiteCommand{\supercite}[\mkbibsuperscript]
+      {\color{gray} % added color
+      \usebibmacro{cite:init}%
+      \let\multicitedelim=\supercitedelim
+      \iffieldundef{prenote}
+        {}
+        {\BibliographyWarning{Ignoring prenote argument}}%
+      \iffieldundef{postnote}
+        {}
+        {\BibliographyWarning{Ignoring postnote argument}}%
+      \bibopenbracket}%
+      {\usebibmacro{citeindex}%
+       \usebibmacro{cite:comp}}
+      {}
+      {\usebibmacro{cite:dump}\bibclosebracket}
+
+  \DeclareCiteCommand{\citeauthor}  % from sp-authoryear-comp.cbx; to add hyperref link  
+    {\boolfalse{citetracker}%
+     \boolfalse{pagetracker}%
+     \usebibmacro{prenote}}
+    {\ifciteindex
+       {\indexnames{labelname}}
+       {}%
+     \printtext[bibhyperref]{\printnames{labelname}}}
+    {\multicitedelim}
+    {\usebibmacro{postnote}}
+
+  \DeclareCiteCommand{\citeyear}  % from sp-authoryear-comp.cbx; to add hyperref link  
+    {\boolfalse{citetracker}%
+     \boolfalse{pagetracker}%
+     \usebibmacro{prenote}}
+    {\printfield[bibhyperref]{year}}
+    {\multicitedelim}
+    {\usebibmacro{postnote}}
+}{}
+\makeatother
+
+%% tikzposter settings
+\makeatletter
+\@ifclassloaded{tikzposter}{  
+\DeclareFieldFormat{labelnumberwidth}{#1}
+\defbibenvironment{bibliography}
+{\footnotesize\noindent}
+{\unspace}
+{}
+\renewbibmacro*{begentry}{%
+\textbf{\color{HHUblue}%
+\printtext[labelnumberwidth]{%
+[\printfield{prefixnumber}%
+\printfield{labelnumber}]}%
+\space
+%\setunit{\addspace}
+}}
+\renewcommand*{\finentrypunct}{\addperiod\space}
+
+\DeclareCiteCommand{\supercite}[\mkbibsuperscript]
+{\color{gray} % added color
+\usebibmacro{cite:init}%
+\let\multicitedelim=\supercitedelim
+\iffieldundef{prenote}
+{}
+{\BibliographyWarning{Ignoring prenote argument}}%
+\iffieldundef{postnote}
+{}
+{\BibliographyWarning{Ignoring postnote argument}}%
+\bibopenbracket}%
+{\usebibmacro{citeindex}%
+\usebibmacro{cite:comp}}
+{}
+{\usebibmacro{cite:dump}\bibclosebracket}
+
+\DeclareCiteCommand{\citeauthor}  % from sp-authoryear-comp.cbx; to add hyperref link  
+{\boolfalse{citetracker}%
+\boolfalse{pagetracker}%
+\usebibmacro{prenote}}
+{\ifciteindex
+{\indexnames{labelname}}
+{}%
+\printtext[bibhyperref]{\printnames{labelname}}}
+{\multicitedelim}
+{\usebibmacro{postnote}}
+
+\DeclareCiteCommand{\citeyear}  % from sp-authoryear-comp.cbx; to add hyperref link  
+{\boolfalse{citetracker}%
+\boolfalse{pagetracker}%
+\usebibmacro{prenote}}
+{\printfield[bibhyperref]{year}}
+{\multicitedelim}
+{\usebibmacro{postnote}}
+}{}
+\makeatother
+
+
+%% tl-abstract settings
+\makeatletter
+\@ifclassloaded{tl-abstract}{
+\defbibenvironment{bibliography}{\noindent}{\unspace}{\xspace$\bullet$\xspace}
+}
+{}
+\makeatother
+
+\addbibresource[datatype=bibtex]{references.bib}
+
+\newcommand{\insertBib}{
+  \printbibliography[
+    %notkeyword=this
+    ] 
+}
+
+\let\cite=\citet  % in order to prevent inconsistencies between \cite and \citet
+\newcommand{\citeauthoryear}[1]{\citeauthor{#1} (\citeyear{#1})}
+\newcommand{\citealtauthoryear}[1]{\citeauthor{#1} \citeyear{#1}}
+
+
+%% BibTeX 
+% \input{settings/natbib_bibtex_setup.tex} 
+% \PassOptionsToPackage{round}{natbib}
+% \renewcommand{\newblock}{}    % to make natbib compatible with beamer

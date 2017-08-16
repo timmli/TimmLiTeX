@@ -1,3 +1,61 @@
+\usepackage{datetime}
+
+% Font & Encoding
+\usepackage{libertine}
+\usepackage[T1]{tipa}		% IPA symbols 
+\usepackage[libertine]{newtxmath}
+\usepackage{microtype}		% micro-typographic aspects of the fonts
+\usepackage[T1]{fontenc}	% special fonts, e.g. for German umlaute
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
+\usepackage[scaled=0.83]{beramono}  % for monospaced font
+
+% Language
+\usepackage[ngerman]{babel}	% uncomment for German
+
+% Trees and graphics
+\usepackage{graphics,tikz}
+\usepackage{multirow}		% similar to \multicolumn
+
+% Symbols
+\usepackage{latexsym,amsmath,amssymb,wasysym}
+\usepackage{marvosym}		% for thunderbolt and Euro symbol
+\usepackage{ulem}			% to cross out text
+\normalem
+\usepackage{url}
+\urlstyle{sf}
+
+% Linguistics
+\usepackage{linguex}
+\usepackage[inference]{semantic} % for CCG 
+\usepackage{packages/ccg} 
+\usepackage{tipa}
+%%%%%%%%%%%%%%%%%%%%%%
+%   AVM SETTINGS     % 
+%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{packages/avm}
+
+\avmoptions{center} 
+\avmfont{\scshape}
+\avmvalfont{\normalfont}
+\avmsortfont{\normalfont\itshape}
+
+\newenvironment{topbot}{   	% more flexible than /newcommand ?
+	\avmvskip{0.2ex} 
+	\hspace{-1.5em}
+	\begin{avm}
+	\avml
+	}
+	%%%
+	{
+	\avmr
+    \end{avm}
+    \hspace{-0.5em}
+}
+%%%%%%%%%%%%%%%%%%%%%%%
+%   FOREST SETTINGS   % 
+%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{forest}
 
 \makeatletter
@@ -65,4 +123,18 @@
 }
 
 
+% BibTex
+\usepackage{natbib}
+\setcitestyle{notesep={: $\!$}} 
 
+% Hyperrefs in PDF 
+\usepackage[bookmarks=true,bookmarksopen=true,%
+hyperindex=true,%
+breaklinks=true,
+draft=false,plainpages=false,
+pdfauthor={},%
+pdfkeywords={},%
+]{hyperref}
+\hypersetup{colorlinks=false, pdfborder={0 0 0}}
+
+\usepackage{lipsum}
