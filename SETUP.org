@@ -3,16 +3,16 @@
 
 * Super class
 
-#+NAME: anydoc-defaults
+#+NAME: anyclass-defaults
 #+BEGIN_SRC latex
-\newcommand{\FontSize}{11pt}
-\newcommand{\DocumentType}{article}
+\newcommand{\DocumentOptions}{11pt,a4paper}
+\newcommand{\DocumentClass}{article}
 #+END_SRC
 
-#+NAME: anydoc
-#+BEGIN_SRC latex :noweb yes :tangle anydoc.cls
+#+NAME: anyclass
+#+BEGIN_SRC latex :noweb yes :tangle anyclass.cls
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{anydoc}[2017/08/16 Just Any Document Type]
+\ProvidesClass{anyclass}[2017/08/16 Just Any Document Type]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 % 
@@ -20,7 +20,7 @@
 % 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
-<<anydoc-defaults>>
+<<anyclass-defaults>>
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 % 
@@ -30,34 +30,23 @@
 
 \RequirePackage{kvoptions}		% for key-value options
 \SetupKeyvalOptions{
-	family=anydoc,
-	prefix=anydoc@ }
+	family=anyclass,
+	prefix=anyclass@ }
 
 \DeclareVoidOption{article}{  			
-  \renewcommand{\DocumentType}{article}}
+  \renewcommand{\DocumentClass}{article}}
 \DeclareVoidOption{book}{  			
-  \renewcommand{\DocumentType}{book}}
+  \renewcommand{\DocumentClass}{book}}
 \DeclareVoidOption{beamer}{  			
-  \renewcommand{\DocumentType}{beamer}}
+  \renewcommand{\DocumentClass}{beamer}}
 \DeclareVoidOption{abstract}{  			
-  \renewcommand{\DocumentType}{abstract}}
+  \renewcommand{\DocumentClass}{abstract}}
 
-\DeclareStringOption{documenttype}[article]
-\define@key{langscibook}{type}{%
-  \renewcommand{\DocumentType}{#1}}
+\DeclareStringOption{options}[11pt]
+\define@key{langscibook}{options}{%
+  \renewcommand{\DocumentOptions}{#1}}
 
-\DeclareVoidOption{12pt}{  			
-  \renewcommand{\FontSize}{12pt}}
-\DeclareVoidOption{11pt}{  			
-  \renewcommand{\FontSize}{11pt}}
-\DeclareVoidOption{10pt}{  			
-  \renewcommand{\FontSize}{10pt}}
-
-\DeclareStringOption{fontsize}[11pt]
-\define@key{langscibook}{fontsize}{%
-  \renewcommand{\FontSize}{#1}}
-
-\ProcessKeyvalOptions{anydoc}
+\ProcessKeyvalOptions{anyclass}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 % 
@@ -66,10 +55,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
 \newcommand{\isabstract}{abstract}
-\ifx\DocumentType\isabstract
+\ifx\DocumentClass\isabstract
 
 \LoadClass[
-<<abstract-preamble>>
+\DocumentOptions
+]{article}
+
+<<abstract-settings>>
 
 \fi
 
@@ -89,10 +81,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
 \newcommand{\isarticle}{article}
-\ifx\DocumentType\isarticle
+\ifx\DocumentClass\isarticle
 
 \LoadClass[
-<<article-preamble>>
+\DocumentOptions
+]{article}
+
+<<article-settings>>
 
 \fi
 
@@ -103,10 +98,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
 \newcommand{\isbeamer}{beamer}
-\ifx\DocumentType\isbeamer
+\ifx\DocumentClass\isbeamer
 
 \LoadClass[
-<<beamer-preamble>>
+\DocumentOptions
+]{beamer}
+
+<<beamer-settings>>
 
 \fi
 
@@ -117,10 +115,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
 \newcommand{\isbook}{book}
-\ifx\DocumentType\isbook
+\ifx\DocumentClass\isbook
 
 \LoadClass[
-<<book-preamble>>
+\DocumentOptions
+]{book}
+
+<<book-settings>>
 
 \fi
 
@@ -138,22 +139,27 @@
 
 ** Abstract template
 
-#+NAME: anydoc-abstract-template
-#+BEGIN_SRC latex :noweb yes :tangle templates/anydoc-abstract-template.tex
+#+NAME: anyclass-abstract-template
+#+BEGIN_SRC latex :noweb yes :tangle templates/anyclass-abstract-template.tex
 \documentclass[
-documenttype=abstract,
-fontsize=12pt,
-]{anydoc}
+class=abstract,
+options={
+<<abstract-options>>
+}
+]{anyclass}
+
+<<abstract-settings>>
 
 <<abstract-body>>
 #+END_SRC
 
 #+NAME: abstract-template
 #+BEGIN_SRC latex :noweb yes :tangle templates/abstract-template.tex
-<<anydoc-defaults>>
-
 \documentclass[
-<<abstract-preamble>>
+<<abstract-options>>
+]{article}
+
+<<abstract-settings>>
 
 <<abstract-body>>
 #+END_SRC
@@ -183,22 +189,27 @@ fontsize=12pt,
 
 ** Article template
 
-#+NAME: anydoc-article-template
-#+BEGIN_SRC latex :noweb yes :tangle templates/anydoc-article-template.tex
+#+NAME: anyclass-article-template
+#+BEGIN_SRC latex :noweb yes :tangle templates/anyclass-article-template.tex
 \documentclass[
-documenttype=article,
-fontsize=11pt,
-]{anydoc}
+class=scrarticle,
+options={
+<<article-options>>
+}
+]{anyclass}
+
+<<article-settings>>
 
 <<article-body>>
 #+END_SRC
 
 #+NAME: article-template
 #+BEGIN_SRC latex :noweb yes :tangle templates/article-template.tex
-<<anydoc-defaults>>
-
 \documentclass[
-<<article-preamble>>
+<<article-options>>
+]{article}
+
+<<article-settings>>
 
 <<article-body>>
 #+END_SRC
@@ -258,11 +269,16 @@ This is an abstract: \lipsum[1]
 
 ** Beamer template
 
-#+NAME: anydoc-beamer-template
-#+BEGIN_SRC latex :noweb yes :tangle templates/anydoc-beamer-template.tex
+#+NAME: anyclass-beamer-template
+#+BEGIN_SRC latex :noweb yes :tangle templates/anyclass-beamer-template.tex
 \documentclass[
-documenttype=beamer,
-]{anydoc}
+class=beamer,
+options={
+<<beamer-options>>
+}
+]{anyclass}
+
+<<beamer-settings>>
 
 <<beamer-body>>
 
@@ -272,10 +288,11 @@ documenttype=beamer,
 #+BEGIN_SRC latex :noweb yes :tangle templates/beamer-template.tex
 % -*- coding: utf-8 -*-
 
-<<anydoc-defaults>>
-
 \documentclass[
-<<beamer-preamble>>
+<<beamer-options>>
+]{beamer}
+
+<<beamer-settings>>
 
 <<beamer-body>>
 
@@ -361,12 +378,16 @@ documenttype=beamer,
 
 ** Book template
 
-#+NAME: anydoc-book-template
-#+BEGIN_SRC latex :noweb yes :tangle templates/anydoc-book-template.tex
+#+NAME: anyclass-book-template
+#+BEGIN_SRC latex :noweb yes :tangle templates/anyclass-book-template.tex
 \documentclass[
-documenttype=abstract,
-fontsize=12pt,
-]{anydoc}
+class=book,
+options={
+<<book-options>>
+}
+]{anyclass}
+
+<<book-settings>>
 
 <<book-body>>
 
@@ -374,10 +395,11 @@ fontsize=12pt,
 
 #+NAME: book-template
 #+BEGIN_SRC latex :noweb yes :tangle templates/book-template.tex
-<<anydoc-defaults>>
-
 \documentclass[
-<<book-preamble>>
+<<book-options>>
+]{book}
+
+<<book-settings>>
 
 <<book-body>>
 
@@ -462,7 +484,7 @@ numbers=noenddot,
 
 
 %%%%%%%%%%%%%%%%%%%%%%%% 
-%       PREAMBLE       %
+%       SETTINGS       %
 %%%%%%%%%%%%%%%%%%%%%%%% 
 
 \input{settings/hausarbeit-settings}
@@ -537,14 +559,14 @@ numbers=noenddot,
 #+NAME: essay-template
 #+BEGIN_SRC latex :noweb yes :tangle templates/essay-template.tex
 %%%%%%%%%%%%%%%%%%%%%%%% 
-%       PREAMBLE       %
+%       SETTINGS       %
 %%%%%%%%%%%%%%%%%%%%%%%%
 
 \documentclass[11pt,twoside]{scrartcl}
 
 \input{settings/scrarticle_setup.tex}
 
-\input{settings/standard-preamble}
+\input{settings/standard-settings}
 
 
 \begin{document}
@@ -592,17 +614,19 @@ numbers=noenddot,
 %%% End:
 #+END_SRC
 
-* Preambles
+* Bundled settings
 
-** Abstract preamble 
+** Abstract settings
 
-#+NAME: abstract-preamble
+#+NAME: abstract-options
 #+BEGIN_SRC latex
-\FontSize,
+12pt,
 a4paper,
-]{article}
+#+END_SRC
 
-\input{settings/standard-preamble}
+#+NAME: abstract-settings
+#+BEGIN_SRC latex
+\input{settings/standard-settings}
 
 
 \usepackage[left=25mm, right=25mm, top=25mm, bottom=25mm, noheadfoot]{geometry}
@@ -612,23 +636,26 @@ a4paper,
 \defbibenvironment{bibliography}{\noindent}{\unspace}{\xspace$\bullet$\xspace}
 #+END_SRC
 
-** Article preamble
+** Article settings
 
-#+NAME: article-preamble
+#+NAME: article-options
 #+BEGIN_SRC latex
-\FontSize,
+11pt,
 draft,
 twoside
-]{scrartcl}
-
-\input{settings/scrarticle-settings}
-
-\input{settings/standard-preamble}
 #+END_SRC
 
-** Beamer preamble
 
-#+NAME: beamer-preamble
+#+NAME: article-settings
+#+BEGIN_SRC latex
+\input{settings/scrarticle-settings}
+
+\input{settings/standard-settings}
+#+END_SRC
+
+** Beamer settings
+
+#+NAME: beamer-options
 #+BEGIN_SRC latex
 % 8pt, 9pt, 10pt, 11pt, 12pt, 14pt, 17pt, 20pt
 % serif,
@@ -639,13 +666,16 @@ twoside
 compress,
 xcolor=table,
 dvipsnames,
-]{beamer}
-
-\input{settings/beamer-preamble.tex}
 #+END_SRC
 
 
-#+BEGIN_SRC latex :noweb yes :tangle settings/beamer-preamble.tex
+#+NAME: beamer-settings
+#+BEGIN_SRC latex
+\input{settings/beamer-settings.tex}
+#+END_SRC
+
+
+#+BEGIN_SRC latex :noweb yes :tangle settings/beamer-settings.tex
 \usepackage{tipa}
 
 %% Encoding, fonts, language
@@ -675,7 +705,7 @@ dvipsnames,
 }
 <<avm-settings>>
 
-<<beamer-settings>>
+<<beamer-style>>
 
 %% Bibliography
 
@@ -688,25 +718,28 @@ dvipsnames,
 % \renewcommand{\newblock}{}    % to make natbib compatible with beamer
 #+END_SRC
 
-** Book preamble
+** Book settings
 
-#+NAME: book-preamble
+#+NAME: book-options
 #+BEGIN_SRC latex
-\FontSize,
+11pt,
 bibliography=totoc,
 numbers=noenddot,
 % draft
-]{scrbook}
-
-\usepackage{datetime}
-
-\input{settings/standard-preamble}
 #+END_SRC
 
-** Standard preamble
 
-#+NAME: standard-preamble
-#+BEGIN_SRC latex :noweb yes :tangle settings/standard-preamble.tex
+#+NAME: book-settings
+#+BEGIN_SRC latex
+\usepackage{datetime}
+
+\input{settings/standard-settings}
+#+END_SRC
+
+** Standard settings
+
+#+NAME: standard-settings
+#+BEGIN_SRC latex :noweb yes :tangle settings/standard-settings.tex
 <<pdflatex-settings>>
 
 %% Trees and graphics
@@ -855,7 +888,7 @@ numbers=noenddot,
 
 ** Beamer
 
-#+NAME: beamer-settings
+#+NAME: beamer-style
 #+BEGIN_SRC latex
 %%%%%%%%%%%%%%%%%%%%%%%%
 %   BEAMER SETTINGS    % 
@@ -953,7 +986,12 @@ numbers=noenddot,
 }
 #+END_SRC
 
-** BibLaTeX
+** TODO BibLaTeX
+:LOGBOOK:
+- State "TODO"       from              [2017-08-18 Fr 08:15]
+:END:
+
+- [ ] add =\abstractTrue=
 
 #+NAME: biblatex-settings
 #+BEGIN_SRC latex
@@ -1106,15 +1144,6 @@ numbers=noenddot,
 {\multicitedelim}
 {\usebibmacro{postnote}}
 }{}
-\makeatother
-
-
-%% tl-abstract settings
-\makeatletter
-\@ifclassloaded{tl-abstract}{
-\defbibenvironment{bibliography}{\noindent}{\unspace}{\xspace$\bullet$\xspace}
-}
-{}
 \makeatother
 
 \addbibresource[datatype=bibtex]{references.bib}

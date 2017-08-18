@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{anydoc}[2017/08/16 Just Any Document Type]
+\ProvidesClass{anyclass}[2017/08/16 Just Any Document Type]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 % 
@@ -7,8 +7,8 @@
 % 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
-\newcommand{\FontSize}{11pt}
-\newcommand{\DocumentType}{article}
+\newcommand{\DocumentOptions}{11pt,a4paper}
+\newcommand{\DocumentClass}{article}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 % 
@@ -18,34 +18,23 @@
 
 \RequirePackage{kvoptions}		% for key-value options
 \SetupKeyvalOptions{
-	family=anydoc,
-	prefix=anydoc@ }
+	family=anyclass,
+	prefix=anyclass@ }
 
 \DeclareVoidOption{article}{  			
-  \renewcommand{\DocumentType}{article}}
+  \renewcommand{\DocumentClass}{article}}
 \DeclareVoidOption{book}{  			
-  \renewcommand{\DocumentType}{book}}
+  \renewcommand{\DocumentClass}{book}}
 \DeclareVoidOption{beamer}{  			
-  \renewcommand{\DocumentType}{beamer}}
+  \renewcommand{\DocumentClass}{beamer}}
 \DeclareVoidOption{abstract}{  			
-  \renewcommand{\DocumentType}{abstract}}
+  \renewcommand{\DocumentClass}{abstract}}
 
-\DeclareStringOption{documenttype}[article]
-\define@key{langscibook}{type}{%
-  \renewcommand{\DocumentType}{#1}}
+\DeclareStringOption{options}[11pt]
+\define@key{langscibook}{options}{%
+  \renewcommand{\DocumentOptions}{#1}}
 
-\DeclareVoidOption{12pt}{  			
-  \renewcommand{\FontSize}{12pt}}
-\DeclareVoidOption{11pt}{  			
-  \renewcommand{\FontSize}{11pt}}
-\DeclareVoidOption{10pt}{  			
-  \renewcommand{\FontSize}{10pt}}
-
-\DeclareStringOption{fontsize}[11pt]
-\define@key{langscibook}{fontsize}{%
-  \renewcommand{\FontSize}{#1}}
-
-\ProcessKeyvalOptions{anydoc}
+\ProcessKeyvalOptions{anyclass}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 % 
@@ -54,14 +43,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
 \newcommand{\isabstract}{abstract}
-\ifx\DocumentType\isabstract
+\ifx\DocumentClass\isabstract
 
 \LoadClass[
-\FontSize,
-a4paper,
+\DocumentOptions
 ]{article}
 
-\input{settings/standard-preamble}
+\input{settings/standard-settings}
 
 
 \usepackage[left=25mm, right=25mm, top=25mm, bottom=25mm, noheadfoot]{geometry}
@@ -88,17 +76,15 @@ a4paper,
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
 \newcommand{\isarticle}{article}
-\ifx\DocumentType\isarticle
+\ifx\DocumentClass\isarticle
 
 \LoadClass[
-\FontSize,
-draft,
-twoside
-]{scrartcl}
+\DocumentOptions
+]{article}
 
 \input{settings/scrarticle-settings}
 
-\input{settings/standard-preamble}
+\input{settings/standard-settings}
 
 \fi
 
@@ -109,21 +95,13 @@ twoside
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
 \newcommand{\isbeamer}{beamer}
-\ifx\DocumentType\isbeamer
+\ifx\DocumentClass\isbeamer
 
 \LoadClass[
-% 8pt, 9pt, 10pt, 11pt, 12pt, 14pt, 17pt, 20pt
-% serif,
-% table, % for table coloring
-% draft,
-% ngerman,
-% handout,	% remove overlays
-compress,
-xcolor=table,
-dvipsnames,
+\DocumentOptions
 ]{beamer}
 
-\input{settings/beamer-preamble.tex}
+\input{settings/beamer-settings.tex}
 
 \fi
 
@@ -134,18 +112,15 @@ dvipsnames,
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
 \newcommand{\isbook}{book}
-\ifx\DocumentType\isbook
+\ifx\DocumentClass\isbook
 
 \LoadClass[
-\FontSize,
-bibliography=totoc,
-numbers=noenddot,
-% draft
-]{scrbook}
+\DocumentOptions
+]{book}
 
 \usepackage{datetime}
 
-\input{settings/standard-preamble}
+\input{settings/standard-settings}
 
 \fi
 

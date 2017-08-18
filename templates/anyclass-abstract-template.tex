@@ -1,7 +1,19 @@
 \documentclass[
-documenttype=abstract,
-fontsize=12pt,
-]{anydoc}
+class=abstract,
+options={
+12pt,
+a4paper,
+}
+]{anyclass}
+
+\input{settings/standard-settings}
+
+
+\usepackage[left=25mm, right=25mm, top=25mm, bottom=25mm, noheadfoot]{geometry}
+\pagenumbering{gobble}
+
+\PassOptionsToPackage{maxbibnames=1,maxcitenames=1,firstinits=true}{biblatex}
+\defbibenvironment{bibliography}{\noindent}{\unspace}{\xspace$\bullet$\xspace}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % HEADER
