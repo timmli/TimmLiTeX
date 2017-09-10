@@ -24,9 +24,9 @@ This is necesssary to make the beamer template usable in org-mode:
 <<beamer-settings>>
 #+END_SRC
 
-* TODO Document templates for Org-mode
+* TODO Document templates
 
-* Document templates for LaTeX
+- [ ] add templates for org-mode
 
 ** Abstract template
 
@@ -48,7 +48,7 @@ This is necesssary to make the beamer template usable in org-mode:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \author{Max Mustermann (Affiliation)}
-\title{Title }
+\title{Title}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % BODY
