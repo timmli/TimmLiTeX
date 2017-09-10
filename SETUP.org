@@ -1,157 +1,32 @@
 #+TITLE: LaTeX settings in one file
 #+AUTHOR: Timm Lichte
 
-* Super class
+* Installation
 
-#+NAME: anyclass-defaults
-#+BEGIN_SRC latex
-\newcommand{\DocumentOptions}{11pt,a4paper}
-\newcommand{\DocumentClass}{article}
+In order to install these templates, press =C-c C-v t= , or evaluate the following source block (with =C-c C-c=):
+
+#+BEGIN_SRC emacs-lisp
+(org-babel-tangle)
 #+END_SRC
 
-#+NAME: anyclass
-#+BEGIN_SRC latex :noweb yes :tangle anyclass.cls
-\NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{anyclass}[2017/08/16 Just Any Document Type]
+* Preambles
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-% 
-% Default values
-% 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+This is necesssary to make the beamer template usable in org-mode:
 
-<<anyclass-defaults>>
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-% 
-% Option handling
-% 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\RequirePackage{kvoptions}		% for key-value options
-\SetupKeyvalOptions{
-	family=anyclass,
-	prefix=anyclass@ }
-
-\DeclareVoidOption{article}{  			
-  \renewcommand{\DocumentClass}{article}}
-\DeclareVoidOption{book}{  			
-  \renewcommand{\DocumentClass}{book}}
-\DeclareVoidOption{beamer}{  			
-  \renewcommand{\DocumentClass}{beamer}}
-\DeclareVoidOption{abstract}{  			
-  \renewcommand{\DocumentClass}{abstract}}
-
-\DeclareStringOption{options}[11pt]
-\define@key{langscibook}{options}{%
-  \renewcommand{\DocumentOptions}{#1}}
-
-\ProcessKeyvalOptions{anyclass}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-% 
-% Abstract
-% 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-
-\newcommand{\isabstract}{abstract}
-\ifx\DocumentClass\isabstract
+#+BEGIN_SRC latex :noweb yes :tangle preambles/tl-beamer.cls
+\NeedsTeXFormat{LaTeX2e} 
+\ProvidesClass{preambles/tl-beamer}[2017/04/26 v0.1 My Beamer Preamble]
 
 \LoadClass[
-\DocumentOptions
-]{article}
-
-<<abstract-settings>>
-
-\fi
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-% 
-% ACL
-% 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-
-% TODO
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-% 
-% Article
-% 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-
-\newcommand{\isarticle}{article}
-\ifx\DocumentClass\isarticle
-
-\LoadClass[
-\DocumentOptions
-]{article}
-
-<<article-settings>>
-
-\fi
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-% 
-% Beamer
-% 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-
-\newcommand{\isbeamer}{beamer}
-\ifx\DocumentClass\isbeamer
-
-\LoadClass[
-\DocumentOptions
+<<beamer-options>>
 ]{beamer}
 
 <<beamer-settings>>
-
-\fi
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-% 
-% Book
-% 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-
-\newcommand{\isbook}{book}
-\ifx\DocumentClass\isbook
-
-\LoadClass[
-\DocumentOptions
-]{book}
-
-<<book-settings>>
-
-\fi
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-% 
-% Poster
-% 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-
-% TODO
-
 #+END_SRC
 
 * Document templates
 
 ** Abstract template
-
-#+NAME: anyclass-abstract-template
-#+BEGIN_SRC latex :noweb yes :tangle templates/anyclass-abstract-template.tex
-\documentclass[
-class=abstract,
-options={
-<<abstract-options>>
-}
-]{anyclass}
-
-<<abstract-settings>>
-
-<<abstract-body>>
-#+END_SRC
 
 #+NAME: abstract-template
 #+BEGIN_SRC latex :noweb yes :tangle templates/abstract-template.tex
@@ -188,20 +63,6 @@ options={
 #+END_SRC
 
 ** Article template
-
-#+NAME: anyclass-article-template
-#+BEGIN_SRC latex :noweb yes :tangle templates/anyclass-article-template.tex
-\documentclass[
-class=scrarticle,
-options={
-<<article-options>>
-}
-]{anyclass}
-
-<<article-settings>>
-
-<<article-body>>
-#+END_SRC
 
 #+NAME: article-template
 #+BEGIN_SRC latex :noweb yes :tangle templates/article-template.tex
@@ -268,21 +129,6 @@ This is an abstract: \lipsum[1]
 #+END_SRC
 
 ** Beamer template
-
-#+NAME: anyclass-beamer-template
-#+BEGIN_SRC latex :noweb yes :tangle templates/anyclass-beamer-template.tex
-\documentclass[
-class=beamer,
-options={
-<<beamer-options>>
-}
-]{anyclass}
-
-<<beamer-settings>>
-
-<<beamer-body>>
-
-#+END_SRC
 
 #+NAME: beamer-template
 #+BEGIN_SRC latex :noweb yes :tangle templates/beamer-template.tex
@@ -377,21 +223,6 @@ options={
 #+END_SRC
 
 ** Book template
-
-#+NAME: anyclass-book-template
-#+BEGIN_SRC latex :noweb yes :tangle templates/anyclass-book-template.tex
-\documentclass[
-class=book,
-options={
-<<book-options>>
-}
-]{anyclass}
-
-<<book-settings>>
-
-<<book-body>>
-
-#+END_SRC
 
 #+NAME: book-template
 #+BEGIN_SRC latex :noweb yes :tangle templates/book-template.tex
@@ -668,12 +499,10 @@ xcolor=table,
 dvipsnames,
 #+END_SRC
 
-
 #+NAME: beamer-settings
 #+BEGIN_SRC latex
 \input{settings/beamer-settings.tex}
 #+END_SRC
-
 
 #+BEGIN_SRC latex :noweb yes :tangle settings/beamer-settings.tex
 \usepackage{tipa}
@@ -716,6 +545,25 @@ dvipsnames,
 % \input{settings/natbib_bibtex_setup.tex} 
 % \PassOptionsToPackage{round}{natbib}
 % \renewcommand{\newblock}{}    % to make natbib compatible with beamer
+
+%% textpos settings
+\usepackage{calc}
+\usepackage[absolute,overlay]{textpos}
+\setlength{\TPHorizModule}{1em}
+\setlength{\TPVertModule}{1ex}
+
+\newlength{\textposOriginH}
+\newlength{\textposOriginV}
+\setlength{\textposOriginH}{10mm}
+\setlength{\textposOriginV}{10mm}
+\textblockorigin{\textposOriginH}{\textposOriginV}
+
+\newcommand{\freeblock}[2]{
+  \begin{textblock}{0.1}(#1)
+  #2
+  \end{textblock}
+}
+
 #+END_SRC
 
 ** Book settings
@@ -1488,3 +1336,141 @@ pdfkeywords={},%
 :END:
 
 - [ ] Move example here.
+* Archive :ARCHIVE:
+** Super class
+:PROPERTIES:
+:ARCHIVE_TIME: 2017-09-10 So 15:37
+:END:
+
+#+NAME: anyclass-defaults
+#+BEGIN_SRC latex
+\newcommand{\DocumentOptions}{11pt,a4paper}
+\newcommand{\DocumentClass}{article}
+#+END_SRC
+
+#+NAME: anyclass
+#+BEGIN_SRC latex :noweb yes :tangle anyclass.cls
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesClass{anyclass}[2017/08/16 Just Any Document Type]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% 
+% Default values
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+<<anyclass-defaults>>
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% 
+% Option handling
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\RequirePackage{kvoptions}		% for key-value options
+\SetupKeyvalOptions{
+	family=anyclass,
+	prefix=anyclass@ }
+
+\DeclareVoidOption{article}{  			
+  \renewcommand{\DocumentClass}{article}}
+\DeclareVoidOption{book}{  			
+  \renewcommand{\DocumentClass}{book}}
+\DeclareVoidOption{beamer}{  			
+  \renewcommand{\DocumentClass}{beamer}}
+\DeclareVoidOption{abstract}{  			
+  \renewcommand{\DocumentClass}{abstract}}
+
+\DeclareStringOption{options}[11pt]
+\define@key{langscibook}{options}{%
+  \renewcommand{\DocumentOptions}{#1}}
+
+\ProcessKeyvalOptions{anyclass}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% 
+% Abstract
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\newcommand{\isabstract}{abstract}
+\ifx\DocumentClass\isabstract
+
+\LoadClass[
+\DocumentOptions
+]{article}
+
+<<abstract-settings>>
+
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% 
+% ACL
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+% TODO
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% 
+% Article
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\newcommand{\isarticle}{article}
+\ifx\DocumentClass\isarticle
+
+\LoadClass[
+\DocumentOptions
+]{article}
+
+<<article-settings>>
+
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% 
+% Beamer
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\newcommand{\isbeamer}{beamer}
+\ifx\DocumentClass\isbeamer
+
+\LoadClass[
+\DocumentOptions
+]{beamer}
+
+<<beamer-settings>>
+
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% 
+% Book
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\newcommand{\isbook}{book}
+\ifx\DocumentClass\isbook
+
+\LoadClass[
+\DocumentOptions
+]{book}
+
+<<book-settings>>
+
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% 
+% Poster
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+% TODO
+
+#+END_SRC
+
