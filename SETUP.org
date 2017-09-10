@@ -24,7 +24,9 @@ This is necesssary to make the beamer template usable in org-mode:
 <<beamer-settings>>
 #+END_SRC
 
-* Document templates
+* TODO Document templates for Org-mode
+
+* Document templates for LaTeX
 
 ** Abstract template
 
@@ -46,8 +48,7 @@ This is necesssary to make the beamer template usable in org-mode:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \author{Max Mustermann (Affiliation)}
-\date{}
-\title{\vspace{-1.6cm}\Large Title }
+\title{Title }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % BODY
@@ -57,7 +58,12 @@ This is necesssary to make the beamer template usable in org-mode:
 
 \maketitle
 
-\section{First section}
+\paragraph{First paragraph}
+
+\paragraph{References}
+{\tiny
+\printbibliography[heading=none]
+}
 
 \end{document}
 #+END_SRC
@@ -459,12 +465,26 @@ a4paper,
 #+BEGIN_SRC latex
 \input{settings/standard-settings}
 
-
 \usepackage[left=25mm, right=25mm, top=25mm, bottom=25mm, noheadfoot]{geometry}
 \pagenumbering{gobble}
 
 \PassOptionsToPackage{maxbibnames=1,maxcitenames=1,firstinits=true}{biblatex}
 \defbibenvironment{bibliography}{\noindent}{\unspace}{\xspace$\bullet$\xspace}
+
+\makeatletter
+\renewcommand\maketitle{
+
+  ~\vspace{-1.1cm}
+
+  {\raggedright
+    \renewcommand{\baselinestretch}{1.2}\selectfont
+  {\bfseries\large\@title}\\[2ex]
+  {\large\@author}
+
+  }
+}
+\makeatother
+
 #+END_SRC
 
 ** Article settings

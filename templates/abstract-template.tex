@@ -5,20 +5,33 @@ a4paper,
 
 \input{settings/standard-settings}
 
-
 \usepackage[left=25mm, right=25mm, top=25mm, bottom=25mm, noheadfoot]{geometry}
 \pagenumbering{gobble}
 
 \PassOptionsToPackage{maxbibnames=1,maxcitenames=1,firstinits=true}{biblatex}
 \defbibenvironment{bibliography}{\noindent}{\unspace}{\xspace$\bullet$\xspace}
 
+\makeatletter
+\renewcommand\maketitle{
+
+  ~\vspace{-1.1cm}
+
+  {\raggedright
+    \renewcommand{\baselinestretch}{1.2}\selectfont
+  {\bfseries\large\@title}\\[2ex]
+  {\large\@author}
+
+  }
+}
+\makeatother
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % HEADER
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \author{Max Mustermann (Affiliation)}
-\date{}
-\title{\vspace{-1.6cm}\Large Title }
+\title{Title }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % BODY
@@ -28,6 +41,10 @@ a4paper,
 
 \maketitle
 
-\section{First section}
+\paragraph{First paragraph}
 
+\paragraph{References}
+{\tiny
+\printbibliography[heading=none]
+}
 \end{document}
