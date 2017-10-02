@@ -3,7 +3,7 @@
 
 * Installation
 
-In order to install these templates, press =C-c C-v t= , or evaluate the following source block (with =C-c C-c=):
+In order to compile these templates, press =C-c C-v t= , or evaluate the following source block (with =C-c C-c=):
 
 #+BEGIN_SRC emacs-lisp
 (org-babel-tangle)
