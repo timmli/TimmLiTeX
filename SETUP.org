@@ -136,6 +136,74 @@ This is an abstract: \lipsum[1]
 
 ** Beamer template
 
+#+NAME: beamer-template-org
+#+BEGIN_SRC org :noweb yes :tangle templates/beamer-template.org
+#+TITLE: Beamer slides
+#+AUTHOR: John Doe
+:Settings:
+# #+DATE: 
+#+BEAMER_HEADER: %\date[]{}
+#+BEAMER_HEADER: %\institute[]{}
+#+BEAMER_HEADER: %\titlegraphic{\includegraphics[height=1cm]{graphics/sfb-logo-quer} \hfil \includegraphics[height=1cm]{graphics/hhu-logo}}	% Logo on title slide
+#+BEAMER_HEADER: <<beamer-settings>>
+#+FILETAGS: research
+#+LANGUAGE:  en
+#+OPTIONS:   H:2 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t ':t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+STARTUP: beamer
+#+LATEX_CLASS: tl-beamer
+#+LATEX_CLASS_OPTIONS: <<beamer-options-org>> 
+#+LATEX_COMPILER: pdflatex
+#+LATEX_HEADER: \input{myMacros}
+#+COLUMNS: %40ITEM %10TAGS %9BEAMER_act(Overlays) %4BEAMER_col(Col) %20BEAMER_opt(Options)
+:end:
+
+,* First section
+
+,** First slide
+
+
+
+
+,* References                                      :B_ignoreheading:
+:PROPERTIES:
+:BEAMER_env: ignoreheading
+:END:
+
+,** References
+:PROPERTIES:
+:beamer_opt: allowframebreaks
+:END:
+
+\insertBib
+
+,* COMMENT org-mode settings
+
+,** Installation of =tl-beamer=
+
+The virtual LaTeX class =tl-beamer= has to be propagated to org-mode beforehand.
+
+,#+BEGIN_SRC elisp :results output slient
+(add-to-list 'org-latex-classes
+         '("tl-beamer" 
+						"\\documentclass{beamer}
+						[NO-DEFAULT-PACKAGES]"
+            ("\\section{%s}" . "\\section*{%s}")
+            ("\\subsection{%s}" . "\\subsection*{%s}")
+            ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+            ("\\paragraph{%s}" . "\\paragraph*{%s}")
+            ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+,#+END_SRC
+
+,* COMMENT Local Variables
+# Local variables:
+# org-latex-with-hyperref: t
+# coding: utf-8
+# end:
+
+
+#+END_SRC
+
 #+NAME: beamer-template
 #+BEGIN_SRC latex :noweb yes :tangle templates/beamer-template.tex
 % -*- coding: utf-8 -*-
@@ -145,6 +213,7 @@ This is an abstract: \lipsum[1]
 ]{beamer}
 
 <<beamer-settings>>
+% \setbeamersize{text margin left=1.5em,text margin right=1.5em}
 
 <<beamer-body>>
 
@@ -519,6 +588,11 @@ xcolor=table,
 dvipsnames,
 #+END_SRC
 
+#+NAME: beamer-options-org
+#+BEGIN_SRC latex
+[compress,xcolor=table,dvipsnames]
+#+END_SRC
+
 #+NAME: beamer-settings
 #+BEGIN_SRC latex
 \input{settings/beamer-settings.tex}
@@ -532,7 +606,9 @@ dvipsnames,
 
 \usepackage{etex} 
 \usepackage{graphics}
+
 <<tikz-settings>>
+
 <<forest-settings>>
 
 \usepackage{url}
@@ -552,6 +628,7 @@ dvipsnames,
   \renewcommand\eachwordtwo{\sffamily}	% for glossing with linguex
   % \setlength{\Extopsep}{1ex}   % vertical margin in linguex examples
 }
+
 <<avm-settings>>
 
 <<beamer-style>>
@@ -583,7 +660,6 @@ dvipsnames,
   #2
   \end{textblock}
 }
-
 #+END_SRC
 
 ** Book settings
