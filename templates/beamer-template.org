@@ -59,7 +59,7 @@
 
 ** Installation of =tl-beamer=
 
-The virtual LaTeX class =tl-beamer= has to be propagated to org-mode beforehand.
+The virtual LaTeX class =tl-beamer= has to be propagated to org-mode before export.
 
 #+BEGIN_SRC elisp :results output slient
 (add-to-list 'org-latex-classes
@@ -73,7 +73,7 @@ The virtual LaTeX class =tl-beamer= has to be propagated to org-mode beforehand.
             ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 #+END_SRC
 
-* COMMENT Local Variables
+** Local Variables
 # Local variables:
 # org-latex-with-hyperref: t
 # coding: utf-8
