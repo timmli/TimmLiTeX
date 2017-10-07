@@ -9,21 +9,6 @@ In order to compile these templates, press =C-c C-v t= , or evaluate the followi
 (org-babel-tangle)
 #+END_SRC
 
-* Preambles
-
-This is necesssary to make the beamer template usable in org-mode:
-
-#+BEGIN_SRC latex :noweb yes :tangle preambles/tl-beamer.cls
-\NeedsTeXFormat{LaTeX2e} 
-\ProvidesClass{preambles/tl-beamer}[2017/04/26 v0.1 My Beamer Preamble]
-
-\LoadClass[
-<<beamer-options>>
-]{beamer}
-
-<<beamer-settings>>
-#+END_SRC
-
 * TODO Document templates
 
 - [ ] add templates for org-mode
@@ -37,6 +22,12 @@ This is necesssary to make the beamer template usable in org-mode:
 ]{article}
 
 <<abstract-settings>>
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% HEADER
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{myMacros}
 
 <<abstract-body>>
 #+END_SRC
@@ -78,17 +69,17 @@ This is necesssary to make the beamer template usable in org-mode:
 
 <<article-settings>>
 
-<<article-body>>
-#+END_SRC
-
-#+NAME: article-body
-#+BEGIN_SRC latex 
 %%%%%%%%%%%%%%
 %   Macros   % 
 %%%%%%%%%%%%%%
 
 \input{myMacros}
 
+<<article-body>>
+#+END_SRC
+
+#+NAME: article-body
+#+BEGIN_SRC latex 
 %%%%%%%%%%%%%
 %   Title   % 
 %%%%%%%%%%%%%
@@ -233,12 +224,6 @@ The virtual LaTeX class =tl-beamer= has to be propagated to org-mode beforehand.
 <<beamer-settings>>
 % \setbeamersize{text margin left=1.5em,text margin right=1.5em}
 
-<<beamer-body>>
-
-#+END_SRC
-
-#+NAME: beamer-body
-#+BEGIN_SRC latex
 %%%%%%%%%%%%%%%%%%%%%%%% 
 %    CUSTOM MACROS     %
 %%%%%%%%%%%%%%%%%%%%%%%% 
@@ -248,6 +233,12 @@ The virtual LaTeX class =tl-beamer= has to be propagated to org-mode beforehand.
 \definecolor{myred}{rgb}{0.8,0,0}
 \definecolor{mydarkgreen}{rgb}{0,0.55,0}
 
+<<beamer-body>>
+
+#+END_SRC
+
+#+NAME: beamer-body
+#+BEGIN_SRC latex
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % HEADER
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -325,19 +316,17 @@ The virtual LaTeX class =tl-beamer= has to be propagated to org-mode beforehand.
 
 <<book-settings>>
 
-<<book-body>>
-
-#+END_SRC
-
-#+NAME: book-body
-#+BEGIN_SRC latex
 %%%%%%%%%%%%%%
 %   Macros   % 
 %%%%%%%%%%%%%%
 
 \input{myMacros}   % the content of myMacros.tex goes here
 
+<<book-body>>
+#+END_SRC
 
+#+NAME: book-body
+#+BEGIN_SRC latex
 %%%%%%%%%%%%%
 %   Title   % 
 %%%%%%%%%%%%%
@@ -853,7 +842,7 @@ numbers=noenddot,
 #+NAME: beamer-style
 #+BEGIN_SRC latex
 %%%%%%%%%%%%%%%%%%%%%%%%
-%   BEAMER SETTINGS    % 
+%   BEAMER STYLE    % 
 %%%%%%%%%%%%%%%%%%%%%%%%
 
 %\usefonttheme{serif}
@@ -1252,11 +1241,12 @@ numbers=noenddot,
 \usepackage[scaled=0.8]{beramono}  % for monospaced font
 \usepackage{microtype}		% micro-typographic aspects of the fonts
 \usepackage[T1]{fontenc}	% special fonts, e.g. for German umlaute
-%% incompabtible with Biblatex
+
+%% compatible with BibLaTeX
+\usepackage[utf8]{inputenc}
+%% incompabtible with BibLaTeX
 % \usepackage{ucs}
 % \usepackage[utf8x]{inputenc}
-%% compatible with Biblatex
-\usepackage[utf8]{inputenc}
 
 %% Language
 %\usepackage[german]{babel}
@@ -1586,5 +1576,23 @@ pdfkeywords={},%
 
 % TODO
 
+#+END_SRC
+
+** Preambles
+:PROPERTIES:
+:ARCHIVE_TIME: 2017-10-07 Sa 22:14
+:END:
+
+This is necessary to make the beamer template usable in org-mode:
+
+#+BEGIN_SRC latex :noweb yes :tangle preambles/tl-beamer.cls
+\NeedsTeXFormat{LaTeX2e} 
+\ProvidesClass{preambles/tl-beamer}[2017/04/26 v0.1 My Beamer Preamble]
+
+\LoadClass[
+<<beamer-options>>
+]{beamer}
+
+<<beamer-settings>>
 #+END_SRC
 
