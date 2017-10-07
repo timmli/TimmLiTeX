@@ -145,18 +145,36 @@ This is an abstract: \lipsum[1]
 #+BEAMER_HEADER: %\date[]{}
 #+BEAMER_HEADER: %\institute[]{}
 #+BEAMER_HEADER: %\titlegraphic{\includegraphics[height=1cm]{graphics/sfb-logo-quer} \hfil \includegraphics[height=1cm]{graphics/hhu-logo}}	% Logo on title slide
-#+BEAMER_HEADER: <<beamer-settings>>
 #+FILETAGS: research
 #+LANGUAGE:  en
 #+OPTIONS:   H:2 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t ':t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
 #+STARTUP: beamer
+#+STARTUP: hideblocks content
 #+LATEX_CLASS: tl-beamer
 #+LATEX_CLASS_OPTIONS: <<beamer-options-org>> 
 #+LATEX_COMPILER: pdflatex
+#+LATEX_HEADER: <<beamer-settings>>
 #+LATEX_HEADER: \input{myMacros}
 #+COLUMNS: %40ITEM %10TAGS %9BEAMER_act(Overlays) %4BEAMER_col(Col) %20BEAMER_opt(Options)
 :end:
+
+,#+BEGIN_EXPORT latex
+\setlength{\Exlabelsep}{0em}		% for linguex examples
+\setlength{\SubExleftmargin}{1,5em}	% for linguex examples
+\renewcommand\eachwordone{\sffamily}	% for glossing with linguex
+\renewcommand\eachwordtwo{\sffamily}	% for glossing with linguex
+\setlength{\Extopsep}{0em}   % vertical margin in linguex examples
+
+\AtBeginSection[]
+{
+ \begin{frame}<beamer>{Outline}
+   \tableofcontents[
+   currentsection
+   ]
+ \end{frame}
+}
+,#+END_EXPORT
 
 ,* First section
 
