@@ -1,5 +1,6 @@
 #+TITLE: Beamer slides
 #+AUTHOR: John Doe
+#+SUBTITLE: Some subtitle
 :Settings:
 # #+DATE: 
 #+BEAMER_HEADER: %\date[]{}
