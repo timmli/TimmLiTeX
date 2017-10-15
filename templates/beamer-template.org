@@ -6,6 +6,7 @@
 #+BEAMER_HEADER: %\date[]{}
 #+BEAMER_HEADER: %\institute[]{}
 #+BEAMER_HEADER: %\titlegraphic{\includegraphics[height=1cm]{graphics/sfb-logo-quer} \hfil \includegraphics[height=1cm]{graphics/hhu-logo}}	% Logo on title slide
+#+BEAMER_HEADER: \setbeamersize{text margin left=15pt,text margin right=20pt}
 #+FILETAGS: research
 #+LANGUAGE:  en
 #+OPTIONS:   H:2 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t ':t
@@ -26,6 +27,8 @@
 \renewcommand\eachwordone{\sffamily}	% for glossing with linguex
 \renewcommand\eachwordtwo{\sffamily}	% for glossing with linguex
 \setlength{\Extopsep}{0em}   % vertical margin in linguex examples
+
+\newcommand{\mypause}{\pause}
 
 \AtBeginSection[]
 {
@@ -76,6 +79,7 @@ The virtual LaTeX class =tl-beamer= has to be propagated to org-mode before expo
 
 ** Local Variables
 # Local variables:
-# org-latex-with-hyperref: t
 # coding: utf-8
+# org-latex-with-hyperref: t
+# org-latex-listings: listings
 # end:
