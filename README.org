@@ -1,2 +1,11 @@
 * latex-templates
-My LaTeX templates 
+
+Collection of LaTeX settings and templates 
+
+** Features
+
+- optimized for the use with Emacs
+- maintained in one =org-mode= file ([[file:SETUP.org][SETUP.org]])
+
+
+

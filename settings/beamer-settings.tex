@@ -1,6 +1,3 @@
-\usepackage{tipa}
-
-%% Encoding, fonts, language
 %%%%%%%%%%%%%%%%%%%%%%%%
 %   PDFLATEX SETTINGS  % 
 %%%%%%%%%%%%%%%%%%%%%%%%
@@ -22,6 +19,7 @@
 %\usepackage[german]{babel}
 %\usepackage{german}
 \usepackage[english]{babel}
+\usepackage{iflang}             % for language specific settings
 
 \usepackage{etex} 
 \usepackage{graphics}
@@ -75,15 +73,17 @@
 
 \newcommand\tikztreeset[1]{\matrix [matrix of nodes,left delimiter=\{,right delimiter=\}](set){#1};}
 
-%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%% 
 %   FOREST SETTINGS   % 
-%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%% 
+
 \usepackage{forest}
 
 \makeatletter
 
 \@ifpackagelater{forest}{2016/01/01}
-{\useforestlibrary{linguistics}}
+{\useforestlibrary{linguistics}%
+ \useforestlibrary{edges}}
 {}
 
 \@ifpackagelater{forest}{2016/01/01}
@@ -105,6 +105,7 @@
 			% inner sep=3,			% necesssary?
 			begin draw/.code={\begin{tikzpicture}[baseline=(current bounding box.center)]},
     }},
+  htree/.style={for tree={grow'=east,parent anchor=east,child anchor=west,anchor=base west}},
   sn edges/.style={for tree={parent anchor=south, child anchor=north}},
   red subtree/.style={for tree={text=red},for descendants={edge=red}},
   black subtree/.style={for tree={text=black},for descendants={edge=black}},
@@ -124,12 +125,10 @@
   %% for drawing STUG sequences
   </.style={ % draw horizontal line to predecessor
     no edge,
-    before drawing tree={tikz+={\draw[dashed](!)--(!p);}}
-  },
+    before drawing tree={tikz+={\draw[dashed](!)--(!p);}}},
   >/.style={ % draw horizontal line to successor
     no edge,
-    before drawing tree={tikz+={\draw[dashed](!)--(!n);}}
-  },
+    before drawing tree={tikz+={\draw[dashed](!)--(!n);}}},
   t/.style={calign with current}, % trunk 
   lex/.style={                    % terminal nodes with lexical material
     no edge,
@@ -140,8 +139,9 @@
   c/.style n args=1{            % visual link with argument
     % edge label={node[xshift={0.8em},scale=0.8,fill=white,draw,inner sep=.10ex,circle]{#1}}
     % tikz={\node[yshift={1.5ex},scale=0.8,fill=white,draw,inner sep=.10ex,circle, right=-0.5em of .east]  {1};}
-    label={[yshift={0.5ex},scale=.8,circle, draw, fill=white, inner sep=.1ex, label distance=-.65em, anchor=west]north east:#1}
-  }  
+    label={[yshift={0.5ex},scale=.8,circle, draw, fill=white, inner sep=.1ex, label distance=-.65em, anchor=west]north east:#1}},
+  Xs/.style={for tree={xshift=#1}},
+  Ys/.style={for tree={yshift=#1}}
 }
 
 
@@ -303,7 +303,6 @@
   isbn=false,
   doi=false,
   eprint=false,
-  %backend=biber,
   backend=biber,
   % sorting=ydnt,  % sort in descending chronological order
   indexing=cite,
@@ -454,7 +453,10 @@
 % \PassOptionsToPackage{round}{natbib}
 % \renewcommand{\newblock}{}    % to make natbib compatible with beamer
 
-%% textpos settings
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%   TEXTPOS SETTINGS    % 
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \usepackage{calc}
 \usepackage[absolute,overlay]{textpos}
 \setlength{\TPHorizModule}{1em}
