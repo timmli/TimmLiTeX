@@ -531,6 +531,25 @@ numbers=noenddot,
 %%% End:
 #+END_SRC
 
+
+* Packages
+
+** tikz-settings.sty
+
+#+NAME: tikz-settings.sty
+#+BEGIN_SRC latex :noweb yes :tangle packages/tikz-settings.sty
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{tikz-settings}
+
+<<tikz-settings>>
+
+<<forest-settings>>
+
+<<textpos-settings>>
+
+\endinput
+#+END_SRC
+
 * Bundled settings
 
 ** Abstract settings
@@ -654,23 +673,8 @@ dvipsnames,
 % \PassOptionsToPackage{round}{natbib}
 % \renewcommand{\newblock}{}    % to make natbib compatible with beamer
 
-%% textpos settings
-\usepackage{calc}
-\usepackage[absolute,overlay]{textpos}
-\setlength{\TPHorizModule}{1em}
-\setlength{\TPVertModule}{1ex}
+<<textpos-settings>>
 
-\newlength{\textposOriginH}
-\newlength{\textposOriginV}
-\setlength{\textposOriginH}{10mm}
-\setlength{\textposOriginV}{10mm}
-\textblockorigin{\textposOriginH}{\textposOriginV}
-
-\newcommand{\freeblock}[2]{
-  \begin{textblock}{0.1}(#1)
-  #2
-  \end{textblock}
-}
 #+END_SRC
 
 ** Book settings
@@ -1324,6 +1328,33 @@ numbers=noenddot,
 } 
 
 \makeatother
+
+#+END_SRC
+
+** textpos
+
+#+NAME: textpos-settings
+#+BEGIN_SRC latex
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%   TEXTPOS SETTINGS    % 
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{calc}
+\usepackage[absolute,overlay]{textpos}
+\setlength{\TPHorizModule}{1em}
+\setlength{\TPVertModule}{1ex}
+
+\newlength{\textposOriginH}
+\newlength{\textposOriginV}
+\setlength{\textposOriginH}{10mm}
+\setlength{\textposOriginV}{10mm}
+\textblockorigin{\textposOriginH}{\textposOriginV}
+
+\newcommand{\freeblock}[2]{
+  \begin{textblock}{0.1}(#1)
+  #2
+  \end{textblock}
+}
 
 #+END_SRC
 
