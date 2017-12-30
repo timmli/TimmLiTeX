@@ -1,0 +1,147 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{tikz-settings}
+
+%%%%%%%%%%%%%%%%%%%%%%
+%   TIKZ SETTINGS    % 
+%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{tikz}
+\usepackage{tikz-dependency}
+
+\tikzset{every tree node/.style={align=center,anchor=north}}	% to allow linebreaks
+\usetikzlibrary{calc} % for positioning arrows with ($(t.center)-(1,0)$)
+\usetikzlibrary{shapes,decorations}
+\usetikzlibrary{backgrounds,fit}
+\usetikzlibrary{arrows}
+\usetikzlibrary{matrix}
+\usetikzlibrary{positioning}
+\usetikzlibrary{automata}
+\usetikzlibrary{tikzmark}
+
+% Define box and box title style (see http://www.texample.net/tikz/examples/boxes-with-text-and-math/)
+\tikzstyle{mybox} = [draw=gray, very thick,
+    rectangle, rounded corners, inner sep=10pt, inner ysep=17pt,yshift=3pt]
+\tikzstyle{fancytitle} =[draw=gray, very thick, fill=white,
+    rectangle, rounded corners, inner sep=5pt, inner ysep=5pt]
+\tikzstyle{mydouble} = [double distance=1pt]
+    
+\tikzset{
+    %Define standard arrow tip
+    >=stealth',
+    %Define style for boxes
+    box/.style={
+           rectangle,
+           rounded corners,
+           draw=black, very thick,
+           text width=10em,
+           minimum height=2em,
+           text centered},
+    % Define arrow style
+    arrow/.style={
+           ->,
+           thick,
+           	shorten <=2pt,
+           shorten >=2pt,}
+}
+
+\newcommand\centertikz[1]{\tikz[baseline=(current bounding box.center)]{#1}}
+\newcommand\tikzcenter{baseline=(current bounding box.center)}
+\newcommand\tikztop{baseline=(current bounding box.north)}
+
+\newcommand\tikztreeset[1]{\matrix [matrix of nodes,left delimiter=\{,right delimiter=\}](set){#1};}
+
+%%%%%%%%%%%%%%%%%%%%%%% 
+%   FOREST SETTINGS   % 
+%%%%%%%%%%%%%%%%%%%%%%% 
+
+\usepackage{forest}
+
+\makeatletter
+
+\@ifpackagelater{forest}{2016/01/01}
+{\useforestlibrary{linguistics}%
+ \useforestlibrary{edges}}
+{}
+
+\@ifpackagelater{forest}{2016/01/01}
+{\newcommand{\forestPreamble}{default preamble}} % version >=2 of forest
+{\newcommand{\forestPreamble}{.style}} % version <=1 of forest
+
+\makeatother
+
+\forestset{
+  \forestPreamble ={
+    % .style={ % version <=1 of forest
+    % default preamble={ % version >=2 of forest    
+		for tree={
+			parent anchor=south, 
+			child anchor=north,
+			% align=center,			% bad: adds space below label
+			fit=rectangle,
+			base=top,				% vertical orientation of nodes
+			% inner sep=3,			% necesssary?
+			begin draw/.code={\begin{tikzpicture}[baseline=(current bounding box.center)]},
+    }},
+  htree/.style={for tree={grow'=east,parent anchor=east,child anchor=west,anchor=base west}},
+  sn edges/.style={for tree={parent anchor=south, child anchor=north}},
+  red subtree/.style={for tree={text=red},for descendants={edge=red}},
+  black subtree/.style={for tree={text=black},for descendants={edge=black}},
+  blue subtree/.style={for tree={text=blue},for descendants={edge=blue}},
+  green subtree/.style={for tree={text=green},for descendants={edge=green}},
+  gray subtree/.style={for tree={text=gray},for descendants={edge=gray}},
+  vcenter/.style={begin draw/.code={\begin{tikzpicture}[baseline=(current bounding box.center)]}},
+  empty nodes/.style={	% from the forest manual
+    for tree={
+      % calign=fixed edge angles,
+      yshift=1ex},
+    delay={where content={}{shape=coordinate,for parent={for children={anchor=north}}}{}}},
+  derivation tree/.style={.style={
+      for tree={parent anchor={},child anchor={},font=\ttfamily}}},
+  dt label/.style 2 args={
+    edge label={node[midway,font=\ttfamily\scriptsize, #1]{#2}},},
+  %% for drawing STUG sequences
+  </.style={ % draw horizontal line to predecessor
+    no edge,
+    before drawing tree={tikz+={\draw[dashed](!)--(!p);}}},
+  >/.style={ % draw horizontal line to successor
+    no edge,
+    before drawing tree={tikz+={\draw[dashed](!)--(!n);}}},
+  t/.style={calign with current}, % trunk 
+  lex/.style={                    % terminal nodes with lexical material
+    no edge,
+    for parent={l sep=0ex},
+    yshift=3ex,
+    draw=gray,
+    content={\textit{##1}}},
+  c/.style n args=1{            % visual link with argument
+    % edge label={node[xshift={0.8em},scale=0.8,fill=white,draw,inner sep=.10ex,circle]{#1}}
+    % tikz={\node[yshift={1.5ex},scale=0.8,fill=white,draw,inner sep=.10ex,circle, right=-0.5em of .east]  {1};}
+    label={[yshift={0.5ex},scale=.8,circle, draw, fill=white, inner sep=.1ex, label distance=-.65em, anchor=west]north east:#1}},
+  Xs/.style={for tree={xshift=#1}},
+  Ys/.style={for tree={yshift=#1}}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%   TEXTPOS SETTINGS    % 
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{calc}
+\usepackage[absolute,overlay]{textpos}
+\setlength{\TPHorizModule}{1em}
+\setlength{\TPVertModule}{1ex}
+
+\newlength{\textposOriginH}
+\newlength{\textposOriginV}
+\setlength{\textposOriginH}{10mm}
+\setlength{\textposOriginV}{10mm}
+\textblockorigin{\textposOriginH}{\textposOriginV}
+
+\newcommand{\freeblock}[2]{
+  \begin{textblock}{0.1}(#1)
+  #2
+  \end{textblock}
+}
+
+
+\endinput
