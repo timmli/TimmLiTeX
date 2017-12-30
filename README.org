@@ -4,7 +4,7 @@ Collection of LaTeX settings and templates
 
 ** Features
 
-- optimized for the use with Emacs
+- optimized for Emacs
 - maintained in one =org-mode= file ([[file:SETUP.org][SETUP.org]])
 
 
