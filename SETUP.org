@@ -777,6 +777,7 @@ numbers=noenddot,
 			% inner sep=3,			% necesssary?
 			begin draw/.code={\begin{tikzpicture}[baseline=(current bounding box.center)]},
     }},
+  htree/.style={for tree={grow'=east,parent anchor=east,child anchor=west,anchor=base west}},
   sn edges/.style={for tree={parent anchor=south, child anchor=north}},
   red subtree/.style={for tree={text=red},for descendants={edge=red}},
   black subtree/.style={for tree={text=black},for descendants={edge=black}},
@@ -1368,6 +1369,22 @@ numbers=noenddot,
   \end{textblock}
 }
 
+#+END_SRC
+
+** TODO tabular
+
+- [ ] needs to be tested
+
+#+NAME: tabular-settings
+#+BEGIN_SRC latex 
+%% Rotate content of tabular cell: \rot{content}
+\usepackage{adjustbox}
+\newcolumntype{R}[2]{%
+  >{\adjustbox{angle=#1,lap=\width-(#2)}\bgroup}%
+  l%
+  <{\egroup}%
+}
+\newcommand*\rot{\multicolumn{1}{R{45}{1em}}}% no optional argument here, please!
 #+END_SRC
 
 ** tikz
