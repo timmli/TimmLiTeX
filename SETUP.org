@@ -1133,6 +1133,16 @@ numbers=noenddot,
   pdfkeywords={},%
   ]{hyperref}
 \hypersetup{colorlinks=false, pdfborder={0 0 0}}
+
+\IfLanguageName{english}{
+  \renewcommand{\chapterautorefname}{Chapter}%
+  \renewcommand{\figureautorefname}{Figure}%
+  \renewcommand{\tableautorefname}{Table}%
+  \renewcommand{\sectionautorefname}{Section}%
+  \renewcommand{\subsectionautorefname}{Section}%
+  \renewcommand{\subsubsectionautorefname}{Section}%
+  \renewcommand{\Hfootnoteautorefname}{Footnote}%
+}{}
 #+END_SRC
 
 ** Listings
@@ -1261,6 +1271,7 @@ numbers=noenddot,
 %\usepackage[german]{babel}
 %\usepackage{german}
 \usepackage[english]{babel}
+\usepackage{iflang}             % for language specific settings
 #+END_SRC
 
 ** scrarticle
