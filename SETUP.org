@@ -129,27 +129,27 @@ This is an abstract: \lipsum[1]
 
 #+NAME: beamer-template-org
 #+BEGIN_SRC org :noweb yes :tangle templates/beamer-template.org
-#+TITLE: Beamer slides
-#+AUTHOR: John Doe
-#+SUBTITLE: Some subtitle
+,#+TITLE: Beamer slides
+,#+AUTHOR: John Doe
+,#+SUBTITLE: Some subtitle
 :Settings:
 # #+DATE: 
-#+BEAMER_HEADER: %\date[]{}
-#+BEAMER_HEADER: %\institute[]{}
-#+BEAMER_HEADER: %\titlegraphic{\includegraphics[height=1cm]{graphics/sfb-logo-quer} \hfil \includegraphics[height=1cm]{graphics/hhu-logo}}	% Logo on title slide
-#+BEAMER_HEADER: \setbeamersize{text margin left=15pt,text margin right=20pt}
-#+FILETAGS: research
-#+LANGUAGE:  en
-#+OPTIONS:   H:2 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t ':t
-#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
-#+STARTUP: beamer
-#+STARTUP: hideblocks content
-#+LATEX_CLASS: tl-beamer
-#+LATEX_CLASS_OPTIONS: <<beamer-options-org>> 
-#+LATEX_COMPILER: pdflatex
-#+LATEX_HEADER: <<beamer-settings>>
-#+LATEX_HEADER: \input{myMacros}
-#+COLUMNS: %40ITEM %10TAGS %9BEAMER_act(Overlays) %4BEAMER_col(Col) %20BEAMER_opt(Options)
+,#+BEAMER_HEADER: %\date[]{}
+,#+BEAMER_HEADER: %\institute[]{}
+,#+BEAMER_HEADER: %\titlegraphic{\includegraphics[height=1cm]{graphics/sfb-logo-quer} \hfil \includegraphics[height=1cm]{graphics/hhu-logo}}	% Logo on title slide
+,#+BEAMER_HEADER: \setbeamersize{text margin left=15pt,text margin right=20pt}
+,#+FILETAGS: research
+,#+LANGUAGE:  en
+,#+OPTIONS:   H:2 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t ':t
+,#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+,#+STARTUP: beamer
+,#+STARTUP: hideblocks content
+,#+LATEX_CLASS: tl-beamer
+,#+LATEX_CLASS_OPTIONS: <<beamer-options-org>> 
+,#+LATEX_COMPILER: pdflatex
+,#+LATEX_HEADER: <<beamer-settings>>
+,#+LATEX_HEADER: \input{myMacros}
+,#+COLUMNS: %40ITEM %10TAGS %9BEAMER_act(Overlays) %4BEAMER_col(Col) %20BEAMER_opt(Options)
 :end:
 
 ,#+BEGIN_EXPORT latex
@@ -174,9 +174,6 @@ This is an abstract: \lipsum[1]
 ,* First section
 
 ,** First slide
-
-
-
 
 ,* References                                      :B_ignoreheading:
 :PROPERTIES:
@@ -209,6 +206,7 @@ The virtual LaTeX class =tl-beamer= has to be propagated to org-mode before expo
 ,#+END_SRC
 
 ,** Local Variables
+
 # Local variables:
 # coding: utf-8
 # org-latex-with-hyperref: t
@@ -1499,7 +1497,7 @@ pdfkeywords={},%
 :END:
 
 - [ ] Move example here.
-* Archive :ARCHIVE:
+* COMMENT Archive :ARCHIVE:
 ** Super class
 :PROPERTIES:
 :ARCHIVE_TIME: 2017-09-10 So 15:37

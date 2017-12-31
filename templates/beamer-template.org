@@ -44,9 +44,6 @@
 
 ** First slide
 
-
-
-
 * References                                      :B_ignoreheading:
 :PROPERTIES:
 :BEAMER_env: ignoreheading
@@ -78,6 +75,7 @@ The virtual LaTeX class =tl-beamer= has to be propagated to org-mode before expo
 #+END_SRC
 
 ** Local Variables
+
 # Local variables:
 # coding: utf-8
 # org-latex-with-hyperref: t
