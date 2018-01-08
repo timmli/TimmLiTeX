@@ -7,5 +7,19 @@ Collection of LaTeX settings and templates
 - optimized for Emacs
 - maintained in one =org-mode= file ([[file:SETUP.org][SETUP.org]])
 
+** Included templates
 
+- short abstract (tex)
+- standard article (tex)
+- standard book (tex)
+- beamer slides (tex/org)
+- langsci paper (tex/org)
+- Hausarbeit & Essay (tex)
+
+** TODO Add overleaf links
+:LOGBOOK:
+- State "TODO"       from              [2018-01-08 Mo 11:22]
+:END:
+
+like this:  https://www.overleaf.com/docs?snip_uri=https://user.phil-fak.uni-duesseldorf.de/~lichte/events/complexity/essay.zip
 
