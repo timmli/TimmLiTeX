@@ -1,0 +1,91 @@
+% -*- coding: utf-8 -*-
+
+\documentclass[
+% 8pt, 9pt, 10pt, 11pt, 12pt, 14pt, 17pt, 20pt
+% serif,
+% table, % for table coloring
+% draft,
+% ngerman,
+% handout,	% remove overlays
+compress,
+xcolor=table,
+dvipsnames,
+]{beamer}
+
+\input{settings/beamer-settings.tex}
+% \setbeamersize{text margin left=1.5em,text margin right=1.5em}
+
+%%%%%%%%%%%%%%%%%%%%%%%% 
+%    CUSTOM MACROS     %
+%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\input{myMacros}
+\definecolor{myblue}{rgb}{0,0,0.70}
+\definecolor{myred}{rgb}{0.8,0,0}
+\definecolor{mydarkgreen}{rgb}{0,0.55,0}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% HEADER
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title[\arabic{page} ]{Beamer Template}
+%\subtitle[short]{Subtitle}	
+\author[Max]{Max Mustermann}
+\institute[Inst.]{Institute/Affiliation}
+\date[]{\today}
+%\logo{\pgfimage[width=2cm,height=1cm]{logo-emmy}}			% Logo on all slides (pdf,png,jpg,eps)
+\titlegraphic{\includegraphics[height=1cm]{graphics/sfb-logo-quer} \hfil \includegraphics[height=1cm]{graphics/hhu-logo}}	% Logo on title slide
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SLIDES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+%\frame{\titlepage}
+
+%\frame{
+%\frametitle{Table of contents}
+%  \tableofcontents
+%  [pausesections]
+%}
+
+%\AtBeginSection[]
+%{
+%  \begin{frame}<beamer>{Outline}
+%    \tableofcontents[
+%    currentsection
+%    ]
+%  \end{frame}
+%}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{About the template}
+  
+\input{README.tex}
+  
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{examples/beamer-examples.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\begin{frame}[plain,allowframebreaks]
+\frametitle{}
+
+\insertBib
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% eval: (TeX-run-style-hooks "beamer")
+%%% End:

@@ -15,7 +15,11 @@ In order to compile these templates, press =C-c C-v t= , or evaluate the followi
 
 ** Abstract template
 
-#+NAME: abstract-template
+#+BEGIN_SRC latex  :noweb yes :tangle TEMPLATE-abstract.tex
+<<abstract-template-tex>>
+#+END_SRC
+
+#+NAME: abstract-template-tex
 #+BEGIN_SRC latex :noweb yes :tangle templates/abstract-template.tex
 \documentclass[
 <<abstract-options>>
@@ -61,7 +65,11 @@ In order to compile these templates, press =C-c C-v t= , or evaluate the followi
 
 ** Article template
 
-#+NAME: article-template
+#+BEGIN_SRC latex  :noweb yes :tangle TEMPLATE-article.tex
+<<article-template-tex>>
+#+END_SRC
+
+#+NAME: article-template-tex
 #+BEGIN_SRC latex :noweb yes :tangle templates/article-template.tex
 \documentclass[
 <<article-options>>
@@ -126,6 +134,10 @@ This is an abstract: \lipsum[1]
 #+END_SRC
 
 ** Beamer template
+
+#+BEGIN_SRC org :noweb yes :tangle TEMPLATE-beamer.org
+<<beamer-template-org>>
+#+END_SRC
 
 #+NAME: beamer-template-org
 #+BEGIN_SRC org :noweb yes :tangle templates/beamer-template.org
@@ -215,7 +227,12 @@ The virtual LaTeX class =tl-beamer= has to be propagated to org-mode before expo
 
 #+END_SRC
 
-#+NAME: beamer-template
+
+#+BEGIN_SRC latex  :noweb yes :tangle TEMPLATE-beamer.tex
+<<beamer-template-tex>>
+#+END_SRC
+
+#+NAME: beamer-template-tex
 #+BEGIN_SRC latex :noweb yes :tangle templates/beamer-template.tex
 % -*- coding: utf-8 -*-
 
@@ -310,7 +327,11 @@ The virtual LaTeX class =tl-beamer= has to be propagated to org-mode before expo
 
 ** Book template
 
-#+NAME: book-template
+# #+BEGIN_SRC latex  :noweb yes :tangle TEMPLATE-book.tex
+# <<book-template-tex>>
+# #+END_SRC
+
+#+NAME: book-template-tex
 #+BEGIN_SRC latex :noweb yes :tangle templates/book-template.tex
 \documentclass[
 <<book-options>>
@@ -388,6 +409,10 @@ The virtual LaTeX class =tl-beamer= has to be propagated to org-mode before expo
 
 ** LangSci template
 
+#+BEGIN_SRC org :noweb yes :tangle TEMPLATE-langsci-paper.org
+<<langsci-paper-template-org>>
+#+END_SRC
+
 #+NAME: langsci-paper-template-org
 #+BEGIN_SRC org :noweb yes :tangle templates/langsci-paper-template.org
 ,#+TITLE: Title of paper
@@ -412,32 +437,6 @@ The virtual LaTeX class =tl-beamer= has to be propagated to org-mode before expo
 ,#+LATEX_HEADER: \input{myMacros}
 ,#+LATEX_HEADER: \bibliography{references}
 :end: 
-
-# Remember to first add the class [[https://github.com/langsci/latex][langscibook]] to the set of known classes (in =init.el=):
-,#+BEGIN_SRC emacs-lisp :exports none
-(add-to-list 'org-latex-classes
-						 '("langscibook" 
-							 "\\documentclass{langsci/langscibook}
-				    		[NO-DEFAULT-PACKAGES]" 
-							 ("\\part{%s}" . "\\part*{%s}") 
-							 ("\\chapter{%s}" . "\\chapter*{%s}") 
-							 ("\\section{%s}" . "\\section*{%s}") 
-							 ("\\subsection{%s}" . "\\subsection*{%s}") 
-							 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-							 ("\\paragraph{%s}" . "\\paragraph*{%s}")
-							 ))
-
-(add-to-list 'org-latex-classes
-						 '("langscibook-paper" 
-							 "\\documentclass[output=paper]{langsci/langscibook}
-				    		[NO-DEFAULT-PACKAGES]" 
-							 ("\\section{%s}" . "\\section*{%s}") 
-							 ("\\subsection{%s}" . "\\subsection*{%s}") 
-							 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-							 ("\\paragraph{%s}" . "\\paragraph*{%s}")
-							 ))
-,#+END_SRC
-
 # Eventually appears after \begin{document}.
 ,#+BEGIN_EXPORT latex
 
@@ -473,7 +472,37 @@ Once upon a time ...
 
 @@latex:\printbibliography[heading=subbibliography,notkeyword=this]@@
 
-,* COMMENT Local Variables
+,* COMMENT org-mode settings
+
+,** Installation of =langscibook=
+
+Remember to first add the class [[https://github.com/langsci/latex][langscibook]] to the set of known classes (in =init.el=).
+
+,#+BEGIN_SRC emacs-lisp :exports none
+(add-to-list 'org-latex-classes
+						 '("langscibook" 
+							 "\\documentclass{langsci/langscibook}
+				    		[NO-DEFAULT-PACKAGES]" 
+							 ("\\part{%s}" . "\\part*{%s}") 
+							 ("\\chapter{%s}" . "\\chapter*{%s}") 
+							 ("\\section{%s}" . "\\section*{%s}") 
+							 ("\\subsection{%s}" . "\\subsection*{%s}") 
+							 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+							 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+							 ))
+
+(add-to-list 'org-latex-classes
+						 '("langscibook-paper" 
+							 "\\documentclass[output=paper]{langsci/langscibook}
+				    		[NO-DEFAULT-PACKAGES]" 
+							 ("\\section{%s}" . "\\section*{%s}") 
+							 ("\\subsection{%s}" . "\\subsection*{%s}") 
+							 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+							 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+							 ))
+,#+END_SRC
+
+,** Local Variables
 
 # Local variables:
 # coding: utf-8
