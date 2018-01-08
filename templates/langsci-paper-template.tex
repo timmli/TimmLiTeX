@@ -1,0 +1,44 @@
+% Created 2018-01-08 Mo 10:47
+% Intended LaTeX compiler: xelatex
+\documentclass[output=paper,draftmode,modfonts,nonflat,nonewtxmath]{langsci/langscibook}
+
+
+\usepackage{linguex,packages/avm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{packages/tikz-settings} % tikz, forest, etc.
+\input{myMacros}
+\bibliography{references}
+\author{John Doe\affiliation{Elfenbeinturm, Fantasien}}
+\date{}
+\title{Title of paper}
+\begin{document}
+
+
+\newcommand{\govR}{\ensuremath{<_G}} 
+\newcommand{\headR}{\ensuremath{<_H}}
+
+% \addto\extrasenglish{%
+  \renewcommand{\chapterautorefname}{Chapter}%
+  \renewcommand{\figureautorefname}{Figure}%
+  \renewcommand{\tableautorefname}{Table}%
+  \renewcommand{\sectionautorefname}{Section}%
+  \renewcommand{\subsectionautorefname}{Section}%
+  \renewcommand{\subsubsectionautorefname}{Section}%
+  \renewcommand{\Hfootnoteautorefname}{Footnote}%
+% }
+
+\abstract{
+Put abstract of the paper here.
+}
+
+\maketitle                      
+
+\section{Introduction}
+\label{sec:org8a738fd}
+
+Once upon a time \ldots{} 
+
+\printbibliography[heading=subbibliography,notkeyword=this]
+\end{document}

@@ -21,7 +21,32 @@
 #+LATEX_HEADER: \bibliography{references}
 :end: 
 
-# Eventually appears before \begin{document}
+# Remember to first add the class [[https://github.com/langsci/latex][langscibook]] to the set of known classes (in =init.el=):
+#+BEGIN_SRC emacs-lisp :exports none
+(add-to-list 'org-latex-classes
+						 '("langscibook" 
+							 "\\documentclass{langsci/langscibook}
+				    		[NO-DEFAULT-PACKAGES]" 
+							 ("\\part{%s}" . "\\part*{%s}") 
+							 ("\\chapter{%s}" . "\\chapter*{%s}") 
+							 ("\\section{%s}" . "\\section*{%s}") 
+							 ("\\subsection{%s}" . "\\subsection*{%s}") 
+							 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+							 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+							 ))
+
+(add-to-list 'org-latex-classes
+						 '("langscibook-paper" 
+							 "\\documentclass[output=paper]{langsci/langscibook}
+				    		[NO-DEFAULT-PACKAGES]" 
+							 ("\\section{%s}" . "\\section*{%s}") 
+							 ("\\subsection{%s}" . "\\subsection*{%s}") 
+							 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+							 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+							 ))
+#+END_SRC
+
+# Eventually appears after \begin{document}.
 #+BEGIN_EXPORT latex
 
 \newcommand{\govR}{\ensuremath{<_G}} 
@@ -38,6 +63,7 @@
 % }
 #+END_EXPORT
 
+# =\abstract= must appear before =\maketitle=.
 #+LATEX:\abstract{
 Put abstract of the paper here.
 #+LATEX:}
@@ -57,9 +83,9 @@ Once upon a time ...
 
 * COMMENT Local Variables
 
-,# Local variables:
-,# coding: utf-8
-,# org-latex-with-hyperref: nil
-,# org-latex-title-command: ""
-,# org-latex-prefer-user-labels: t
-,# end:
+# Local variables:
+# coding: utf-8
+# org-latex-with-hyperref: nil
+# org-latex-title-command: ""
+# org-latex-prefer-user-labels: t
+# end:
