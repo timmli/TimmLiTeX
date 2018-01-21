@@ -1,0 +1,27 @@
+\begin{thebibliography}{4}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\urlprefix}{URL }
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
+  \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup
+  \urlstyle{rm}\Url}\fi
+
+\bibitem[{Blarbarucki(1916)}]{fifak:aspects}
+Elizjusz \textsc{Blarbarucki} (1916), On some aspects of some aspects,
+  \emph{Astrolog Polski}, 16:13–36.
+
+\bibitem[{Blarbarucki(2006)}]{blarbarucki:blabalyser}
+Robert \textsc{Blarbarucki} (2006), \emph{The implementation of a differential
+  blabalyser}, Master’s thesis, Faculty of Computer Science, Warsaw
+  University.
+
+\bibitem[{Fifak(2001)}]{fifak:sigma_rho}
+Filigran \textsc{Fifak} (2001), On {σ-ρ} aromas in blabalystics, \emph{Acta
+  Fetorica}, 12(2):227–234.
+
+\bibitem[{Fifak and Gryzogrzechotalski(2000)}]{fifak:blabal}
+Filigran \textsc{Fifak} and Gizbert \textsc{Gryzogrzechotalski} (2000), On
+  blabal fetoria, in \emph{Proceedings of Euroblabal 2000}, pp.~124–132.
+
+\end{thebibliography}
