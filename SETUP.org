@@ -816,8 +816,6 @@ numbers=noenddot,
 
 #+NAME: standard-settings
 #+BEGIN_SRC latex :noweb yes :tangle settings/standard-settings.tex
-\usepackage{tipa}	% for phonetic symbols; has to appear before pdflatex-settings
-
 <<pdflatex-settings>>
 
 %% Trees and graphics
@@ -842,6 +840,7 @@ numbers=noenddot,
 % \usepackage[ngerman]{babel}	% uncomment for German
 
 %% Linguistics
+\usepackage{tipa}	% for phonetic symbols; has to appear before fontspec
 \usepackage{linguex}
 \renewcommand{\firstrefdash}{}
 

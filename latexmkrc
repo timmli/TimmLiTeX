@@ -1,1 +1,2 @@
-$pdflatex = 'xelatex %O %S';
+# $pdflatex = 'xelatex %O %S';
+$pdflatex = 'pdflatex %O %S';
