@@ -3,8 +3,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Font & Encoding
-\usepackage{libertine}
-\usepackage[libertine]{newtxmath}
+% \usepackage{libertine} % libertine tends to cause problems, e.g. when using tipa
+% \usepackage[libertine]{newtxmath}
+\usepackage{times}
 \usepackage[scaled=0.8]{beramono}  % for monospaced font
 \usepackage{microtype}		% micro-typographic aspects of the fonts
 \usepackage[T1]{fontenc}	% special fonts, e.g. for German umlaute
@@ -160,7 +161,7 @@
 % \usepackage[ngerman]{babel}	% uncomment for German
 
 %% Linguistics
-\usepackage{tipa}	% for phonetic symbols; has to appear before pdflatex-settings
+\usepackage{tipa}	% for phonetic symbols; has to appear before fontspec
 \usepackage{linguex}
 \renewcommand{\firstrefdash}{}
 
