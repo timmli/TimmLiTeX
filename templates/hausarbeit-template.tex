@@ -5,20 +5,19 @@ numbers=noenddot,
 % draft
 ]{scrbook}
 
-
 %%%%%%%%%%%%%%%%%%%%%%%% 
 %       SETTINGS       %
 %%%%%%%%%%%%%%%%%%%%%%%% 
 
-\input{settings/hausarbeit-settings}
+\usepackage{datetime}
 
+\input{settings/standard-settings}
 
 %%%%%%%%%%%%%%
 %   Macros   % 
 %%%%%%%%%%%%%%
 
 \input{myMacros}   % the content of myMacros.tex goes here
-
 
 %%%%%%%%%%%%%
 %   Title   % 
@@ -48,7 +47,7 @@ numbers=noenddot,
 
 \chapter{Information about this template}
 
-\input{README.tex}
+\input{examples/README.tex}
 
 \chapter{\LaTeX\ Examples}
 
@@ -66,8 +65,7 @@ numbers=noenddot,
 %  Document end   % 
 %%%%%%%%%%%%%%%%%%% 
 
-\bibliographystyle{bst/unified}
-\bibliography{references}
+\insertBib
 
 \end{document}
 

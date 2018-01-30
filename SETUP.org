@@ -73,7 +73,7 @@ In order to compile these templates, press =C-c C-v t= , or evaluate the followi
 #+BEGIN_SRC latex :noweb yes :tangle templates/article-template.tex
 \documentclass[
 <<article-options>>
-]{article}
+]{scrartcl}
 
 <<article-settings>>
 
@@ -111,7 +111,7 @@ This is an abstract: \lipsum[1]
 
 \section{Information about this template}
 
-\input{README.tex}
+\input{examples/README.tex}
 
 \input{examples/master-examples.tex}
 
@@ -301,7 +301,7 @@ The virtual LaTeX class =tl-beamer= has to be propagated to org-mode before expo
 \begin{frame}
   \frametitle{About the template}
   
-\input{README.tex}
+\input{examples/README.tex}
   
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -335,7 +335,7 @@ The virtual LaTeX class =tl-beamer= has to be propagated to org-mode before expo
 #+BEGIN_SRC latex :noweb yes :tangle templates/book-template.tex
 \documentclass[
 <<book-options>>
-]{book}
+]{scrbook}
 
 <<book-settings>>
 
@@ -375,7 +375,7 @@ The virtual LaTeX class =tl-beamer= has to be propagated to org-mode before expo
 
 \chapter{Information about this template}
 
-\input{README.tex}
+\input{examples/README.tex}
 
 \chapter{\LaTeX\ Examples}
 
@@ -524,20 +524,17 @@ numbers=noenddot,
 % draft
 ]{scrbook}
 
-
 %%%%%%%%%%%%%%%%%%%%%%%% 
 %       SETTINGS       %
 %%%%%%%%%%%%%%%%%%%%%%%% 
 
-\input{settings/hausarbeit-settings}
-
+<<book-settings>>
 
 %%%%%%%%%%%%%%
 %   Macros   % 
 %%%%%%%%%%%%%%
 
 \input{myMacros}   % the content of myMacros.tex goes here
-
 
 %%%%%%%%%%%%%
 %   Title   % 
@@ -567,7 +564,7 @@ numbers=noenddot,
 
 \chapter{Information about this template}
 
-\input{README.tex}
+\input{examples/README.tex}
 
 \chapter{\LaTeX\ Examples}
 
@@ -585,8 +582,7 @@ numbers=noenddot,
 %  Document end   % 
 %%%%%%%%%%%%%%%%%%% 
 
-\bibliographystyle{bst/unified}
-\bibliography{references}
+\insertBib
 
 \end{document}
 
@@ -633,7 +629,7 @@ numbers=noenddot,
 
 \section{Information about the template}
 
-\input{README.tex}
+\input{examples/README.tex}
 
 \input{examples/master-examples}
 
@@ -820,12 +816,17 @@ numbers=noenddot,
 
 #+NAME: standard-settings
 #+BEGIN_SRC latex :noweb yes :tangle settings/standard-settings.tex
+\usepackage{tipa}	% for phonetic symbols; has to appear before pdflatex-settings
+
 <<pdflatex-settings>>
 
 %% Trees and graphics
 \usepackage{graphics}
+
 <<tikz-settings>>
+
 <<forest-settings>>
+
 % \usepackage{arydshln} 		% for dashed horizontal lines in tables (incompatible with avm)
 \usepackage{multirow}		% similar to \multicolumn
 
@@ -842,9 +843,10 @@ numbers=noenddot,
 
 %% Linguistics
 \usepackage{linguex}
-\usepackage{tipa}	% for phonetic symbols
 \renewcommand{\firstrefdash}{}
+
 <<avm-settings>>
+
 % \usepackage[inference]{semantic} % for CCG 
 % \usepackage{packages/ccg}
 

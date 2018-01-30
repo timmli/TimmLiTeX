@@ -1,3 +1,5 @@
+\usepackage{tipa}	% for phonetic symbols; has to appear before pdflatex-settings
+
 %%%%%%%%%%%%%%%%%%%%%%%%
 %   PDFLATEX SETTINGS  % 
 %%%%%%%%%%%%%%%%%%%%%%%%
@@ -23,6 +25,7 @@
 
 %% Trees and graphics
 \usepackage{graphics}
+
 %%%%%%%%%%%%%%%%%%%%%%
 %   TIKZ SETTINGS    % 
 %%%%%%%%%%%%%%%%%%%%%%
@@ -71,6 +74,7 @@
 \newcommand\tikztop{baseline=(current bounding box.north)}
 
 \newcommand\tikztreeset[1]{\matrix [matrix of nodes,left delimiter=\{,right delimiter=\}](set){#1};}
+
 %%%%%%%%%%%%%%%%%%%%%%% 
 %   FOREST SETTINGS   % 
 %%%%%%%%%%%%%%%%%%%%%%% 
@@ -142,6 +146,7 @@
   Ys/.style={for tree={yshift=#1}}
 }
 
+
 % \usepackage{arydshln} 		% for dashed horizontal lines in tables (incompatible with avm)
 \usepackage{multirow}		% similar to \multicolumn
 
@@ -158,8 +163,8 @@
 
 %% Linguistics
 \usepackage{linguex}
-\usepackage{tipa}	% for phonetic symbols
 \renewcommand{\firstrefdash}{}
+
 %%%%%%%%%%%%%%%%%%%%%%
 %   AVM SETTINGS     % 
 %%%%%%%%%%%%%%%%%%%%%%
@@ -183,6 +188,7 @@
     \end{avm}
     \hspace{-0.5em}
 }
+
 % \usepackage[inference]{semantic} % for CCG 
 % \usepackage{packages/ccg}
 
