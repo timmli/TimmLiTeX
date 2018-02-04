@@ -1,3 +1,5 @@
+SHELL := /bin/bash
+
 # specify your main target here:
 all: misc.pdf clean
 
@@ -18,5 +20,9 @@ clean:
 realclean: clean
 	rm -f *.dvi *.ps *.pdf
 
+release_hausarbeit:
+	cp templates/hausarbeit-template.tex .
+	zip -r hausarbeit-template.zip hausarbeit-template.tex myMacros.tex references.bib settings/standard-settings.tex packages/*.sty examples/*.tex bst/biblatex-sp-unified/[^.]* 
+	rm hausarbeit-template.tex
 
 
