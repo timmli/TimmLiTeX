@@ -28,5 +28,5 @@ HAUSARBEIT_FILES =  myMacros.tex references.bib \
 
 release_hausarbeit:
 	cp templates/hausarbeit-template.tex .
-	zip -r hausarbeit-template.zip $(HAUSARBEIT_FILES) 
+	zip -r hausarbeit-template.zip hausarbeit-template.tex $(HAUSARBEIT_FILES) 
 	rm hausarbeit-template.tex
