@@ -30,3 +30,16 @@ release_hausarbeit:
 	cp templates/hausarbeit-template.tex .
 	zip -r hausarbeit-template.zip hausarbeit-template.tex $(HAUSARBEIT_FILES) 
 	rm hausarbeit-template.tex
+
+
+ABSTRACT_FILES =  myMacros.tex references.bib \
+	settings/standard-settings.tex \
+	$(wildcard packages/*.sty) \
+	$(filter-out $(wildcard examples/beamer*), $(wildcard examples/*.tex)) \
+	$(wildcard bst/biblatex-sp-unified/[^.]*)
+
+release_abstract:
+	cp templates/abstract-template.tex .
+	zip -r abstract-template.zip abstract-template.tex $(ABSTRACT_FILES) 
+	rm abstract-template.tex
+
