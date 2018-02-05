@@ -20,9 +20,13 @@ clean:
 realclean: clean
 	rm -f *.dvi *.ps *.pdf
 
+HAUSARBEIT_FILES =  myMacros.tex references.bib \
+	settings/standard-settings.tex \
+	$(wildcard packages/*.sty) \
+	$(filter-out $(wildcard examples/beamer*), $(wildcard examples/*.tex)) \
+	$(wildcard bst/biblatex-sp-unified/[^.]*)
+
 release_hausarbeit:
 	cp templates/hausarbeit-template.tex .
-	zip -r hausarbeit-template.zip hausarbeit-template.tex myMacros.tex references.bib settings/standard-settings.tex packages/*.sty examples/*.tex bst/biblatex-sp-unified/[^.]* 
+	zip -r hausarbeit-template.zip $(HAUSARBEIT_FILES) 
 	rm hausarbeit-template.tex
-
-
