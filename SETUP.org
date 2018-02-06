@@ -934,7 +934,7 @@ numbers=noenddot,
     yshift=3ex,
     draw=gray,
     content={\textit{##1}}},
-  c/.style n args=1{            % visual link with argument
+  c/.style args={#1}{            % visual link with argument
     % edge label={node[xshift={0.8em},scale=0.8,fill=white,draw,inner sep=.10ex,circle]{#1}}
     % tikz={\node[yshift={1.5ex},scale=0.8,fill=white,draw,inner sep=.10ex,circle, right=-0.5em of .east]  {1};}
     label={[yshift={0.5ex},scale=.8,circle, draw, fill=white, inner sep=.1ex, label distance=-.65em, anchor=west]north east:#1}},
