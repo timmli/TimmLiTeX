@@ -789,6 +789,55 @@ numbers=noenddot,
 %%% End:
 #+END_SRC
 
+** Standalone template
+
+#+NAME: standalone-template
+#+BEGIN_SRC latex :noweb yes :tangle templates/standalone-template.tex
+\documentclass[
+	%pstricks=true
+	,crop=true
+	,varwidth=\maxdimen
+	]{standalone}
+
+<<pdflatex-settings>>
+
+<<tikz-settings>>
+
+<<forest-settings>>
+
+%% Symbols
+\usepackage{latexsym,amsmath,amssymb,wasysym}
+\usepackage{marvosym}		% for thunderbolt symbol
+\usepackage{ulem}			% to cross out text
+\normalem
+\usepackage{url}
+\urlstyle{sf}
+
+%% Linguistics
+\usepackage{tipa}	% for phonetic symbols; has to appear before fontspec
+\usepackage{linguex}
+\renewcommand{\firstrefdash}{}
+
+<<avm-settings>>
+
+% \usepackage[inference]{semantic} % for CCG 
+% \usepackage{packages/ccg}
+
+% \input{myMacros}
+
+\begin{document}
+
+\Forest{
+  [S
+    [NP] 
+    [VP
+      [V  [\textit{eats}] ]
+      [NP] ]]
+}
+
+\end{document}
+#+END_SRC
+
 * Packages
 
 ** tikz-settings.sty
