@@ -656,6 +656,139 @@ numbers=noenddot,
 %%% End:
 #+END_SRC
 
+** Poster template
+
+#+NAME: poster-template
+#+BEGIN_SRC latex :noweb yes :tangle templates/poster-template.tex
+\documentclass[
+	17pt,%12pt, 14pt, 17pt, 20pt, 25pt
+	a1paper,%a0paper,a1paper,a2paper
+	%landscape,portrait
+	%margin=0mm, 		% between paper and poster
+	%innermargin=15mm, 	% between poster and outermost blocks
+	%colspace=15mm,		% horizontal spacing between successive columns
+	%subcolspace=8mm,	% horizontal spacing between successive columns in the subcolumn environment
+	%blockverticalspace=15mm,	% between two blocks
+	]{tikzposter} 
+
+\input{settings/poster-settings}
+
+\input{myMacros}
+
+\definecolor{mygray}{gray}{0.9}
+\definecolor{HHUblue}{HTML}{006AB3}
+\definecolor{lightgray}{gray}{0.7}
+
+%%%%%%%%%%%%%%%%%%%%%%
+%   TITLE            % 
+%%%%%%%%%%%%%%%%%%%%%%
+
+\setlength{\fboxsep}{3pt}
+\title{Title of poster}
+\author{Author Name(s)}
+\institute{Affiliation}
+
+\titlegraphic{\hspace*{1cm}\includegraphics[width=5cm]{graphics/sfb-logo-quer.pdf}\hspace{36cm}\includegraphics[width=10cm]{graphics/hhu-logo-hres.pdf}} 
+
+\settitle{
+	\centering
+	\color{titlefgcolor} {\bfseries \Huge \@title \par}
+	\vspace*{2em}
+	{\huge \@author \par} \vspace*{1em} {\LARGE \@institute}
+
+	\raisebox{0cm}[0pt]{\@titlegraphic}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%
+%   POSTERSTYLE      % 
+%%%%%%%%%%%%%%%%%%%%%%
+
+\input{settings/myPosterstyle}
+\tikzposterlatexaffectionproofoff
+
+\defineblockstyle{greybox}{}{
+	\draw[color=gray,fill=mygray] (blockbody.south west)
+		rectangle (blockbody.north east);
+	\ifBlockHasTitle
+		\draw[color=white] (blocktitle.south west)
+			rectangle (blocktitle.north east);
+	\fi
+}
+
+%%%%%%%%%%%%%%%%%%%%%%
+%   POSTER           % 
+%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\maketitle[
+	%width=10cm,	% width of the title portion of the poster
+	%roundedcorners, linewidth, innersep	% box style of the title
+	%titletotopverticalspace=0cmm, titletoblockverticalspace=0cm
+	%titlegraphictotitledistance=0cm, 	% vertical distance between the titlegraphic and title description
+	%titletextscale=2, 		% relative scaling of the text of the title
+	]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{-5cm}
+\block{Big box}{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  Block text
+}
+\input{examples/poster-note}
+
+\begin{columns} 
+
+\column{0.5}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\block{First column block}{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  Block text
+}
+
+\column{0.5}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\block{Second column block}{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  Block text  
+}
+
+\end{columns}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%  List of References    % 
+%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\defineblockstyle{noframe}{}{
+	\draw[color=white] (blockbody.south west)
+		rectangle (blockbody.north east);
+	\ifBlockHasTitle
+		\draw[color=white] (blocktitle.south west)
+			rectangle (blocktitle.north east);
+	\fi
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\useblockstyle[linewidth=0pt]{noframe}
+\block[linewidth=0pt]{}{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{-5.5ex}
+\tiny
+
+\printbibliography[heading=none]
+
+}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
+#+END_SRC
+
 * Packages
 
 ** tikz-settings.sty
@@ -862,6 +995,44 @@ numbers=noenddot,
 
 %% for blindtext
 \usepackage{lipsum}
+
+#+END_SRC
+
+** Poster settings
+
+#+NAME: poster-settings
+#+BEGIN_SRC latex :noweb yes :tangle settings/poster-settings.tex
+%%%%%%%%%%%%%%%%%%%%%%
+%   FONT             % 
+%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+%\usepackage{ucs}
+\usepackage[utf8]{inputenc}
+%\usepackage[utf8x]{inputenc} 
+%\usepackage{helvet}
+%\usepackage{avant}
+\usepackage{DejaVuSans}
+\usepackage[scaled=0.9]{beramono}  % for monospaced font
+\renewcommand*{\familydefault}{\sfdefault}
+
+<<biblatex-settings>>
+
+%%%%%%%%%%%%%%%%%%%%%%
+%   MISC             % 
+%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{xcolor,enumitem}
+\usepackage{linguex,packages/avm} 
+\usepackage{amsmath,amssymb,amsfonts,marvosym}
+\usepackage{ulem}			% to cross out text
+\normalem
+\usepackage{multicol}
+
+<<listings-settings>>
+
+<<forest-settings>>
 
 #+END_SRC
 

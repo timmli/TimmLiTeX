@@ -14,6 +14,8 @@ Collection of LaTeX settings and templates
 | standard book             | [[file:templates/book-template.tex][tex]]     |          |
 | beamer slides             | [[file:templates/beamer-template.tex][tex]],[[file:templates/beamer-template.org][org]] |          |
 | langsci paper             | [[file:templates/langsci-paper-template.tex][tex]],[[file:templates/langsci-paper-template.org][org]] |          |
+| jlm article               | TODO    |          |
+| poster                    | [[file:templates/poster-template.tex][tex]]     |          |
 | Hausarbeit (for teaching) | [[file:templates/hausarbeit-template.tex][tex]]     | [[https://www.overleaf.com/docs?snip_uri=https://github.com/timmli/latex-templates/releases/download/current/hausarbeit-template.zip][Overleaf]] |
 | Essay (for teaching)      | [[file:templates/essay-template.tex][tex]]     |          |
 
