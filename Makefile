@@ -31,6 +31,10 @@ release_hausarbeit:
 	zip -r hausarbeit-template.zip hausarbeit-template.tex $(HAUSARBEIT_FILES) 
 	rm hausarbeit-template.tex
 
+test_hausarbeit:
+	cp templates/hausarbeit-template.tex .
+	latexmk -pdf hausarbeit-template.tex
+
 ABSTRACT_FILES =  myMacros.tex references.bib \
 	settings/standard-settings.tex \
 	$(wildcard packages/*.sty) \
