@@ -15,10 +15,6 @@ In order to compile these templates, press =C-c C-v t= , or evaluate the followi
 
 ** Abstract template
 
-#+BEGIN_SRC latex  :noweb yes :tangle TEMPLATE-abstract.tex
-<<abstract-template-tex>>
-#+END_SRC
-
 #+NAME: abstract-template-tex
 #+BEGIN_SRC latex :noweb yes :tangle templates/abstract-template.tex
 \documentclass[
@@ -68,10 +64,6 @@ In order to compile these templates, press =C-c C-v t= , or evaluate the followi
 #+END_SRC
 
 ** Article template
-
-#+BEGIN_SRC latex  :noweb yes :tangle TEMPLATE-article.tex
-<<article-template-tex>>
-#+END_SRC
 
 #+NAME: article-template-tex
 #+BEGIN_SRC latex :noweb yes :tangle templates/article-template.tex
@@ -138,10 +130,6 @@ This is an abstract: \lipsum[1]
 #+END_SRC
 
 ** Beamer template
-
-#+BEGIN_SRC org :noweb yes :tangle TEMPLATE-beamer.org
-<<beamer-template-org>>
-#+END_SRC
 
 #+NAME: beamer-template-org
 #+BEGIN_SRC org :noweb yes :tangle templates/beamer-template.org
@@ -229,11 +217,6 @@ The virtual LaTeX class =tl-beamer= has to be propagated to org-mode before expo
 # org-latex-listings: listings
 # end:
 
-#+END_SRC
-
-
-#+BEGIN_SRC latex  :noweb yes :tangle TEMPLATE-beamer.tex
-<<beamer-template-tex>>
 #+END_SRC
 
 #+NAME: beamer-template-tex
@@ -331,10 +314,6 @@ The virtual LaTeX class =tl-beamer= has to be propagated to org-mode before expo
 
 ** Book template
 
-# #+BEGIN_SRC latex  :noweb yes :tangle TEMPLATE-book.tex
-# <<book-template-tex>>
-# #+END_SRC
-
 #+NAME: book-template-tex
 #+BEGIN_SRC latex :noweb yes :tangle templates/book-template.tex
 \documentclass[
@@ -412,10 +391,6 @@ The virtual LaTeX class =tl-beamer= has to be propagated to org-mode before expo
 #+END_SRC
 
 ** LangSci template
-
-#+BEGIN_SRC org :noweb yes :tangle TEMPLATE-langsci-paper.org
-<<langsci-paper-template-org>>
-#+END_SRC
 
 #+NAME: langsci-paper-template-org
 #+BEGIN_SRC org :noweb yes :tangle templates/langsci-paper-template.org
