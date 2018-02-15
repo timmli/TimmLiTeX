@@ -15,6 +15,52 @@ In order to compile these templates, press =C-c C-v t= , or evaluate the followi
 
 ** Abstract template
 
+#+NAME: abstract-template-org
+#+BEGIN_SRC org :noweb yes :tangle templates/abstract-template.org
+,#+TITLE: Title of paper
+,#+AUTHOR: John Doe (Elfenbeinturm, Fantasien)
+:Settings:
+,#+FILETAGS: chooseTag
+,#+CATEGORY: chooseCategory
+,#+DATE: 
+,#+STARTUP: nohideblocks
+,#+LANGUAGE: en
+,#+OPTIONS: H:5 num:t toc:nil Spec\n:nil @:t ::t |:t ^:t -:t f:t *:t <:t ':t
+,#+OPTIONS: TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+,#+LATEX_CLASS: tl-abstract 
+,#+LATEX_CLASS_OPTIONS: [<<abstract-options>>]
+,#+LATEX_COMPILER: pdflatex
+,#+LATEX_HEADER: <<abstract-settings>>
+,#+LATEX_HEADER: \input{myMacros}
+,#+LATEX_HEADER: %\bibliography{references}
+:end:
+
+,* Paragraph title
+
+,* COMMENT org-mode settings
+
+,** Installation of =tl-abstract=
+
+Remember to first add the class [[https://github.com/langsci/latex][langscibook]] to the set of known classes (in =init.el=).
+
+,#+BEGIN_SRC emacs-lisp :exports none
+(add-to-list 'org-latex-classes
+         '("tl-abstract" 
+						"\\documentclass{article}
+						[NO-DEFAULT-PACKAGES]"
+            ("\\paragraph{%s}" . "\\paragraph*{%s}")
+            ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+,#+END_SRC
+
+,** Local Variables
+
+# Local variables:
+# coding: utf-8
+# org-latex-with-hyperref: nil
+# org-latex-prefer-user-labels: t
+# end:
+#+END_SRC
+
 #+NAME: abstract-template-tex
 #+BEGIN_SRC latex :noweb yes :tangle templates/abstract-template.tex
 \documentclass[
@@ -837,8 +883,7 @@ numbers=noenddot,
 
 #+NAME: abstract-options
 #+BEGIN_SRC latex
-12pt,
-a4paper,
+12pt,a4paper
 #+END_SRC
 
 #+NAME: abstract-settings
@@ -847,20 +892,15 @@ a4paper,
 
 \usepackage[left=25mm, right=25mm, top=25mm, bottom=25mm, noheadfoot]{geometry}
 \pagenumbering{gobble}
-
 \PassOptionsToPackage{maxbibnames=1,maxcitenames=1,firstinits=true}{biblatex}
 \defbibenvironment{bibliography}{\noindent}{\unspace}{\xspace$\bullet$\xspace}
-
 \makeatletter
 \renewcommand\maketitle{
-
-  ~\vspace{-1.1cm}
-
+  ~\vspace{-1.1cm}\newline
   {\raggedright
     \renewcommand{\baselinestretch}{1.2}\selectfont
   {\bfseries\large\@title}\\[2ex]
   {\large\@author}
-
   }
 }
 \makeatother
