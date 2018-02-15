@@ -9,8 +9,8 @@ Collection of LaTeX settings and templates
 
 ** Included templates
 
-| short abstract            | [[file:templates/abstract-template.tex][tex]]     | [[https://www.overleaf.com/docs?snip_uri=https://github.com/timmli/latex-templates/releases/download/current/abstract-template.zip][Overleaf]] |
-| standard article          | [[file:templates/article-template.tex][tex]]     |          |
+| short abstract            | [[file:templates/abstract-template.tex][tex]],[[file:templates/abstract-template.org][org]] | [[https://www.overleaf.com/docs?snip_uri=https://github.com/timmli/latex-templates/releases/download/current/abstract-template.zip][Overleaf]] |
+| standard article          | [[file:templates/article-template.tex][tex]],[[file:templates/article-template.org][org]] |          |
 | standard book             | [[file:templates/book-template.tex][tex]]     |          |
 | beamer slides             | [[file:templates/beamer-template.tex][tex]],[[file:templates/beamer-template.org][org]] |          |
 | langsci paper             | [[file:templates/langsci-paper-template.tex][tex]],[[file:templates/langsci-paper-template.org][org]] |          |
