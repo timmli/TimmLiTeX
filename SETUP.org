@@ -111,6 +111,65 @@ Remember to first add the class [[https://github.com/langsci/latex][langscibook]
 
 ** Article template
 
+#+NAME: article-template-org
+#+BEGIN_SRC org :noweb yes :tangle templates/article-template.org
+,#+TITLE: Title of paper
+,#+AUTHOR: John Doe @@latex:\affiliation{Elfenbeinturm, Fantasien, \url{some@email.address}}@@
+:Settings:
+,#+FILETAGS: chooseTag
+,#+CATEGORY: chooseCategory
+,#+DATE: 
+,#+STARTUP: nohideblocks
+,#+LANGUAGE: en
+,#+OPTIONS: H:5 num:t toc:nil Spec\n:nil @:t ::t |:t ^:t -:t f:t *:t <:t ':t
+,#+OPTIONS: TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+,#+LATEX_CLASS: tl-article 
+,#+LATEX_CLASS_OPTIONS: [<<article-options>>]
+,#+LATEX_COMPILER: pdflatex
+,#+LATEX_HEADER: <<article-settings>>
+,#+LATEX_HEADER: \input{myMacros}
+,#+LATEX_HEADER: %\bibliography{references}
+:end:
+
+,#+BEGIN_abstract
+This is an abstract: @@latex:\lipsum[1]@@
+,#+END_abstract
+
+,* Introduction
+
+Once upon a time ... 
+
+,* List of references :ignore:
+
+@@latex:\insertBib@@
+
+,* COMMENT org-mode settings
+
+,** Installation of =tl-article=
+
+Remember to first add the class [[https://github.com/langsci/latex][langscibook]] to the set of known classes (in =init.el=).
+
+,#+BEGIN_SRC emacs-lisp :exports none
+(add-to-list 'org-latex-classes
+         '("tl-article" 
+						"\\documentclass{scrartcl}
+						[NO-DEFAULT-PACKAGES]"
+						("\\section{%s}" . "\\section*{%s}") 
+						("\\subsection{%s}" . "\\subsection*{%s}") 
+						("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+						("\\paragraph{%s}" . "\\paragraph*{%s}")))
+,#+END_SRC
+
+,** Local Variables
+
+# Local variables:
+# coding: utf-8
+# org-latex-with-hyperref: nil
+# org-latex-prefer-user-labels: t
+# end:
+#+END_SRC
+
+
 #+NAME: article-template-tex
 #+BEGIN_SRC latex :noweb yes :tangle templates/article-template.tex
 \documentclass[
@@ -911,16 +970,13 @@ numbers=noenddot,
 
 #+NAME: article-options
 #+BEGIN_SRC latex
-11pt,
-draft,
-twoside
+11pt,draft,twoside
 #+END_SRC
 
 
 #+NAME: article-settings
 #+BEGIN_SRC latex
 \input{settings/scrarticle-settings}
-
 \input{settings/standard-settings}
 #+END_SRC
 
