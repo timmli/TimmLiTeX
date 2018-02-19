@@ -23,6 +23,9 @@
 
 \setlength{\fboxsep}{3pt}
 \title{Title of poster}
+%% \parbox is needed with linebreaks
+% \title{\hspace{-2em}\parbox{\textwidth}{\centering
+%     Title of poster}}
 \author{Author Name(s)}
 \institute{Affiliation}
 
@@ -30,9 +33,9 @@
 
 \settitle{
 	\centering
-	\color{titlefgcolor} {\bfseries \Huge \@title \par}
+	\color{titlefgcolor}{\bfseries\Huge\@title\par}
 	\vspace*{2em}
-	{\huge \@author \par} \vspace*{1em} {\LARGE \@institute}
+	{\huge\@author\par} \vspace*{1em} {\LARGE\@institute}
 
 	\raisebox{0cm}[0pt]{\@titlegraphic}
 }
