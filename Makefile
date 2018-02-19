@@ -20,6 +20,8 @@ clean:
 realclean: clean
 	rm -f *.dvi *.ps *.pdf
 
+#-------------------------------------------------------------------------------
+
 HAUSARBEIT_FILES =  myMacros.tex references.bib \
 	settings/standard-settings.tex \
 	$(wildcard packages/*.sty) \
@@ -35,16 +37,24 @@ test_hausarbeit:
 	cp templates/hausarbeit-template.tex .
 	latexmk -pdf hausarbeit-template.tex
 
+#-------------------------------------------------------------------------------
+
 ABSTRACT_FILES =  myMacros.tex references.bib \
 	settings/standard-settings.tex \
 	$(wildcard packages/*.sty) \
 	$(filter-out $(wildcard examples/poster*), $(filter-out $(wildcard examples/beamer*), $(wildcard examples/*.tex))) \
 	$(wildcard bst/biblatex-sp-unified/[^.]*)
 
+test_abstract:
+	cp templates/abstract-template.tex .
+	latexmk -pdf abstract-template.tex
+
 release_abstract:
 	cp templates/abstract-template.tex .
 	zip -r abstract-template.zip abstract-template.tex $(ABSTRACT_FILES) 
 	rm abstract-template.tex
+
+#-------------------------------------------------------------------------------
 
 POSTER_FILES =  myMacros.tex references.bib \
 	settings/myPosterstyle.tex \
@@ -54,6 +64,10 @@ POSTER_FILES =  myMacros.tex references.bib \
 	$(wildcard packages/*.sty) \
 	$(filter-out $(wildcard examples/beamer*), $(wildcard examples/*.tex)) \
 	$(wildcard bst/biblatex-sp-unified/[^.]*)
+
+test_poster:
+	cp templates/poster-template.tex .
+	latexmk -pdf poster-template.tex
 
 release_poster:
 	cp templates/poster-template.tex .
