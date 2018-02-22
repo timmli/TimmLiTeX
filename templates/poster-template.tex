@@ -17,6 +17,8 @@
 \definecolor{HHUblue}{HTML}{006AB3}
 \definecolor{lightgray}{gray}{0.7}
 
+\newcommand{\affilsup}[1]{{\color{gray}$^{\text{#1}}$}}
+
 %%%%%%%%%%%%%%%%%%%%%%
 %   TITLE            % 
 %%%%%%%%%%%%%%%%%%%%%%
@@ -26,10 +28,10 @@
 %% \parbox is needed with linebreaks
 % \title{\hspace{-2em}\parbox{\textwidth}{\centering
 %     Title of poster}}
-\author{Author Name(s)}
-\institute{Affiliation}
+\author{Author Name(s)\affilsup{1}}
+\institute{\affilsup{1}Affiliation}
 
-\titlegraphic{\hspace*{1cm}\includegraphics[width=5cm]{graphics/sfb-logo-quer.pdf}\hspace{36cm}\includegraphics[width=10cm]{graphics/hhu-logo-hres.pdf}} 
+\titlegraphic{\hspace*{1cm}\raisebox{0ex}{\includegraphics[width=5cm]{graphics/sfb-logo-quer.pdf}}\hspace{36cm}\raisebox{0ex}{\includegraphics[width=10cm]{graphics/hhu-logo-hres.pdf}}} 
 
 \settitle{
 	\centering
