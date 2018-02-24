@@ -318,8 +318,7 @@
   %% for drawing STUG sequences
   %% conn, <-- and --> are take from https://tex.stackexchange.com/a/414444/61499
   conn/.style n args=2{
-    tikz+={\draw [dashed] (#1) -- (#2);}
-  },
+    tikz+={\draw [dashed] (#1) -- (#2);}},
   -->/.style={ % draw horizontal line to predecessor
     before drawing tree={
       temptoksa=,
@@ -383,5 +382,18 @@
     % tikz={\node[yshift={1.5ex},scale=0.8,fill=white,draw,inner sep=.10ex,circle, right=-0.5em of .east]  {1};}
     label={[yshift={0.5ex},scale=.8,circle, draw, fill=white, inner sep=.1ex, label distance=-.65em, anchor=west]north east:#1}},
   Xs/.style={for tree={xshift=#1}},
-  Ys/.style={for tree={yshift=#1}}
+  Ys/.style={for tree={yshift=#1}},
+  %% Beamer overlays (https://tex.stackexchange.com/a/253384/61499)
+  visible on/.style={%
+    for tree={%
+      /tikz/visible on={#1},
+      edge={/tikz/visible on={#1}}}},
+  opaque on/.style={%
+    for tree={%
+      /tikz/opaque on={#1},
+      edge={/tikz/opaque on={#1}}}},
+  alerted on/.style={%
+    for tree={%
+      /tikz/alerted on={#1},
+      edge={/tikz/alerted on={#1}}}},
 }

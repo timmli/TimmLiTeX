@@ -50,22 +50,31 @@
 \tikzstyle{mydouble} = [double distance=1pt]
     
 \tikzset{
-    %Define standard arrow tip
-    >=stealth',
-    %Define style for boxes
-    box/.style={
-           rectangle,
-           rounded corners,
-           draw=black, very thick,
-           text width=10em,
-           minimum height=2em,
-           text centered},
-    % Define arrow style
-    arrow/.style={
-           ->,
-           thick,
-           	shorten <=2pt,
-           shorten >=2pt,}
+  %% Define standard arrow tip
+  >=stealth',
+  %% Define style for boxes
+  box/.style={
+    rectangle,
+    rounded corners,
+    draw=black, very thick,
+    text width=10em,
+    minimum height=2em,
+    text centered},
+  %% Define arrow style
+  arrow/.style={
+    ->,
+    thick,
+    shorten <=2pt,
+    shorten >=2pt,},
+  %% Beamer overlays (https://tex.stackexchange.com/a/253384/61499)
+  invisible/.style={opacity=0,text opacity=0},
+  visible on/.style={alt=#1{}{invisible}},
+  alt/.code args={<#1>#2#3}{%
+    \alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}}},
+  transparent/.style={opacity=0.1,text opacity=0.1},
+  opaque on/.style={alt=#1{}{transparent}},
+  alerted/.style={color=alerttextdefaultfg},
+  alert on/.style={alt=#1{alerted}{}},
 }
 
 \newcommand\centertikz[1]{\tikz[baseline=(current bounding box.center)]{#1}}
@@ -126,8 +135,7 @@
   %% for drawing STUG sequences
   %% conn, <-- and --> are take from https://tex.stackexchange.com/a/414444/61499
   conn/.style n args=2{
-    tikz+={\draw [dashed] (#1) -- (#2);}
-  },
+    tikz+={\draw [dashed] (#1) -- (#2);}},
   -->/.style={ % draw horizontal line to predecessor
     before drawing tree={
       temptoksa=,
@@ -191,7 +199,20 @@
     % tikz={\node[yshift={1.5ex},scale=0.8,fill=white,draw,inner sep=.10ex,circle, right=-0.5em of .east]  {1};}
     label={[yshift={0.5ex},scale=.8,circle, draw, fill=white, inner sep=.1ex, label distance=-.65em, anchor=west]north east:#1}},
   Xs/.style={for tree={xshift=#1}},
-  Ys/.style={for tree={yshift=#1}}
+  Ys/.style={for tree={yshift=#1}},
+  %% Beamer overlays (https://tex.stackexchange.com/a/253384/61499)
+  visible on/.style={%
+    for tree={%
+      /tikz/visible on={#1},
+      edge={/tikz/visible on={#1}}}},
+  opaque on/.style={%
+    for tree={%
+      /tikz/opaque on={#1},
+      edge={/tikz/opaque on={#1}}}},
+  alerted on/.style={%
+    for tree={%
+      /tikz/alerted on={#1},
+      edge={/tikz/alerted on={#1}}}},
 }
 
 
