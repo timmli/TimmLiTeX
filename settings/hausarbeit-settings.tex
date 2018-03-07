@@ -92,6 +92,8 @@
   blue subtree/.style={for tree={text=blue},for descendants={edge=blue}},
   green subtree/.style={for tree={text=green},for descendants={edge=green}},
   gray subtree/.style={for tree={text=gray},for descendants={edge=gray}},
+  color subtree/.style={for tree={text=#1},for descendants={edge={draw=#1}}},
+  subtree color/.style={for tree={text=#1},for descendants={edge={draw=#1}}},
   vcenter/.style={begin draw/.code={\begin{tikzpicture}[baseline=(current bounding box.center)]}},
   empty nodes/.style={	% from the forest manual
     for tree={
