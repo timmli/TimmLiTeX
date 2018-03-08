@@ -44,13 +44,13 @@
     shorten >=2pt,},
   %% Beamer overlays (https://tex.stackexchange.com/a/253384/61499)
   invisible/.style={opacity=0,text opacity=0},
-  visible on/.style={alt=#1{}{invisible}},
+  visible/.style={alt=#1{}{invisible}},
   alt/.code args={<#1>#2#3}{%
     \alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}}},
   transparent/.style={opacity=0.1,text opacity=0.1},
-  opaque on/.style={alt=#1{}{transparent}},
-  alerted/.style={color=alerttextdefaultfg},
-  alert on/.style={alt=#1{alerted}{}},
+  opaque/.style={alt=#1{}{transparent}},
+  alerted/.style={color=alerted text.fg},
+  alert/.style={alt=#1{alerted}{}},
 }
 
 \newcommand\centertikz[1]{\tikz[baseline=(current bounding box.center)]{#1}}
@@ -179,18 +179,24 @@
   Xs/.style={for tree={xshift=#1}},
   Ys/.style={for tree={yshift=#1}},
   %% Beamer overlays (https://tex.stackexchange.com/a/253384/61499)
-  visible on/.style={%
+  invisible/.style={%
     for tree={%
-      /tikz/visible on={#1},
-      edge={/tikz/visible on={#1}}}},
-  opaque on/.style={%
+      /tikz/invisible={#1},
+      edge={/tikz/invisible={#1}}}},
+  visible/.style={%
     for tree={%
-      /tikz/opaque on={#1},
-      edge={/tikz/opaque on={#1}}}},
-  alerted on/.style={%
+      /tikz/visible={#1},
+      edge={/tikz/visible={#1}}}},
+  opaque/.style={%
     for tree={%
-      /tikz/alerted on={#1},
-      edge={/tikz/alerted on={#1}}}},
+      /tikz/opaque={#1},
+      edge={/tikz/opaque={#1}}}},
+  alert/.style={%
+    for tree={%
+      /tikz/alert={#1},
+      edge={/tikz/alert={#1}}}},
+  only/.code args={<#1>}{% https://tex.stackexchange.com/a/417110/61499
+    \alt<#1>{}{\pgfkeysalso{before typesetting nodes={remove}}}},
 }
 
 

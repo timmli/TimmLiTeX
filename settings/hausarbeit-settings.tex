@@ -173,18 +173,24 @@
   Xs/.style={for tree={xshift=#1}},
   Ys/.style={for tree={yshift=#1}},
   %% Beamer overlays (https://tex.stackexchange.com/a/253384/61499)
-  visible on/.style={%
+  invisible/.style={%
     for tree={%
-      /tikz/visible on={#1},
-      edge={/tikz/visible on={#1}}}},
-  opaque on/.style={%
+      /tikz/invisible={#1},
+      edge={/tikz/invisible={#1}}}},
+  visible/.style={%
     for tree={%
-      /tikz/opaque on={#1},
-      edge={/tikz/opaque on={#1}}}},
-  alerted on/.style={%
+      /tikz/visible={#1},
+      edge={/tikz/visible={#1}}}},
+  opaque/.style={%
     for tree={%
-      /tikz/alerted on={#1},
-      edge={/tikz/alerted on={#1}}}},
+      /tikz/opaque={#1},
+      edge={/tikz/opaque={#1}}}},
+  alert/.style={%
+    for tree={%
+      /tikz/alert={#1},
+      edge={/tikz/alert={#1}}}},
+  only/.code args={<#1>}{% https://tex.stackexchange.com/a/417110/61499
+    \alt<#1>{}{\pgfkeysalso{before typesetting nodes={remove}}}},
 }
 
 
