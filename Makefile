@@ -90,3 +90,8 @@ release_poster:
 	cp templates/poster-template.tex .
 	zip -r poster-template.zip poster-template.tex $(POSTER_FILES) 
 	rm poster-template.tex
+
+#-------------------------------------------------------------------------------
+
+release_all: release_abstract release_beamer release_hausarbeit release_poster
+
