@@ -8,17 +8,27 @@
 %   PDFLATEX SETTINGS  % 
 %%%%%%%%%%%%%%%%%%%%%%%%
 
-%% Font & Encoding
+%%   Font & Encoding
+
 % \usepackage{libertine} % libertine tends to cause problems, e.g. when using tipa
 % \usepackage[libertine]{newtxmath}
 \usepackage{times}
+
+\makeatletter
+
+\@ifclassloaded{beamer}{
+  \usepackage{libertine} % libertine tends to cause problems, e.g. when using tipa
+  \usepackage[libertine]{newtxmath}}{}
+
+\@ifclassloaded{tikzposter}{
+  \usepackage{DejaVuSans} 
+  \renewcommand*{\familydefault}{\sfdefault}}{}
+
+\makeatother
+
 \usepackage[scaled=0.8]{beramono}  % for monospaced font
 \usepackage{microtype}		% micro-typographic aspects of the fonts
 \usepackage[T1]{fontenc}	% special fonts, e.g. for German umlaute
-
-%% for posters
-% \usepackage{DejaVuSans} 
-% \renewcommand*{\familydefault}{\sfdefault}
 
 %% compatible with BibLaTeX
 \usepackage[utf8]{inputenc}
