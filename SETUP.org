@@ -397,7 +397,7 @@ The virtual LaTeX class =tl-beamer= has to be propagated to org-mode before expo
   
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\input{examples/beamer-examples.tex}
+%\input{examples/beamer-examples.tex} % Forest examples may cause problems together with TeX Live 2016
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \begin{frame}[plain,allowframebreaks]
 \frametitle{}
