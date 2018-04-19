@@ -34,39 +34,42 @@
 
 \begin{frame}
 \frametitle{Overlays in Forest trees}
-\Forest{
-  [,phantom
-    [S,only=<+> [NP [N [I,lex]]]]
-    [S,only=<+>,--> [NP [N [I,lex]]]]
-    [S,only=<1-.> [V [wrote,lex]]]
-    [S,only=<+>
-      [NP [N [I,lex]]]
-      [V [wrote,lex]]]
-    [S,only=<+>,-->
-      [NP [N [I,lex]]]
-      [V [wrote,lex]]]
-    [S,only=<1-.> [NP [D [a,lex]]]]
-    [S,only=<+>
-      [NP [N [I,lex]]]
-      [V [wrote,lex]]
-      [NP [D [a,lex]]]]
-    [S,only=<+>,-->
-      [NP [N [I,lex]]]
-      [V [wrote,lex]]
-      [NP,--> [D [a,lex]]]]
-    [S,only=<1-.> [NP [N [novel,lex]]]]
-    [S,only=<+>
-      [NP [N [I,lex]]]
-      [V [wrote,lex]]
-      [NP
-        [D [a,lex]]
-        [N [novel,lex]]]]
-    [S,only=<+->,alert=<.>,c=0
-      [NP,c=1 [N [I,lex]]]
-      [V [wrote,lex]]
-      [NP,c=2
-        [D [a,lex]]
-        [N [novel,lex]]]] 
-    ]
-}
+
+%% This example may cause problems together with TeX Live 2016
+% \Forest{
+%   [,phantom
+%     [S,only=<+> [NP [N [I,lex]]]]
+%     [S,only=<+>,--> [NP [N [I,lex]]]]
+%     [S,only=<1-.> [V [wrote,lex]]]
+%     [S,only=<+>
+%       [NP [N [I,lex]]]
+%       [V [wrote,lex]]]
+%     [S,only=<+>,-->
+%       [NP [N [I,lex]]]
+%       [V [wrote,lex]]]
+%     [S,only=<1-.> [NP [D [a,lex]]]]
+%     [S,only=<+>
+%       [NP [N [I,lex]]]
+%       [V [wrote,lex]]
+%       [NP [D [a,lex]]]]
+%     [S,only=<+>,-->
+%       [NP [N [I,lex]]]
+%       [V [wrote,lex]]
+%       [NP,--> [D [a,lex]]]]
+%     [S,only=<1-.> [NP [N [novel,lex]]]]
+%     [S,only=<+>
+%       [NP [N [I,lex]]]
+%       [V [wrote,lex]]
+%       [NP
+%         [D [a,lex]]
+%         [N [novel,lex]]]]
+%     [S,only=<+->,alert=<.>,c=0
+%       [NP,c=1 [N [I,lex]]]
+%       [V [wrote,lex]]
+%       [NP,c=2
+%         [D [a,lex]]
+%         [N [novel,lex]]]] 
+%     ]
+%   }
+
 \end{frame}

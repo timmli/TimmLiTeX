@@ -418,7 +418,7 @@ Link type for typesetting linguistic examples:
   
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\input{examples/beamer-examples.tex} % Forest examples may cause problems together with TeX Live 2016
+\input{examples/beamer-examples.tex}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \begin{frame}[plain,allowframebreaks]
 \frametitle{}
