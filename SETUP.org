@@ -269,7 +269,9 @@ This is an abstract: \lipsum[1]
 \setlength{\Extopsep}{0em}   % vertical margin in linguex examples
 
 \newcommand{\mypause}{\pause}
-\renewcommand{\bsp}[1]{{\color{HHUblue}\itshape\bfseries #1}} % already defined in myMacros.tex
+
+% \renewcommand{\bsp}[1]{{\color{HHUblue}\itshape\bfseries #1}} % already defined in myMacros.tex
+\renewcommand{\bsp}[1]{{\usebeamercolor[bg!80]{block title example}\itshape\bfseries #1}}
 
 \AtBeginSection[]
 {
