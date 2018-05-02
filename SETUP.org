@@ -1064,6 +1064,8 @@ dvipsnames,
 
 <<avm-settings>>
 
+<<listings-settings>>
+
 <<beamer-style>>
 
 %% Bibliography
