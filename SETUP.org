@@ -37,6 +37,14 @@ In order to compile these templates, press =C-c C-v t= , or evaluate the followi
 
 ,* Paragraph title
 
+,* References 
+
+,#+BEGIN_EXPORT latex
+{\tiny
+\printbibliography[heading=none]
+}
+,#+END_EXPORT
+
 ,* COMMENT org-mode settings
 
 ,** Installation of =tl-abstract=

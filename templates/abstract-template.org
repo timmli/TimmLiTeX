@@ -34,6 +34,14 @@
 
 * Paragraph title
 
+* References 
+
+#+BEGIN_EXPORT latex
+{\tiny
+\printbibliography[heading=none]
+}
+#+END_EXPORT
+
 * COMMENT org-mode settings
 
 ** Installation of =tl-abstract=
