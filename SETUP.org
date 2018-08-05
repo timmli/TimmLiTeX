@@ -375,6 +375,8 @@ Link type for typesetting linguistic examples:
 \definecolor{myred}{rgb}{0.8,0,0}
 \definecolor{mydarkgreen}{rgb}{0,0.55,0}
 
+\renewcommand{\bsp}[1]{{\usebeamercolor[bg!80]{block title example}\itshape\bfseries #1}}
+
 <<beamer-body>>
 
 #+END_SRC
