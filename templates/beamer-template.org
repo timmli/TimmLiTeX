@@ -33,6 +33,12 @@
 % \renewcommand{\bsp}[1]{{\color{HHUblue}\itshape\bfseries #1}} % already defined in myMacros.tex
 \renewcommand{\bsp}[1]{{\usebeamercolor[bg!80]{block title example}\itshape\bfseries #1}}
 
+%\frame{
+%\frametitle{Table of contents}
+%  \tableofcontents
+%  [pausesections]
+%}
+
 \AtBeginSection[]
 {
  \begin{frame}<beamer>{Outline}
