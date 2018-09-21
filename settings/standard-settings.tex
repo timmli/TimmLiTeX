@@ -147,6 +147,8 @@
   derivation tree/.style={.style={
       for tree={parent anchor={},child anchor={},font=\ttfamily}}},
   derivation/.style={for children={fit=tight}},
+  description/.style={
+    for tree={parent anchor={},child anchor={},edge=->}},
   dt label/.style 2 args={
     edge label={node[midway,font=\ttfamily\scriptsize, #1]{#2}},},
   %% for drawing STUG sequences
@@ -190,8 +192,8 @@
             u,
             if n=1{}{
               p,
-              while nodewalk valid={1}{
-                1,
+              while nodewalk valid={last}{
+                last,
                 if={ > OR= {level}{tempcounta} }{
                   temptoksa/.option=name,
                   break=1
