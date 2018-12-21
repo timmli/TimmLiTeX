@@ -46,8 +46,8 @@ BEAMER_FILES =  myMacros.tex references.bib \
 	$(wildcard bst/biblatex-sp-unified/[^.]*) \
 	graphics/sfb-logo-quer.pdf \
 	graphics/hhu-logo-hres.pdf \
-	graphics/graphics/MNF-logo.pdf \
-	graphics/graphics/UT-logo.pdf 
+	graphics/MNF-logo.pdf \
+	graphics/UT-logo.pdf 
 
 test_beamer:
 	cp templates/beamer-template.tex .
