@@ -1,0 +1,41 @@
+\mode<presentation>
+
+\usetheme{Tuebingen}
+
+\defbeamertemplate*{headline}{Lustnau} %headline format
+{}
+
+\defbeamertemplate*{frametitle}{Lustnau}[1][left] % inspired by the definition of the default frametitle
+{%
+  % \ifbeamercolorempty[bg]{frametitle}{}{\nointerlineskip}%
+  % \@tempdima=\textwidth%
+  % \advance\@tempdima by\beamer@leftmargin%
+  % \advance\@tempdima by\beamer@rightmargin%
+  \hspace{-0.475cm}               %due to sep in beamercolorbox
+  \begin{beamercolorbox}[sep=0.35cm,#1,wd=.82\textwidth]{frametitle}
+    \usebeamerfont{frametitle}%
+    % \vbox{}\vskip-1ex%
+    \vbox{}\vskip-0.8ex%
+    \if@tempswa\else\csname beamer@fte#1\endcsname\fi%
+    \strut\insertframetitle\strut\par%
+    {%
+      \ifx\insertframesubtitle\@empty%
+      \else%
+      {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle\strut\par}%
+      \fi
+    }%
+    \vskip-1ex%
+    \if@tempswa\else\vskip-.3cm\fi% set inside beamercolorbox... evil here...
+    \end{beamercolorbox}%
+    \par
+    \vspace*{-0.08cm}
+    {\color{UTgold}\vhrulefill{0.2pt}}
+    % \vspace*{-1.5mm}
+  }
+
+\addtobeamertemplate{frametitle}{}{%
+  \begin{tikzpicture}[remember picture,overlay]
+  \node[anchor=north east,xshift=-1cm,yshift=-0.3ex] at (current page.north east) {\insertheadlinelogo};
+  \end{tikzpicture}}
+
+\mode<all>
