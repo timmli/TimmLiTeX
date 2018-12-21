@@ -13,7 +13,13 @@ dvipsnames,
 ]{beamer}
 
 \input{settings/beamer-settings.tex}
-% \setbeamersize{text margin left=1.5em,text margin right=1.5em}
+
+\usetheme{Lustnau}  
+% \usetheme{Tuebingen}
+\input{beamerlogosTuebingen.tex}
+
+% \usetheme{Duesseldorf}
+% \input{beamerlogosDuesseldorf.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%% 
 %    CUSTOM MACROS     %
@@ -25,18 +31,20 @@ dvipsnames,
 \definecolor{mydarkgreen}{rgb}{0,0.55,0}
 
 \renewcommand{\bsp}[1]{{\usebeamercolor[bg!80]{block title example}\itshape\bfseries #1}}
+\newcommand{\term}[1]{{\color{UTblue}\scshape\bfseries #1}} 
+\newcommand{\bspcolor}[1]{{\color{UTlightgreen}\bfseries #1}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % HEADER
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\title[\arabic{page} ]{Beamer Template}
-%\subtitle[short]{Subtitle}	
+\title[]{Beamer Template}
+\subtitle[short]{Subtitle}	
 \author[Max]{Max Mustermann}
 \institute[Inst.]{Institute/Affiliation}
 \date[]{\today}
 %\logo{\pgfimage[width=2cm,height=1cm]{logo-emmy}}			% Logo on all slides (pdf,png,jpg,eps)
-%\titlegraphic{\includegraphics[height=1cm]{graphics/sfb-logo-quer} \hfil \includegraphics[height=1cm]{graphics/hhu-logo}}	% Logo on title slide
+%\titlegraphic{\includegraphics[height=1cm]{path/to/picture}}	% on title slide
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SLIDES
@@ -44,9 +52,11 @@ dvipsnames,
 
 \begin{document}
 
-\begin{frame}[plain]
-  \titlepage
-\end{frame}
+\maketitle
+
+% \begin{frame}[plain]
+%   \titlepage
+% \end{frame}
 
 %\frame{\titlepage}
 

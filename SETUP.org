@@ -253,8 +253,7 @@ This is an abstract: \lipsum[1]
 # #+DATE: 
 ,#+BEAMER_HEADER: %\date[]{}
 ,#+BEAMER_HEADER: %\institute[]{}
-,#+BEAMER_HEADER: %\titlegraphic{\includegraphics[height=1cm]{graphics/sfb-logo-quer} \hfil \includegraphics[height=1cm]{graphics/hhu-logo}}	% Logo on title slide
-,#+BEAMER_HEADER: \setbeamersize{text margin left=15pt,text margin right=20pt}
+,#+BEAMER_HEADER: %\titlegraphic{\includegraphics[height=1cm]{path/to/picture}}	% on title slide
 ,#+FILETAGS: research
 ,#+LANGUAGE:  en
 ,#+OPTIONS:   H:2 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t ':t
@@ -280,6 +279,8 @@ This is an abstract: \lipsum[1]
 
 % \renewcommand{\bsp}[1]{{\color{HHUblue}\itshape\bfseries #1}} % already defined in myMacros.tex
 \renewcommand{\bsp}[1]{{\usebeamercolor[bg!80]{block title example}\itshape\bfseries #1}}
+\newcommand{\term}[1]{{\color{UTblue}\scshape\bfseries #1}} 
+\newcommand{\bspcolor}[1]{{\color{UTlightgreen}\bfseries #1}}
 
 \AtBeginSection[]
 {
@@ -364,7 +365,8 @@ Link type for typesetting linguistic examples:
 ]{beamer}
 
 <<beamer-settings>>
-% \setbeamersize{text margin left=1.5em,text margin right=1.5em}
+
+<<beamer-theme-settings>>
 
 %%%%%%%%%%%%%%%%%%%%%%%% 
 %    CUSTOM MACROS     %
@@ -376,6 +378,8 @@ Link type for typesetting linguistic examples:
 \definecolor{mydarkgreen}{rgb}{0,0.55,0}
 
 \renewcommand{\bsp}[1]{{\usebeamercolor[bg!80]{block title example}\itshape\bfseries #1}}
+\newcommand{\term}[1]{{\color{UTblue}\scshape\bfseries #1}} 
+\newcommand{\bspcolor}[1]{{\color{UTlightgreen}\bfseries #1}}
 
 <<beamer-body>>
 
@@ -387,13 +391,13 @@ Link type for typesetting linguistic examples:
 % HEADER
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\title[\arabic{page} ]{Beamer Template}
-%\subtitle[short]{Subtitle}	
+\title[]{Beamer Template}
+\subtitle[short]{Subtitle}	
 \author[Max]{Max Mustermann}
 \institute[Inst.]{Institute/Affiliation}
 \date[]{\today}
 %\logo{\pgfimage[width=2cm,height=1cm]{logo-emmy}}			% Logo on all slides (pdf,png,jpg,eps)
-%\titlegraphic{\includegraphics[height=1cm]{graphics/sfb-logo-quer} \hfil \includegraphics[height=1cm]{graphics/hhu-logo}}	% Logo on title slide
+%\titlegraphic{\includegraphics[height=1cm]{path/to/picture}}	% on title slide
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SLIDES
@@ -401,9 +405,11 @@ Link type for typesetting linguistic examples:
 
 \begin{document}
 
-\begin{frame}[plain]
-  \titlepage
-\end{frame}
+\maketitle
+
+% \begin{frame}[plain]
+%   \titlepage
+% \end{frame}
 
 %\frame{\titlepage}
 
@@ -957,6 +963,371 @@ numbers=noenddot,
 \end{document}
 #+END_SRC
 
+* Beamer themes
+
+** Theme settings
+
+#+NAME: beamer-theme-settings
+#+BEGIN_SRC latex :noweb yes
+\usetheme{Lustnau}  
+% \usetheme{Tuebingen}
+\input{beamerlogosTuebingen.tex}
+
+% \usetheme{Duesseldorf}
+% \input{beamerlogosDuesseldorf.tex}
+#+END_SRC
+
+** Tuebingen
+
+#+NAME: beamerthemeTuebingen.sty
+#+BEGIN_SRC latex :noweb yes :tangle themes/beamerthemeTuebingen.sty
+\mode<presentation>
+
+%% Requirement
+\RequirePackage{tikz}
+\RequirePackage{helvet}
+\RequirePackage{beramono}  % for monospaced font
+\PassOptionsToPackage{scaled=0.95}{beramono}
+
+%% Additional fields
+\def\titlelogo#1{\gdef\@titlelogo{#1}}
+\titlelogo{}
+\def\inserttitlelogo{\@titlelogo}
+
+\def\headlinelogo#1{\gdef\@headlinelogo{#1}}
+\headlinelogo{}
+\def\insertheadlinelogo{\@headlinelogo}
+
+%% Generic macros
+\def\vhrulefill#1{\leavevmode\leaders\hrule\@height#1\hfill \kern\z@}
+
+%% Settings
+\useinnertheme{Tuebingen}
+\useoutertheme{Tuebingen}
+\usecolortheme{Tuebingen}
+
+\setbeamersize{text margin left=1cm,text margin right=1cm}
+
+\mode<all>
+#+END_SRC
+
+#+NAME: beamercolorthemeTuebingen.sty
+#+BEGIN_SRC latex :noweb yes :tangle themes/beamercolorthemeTuebingen.sty
+\mode<presentation>
+
+\definecolor{UTred}{RGB}{165,30,55} 
+\definecolor{UTgray}{RGB}{195,195,195} 
+\definecolor{UTgold}{RGB}{180,160,105}
+\definecolor{UTanthracite}{RGB}{50,65,75}
+\definecolor{UTlightgreen}{RGB}{125,165,75}
+\definecolor{UTgreen}{RGB}{50,110,30} 
+\definecolor{UTblue}{RGB}{0,105,170}
+\definecolor{UTlightblue}{RGB}{80,170,200}
+\definecolor{UTnavyblue}{RGB}{65,90,140}
+\definecolor{UTbrown}{RGB}{145,105,70}
+\definecolor{UTlightbrown}{RGB}{215,180,105}
+
+%% Settings
+\setbeamercolor*{author}{fg=black}
+\setbeamercolor*{date}{fg=black}
+\setbeamercolor*{title}{fg=UTred}
+\setbeamercolor*{subtitle}{fg=black}
+\setbeamercolor*{titlegraphic}{bg=UTgray}
+
+\setbeamercolor*{block title}{bg=UTnavyblue,fg=white}
+\setbeamercolor*{block body}{bg=UTnavyblue!30!white}
+\setbeamercolor*{block title alerted}{bg=UTred,fg=white}
+\setbeamercolor*{block body alerted}{bg=UTred!30!white}
+\setbeamercolor*{block title example}{bg=UTgreen,fg=white}
+\setbeamercolor*{block body example}{bg=UTgreen!30!white}
+
+\setbeamercolor*{item}{fg=black}
+
+\setbeamercolor*{section in toc}{fg=black}
+\setbeamercolor*{section number projected}{bg=UTred,fg=white}
+
+\setbeamercolor*{bibliography entry title}{fg=black}
+\setbeamercolor*{bibliography entry author}{fg=black}
+\setbeamercolor*{bibliography entry location}{fg=black}
+\setbeamercolor*{bibliography entry note}{fg=black}
+
+\mode
+<all>
+#+END_SRC
+
+#+NAME: beamerinnerthemeTuebingen.sty
+#+BEGIN_SRC latex :noweb yes :tangle themes/beamerinnerthemeTuebingen.sty
+\mode<presentation>
+
+%% General settings
+
+\setbeamertemplate*{background}{}
+
+\setbeamerfont*{title}{size*={14}{16},series=\bfseries}
+\setbeamerfont*{subtitle}{size*={12}{15},series=\upshape}
+\setbeamerfont*{author}{size*={10}{12},series=\bfseries}
+\setbeamerfont*{date}{size*={10}{12},series=\bfseries}
+
+\setbeamertemplate{blocks}[rounded][shadow=true]
+
+\setbeamertemplate{itemize item}{\color{black}$\bullet$}
+\setbeamertemplate{itemize subitem}{\color{black}--}
+\setbeamertemplate{itemize subsubitem}{\color{black}\tiny$\blacksquare$}
+
+\setbeamertemplate{blocks}[default]
+
+\setbeamertemplate{section in toc}[square]
+
+\setbeamertemplate{bibliography item}{\insertbiblabel}  % insert label from bib(la)tex
+\setbeamerfont{bibliography entry author}{size=\tiny}%
+\setbeamerfont{bibliography entry title}{size=\tiny}
+\setbeamerfont{bibliography entry journal}{size=\tiny}
+\setbeamerfont{bibliography entry note}{size=\tiny}
+
+%% Title page
+
+\defbeamertemplate*{title page}{Tuebingen}[1][t]
+{
+  \thispagestyle{empty}
+  \setlength{\baselineskip}{12pt}
+  % \vskip-0.08\paperheight
+  \vskip0.042\paperheight
+  \inserttitlelogo
+  \vskip-0.015\paperheight
+  {\color{UTgold}\vhrulefill{0.2pt}}
+  \vskip0.025\paperheight
+  \begin{beamercolorbox}[wd=\textwidth,ht=0.375\paperheight]{titlegraphic}
+  {\inserttitlegraphic}
+  \end{beamercolorbox}
+  \vskip-5pt
+  {\color{UTred}\rule{\textwidth}{7pt}}
+  \vskip0pt
+  {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par}%
+  \vskip0.6ex
+  {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle}
+  \vskip0pt plus 1filll
+  \ifx\insertdate\@empty%
+  \else%
+  {\usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate},%
+  \fi
+  {\usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor}%
+  \par
+}
+
+\mode<all>
+#+END_SRC
+
+#+NAME: beamerouterthemeTuebingen.sty
+#+BEGIN_SRC latex :noweb yes :tangle themes/beamerouterthemeTuebingen.sty
+\mode<presentation>
+
+% Frame title
+\setbeamercolor{frametitle}{fg=black}
+\setbeamerfont{frametitle}{size=\large,series=\bfseries}
+% \setbeamerfont{footline}{size=\tiny}
+\defbeamertemplate*{frametitle}{Tuebingen}[1][]
+{
+  \vspace*{2mm}
+  \usebeamerfont{frametitle}\insertframetitle
+  \vspace*{-1.5mm}
+}
+
+\setbeamertemplate{navigation symbols}{}
+\defbeamertemplate*{sidebar}{Tuebingen}{}
+  
+\defbeamertemplate*{headline}{Tuebingen} %headline format
+{
+  \vspace*{2.5mm}
+  \begin{beamercolorbox}[wd=\paperwidth,leftskip=1.01cm,rightskip=1.01cm]
+  {headline}
+  \hspace*{0mm}
+  \insertheadlinelogo
+  \par
+  \vspace*{0.3mm}
+  {\color{UTgold}\vhrulefill{0.2pt}}
+  \end{beamercolorbox}
+}
+
+\setbeamerfont{footline}{size=\tiny}
+\defbeamertemplate*{footline}{Tuebingen} %footline format
+{
+  \begin{beamercolorbox}[wd=\paperwidth,leftskip=1cm,rightskip=1cm]
+  {footline} 
+  {\color{UTred}\vhrulefill{0.2pt}}
+  \end{beamercolorbox} \begin{beamercolorbox}[wd=\paperwidth,leftskip=1cm,rightskip=1cm,ht=0.37cm,dp=0.25cm]{footline} 
+  ~\insertframenumber{} | \insertshortauthor\insertshortinstitute, \insertshorttitle%
+  \ifx\insertdate\@empty%
+  \else%
+  , \insertshortdate
+  \fi
+  % \fussnote \hfill \crtext \hspace*{20mm}
+  \end{beamercolorbox}
+}
+
+\mode<all>  
+#+END_SRC
+
+#+NAME: beamerlogosTuebingen.tex
+#+BEGIN_SRC latex :noweb yes :tangle themes/beamerlogosTuebingen.tex
+\titlelogo{%
+  \includegraphics[width=.31\paperwidth, keepaspectratio=true]{graphics/UT-logo.pdf}
+  \hskip0.35cm
+  \begin{minipage}[t]{0.5\textwidth}
+  \setlength{\baselineskip}{11pt}
+  \vskip-0.108\paperheight
+  \includegraphics[width=.45\paperwidth, keepaspectratio=true]{graphics/MNF-logo.pdf}
+  \upshape\sffamily\color{UTred}\fontsize{7}{10}\selectfont\textbf{Fachbereich Informatik} 
+  \end{minipage}% 
+}
+
+\headlinelogo{%
+  \includegraphics[width=2.52cm, keepaspectratio=true]{graphics/UT-logo.pdf}
+}      
+
+\titlegraphic{
+  % \tikz\node[
+  %   % circle,
+  %   rectangle,
+  %   rounded corners,
+  %   % draw,
+  %   text=black,
+  %   text width=10cm,
+  %   minimum height=5cm,
+  %   path picture={
+  %     \node at (path picture bounding box.center){
+  %       \includegraphics[width=3.5cm]{path/to/picture}
+  %     };
+  %   }]{};
+} % \color{UTgray}\rule{\textwidth}{35mm}
+#+END_SRC
+
+** Lustnau
+
+#+NAME: beamerthemeLustnau.sty
+#+BEGIN_SRC latex :noweb yes :tangle themes/beamerthemeLustnau.sty
+\mode<presentation>
+
+\usetheme{Tuebingen}
+
+\defbeamertemplate*{headline}{Lustnau} %headline format
+{}
+
+\defbeamertemplate*{frametitle}{Lustnau}[1][left] % inspired by the definition of the default frametitle
+{%
+  % \ifbeamercolorempty[bg]{frametitle}{}{\nointerlineskip}%
+  % \@tempdima=\textwidth%
+  % \advance\@tempdima by\beamer@leftmargin%
+  % \advance\@tempdima by\beamer@rightmargin%
+  \hspace{-0.475cm}               %due to sep in beamercolorbox
+  \begin{beamercolorbox}[sep=0.35cm,#1,wd=.82\textwidth]{frametitle}
+    \usebeamerfont{frametitle}%
+    % \vbox{}\vskip-1ex%
+    \vbox{}\vskip-0.8ex%
+    \if@tempswa\else\csname beamer@fte#1\endcsname\fi%
+    \strut\insertframetitle\strut\par%
+    {%
+      \ifx\insertframesubtitle\@empty%
+      \else%
+      {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle\strut\par}%
+      \fi
+    }%
+    \vskip-1ex%
+    \if@tempswa\else\vskip-.3cm\fi% set inside beamercolorbox... evil here...
+    \end{beamercolorbox}%
+    \par
+    \vspace*{-0.08cm}
+    {\color{UTgold}\vhrulefill{0.2pt}}
+    % \vspace*{-1.5mm}
+  }
+
+\addtobeamertemplate{frametitle}{}{%
+  \begin{tikzpicture}[remember picture,overlay]
+  \node[anchor=north east,xshift=-1cm,yshift=-0.3ex] at (current page.north east) {\insertheadlinelogo};
+  \end{tikzpicture}}
+
+\mode<all>
+#+END_SRC
+
+** Duesseldorf
+
+#+NAME: beamerthemeDuesseldorf.sty
+#+BEGIN_SRC latex :noweb yes :tangle themes/beamerthemeDuesseldorf.sty
+\mode<presentation>
+
+\usepackage{libertine} % libertine tends to cause problems, e.g. when using tipa
+\usepackage[libertine]{newtxmath}
+
+% \usepackage{times}
+
+\usepackage[scaled=0.8]{beramono}  % for monospaced font
+
+%\usefonttheme{serif}
+%\renewcommand*{\ttdefault}{cmtt}
+
+\definecolor{HHUblue}{HTML}{006AB3}
+\setbeamercolor{structure}{fg=HHUblue}
+
+\setbeamerfont{frametitle}{family=\sffamily}
+\setbeamerfont{title}{family=\sffamily}
+\setbeamerfont{block title}{family=\sffamily}
+
+\usetheme{Copenhagen} % Boadilla
+\usecolortheme{default}   % beaver
+\usefonttheme{default}		% default | professionalfonts | serif | structurebold | structureitalicserif | structuresmallcapsserif
+\useinnertheme{default} 	% circles | default | inmargin | rectangles | rounded
+\useoutertheme{default}	% default | infolines | miniframes | shadow | sidebar | smoothbars | smoothtree | split | tree
+
+%\setbeamercovered{transparent}				% for transparent overlays
+\setbeamercovered{invisible}				% for non-transparent overlays
+\setbeamertemplate{navigation symbols}{}	% no navigation symbols
+\setbeamertemplate{headline}[default]		% no headline
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{section in toc}[]
+\setbeamertemplate{subsection in toc}[]
+\setbeamertemplate{itemize items}[square]
+\setbeamertemplate{enumerate items}[square]
+%\setbeamertemplate{blocks}[default]		% rectangular blocks
+%\setbeamersize{text margin left=10pt,text margin right=10pt}
+
+%% Bibliography style (http://tex.stackexchange.com/questions/97615/article-style-bibliography-in-beamer-class)
+\setbeamertemplate{frametitle continuation}[from second]
+% Now get rid of all the colours
+\setbeamercolor*{bibliography entry title}{fg=black}
+\setbeamercolor*{bibliography entry author}{fg=black}
+\setbeamercolor*{bibliography entry location}{fg=black}
+\setbeamercolor*{bibliography entry note}{fg=black}
+% and kill the abominable icon
+\setbeamertemplate{bibliography item}{\insertbiblabel}  % insert label from bib(la)tex
+\AtBeginDocument{
+  \renewcommand*{\bibfont}{\scriptsize}
+}
+
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+    \pgfsetfillopacity{0}\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,left]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\pgfsetfillopacity{1}\color{gray}\hspace*{2ex}\insertshortauthor~~(\insertshortinstitute)
+    \end{beamercolorbox}%
+    \pgfsetfillopacity{0}\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\pgfsetfillopacity{1}\insertshorttitle
+    \end{beamercolorbox}%
+    \pgfsetfillopacity{0}\begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\pgfsetfillopacity{1}\color{gray}\insertshortdate{}\hspace*{2em}
+    \insertframenumber{} %/ \inserttotalframenumber
+    \hspace*{2ex}
+    \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+\mode<all>
+#+END_SRC
+
+#+NAME: beamerlogosDuesseldorf.tex
+#+BEGIN_SRC latex :noweb yes :tangle themes/beamerlogosDuesseldorf.tex
+\titlegraphic{\includegraphics[height=1cm]{graphics/sfb-logo-quer} \hfil \includegraphics[height=1cm]{graphics/hhu-logo}}
+#+END_SRC
+
 * Packages
 
 ** tikz-settings.sty
@@ -1075,8 +1446,6 @@ dvipsnames,
 <<avm-settings>>
 
 <<listings-settings>>
-
-<<beamer-style>>
 
 %% Bibliography
 
@@ -1391,6 +1760,8 @@ Draw horizontal edges between adjacent siblings:
 #+END_SRC
 
 ** Beamer
+
+DEPRECATED! =beamer-style= has been moved to a separate Beamer theme: [[*Duesseldorf]]
 
 #+NAME: beamer-style
 #+BEGIN_SRC latex

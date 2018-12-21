@@ -43,16 +43,23 @@ BEAMER_FILES =  myMacros.tex references.bib \
 	settings/beamer-settings.tex \
 	$(wildcard packages/*.sty) \
 	$(filter-out $(wildcard examples/poster*), $(wildcard examples/*.tex)) \
-	$(wildcard bst/biblatex-sp-unified/[^.]*)
+	$(wildcard bst/biblatex-sp-unified/[^.]*) \
+	graphics/sfb-logo-quer.pdf \
+	graphics/hhu-logo-hres.pdf \
+	graphics/graphics/MNF-logo.pdf \
+	graphics/graphics/UT-logo.pdf 
 
 test_beamer:
 	cp templates/beamer-template.tex .
+	cp themes/beamer* .
 	latexmk -pdf beamer-template.tex
 
 release_beamer:
 	cp templates/beamer-template.tex .
-	zip -r beamer-template.zip beamer-template.tex $(BEAMER_FILES) 
-	rm beamer-template.tex
+	cp themes/beamer* .
+	zip -r template-beamer.zip beamer* $(BEAMER_FILES) 
+	rm beamer*
+	mv template-beamer.zip beamer-template.zip
 
 #-------------------------------------------------------------------------------
 

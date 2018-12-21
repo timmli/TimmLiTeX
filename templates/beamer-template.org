@@ -5,8 +5,7 @@
 # #+DATE: 
 #+BEAMER_HEADER: %\date[]{}
 #+BEAMER_HEADER: %\institute[]{}
-#+BEAMER_HEADER: %\titlegraphic{\includegraphics[height=1cm]{graphics/sfb-logo-quer} \hfil \includegraphics[height=1cm]{graphics/hhu-logo}}	% Logo on title slide
-#+BEAMER_HEADER: \setbeamersize{text margin left=15pt,text margin right=20pt}
+#+BEAMER_HEADER: %\titlegraphic{\includegraphics[height=1cm]{path/to/picture}}	% on title slide
 #+FILETAGS: research
 #+LANGUAGE:  en
 #+OPTIONS:   H:2 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t ':t
@@ -32,6 +31,8 @@
 
 % \renewcommand{\bsp}[1]{{\color{HHUblue}\itshape\bfseries #1}} % already defined in myMacros.tex
 \renewcommand{\bsp}[1]{{\usebeamercolor[bg!80]{block title example}\itshape\bfseries #1}}
+\newcommand{\term}[1]{{\color{UTblue}\scshape\bfseries #1}} 
+\newcommand{\bspcolor}[1]{{\color{UTlightgreen}\bfseries #1}}
 
 \AtBeginSection[]
 {
