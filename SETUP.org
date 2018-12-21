@@ -1394,7 +1394,7 @@ numbers=noenddot,
 
 #+NAME: beamer-options
 #+BEGIN_SRC latex
-% 8pt, 9pt, 10pt, 11pt, 12pt, 14pt, 17pt, 20pt
+10pt, % 8pt, 9pt, 10pt, 11pt, 12pt, 14pt, 17pt, 20pt
 % serif,
 % table, % for table coloring
 % draft,
@@ -1407,7 +1407,7 @@ dvipsnames,
 
 #+NAME: beamer-options-org
 #+BEGIN_SRC latex
-[compress,xcolor=table,dvipsnames]
+[compress,xcolor=table,dvipsnames,10pt]
 #+END_SRC
 
 #+NAME: beamer-settings
