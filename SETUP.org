@@ -41,6 +41,7 @@
       - [[#tabular][tabular]]
       - [[#tikz][tikz]]
       - [[#hausarbeit][hausarbeit]]
+- [[#macros][Macros]]
 - [[#examples][Examples]]
 - [[#local-variables][Local variables]]
 
