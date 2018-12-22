@@ -303,11 +303,13 @@ This is an abstract: \lipsum[1]
 ,#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
 ,#+STARTUP: beamer
 ,#+STARTUP: hideblocks content
-,#+LATEX_CLASS: tl-beamer
+,#+LATEX_CLASS: beamer
 ,#+LATEX_CLASS_OPTIONS: <<beamer-options-org>> 
 ,#+LATEX_COMPILER: pdflatex
 ,#+LATEX_HEADER: <<beamer-settings>>
 ,#+LATEX_HEADER: \input{myMacros}
+,#+LATEX_HEADER: \usetheme{Lustnau}
+,#+LATEX_HEADER: \input{beamerlogosTuebingen}
 ,#+COLUMNS: %40ITEM %10TAGS %9BEAMER_act(Overlays) %4BEAMER_col(Col) %20BEAMER_opt(Options)
 :end:
 
@@ -353,7 +355,7 @@ This is an abstract: \lipsum[1]
 
 ,* COMMENT org-mode settings
 
-,** Installation of =tl-beamer=
+,** DEPRECATED: Installation of =tl-beamer=
 
 The virtual LaTeX class =tl-beamer= has to be propagated to org-mode before export.
 
