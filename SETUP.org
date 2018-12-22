@@ -1216,7 +1216,7 @@ numbers=noenddot,
 #+BEGIN_SRC latex :noweb yes :tangle themes/beamerlogosTuebingen.tex
 \titlelogo{%
   \includegraphics[width=.31\paperwidth, keepaspectratio=true]{graphics/UT-logo.pdf}
-  \hskip0.38cm
+  \hskip0.4cm
   \begin{minipage}[t]{0.5\textwidth}
   \setlength{\baselineskip}{11pt}
   \vskip-0.108\paperheight
