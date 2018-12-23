@@ -38,7 +38,7 @@
 
 \AtBeginSection[]
 {
- \begin{frame}<beamer>{Outline}
+ \begin{frame}{Outline} % add <beamer> to remove this from handouts
    \tableofcontents[
    currentsection
    ]
