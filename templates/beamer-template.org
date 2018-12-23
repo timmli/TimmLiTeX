@@ -13,7 +13,7 @@
 #+STARTUP: beamer
 #+STARTUP: hideblocks content
 #+LATEX_CLASS: beamer
-#+LATEX_CLASS_OPTIONS: [compress,xcolor=table,dvipsnames,10pt] 
+#+LATEX_CLASS_OPTIONS: [compress,xcolor=table,dvipsnames,10pt] % other options: handout,t 
 #+LATEX_COMPILER: pdflatex
 #+LATEX_HEADER: \input{settings/beamer-settings.tex}
 #+LATEX_HEADER: \input{myMacros}

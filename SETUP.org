@@ -402,6 +402,8 @@ Link type for typesetting linguistic examples:
 
 #+END_SRC
 
+In order to position the =\maketitle= command manually, you need to add =# org-latex-title-command: ""= to the local variables.
+
 #+NAME: beamer-template-tex
 #+BEGIN_SRC latex :noweb yes :tangle templates/beamer-template.tex
 % -*- coding: utf-8 -*-
@@ -1453,7 +1455,7 @@ dvipsnames,
 
 #+NAME: beamer-options-org
 #+BEGIN_SRC latex
-[compress,xcolor=table,dvipsnames,10pt]
+[compress,xcolor=table,dvipsnames,10pt] % other options: handout,t
 #+END_SRC
 
 #+NAME: beamer-settings
