@@ -469,7 +469,7 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 
 %\AtBeginSection[]
 %{
-%  \begin{frame}<beamer>{Outline}
+%  \begin{frame}{Outline}
 %    \tableofcontents[
 %    currentsection
 %    ]
