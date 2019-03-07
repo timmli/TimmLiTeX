@@ -44,7 +44,7 @@ Put abstract here.
 * List of references :ignore:
 
 #+BEGIN_EXPORT latex
-\bibliographystyle{templates/jlm/jlm}
+\bibliographystyle{jlm}
 \bibliography{references}
 #+END_EXPORT
 
