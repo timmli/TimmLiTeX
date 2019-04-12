@@ -9,12 +9,12 @@ Collection of LaTeX settings and templates
 
 ** Included templates
 
-| short abstract            | [[file:templates/abstract-template.tex][tex]],[[file:templates/abstract-template.org][org]] | [[https://www.overleaf.com/docs?snip_uri=https://github.com/timmli/latex-templates/releases/download/v0.1.1/abstract-template.zip][Overleaf]] |
+| short abstract            | [[file:templates/abstract-template.tex][tex]],[[file:templates/abstract-template.org][org]] | [[https://www.overleaf.com/docs?snip_uri=https://github.com/timmli/latex-templates/releases/download/v0.1.2/abstract-template.zip][Overleaf]] |
 | standard article          | [[file:templates/article-template.tex][tex]],[[file:templates/article-template.org][org]] |          |
 | standard book             | [[file:templates/book-template.tex][tex]]     |          |
-| beamer slides (Tuebingen) | [[file:templates/beamer-template.tex][tex]],[[file:templates/beamer-template.org][org]] | [[https://www.overleaf.com/docs?snip_uri=https://github.com/timmli/latex-templates/releases/download/v0.1.1/beamer-template.zip][Overleaf]] |
+| beamer slides (Tuebingen) | [[file:templates/beamer-template.tex][tex]],[[file:templates/beamer-template.org][org]] | [[https://www.overleaf.com/docs?snip_uri=https://github.com/timmli/latex-templates/releases/download/v0.1.2/beamer-template.zip][Overleaf]] |
 | langsci paper             | [[file:templates/langsci-paper-template.tex][tex]],[[file:templates/langsci-paper-template.org][org]] |          |
 | jlm article               | TODO    |          |
-| poster                    | [[file:templates/poster-template.tex][tex]]     | [[https://www.overleaf.com/docs?snip_uri=https://github.com/timmli/latex-templates/releases/download/v0.1.1/poster-template.zip][Overleaf]] |
-| Hausarbeit (for teaching) | [[file:templates/hausarbeit-template.tex][tex]]     | [[https://www.overleaf.com/docs?snip_uri=https://github.com/timmli/latex-templates/releases/download/v0.1.1/hausarbeit-template.zip][Overleaf]] |
+| poster                    | [[file:templates/poster-template.tex][tex]]     | [[https://www.overleaf.com/docs?snip_uri=https://github.com/timmli/latex-templates/releases/download/v0.1.2/poster-template.zip][Overleaf]] |
+| Hausarbeit (for teaching) | [[file:templates/hausarbeit-template.tex][tex]]     | [[https://www.overleaf.com/docs?snip_uri=https://github.com/timmli/latex-templates/releases/download/v0.1.2/hausarbeit-template.zip][Overleaf]] |
 | Essay (for teaching)      | [[file:templates/essay-template.tex][tex]]     |          |
