@@ -1624,16 +1624,16 @@ numbers=noenddot,
 
 <<forest-settings>>
 
-% \usepackage{arydshln} 		% for dashed horizontal lines in tables (incompatible with avm)
-\usepackage{multirow}		% similar to \multicolumn
+% \usepackage{arydshln} 		    % for dashed horizontal lines in tables (incompatible with avm)
+\usepackage{multirow}           % similar to \multicolumn
 
 %% Symbols
 \usepackage{latexsym,amsmath,amssymb,wasysym}
-\usepackage{marvosym}		% for thunderbolt symbol
-\usepackage{ulem}			% to cross out text
+\usepackage{marvosym}           % for thunderbolt symbol
+\usepackage{ulem}               % to cross out text
 \normalem
 \usepackage{url}
-\urlstyle{sf}
+\urlstyle{tt}                   % tt,rm,sf,same
 
 %% Linguistics
 \usepackage{tipa}	% for phonetic symbols; has to appear before fontspec
