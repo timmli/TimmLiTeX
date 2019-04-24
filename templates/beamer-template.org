@@ -13,7 +13,7 @@
 #+STARTUP: beamer
 #+STARTUP: hideblocks content
 #+LATEX_CLASS: beamer
-#+LATEX_CLASS_OPTIONS: [compress,xcolor=table,dvipsnames,10pt] % other options: handout,t 
+#+LATEX_CLASS_OPTIONS: [compress,xcolor=table,dvipsnames,10pt]  
 #+LATEX_COMPILER: pdflatex
 #+LATEX_HEADER: \input{settings/beamer-settings.tex}
 #+LATEX_HEADER: \input{myMacros}
@@ -23,6 +23,8 @@
 :end:
 
 #+BEGIN_EXPORT latex
+%\selectlanguage{german} % select german language for babel package 
+
 \setlength{\Exlabelsep}{0em}		% for linguex examples
 \setlength{\SubExleftmargin}{1,5em}	% for linguex examples
 \renewcommand\eachwordone{\sffamily}	% for glossing with linguex

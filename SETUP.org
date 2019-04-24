@@ -315,6 +315,8 @@ This is an abstract: \lipsum[1]
 :end:
 
 ,#+BEGIN_EXPORT latex
+%\selectlanguage{german} % select german language for babel package 
+
 \setlength{\Exlabelsep}{0em}		% for linguex examples
 \setlength{\SubExleftmargin}{1,5em}	% for linguex examples
 \renewcommand\eachwordone{\sffamily}	% for glossing with linguex
@@ -1540,7 +1542,7 @@ dvipsnames,
 
 #+NAME: beamer-options-org
 #+BEGIN_SRC latex
-[compress,xcolor=table,dvipsnames,10pt] % other options: handout,t
+[compress,xcolor=table,dvipsnames,10pt] 
 #+END_SRC
 
 #+NAME: beamer-settings
