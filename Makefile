@@ -80,6 +80,37 @@ test_hausarbeit:
 
 #-------------------------------------------------------------------------------
 
+JLM_ARTICLE_FILES =  myMacros.tex references.bib \
+	$(wildcard packages/*.sty) \
+	$(filter-out $(wildcard examples/poster*), $(filter-out $(wildcard examples/beamer*), $(wildcard examples/*.tex)))
+
+release_jlm_article:
+	cp templates/jlm-article-template.org .
+	cp templates/jlm/cc-by.pdf .
+	cp templates/jlm/jlm.cls .
+	cp templates/jlm/jlm.bst .
+	cp templates/jlm/jlm-guidelines.pdf .
+	cp templates/latexmkrc-xelatex latexmkrc
+	cp -r templates/jlm/fonts .
+	zip -r jlm-article-template.zip \
+		jlm-article-template.org jlm.cls jlm.bst cc-by.pdf jlm-guidelines.pdf latexmkrc fonts $(JLM_ARTICLE_FILES) 
+	rm -fr jlm-article-template.org jlm.cls jlm.bst cc-by.pdf jlm-guidelines.pdf fonts
+
+test_jlm_article:
+	cp templates/jlm-article-template.org .
+	cp templates/jlm/cc-by.pdf .
+	cp templates/jlm/jlm.cls .
+	cp templates/jlm/jlm.bst .
+	cp templates/jlm/jlm-guidelines.pdf .
+	cp templates/latexmkrc-xelatex latexmkrc
+	pandoc jlm-article-template.org jlm-article-template.tex 
+	latexmk -pdf hausarbeit-template.tex
+
+clean_jlm_article:
+	rm -fr jlm-article-template.org jlm.cls jlm.bst cc-by.pdf jlm-guidelines.pdf fonts
+
+#-------------------------------------------------------------------------------
+
 POSTER_FILES =  myMacros.tex references.bib \
 	settings/myPosterstyle.tex \
 	settings/poster-settings.tex \
@@ -100,5 +131,5 @@ release_poster:
 
 #-------------------------------------------------------------------------------
 
-release_all: release_abstract release_beamer release_hausarbeit release_poster
+release_all: release_abstract release_beamer release_hausarbeit release_poster release_jlm_article
 

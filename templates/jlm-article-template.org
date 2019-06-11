@@ -1,6 +1,6 @@
 #+TITLE: Title of article
 #+LATEX_HEADER: \titlerunning{Title in header line}
-#+AUTHOR: Auhthor name
+#+AUTHOR: Author name
 # #+LATEX_HEADER: \author{Author1\inst{1} \and Author2\inst{2}} % or like this
 #+LATEX_HEADER: \affiliation{Affiliation of author}
 #+LATEX_HEADER: \authorrunning{}
