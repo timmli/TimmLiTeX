@@ -1,0 +1,58 @@
+\mode<presentation>
+
+%% General settings
+
+\setbeamertemplate*{background}{}
+
+\setbeamerfont*{title}{size*={14}{16},series=\bfseries}
+\setbeamerfont*{subtitle}{size*={12}{15},series=\upshape}
+\setbeamerfont*{author}{size*={10}{12},series=\bfseries}
+\setbeamerfont*{date}{size*={10}{12},series=\bfseries}
+
+\setbeamertemplate{blocks}[rounded][shadow=true]
+
+\setbeamertemplate{itemize item}{\color{black}$\bullet$}
+\setbeamertemplate{itemize subitem}{\color{black}--}
+\setbeamertemplate{itemize subsubitem}{\color{black}\tiny$\blacksquare$}
+
+\setbeamertemplate{blocks}[default]
+
+\setbeamertemplate{section in toc}[square]
+
+\setbeamertemplate{bibliography item}{\insertbiblabel}  % insert label from bib(la)tex
+\setbeamerfont{bibliography entry author}{size=\tiny}%
+\setbeamerfont{bibliography entry title}{size=\tiny}
+\setbeamerfont{bibliography entry journal}{size=\tiny}
+\setbeamerfont{bibliography entry note}{size=\tiny}
+
+%% Title page
+
+\defbeamertemplate*{title page}{Tuebingen}[1][t]
+{
+  \thispagestyle{empty}
+  \setlength{\baselineskip}{11pt}
+  % \vskip-0.08\paperheight
+  \vskip0.042\paperheight
+  \inserttitlelogo
+  \vskip-0.015\paperheight
+  {\color{UTgold}\vhrulefill{0.2pt}}
+  \vskip0.025\paperheight
+  \begin{beamercolorbox}[wd=\textwidth,ht=0.375\paperheight]{titlegraphic}
+  {\inserttitlegraphic}
+  \end{beamercolorbox}
+  \vskip-5pt
+  {\color{UTred}\rule{\textwidth}{7pt}}
+  \vskip0pt
+  {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par}%
+  \vskip0.6ex
+  {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle}
+  \vskip0pt plus 1filll
+  \ifx\insertdate\@empty%
+  \else%
+  {\usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate},%
+  \fi
+  {\usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor}%
+  \par
+}
+
+\mode<all>
