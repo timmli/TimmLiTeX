@@ -9,13 +9,12 @@
 \setbeamerfont*{author}{size*={10}{12},series=\bfseries}
 \setbeamerfont*{date}{size*={10}{12},series=\bfseries}
 
-\setbeamertemplate{blocks}[rounded][shadow=true]
-
 \setbeamertemplate{itemize item}{\color{black}$\bullet$}
 \setbeamertemplate{itemize subitem}{\color{black}--}
 \setbeamertemplate{itemize subsubitem}{\color{black}\tiny$\blacksquare$}
 
 \setbeamertemplate{blocks}[default]
+\setbeamerfont*{block title}{size=\normalsize}
 
 \setbeamertemplate{section in toc}[square]
 
@@ -49,7 +48,7 @@
   \vskip0pt plus 1filll
   \ifx\insertdate\@empty%
   \else%
-  {\usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate},%
+  {\usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate}, %
   \fi
   {\usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor}%
   \par
