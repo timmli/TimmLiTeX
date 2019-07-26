@@ -1310,12 +1310,18 @@ numbers=noenddot,
 \titlelogo{%
   \includegraphics[width=.31\paperwidth, keepaspectratio=true]{graphics/UT-logo.pdf}
   \hskip0.4cm
+  %% Trajan
   \begin{minipage}[t]{0.5\textwidth}
-  \setlength{\baselineskip}{11pt}
-  \vskip-0.108\paperheight
-  \includegraphics[width=.45\paperwidth, keepaspectratio=true]{graphics/MNF-logo.pdf}\newline
-  \upshape\sffamily\color{UTred}\fontsize{7}{10}\selectfont\textbf{Fachbereich Informatik} 
-  \end{minipage}% 
+  \vskip-0.104\paperheight
+  \includegraphics[width=.45\paperwidth, keepaspectratio=true]{graphics/UT-MNF-FBI-logo.pdf}
+  \end{minipage}%
+  %% Trajan + Arial
+  % \begin{minipage}[t]{0.5\textwidth}
+  % \setlength{\baselineskip}{11pt}
+  % \vskip-0.108\paperheight
+  % \includegraphics[width=.45\paperwidth, keepaspectratio=true]{graphics/UT-MNF-logo.pdf}\newline
+  % \upshape\sffamily\color{UTred}\fontsize{7}{10}\selectfont\textbf{Fachbereich Informatik}
+  % \end{minipage}%
 }
 
 \headlinelogo{%
@@ -1325,17 +1331,17 @@ numbers=noenddot,
 \titlegraphic{
   % \tikz\node[
   %   % circle,
-  %   rectangle,
-  %   rounded corners,
+  % rectangle,
+  % rounded corners,
   %   % draw,
-  %   text=black,
-  %   text width=10cm,
-  %   minimum height=5cm,
-  %   path picture={
-  %     \node at (path picture bounding box.center){
-  %       \includegraphics[width=3.5cm]{path/to/picture}
-  %     };
-  %   }]{};
+  % text=black,
+  % text width=10cm,
+  % minimum height=5cm,
+  % path picture={
+  % \node at (path picture bounding box.center){
+  % \includegraphics[width=3.5cm]{path/to/picture}
+  % };
+  % }]{};
 } % \color{UTgray}\rule{\textwidth}{35mm}
 #+END_SRC
 
