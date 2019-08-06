@@ -61,6 +61,9 @@ release_beamer:
 	rm beamer*
 	mv template-beamer.zip beamer-template.zip
 
+clean_beamer:
+	rm beamer*
+
 #-------------------------------------------------------------------------------
 
 HAUSARBEIT_FILES =  myMacros.tex references.bib \
@@ -97,17 +100,40 @@ release_jlm_article:
 	rm -fr jlm-article-template.org jlm.cls jlm.bst cc-by.pdf jlm-guidelines.pdf fonts
 
 test_jlm_article:
-	cp templates/jlm-article-template.org .
+	cp templates/jlm-article-template.tex .
 	cp templates/jlm/cc-by.pdf .
 	cp templates/jlm/jlm.cls .
 	cp templates/jlm/jlm.bst .
 	cp templates/jlm/jlm-guidelines.pdf .
 	cp templates/latexmkrc-xelatex latexmkrc
-	pandoc jlm-article-template.org jlm-article-template.tex 
 	latexmk -pdf hausarbeit-template.tex
 
 clean_jlm_article:
 	rm -fr jlm-article-template.org jlm.cls jlm.bst cc-by.pdf jlm-guidelines.pdf fonts
+
+#-------------------------------------------------------------------------------
+
+LANGSCI_PAPER_FILES =  myMacros.tex references.bib \
+	$(wildcard packages/*.sty) \
+	$(filter-out $(wildcard examples/poster*), $(filter-out $(wildcard examples/beamer*), $(wildcard examples/*.tex)))
+
+release_langsci_paper:
+	cp -r templates/langscibook/langsci .
+	cp templates/langsci-paper-template.org .
+	cp templates/langsci-paper-template.tex .
+	cp templates/latexmkrc-xelatex latexmkrc
+	zip -r langsci-paper-template.zip \
+    langsci-paper-template.org langsci-paper-template.tex langsci $(LANGSCI_PAPER_FILES)
+	rm -fr langsci langsci*
+
+test_langsci_paper:
+	cp -r templates/langscibook/langsci .
+	cp templates/langsci-paper-template.tex .
+	cp templates/latexmkrc-xelatex latexmkrc
+	latexmk -pdf langsci-paper-template.tex
+
+clean_langsci_paper:
+	rm -fr langsci langsci*
 
 #-------------------------------------------------------------------------------
 
@@ -131,5 +157,5 @@ release_poster:
 
 #-------------------------------------------------------------------------------
 
-release_all: release_abstract release_beamer release_hausarbeit release_poster release_jlm_article
+release_all: release_abstract release_beamer release_hausarbeit release_poster release_jlm_article release_langsci_paper
 
