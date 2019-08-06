@@ -203,26 +203,4 @@
 }
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%
-%   TEXTPOS SETTINGS    % 
-%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\usepackage{calc}
-\usepackage[absolute,overlay]{textpos}
-\setlength{\TPHorizModule}{1em}
-\setlength{\TPVertModule}{1ex}
-
-\newlength{\textposOriginH}
-\newlength{\textposOriginV}
-\setlength{\textposOriginH}{10mm}
-\setlength{\textposOriginV}{10mm}
-\textblockorigin{\textposOriginH}{\textposOriginV}
-
-\newcommand{\freeblock}[2]{
-  \begin{textblock}{0.1}(#1)
-  #2
-  \end{textblock}
-}
-
-
 \endinput
