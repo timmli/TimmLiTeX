@@ -1484,6 +1484,16 @@ numbers=noenddot,
 
 <<forest-settings>>
 
+\endinput
+#+END_SRC
+
+** textpos-settings.sty
+
+#+NAME: textpos-settings.sty
+#+BEGIN_SRC latex :noweb yes :tangle packages/textpos-settings.sty
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{textpos-settings}
+
 <<textpos-settings>>
 
 \endinput
