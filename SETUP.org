@@ -596,7 +596,7 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 ,#+DATE: 
 ,#+STARTUP: nohideblocks
 ,#+LANGUAGE: en
-,#+OPTIONS: H:5 num:t toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t ':t
+,#+OPTIONS: H:5 num:t title:nil toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t ':t
 ,#+OPTIONS: TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
 ,#+LATEX_CLASS: langscibook-paper
 ,#+LATEX_CLASS_OPTIONS: [output=paper,draftmode,modfonts,nonflat,nonewtxmath]
@@ -628,11 +628,11 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 ,#+END_EXPORT
 
 # =\abstract= must appear before =\maketitle=.
+# Therefore, we set =:title nil= and call =\maketitle= explicitely.
 ,#+LATEX:\abstract{
 Put abstract of the paper here.
 ,#+LATEX:}
 
-# This makes it necessary to empty =org-latex-title-command=.
 ,#+BEGIN_EXPORT latex
 \maketitle                      
 ,#+END_EXPORT
@@ -680,7 +680,6 @@ Remember to first add the class [[https://github.com/langsci/latex][langscibook]
 # Local variables:
 # coding: utf-8
 # org-latex-with-hyperref: nil
-# org-latex-title-command: ""
 # org-latex-prefer-user-labels: t
 # end:
 
