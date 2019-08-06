@@ -17,7 +17,7 @@
 #+LATEX_HEADER: \usepackage{amsmath}
 #+LATEX_HEADER: \usepackage{booktabs}
 #+LATEX_HEADER: \usepackage{packages/tikz-settings} % tikz, forest, etc.
-#+LATEX_HEADER: \input{myMacros}
+#+LATEX_HEADER: %\input{myMacros}
 #+LATEX_HEADER: \bibliography{references}
 :end: 
 # Eventually appears after \begin{document}.
