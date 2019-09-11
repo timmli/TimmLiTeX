@@ -1521,7 +1521,7 @@ numbers=noenddot,
   {\raggedright
     \renewcommand{\baselinestretch}{1.2}\selectfont
   {\bfseries\large\@title}\\[2ex]
-  {\large\@author}
+  {\large\@author}\\[2ex]
   }
 }
 \makeatother

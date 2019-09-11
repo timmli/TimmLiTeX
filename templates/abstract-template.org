@@ -23,7 +23,7 @@
 #+LATEX_HEADER:   {\raggedright
 #+LATEX_HEADER:     \renewcommand{\baselinestretch}{1.2}\selectfont
 #+LATEX_HEADER:   {\bfseries\large\@title}\\[2ex]
-#+LATEX_HEADER:   {\large\@author}
+#+LATEX_HEADER:   {\large\@author}\\[2ex]
 #+LATEX_HEADER:   }
 #+LATEX_HEADER: }
 #+LATEX_HEADER: \makeatother
