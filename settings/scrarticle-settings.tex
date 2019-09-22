@@ -22,7 +22,7 @@
 % quotes are indented at one side only.
 \renewenvironment{quote}
 {\list{}{\rightmargin0pt\leftmargin8mm}%{\rightmargin\leftmargin}%
-\item\relax}
+  \item\relax}
 {\endlist}
 
 
@@ -33,20 +33,20 @@
     % \itemindent    \listparindent
     % \rightmargin   \leftmargin
     \parsep        \z@ \@plus\p@}%
-\item\relax}
+  \item\relax}
 {\endlist}
 
 \renewcommand{\maketitle}{
   \thispagestyle{plain}
   {\raggedright
-    \ifdraft{\Large (Draft of \today, \currenttime)\par}{}%
-    {\huge\sffamily%
+    \ifdraft{\large (Draft of \today, \currenttime)\par}{}%
+    {\LARGE\sffamily%
       \ifx\@subject\empty\else{(\@subject) }\fi%
       \textbf{\@title}\\[2ex]\par}
     {\Large\@author \\}%
     \@ifundefined{@affiliation}{}
     { \vspace*{1ex}%
-      \large\@affiliation \\}}%
+      \Large\@affiliation \\}}%
 
   % \vspace*{\baselineskip}%
   % \ifx\@epigram\empty%
@@ -55,7 +55,7 @@
   % \fi%
   \vspace*{-3ex}
   \begin{quote}
-    \abstract
+  \abstract
   \end{quote}
 } 
 
