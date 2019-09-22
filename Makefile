@@ -39,6 +39,25 @@ release_abstract:
 
 #-------------------------------------------------------------------------------
 
+ARTICLE_FILES =  myMacros.tex references.bib \
+	settings/standard-settings.tex \
+  settings/scrarticle-settings.tex \
+	$(wildcard packages/*.sty) \
+	$(filter-out $(wildcard examples/poster*), $(filter-out $(wildcard examples/beamer*), $(wildcard examples/*.tex))) \
+	$(wildcard bst/biblatex-sp-unified/[^.]*)
+
+test_article:
+	cp templates/article-template.tex .
+	latexmk -pdf article-template.tex
+
+release_article:
+	cp templates/article-template.tex .
+	cp templates/article-template.org .
+	zip -r article-template.zip article-template.tex article-template.org $(ARTICLE_FILES) 
+	rm article-template.tex article-template.org
+
+#-------------------------------------------------------------------------------
+
 BEAMER_FILES =  myMacros.tex references.bib \
 	settings/beamer-settings.tex \
 	$(wildcard packages/*.sty) \
@@ -157,5 +176,5 @@ release_poster:
 
 #-------------------------------------------------------------------------------
 
-release_all: release_abstract release_beamer release_hausarbeit release_poster release_jlm_article release_langsci_paper
+release_all: release_abstract release_article release_beamer release_hausarbeit release_poster release_jlm_article release_langsci_paper
 
