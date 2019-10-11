@@ -237,6 +237,15 @@
       edge={/tikz/alert={#1}}}},
   only/.code args={<#1>}{% https://tex.stackexchange.com/a/417110/61499
     \alt<#1>{}{\pgfkeysalso{before typesetting nodes={remove}}}},
+  unify children/.style={
+    if nodewalk valid={1}{
+      l sep=5pt,
+      for children={l=0mm},
+      for nodewalk={1}{
+        for siblings={no edge},
+        edge={decorate, decoration={brace, amplitude=5pt}},
+        edge path'={(!u1.west |- .north) -- (!ul.east |- .north)}
+      }}{}}
 }
 
 
