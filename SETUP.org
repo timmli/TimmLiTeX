@@ -9,6 +9,7 @@
       - [[#beamer-template][Beamer template]]
       - [[#book-template][Book template]]
       - [[#langsci-template][LangSci template]]
+      - [[#jlm-template][JLM template]]
       - [[#hausarbeit-template][Hausarbeit template]]
       - [[#essay-template][Essay template]]
       - [[#poster-template][Poster template]]
@@ -20,6 +21,7 @@
       - [[#duesseldorf][Duesseldorf]]
 - [[#packages][Packages]]
       - [[#tikz-settingssty][tikz-settings.sty]]
+      - [[#textpos-settingssty][textpos-settings.sty]]
 - [[#bundled-settings][Bundled settings]]
       - [[#abstract-settings][Abstract settings]]
       - [[#article-settings][Article settings]]
@@ -53,9 +55,7 @@ In order to compile these templates, press =C-c C-v t= , or evaluate the followi
 (org-babel-tangle)
 #+END_SRC
 
-* TODO Document templates
-
-- [ ] add templates for org-mode
+* Document templates
 
 ** Abstract template
 
@@ -1356,20 +1356,8 @@ numbers=noenddot,
 }      
 
 \titlegraphic{
-  % \tikz\node[
-  %   % circle,
-  % rectangle,
-  % rounded corners,
-  %   % draw,
-  % text=black,
-  % text width=10cm,
-  % minimum height=5cm,
-  % path picture={
-  % \node at (path picture bounding box.center){
-  % \includegraphics[width=3.5cm]{path/to/picture}
-  % };
-  % }]{};
-} % \color{UTgray}\rule{\textwidth}{35mm}
+% TODO
+} 
 #+END_SRC
 
 ** Lustnau
