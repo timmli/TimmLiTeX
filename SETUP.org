@@ -1227,16 +1227,35 @@ numbers=noenddot,
   \setlength{\baselineskip}{11pt}
   % \vskip-0.08\paperheight
   \vskip0.042\paperheight
+  %% Title logo
   \inserttitlelogo
   \vskip-0.015\paperheight
   {\color{UTgold}\vhrulefill{0.2pt}}
   \vskip0.025\paperheight
+  %% Title graphic
   \begin{beamercolorbox}[wd=\textwidth,ht=0.375\paperheight]{titlegraphic}
+  %% Savebox for \titlegraphic
+  %% In order to be able to directly include tikzpictures 
+  \newsavebox\mytitlebox
+  \begin{lrbox}{\mytitlebox}
+  \begin{minipage}{\textwidth}
   {\inserttitlegraphic}
+  \end{minipage}
+  \end{lrbox}
+  %% Autocrop \titlegraphic  
+  \tikz\node[
+    minimum width=\textwidth,
+    minimum height=0.375\paperheight,
+    path picture={
+      \node at (path picture bounding box.center){
+        \usebox\mytitlebox
+      };
+    }]{};
   \end{beamercolorbox}
   \vskip-5pt
   {\color{UTred}\rule{\textwidth}{7pt}}
   \vskip0pt
+  %% Title, subtitle, author, date etc.
   {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par}%
   \vskip0.6ex
   {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle}
