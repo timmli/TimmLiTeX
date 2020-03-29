@@ -802,6 +802,7 @@ numbers=noenddot,
 \author{{\LARGE Max Mustermann} \\
 		\\
 		Matrikelnummer: 123456789\\
+		Studiengang: BSc Neue Ätherwissenschaften \\
 		\url{mustermann@uni-tuebingen.de}\\ 
 		Eberhard-Karls-Universität Tübingen\\}  
 \date{\ddmmyyyydate\today, \currenttime}
@@ -2589,10 +2590,12 @@ pdfkeywords={},%
 %   MISCELLANEOUS    % 
 %%%%%%%%%%%%%%%%%%%%%%
 
-\newcommand{\circled}[1]{\textcircled{\raisebox{-0.9pt}{#1}}}
-% \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
-%     \node[shape=circle,draw,inner sep=.15ex] (char) {#1};}}
-% \newcommand{\circled}[1]{\textcircled{\raisebox{-0.8pt}{\scalebox{0.8}{#1}}}}
+% \newcommand{\circled}[1]{\textcircled{\raisebox{-0.9pt}{#1}}}
+\DeclareRobustCommand\circled[1]{\tikz[baseline=(char.base)]{ % works better compared to \newcommand*
+    \node[shape=circle,draw,inner sep=.15ex] (char) {\small{#1}};}}
+% \usepackage{circledsteps}       % provides the macro \Circled; not included in TeXLive 2018
+% \newcommand{circled}[1]{\Circled{#1}}
+
 
 \newcommand{\prule}[3]{
       $\begin{array}{c} #1\\ \hline
