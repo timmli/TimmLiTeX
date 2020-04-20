@@ -55,7 +55,15 @@ In order to compile these templates, press =C-c C-v t= , or evaluate the followi
 (org-babel-tangle)
 #+END_SRC
 
-* Document templates
+* TODO Document templates
+:LOGBOOK:
+- State "TODO"       from              [2020-04-19 So 23:48]
+:END:
+
+- [ ] create repository for each template and import them as submodule in /templates
+      - These repositories are also included as submodules in projects so that changes are propagated in both directions.
+- [ ] tangle complete templates into the submodules in /templates
+      - Beamer themes don't have to be in the same directory: https://tex.stackexchange.com/a/214081/61499
 
 ** Abstract template
 
