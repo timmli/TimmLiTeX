@@ -1,0 +1,76 @@
+\mode<presentation>
+
+%% General settings
+
+\setbeamertemplate*{background}{}
+
+\setbeamerfont*{title}{size*={14}{16},series=\bfseries}
+\setbeamerfont*{subtitle}{size*={12}{15},series=\upshape}
+\setbeamerfont*{author}{size*={10}{12},series=\bfseries}
+\setbeamerfont*{date}{size*={10}{12},series=\bfseries}
+
+\setbeamertemplate{itemize item}{\color{black}$\bullet$}
+\setbeamertemplate{itemize subitem}{\color{black}--}
+\setbeamertemplate{itemize subsubitem}{\color{black}\tiny$\blacksquare$}
+
+\setbeamertemplate{blocks}[default]
+\setbeamerfont*{block title}{size=\normalsize}
+
+\setbeamertemplate{section in toc}[square]
+
+\setbeamertemplate{bibliography item}{\insertbiblabel}  % insert label from bib(la)tex
+\setbeamerfont{bibliography entry author}{size=\tiny}%
+\setbeamerfont{bibliography entry title}{size=\tiny}
+\setbeamerfont{bibliography entry journal}{size=\tiny}
+\setbeamerfont{bibliography entry note}{size=\tiny}
+
+%% Title page
+
+\defbeamertemplate*{title page}{Tuebingen}[1][t]
+{
+  \thispagestyle{empty}
+  \setlength{\baselineskip}{11pt}
+  % \vskip-0.08\paperheight
+  \vskip0.042\paperheight
+  %% Title logo
+  \inserttitlelogo
+  \vskip-0.015\paperheight
+  {\color{UTgold}\vhrulefill{0.2pt}}
+  \vskip0.025\paperheight
+  %% Title graphic
+  \begin{beamercolorbox}[wd=\textwidth,ht=0.375\paperheight]{titlegraphic}
+  %% Savebox for \titlegraphic
+  %% In order to be able to directly include tikzpictures 
+  \newsavebox\mytitlebox
+  \begin{lrbox}{\mytitlebox}
+  \begin{minipage}{\textwidth}
+  {\inserttitlegraphic}
+  \end{minipage}
+  \end{lrbox}
+  %% Autocrop \titlegraphic (inspired by https://tex.stackexchange.com/a/193558/61499)
+  \tikz\node[
+    minimum width=\textwidth,
+    minimum height=0.375\paperheight,
+    path picture={
+      \node at (path picture bounding box.center){
+        \usebox\mytitlebox
+      };
+    }]{};
+  \end{beamercolorbox}
+  \vskip-5pt
+  {\color{UTred}\rule{\textwidth}{7pt}}
+  \vskip0pt
+  %% Title, subtitle, author, date etc.
+  {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par}%
+  \vskip0.6ex
+  {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle}
+  \vskip0pt plus 1filll
+  \ifx\insertdate\@empty%
+  \else%
+  {\usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate}, %
+  \fi
+  {\usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor}%
+  \par
+}
+
+\mode<all>

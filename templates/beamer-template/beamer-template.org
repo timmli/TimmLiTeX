@@ -1,0 +1,111 @@
+#+TITLE: Beamer slides
+#+AUTHOR: John Doe
+#+SUBTITLE: Some subtitle
+:Settings:
+# #+DATE: 
+#+BEAMER_HEADER: %\date[]{}
+#+BEAMER_HEADER: %\institute[]{}
+#+BEAMER_HEADER: %\titlegraphic{\includegraphics[height=1cm]{path/to/picture}}	% on title slide
+#+FILETAGS: research
+#+LANGUAGE:  en
+#+OPTIONS:   H:2 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t ':t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+STARTUP: beamer
+#+STARTUP: hideblocks content
+#+LATEX_CLASS: beamer
+#+LATEX_CLASS_OPTIONS: [compress,xcolor=table,dvipsnames,10pt,aspectratio=43]  
+#+LATEX_COMPILER: pdflatex
+#+LATEX_HEADER: \input{beamer-template/beamer-settings.tex}
+#+LATEX_HEADER: \input{beamer-template/myMacros}
+#+LATEX_HEADER: \usepackage{beamer-template/themes/beamerthemeLustnau} % \usetheme{Lustnau}
+#+LATEX_HEADER: \input{beamer-template/themes/beamerlogosTuebingen}
+#+COLUMNS: %40ITEM %10TAGS %9BEAMER_act(Overlays) %4BEAMER_col(Col) %20BEAMER_opt(Options)
+:end:
+
+#+BEGIN_EXPORT latex
+%\selectlanguage{german} % select german language for babel package 
+
+\setlength{\Exlabelsep}{0em}		% for linguex examples
+\setlength{\SubExleftmargin}{1,5em}	% for linguex examples
+\renewcommand\eachwordone{\sffamily}	% for glossing with linguex
+\renewcommand\eachwordtwo{\sffamily}	% for glossing with linguex
+\setlength{\Extopsep}{0em}   % vertical margin in linguex examples
+
+\newcommand{\mypause}{\pause}
+
+% \renewcommand{\bsp}[1]{{\color{HHUblue}\itshape\bfseries #1}} % already defined in myMacros.tex
+\renewcommand{\bsp}[1]{{\usebeamercolor[bg!80]{block title example}\itshape\bfseries #1}}
+\newcommand{\term}[1]{{\color{UTblue}\scshape\bfseries #1}} 
+\newcommand{\bspcolor}[1]{{\color{UTlightgreen}\bfseries #1}}
+
+\AtBeginSection[]
+{
+ \begin{frame}{Outline} % add <beamer> to remove this from handouts
+   \tableofcontents[
+   currentsection
+   ]
+ \end{frame}
+}
+#+END_EXPORT
+
+* First section
+
+** First slide
+
+* References                                      :B_ignoreheading:
+:PROPERTIES:
+:BEAMER_env: ignoreheading
+:END:
+
+** References
+:PROPERTIES:
+:beamer_opt: allowframebreaks
+:END:
+
+\insertBib
+
+* COMMENT org-mode settings
+
+** DEPRECATED: Installation of =tl-beamer=
+
+The virtual LaTeX class =tl-beamer= has to be propagated to org-mode before export.
+
+#+BEGIN_SRC elisp :results output slient
+(add-to-list 'org-latex-classes
+         '("tl-beamer" 
+						"\\documentclass{beamer}
+						[NO-DEFAULT-PACKAGES]"
+            ("\\section{%s}" . "\\section*{%s}")
+            ("\\subsection{%s}" . "\\subsection*{%s}")
+            ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+            ("\\paragraph{%s}" . "\\paragraph*{%s}")
+            ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+#+END_SRC
+
+** Installation of special link types
+
+Link type for typesetting linguistic examples:
+
+#+BEGIN_SRC emacs-lisp
+(org-link-set-parameters
+ "bsp"
+ :follow (lambda (path) (message "You clicked me."))
+ :export (lambda (path desc backend)
+           (cond
+            ((eq backend 'latex)								
+						 (format "{\\bsp{%s}}" (or desc path)))
+						((eq 'html backend)
+             (format "<font color=\"blue\">%s</font>"
+                     (or desc path)))))
+ :face '(:foreground "CornflowerBlue"	:slant italic	:weight bold		)
+ :help-echo "This will be exported as example."
+ )
+#+END_SRC
+
+** Local Variables
+
+# Local variables:
+# coding: utf-8
+# org-latex-with-hyperref: t
+# org-latex-listings: listings
+# end:

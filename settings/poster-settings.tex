@@ -16,7 +16,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%
 %   BIBLATEX SETTINGS  % 
 %%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\mycitestyle}{bst/biblatex-sp-unified/cbx/sp-authoryear-comp}
 \makeatletter
 \@ifclassloaded{beamer}{\renewcommand{\mycitestyle}{numeric-comp}}{}
 \@ifclassloaded{tikzposter}{\renewcommand{\mycitestyle}{numeric-comp}}{}
@@ -24,7 +23,7 @@
 
 \usepackage[
   natbib=true,
-  style=bst/biblatex-sp-unified/bbx/biblatex-sp-unified,
+  style=\mystyle,
   citestyle=\mycitestyle,
   %refsection=chapter,
   maxbibnames=99,

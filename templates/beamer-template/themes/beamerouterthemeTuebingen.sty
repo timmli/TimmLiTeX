@@ -1,0 +1,46 @@
+\mode<presentation>
+
+% Frame title
+\setbeamercolor{frametitle}{fg=black}
+\setbeamerfont{frametitle}{size=\large,series=\bfseries}
+% \setbeamerfont{footline}{size=\tiny}
+\defbeamertemplate*{frametitle}{Tuebingen}[1][]
+{
+  \vspace*{2mm}
+  \usebeamerfont{frametitle}\insertframetitle
+  \vspace*{-1.5mm}
+}
+
+\setbeamertemplate{navigation symbols}{}
+\defbeamertemplate*{sidebar}{Tuebingen}{}
+  
+\defbeamertemplate*{headline}{Tuebingen} %headline format
+{
+  \vspace*{2.5mm}
+  \begin{beamercolorbox}[wd=\paperwidth,leftskip=1.01cm,rightskip=1.01cm]
+  {headline}
+  \hspace*{0mm}
+  \insertheadlinelogo
+  \par
+  \vspace*{0.3mm}
+  {\color{UTgold}\vhrulefill{0.2pt}}
+  \end{beamercolorbox}
+}
+
+\setbeamerfont{footline}{size=\tiny}
+\defbeamertemplate*{footline}{Tuebingen} %footline format
+{
+  \begin{beamercolorbox}[wd=\paperwidth,leftskip=1cm,rightskip=1cm]
+  {footline} 
+  {\color{UTred}\vhrulefill{0.2pt}}
+  \end{beamercolorbox} \begin{beamercolorbox}[wd=\paperwidth,leftskip=1cm,rightskip=1cm,ht=0.37cm,dp=0.25cm]{footline} 
+  ~\insertframenumber{} | \insertshortauthor\insertshortinstitute, \insertshorttitle%
+  \ifx\insertdate\@empty%
+  \else%
+  , \insertshortdate
+  \fi
+  % \fussnote \hfill \crtext \hspace*{20mm}
+  \end{beamercolorbox}
+}
+
+\mode<all>

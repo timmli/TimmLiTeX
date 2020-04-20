@@ -297,7 +297,7 @@ This is an abstract: \lipsum[1]
 ** Beamer template
 
 #+NAME: beamer-template-org
-#+BEGIN_SRC org :noweb yes :tangle templates/beamer-template.org
+#+BEGIN_SRC org :noweb yes :tangle templates/beamer-template/beamer-template.org
 ,#+TITLE: Beamer slides
 ,#+AUTHOR: John Doe
 ,#+SUBTITLE: Some subtitle
@@ -316,9 +316,9 @@ This is an abstract: \lipsum[1]
 ,#+LATEX_CLASS_OPTIONS: <<beamer-options-org>> 
 ,#+LATEX_COMPILER: pdflatex
 ,#+LATEX_HEADER: <<beamer-settings>>
-,#+LATEX_HEADER: \input{myMacros}
-,#+LATEX_HEADER: \usetheme{Lustnau}
-,#+LATEX_HEADER: \input{beamerlogosTuebingen}
+,#+LATEX_HEADER: \input{beamer-template/myMacros}
+,#+LATEX_HEADER: \usepackage{beamer-template/themes/beamerthemeLustnau} % \usetheme{Lustnau}
+,#+LATEX_HEADER: \input{beamer-template/themes/beamerlogosTuebingen}
 ,#+COLUMNS: %40ITEM %10TAGS %9BEAMER_act(Overlays) %4BEAMER_col(Col) %20BEAMER_opt(Options)
 :end:
 
@@ -415,7 +415,7 @@ Link type for typesetting linguistic examples:
 In order to position the =\maketitle= command manually, you need to add =# org-latex-title-command: ""= to the local variables.
 
 #+NAME: beamer-template-tex
-#+BEGIN_SRC latex :noweb yes :tangle templates/beamer-template.tex
+#+BEGIN_SRC latex :noweb yes :tangle templates/beamer-template/beamer-template.tex
 % -*- coding: utf-8 -*-
 
 \documentclass[
@@ -490,11 +490,11 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 \begin{frame}
   \frametitle{About the template}
   
-\input{examples/README.tex}
+\input{beamer-template/examples/README.tex}
   
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\input{examples/beamer-examples.tex}
+\input{beamer-template/examples/beamer-examples.tex}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \begin{frame}[plain,allowframebreaks]
 \frametitle{}
@@ -528,7 +528,7 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 %   Macros   % 
 %%%%%%%%%%%%%%
 
-\input{myMacros}   % the content of myMacros.tex goes here
+\input{beamer-template/myMacros}   % the content of myMacros.tex goes here
 
 <<book-body>>
 #+END_SRC
@@ -1111,18 +1111,18 @@ numbers=noenddot,
 
 #+NAME: beamer-theme-settings
 #+BEGIN_SRC latex :noweb yes
-\usetheme{Lustnau}  
-% \usetheme{Tuebingen}
-\input{beamerlogosTuebingen.tex}
+\usepackage{beamer-template/themes/beamerthemeLustnau} % \usetheme{Lustnau}  
+% \usepackage{beamer-template/themes/beamerthemeTuebingen} % \usetheme{Tuebingen}
+\input{beamer-template/themes/beamerlogosTuebingen.tex}
 
-% \usetheme{Duesseldorf}
-% \input{beamerlogosDuesseldorf.tex}
+% \usepackage{beamer-template/themes/beamerthemeDuesseldorf} % \usetheme{Duesseldorf}
+% \input{beamer-template/themes/beamerlogosDuesseldorf.tex}
 #+END_SRC
 
 ** Tuebingen
 
 #+NAME: beamerthemeTuebingen.sty
-#+BEGIN_SRC latex :noweb yes :tangle themes/beamerthemeTuebingen.sty
+#+BEGIN_SRC latex :noweb yes :tangle templates/beamer-template/themes/beamerthemeTuebingen.sty
 \mode<presentation>
 
 %% Requirement
@@ -1154,7 +1154,7 @@ numbers=noenddot,
 #+END_SRC
 
 #+NAME: beamercolorthemeTuebingen.sty
-#+BEGIN_SRC latex :noweb yes :tangle themes/beamercolorthemeTuebingen.sty
+#+BEGIN_SRC latex :noweb yes :tangle templates/beamer-template/themes/beamercolorthemeTuebingen.sty
 \mode<presentation>
 
 \definecolor{UTred}{RGB}{165,30,55} 
@@ -1201,7 +1201,7 @@ numbers=noenddot,
 #+END_SRC
 
 #+NAME: beamerinnerthemeTuebingen.sty
-#+BEGIN_SRC latex :noweb yes :tangle themes/beamerinnerthemeTuebingen.sty
+#+BEGIN_SRC latex :noweb yes :tangle templates/beamer-template/themes/beamerinnerthemeTuebingen.sty
 \mode<presentation>
 
 %% General settings
@@ -1281,7 +1281,7 @@ numbers=noenddot,
 #+END_SRC
 
 #+NAME: beamerouterthemeTuebingen.sty
-#+BEGIN_SRC latex :noweb yes :tangle themes/beamerouterthemeTuebingen.sty
+#+BEGIN_SRC latex :noweb yes :tangle templates/beamer-template/themes/beamerouterthemeTuebingen.sty
 \mode<presentation>
 
 % Frame title
@@ -1331,7 +1331,7 @@ numbers=noenddot,
 #+END_SRC
 
 #+NAME: beamerlogosTuebingen.tex
-#+BEGIN_SRC latex :noweb yes :tangle themes/beamerlogosTuebingen.tex
+#+BEGIN_SRC latex :noweb yes :tangle templates/beamer-template/themes/beamerlogosTuebingen.tex
 \titlelogo{%
   \includegraphics[width=3.967cm, keepaspectratio=true]{graphics/UT-logo.pdf}
   \hskip0.4cm 
@@ -1372,7 +1372,7 @@ numbers=noenddot,
 ** Lustnau
 
 #+NAME: beamerthemeLustnau.sty
-#+BEGIN_SRC latex :noweb yes :tangle themes/beamerthemeLustnau.sty
+#+BEGIN_SRC latex :noweb yes :tangle templates/beamer-template/themes/beamerthemeLustnau.sty
 \mode<presentation>
 
 \usetheme{Tuebingen}
@@ -1419,7 +1419,7 @@ numbers=noenddot,
 ** Duesseldorf
 
 #+NAME: beamerthemeDuesseldorf.sty
-#+BEGIN_SRC latex :noweb yes :tangle themes/beamerthemeDuesseldorf.sty
+#+BEGIN_SRC latex :noweb yes :tangle templates/beamer-template/themes/beamerthemeDuesseldorf.sty
 \mode<presentation>
 
 \usepackage{libertine} % libertine tends to cause problems, e.g. when using tipa
@@ -1492,7 +1492,7 @@ numbers=noenddot,
 #+END_SRC
 
 #+NAME: beamerlogosDuesseldorf.tex
-#+BEGIN_SRC latex :noweb yes :tangle themes/beamerlogosDuesseldorf.tex
+#+BEGIN_SRC latex :noweb yes :tangle templates/beamer-template/themes/beamerlogosDuesseldorf.tex
 \titlegraphic{\includegraphics[height=1cm]{graphics/sfb-logo-quer} \hfil \includegraphics[height=1cm]{graphics/hhu-logo}}
 #+END_SRC
 
@@ -1591,10 +1591,10 @@ aspectratio=43,
 
 #+NAME: beamer-settings
 #+BEGIN_SRC latex
-\input{settings/beamer-settings.tex}
+\input{beamer-template/beamer-settings.tex}
 #+END_SRC
 
-#+BEGIN_SRC latex :noweb yes :tangle settings/beamer-settings.tex
+#+BEGIN_SRC latex :noweb yes :tangle templates/beamer-template/beamer-settings.tex
 <<pdflatex-settings>>
 
 \usepackage{etex} 
@@ -1629,6 +1629,8 @@ aspectratio=43,
 %% Bibliography
 
 %% BibLaTeX
+\newcommand{\mycitestyle}{beamer-template/bst/biblatex-sp-unified/cbx/sp-authoryear-comp}
+\newcommand{\mystyle}{beamer-template/bst/biblatex-sp-unified/bbx/biblatex-sp-unified}
 <<biblatex-settings>>
 
 %% BibTeX 
@@ -1909,19 +1911,6 @@ numbers=noenddot,
 
 #+END_SRC
 
-*** COMMENT Old stuff
-
-Draw horizontal edges between adjacent siblings:
-
-#+BEGIN_SRC latex
-  </.style={ % draw horizontal line to predecessor
-    no edge,
-    before drawing tree={tikz+={\draw[dashed](!)--(!p);}}},
-  >/.style={ % draw horizontal line to successor
-    no edge,
-    before drawing tree={tikz+={\draw[dashed](!)--(!n);}}},
-#+END_SRC
-
 ** AVM
 
 #+NAME: avm-settings
@@ -1930,7 +1919,7 @@ Draw horizontal edges between adjacent siblings:
 %   AVM SETTINGS     % 
 %%%%%%%%%%%%%%%%%%%%%%
 
-\usepackage{packages/avm}
+\usepackage{beamer-template/packages/avm}
 
 \avmoptions{center,topright}  % topright determines the position of \osort
 \avmfont{\scshape}
@@ -1963,7 +1952,6 @@ Draw horizontal edges between adjacent siblings:
 %%%%%%%%%%%%%%%%%%%%%%%%
 %   BIBLATEX SETTINGS  % 
 %%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\mycitestyle}{bst/biblatex-sp-unified/cbx/sp-authoryear-comp}
 \makeatletter
 \@ifclassloaded{beamer}{\renewcommand{\mycitestyle}{numeric-comp}}{}
 \@ifclassloaded{tikzposter}{\renewcommand{\mycitestyle}{numeric-comp}}{}
@@ -1971,7 +1959,7 @@ Draw horizontal edges between adjacent siblings:
 
 \usepackage[
   natbib=true,
-  style=bst/biblatex-sp-unified/bbx/biblatex-sp-unified,
+  style=\mystyle,
   citestyle=\mycitestyle,
   %refsection=chapter,
   maxbibnames=99,
@@ -2536,8 +2524,12 @@ pdfkeywords={},%
 
 * Macros
 
+#+BEGIN_SRC latex :tangle templates/beamer-template/myMacros.tex
+<<myMacros.tex>>
+#+END_SRC
+
 #+NAME: myMacros.tex
-#+BEGIN_SRC latex :noweb yes :tangle myMacros.tex
+#+BEGIN_SRC latex :noweb yes
 %%%%%%%%%%%%%%%%%%%%%%
 %   TODONOTES        % 
 %%%%%%%%%%%%%%%%%%%%%%
