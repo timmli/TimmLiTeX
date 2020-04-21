@@ -430,7 +430,7 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 %    CUSTOM MACROS     %
 %%%%%%%%%%%%%%%%%%%%%%%% 
 
-\input{myMacros}
+\input{beamer-template/myMacros}
 \definecolor{myblue}{rgb}{0,0,0.70}
 \definecolor{myred}{rgb}{0.8,0,0}
 \definecolor{mydarkgreen}{rgb}{0,0.55,0}
@@ -487,14 +487,7 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 %}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-  \frametitle{About the template}
-  
-\input{beamer-template/examples/README.tex}
-  
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\input{beamer-template/examples/beamer-examples.tex}
+\input{beamer-template/beamer-examples.tex}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \begin{frame}[plain,allowframebreaks]
 \frametitle{}
@@ -528,7 +521,7 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 %   Macros   % 
 %%%%%%%%%%%%%%
 
-\input{beamer-template/myMacros}   % the content of myMacros.tex goes here
+\input{myMacros}   % the content of myMacros.tex goes here
 
 <<book-body>>
 #+END_SRC
@@ -1107,16 +1100,18 @@ numbers=noenddot,
 
 * Beamer themes
 
+Local Beamer themes are executed relative to the directory of the master file. Therefore, in order to avoid the use of specific relative paths in the code of the themes, they must later be put in the same directory as the master file.
+
 ** Theme settings
 
 #+NAME: beamer-theme-settings
 #+BEGIN_SRC latex :noweb yes
-\usepackage{beamer-template/themes/beamerthemeLustnau} % \usetheme{Lustnau}  
-% \usepackage{beamer-template/themes/beamerthemeTuebingen} % \usetheme{Tuebingen}
-\input{beamer-template/themes/beamerlogosTuebingen.tex}
+\usetheme{Lustnau}  
+% \usetheme{Tuebingen}
+\input{beamerlogosTuebingen.tex}
 
-% \usepackage{beamer-template/themes/beamerthemeDuesseldorf} % \usetheme{Duesseldorf}
-% \input{beamer-template/themes/beamerlogosDuesseldorf.tex}
+% \usetheme{Duesseldorf}
+% \input{beamerlogosDuesseldorf.tex}
 #+END_SRC
 
 ** Tuebingen
@@ -1333,35 +1328,35 @@ numbers=noenddot,
 #+NAME: beamerlogosTuebingen.tex
 #+BEGIN_SRC latex :noweb yes :tangle templates/beamer-template/themes/beamerlogosTuebingen.tex
 \titlelogo{%
-  \includegraphics[width=3.967cm, keepaspectratio=true]{graphics/UT-logo.pdf}
+  \includegraphics[width=3.967cm, keepaspectratio=true]{beamer-template/graphics/UT-logo.pdf}
   \hskip0.4cm 
   %% Trajan
   \begin{minipage}[t]{0.5\textwidth}
   \vskip-0.95cm
-  \includegraphics[width=5.75cm, keepaspectratio=true]{graphics/UT-MNF-FBI-logo.pdf}
+  \includegraphics[width=5.75cm, keepaspectratio=true]{beamer-template/graphics/UT-MNF-FBI-logo.pdf}
   \end{minipage}%
 }
 
 %% Old version with relative measures
 % \titlelogo{%
-% \includegraphics[width=.31\paperwidth, keepaspectratio=true]{graphics/UT-logo.pdf}
+% \includegraphics[width=.31\paperwidth, keepaspectratio=true]{beamer-template/graphics/UT-logo.pdf}
 % \hskip0.4cm 
 %   %% Trajan
 % \begin{minipage}[t]{0.5\textwidth}
 % \vskip-0.104\paperheight
-% \includegraphics[width=.45\paperwidth, keepaspectratio=true]{graphics/UT-MNF-FBI-logo.pdf}
+% \includegraphics[width=.45\paperwidth, keepaspectratio=true]{beamer-template/graphics/UT-MNF-FBI-logo.pdf}
 % \end{minipage}%
 %   %% Trajan + Arial
 %   % \begin{minipage}[t]{0.5\textwidth}
 %   % \setlength{\baselineskip}{11pt}
 %   % \vskip-0.108\paperheight
-%   % \includegraphics[width=.45\paperwidth, keepaspectratio=true]{graphics/UT-MNF-logo.pdf}\newline
+%   % \includegraphics[width=.45\paperwidth, keepaspectratio=true]{beamer-template/graphics/UT-MNF-logo.pdf}\newline
 %   % \upshape\sffamily\color{UTred}\fontsize{7}{10}\selectfont\textbf{Fachbereich Informatik}
 %   % \end{minipage}%
 % }
 
 \headlinelogo{%
-  \includegraphics[width=2.52cm, keepaspectratio=true]{graphics/UT-logo.pdf}
+  \includegraphics[width=2.52cm, keepaspectratio=true]{beamer-template/graphics/UT-logo.pdf}
 }      
 
 \titlegraphic{
@@ -2524,7 +2519,7 @@ pdfkeywords={},%
 
 * Macros
 
-#+BEGIN_SRC latex :tangle templates/beamer-template/myMacros.tex
+#+BEGIN_SRC latex :noweb yes :tangle templates/beamer-template/myMacros.tex
 <<myMacros.tex>>
 #+END_SRC
 
@@ -2637,7 +2632,452 @@ pdfkeywords={},%
 - State "TODO"       from              [2017-08-16 Mi 17:34]
 :END:
 
-- [ ] Move example here.
+** README
+
+#+NAME: readme
+#+BEGIN_SRC latex
+More \LaTeX{} templates on \url{https://github.com/timmli/latex-templates}.
+#+END_SRC
+
+** AVM
+
+#+NAME: example-avms
+#+BEGIN_SRC latex
+\begin{avm}
+  \@0\[\asort{eating}
+    actor & \@1 \\ 
+    theme & \@2 \]
+\end{avm}
+
+\medskip
+
+\noindent $\Rightarrow$ \url{http://nlp.stanford.edu/manning/tex/avm-doc.pdf}
+#+END_SRC
+
+** Beamer
+
+#+NAME: beamer-examples
+#+BEGIN_SRC latex :noweb yes :tangle templates/beamer-template/beamer-examples.tex
+\begin{frame}
+  \frametitle{About the template}
+  
+<<readme>>
+  
+\end{frame}
+
+<<example-beamer-frames>>
+<<example-beamer-blocks>>
+<<example-beamer-overlays>>
+<<example-beamer-columns>>
+
+\begin{frame}
+\frametitle{Citation}
+<<example-citations>>
+\end{frame}
+
+\begin{frame}
+\frametitle{Linguistic examples}
+<<example-linguistic-examples>>
+\end{frame}
+
+\begin{frame}
+\frametitle{Trees}
+<<example-trees>>
+\end{frame}
+
+\begin{frame}
+\frametitle{AVM}
+<<example-avms>>
+\end{frame}
+
+% \begin{frame}
+% \frametitle{IPA symbols}
+% \input{examples/ipa.tex}
+% \end{frame}
+
+\begin{frame}
+\frametitle{Formulae}
+<<example-formulae>>
+\end{frame}
+
+\begin{frame}
+\frametitle{Tables}
+<<example-tables>>
+\end{frame}
+#+END_SRC
+
+#+NAME: example-beamer-blocks
+#+BEGIN_SRC latex
+\begin{frame}
+  \frametitle{Blocks}
+
+  \begin{block}{Title of a block}		% Titles may be left blank!
+    Body of a block
+  \end{block}
+
+  \begin{exampleblock}{Title of an exampleblock}
+    Body of an exampleblock
+  \end{exampleblock}
+
+  \begin{alertblock}{Title of an alertblock}
+    Body of an alertblock
+  \end{alertblock}
+  
+\end{frame}
+#+END_SRC
+
+#+NAME: example-beamer-columns
+#+BEGIN_SRC latex
+\begin{frame}
+  \frametitle{Columns}
+
+  \begin{columns}
+    \column{.55\textwidth}
+    First column
+		\pgfimage[width=\textwidth]{graphics/hhu-logo-hres}
+    \column{.45\textwidth}
+		Second column
+    \begin{enumerate}
+    \item bla
+    \item blupp
+    \end{enumerate}
+  \end{columns}
+
+\end{frame}
+#+END_SRC
+
+#+NAME: example-beamer-frames
+#+BEGIN_SRC latex
+\begin{frame}[label=frameoptions]
+\frametitle{The frame environment}
+
+  \hspace{-1em}{\tt $\backslash$begin\{frame\}[OVERLAY OPTION][OPTIONS]\{Title\}\{Subtitle\}}
+
+  \bigskip
+
+  {\bf OVERLAY OPTION:}
+  \begin{itemize}
+  \item {\tt <+->} 
+  \end{itemize}
+
+  \bigskip
+
+  {\bf OPTIONS:}
+  \begin{itemize}
+  \item {\tt b,c,t}: frame orientation
+  \item {\tt squeeze}: minimizes vertical margins
+  \item {\tt plain}: suppresses title, header and sidebar
+  \item {\tt label=name}: makes a frame reusable with {\tt $\backslash$againframe\{name\}} and can be used with hyperlinks.
+  \item {\tt allowframebreaks}: spread frame content over several slides 
+  \end{itemize}
+
+  \vfill 
+
+  Hyperlink: \hyperlink{frameoptions}{\beamerbutton{The frame environment}}
+
+\end{frame}
+#+END_SRC
+
+#+NAME: example-beamer-overlays
+#+BEGIN_SRC latex
+\begin{frame}
+  \frametitle{Overlays}
+  {\small 
+
+    Explicit specification of overlays:
+    \begin{itemize}
+    \item \color<2>{red}{Changing colors ...}
+    \item \alert<3>{Alert mode ...} 
+    \item \textbf<4>{Changing the font face ...}
+    \item \only<-5>{Changing existence ...} 
+    \item \visible<-6>{Changing visability ...}
+    \item \uncover<7->{Uncovering from grey ...}
+    \item \alt<8>{Specifying alternations ...}{... in one instruction}
+    \end{itemize}
+
+    \vfill
+    {\tt $\backslash$pause[<number>]} separates two overlays.
+
+    \vfill
+    Overlays in list environments:
+    \begin{itemize}
+    \item<9-> First item
+    \item<alert@10> Second item with alert
+    \item Alternatively, list environments can have an overlay option such as {\tt <+-> } or {\tt <+- alert@ +>}.
+    \end{itemize}
+
+    \vfill
+    Remember that you can declare overlays in the frame options.
+    \hyperlink{frameoptions}{\beamerbutton{The frame environment}}
+
+  }
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Overlays in Forest trees}
+
+%% This example may cause problems together with TeX Live 2016
+% \Forest{
+%   [,phantom
+%     [S,only=<+> [NP [N [I,lex]]]]
+%     [S,only=<+>,--> [NP [N [I,lex]]]]
+%     [S,only=<1-.> [V [wrote,lex]]]
+%     [S,only=<+>
+%       [NP [N [I,lex]]]
+%       [V [wrote,lex]]]
+%     [S,only=<+>,-->
+%       [NP [N [I,lex]]]
+%       [V [wrote,lex]]]
+%     [S,only=<1-.> [NP [D [a,lex]]]]
+%     [S,only=<+>
+%       [NP [N [I,lex]]]
+%       [V [wrote,lex]]
+%       [NP [D [a,lex]]]]
+%     [S,only=<+>,-->
+%       [NP [N [I,lex]]]
+%       [V [wrote,lex]]
+%       [NP,--> [D [a,lex]]]]
+%     [S,only=<1-.> [NP [N [novel,lex]]]]
+%     [S,only=<+>
+%       [NP [N [I,lex]]]
+%       [V [wrote,lex]]
+%       [NP
+%         [D [a,lex]]
+%         [N [novel,lex]]]]
+%     [S,only=<+->,alert=<.>,c=0
+%       [NP,c=1 [N [I,lex]]]
+%       [V [wrote,lex]]
+%       [NP,c=2
+%         [D [a,lex]]
+%         [N [novel,lex]]]] 
+%     ]
+%   }
+\end{frame}
+#+END_SRC
+
+** Citations
+
+#+NAME: example-citations
+#+BEGIN_SRC latex
+Example for invoking citations: \cite{Bech:63}, \citet[291]{Bech:63}, \citep{Bech:63}, \citealt{Bech:63}
+
+References are stored in \texttt{references.bib}.
+#+END_SRC
+
+** Linguistics
+
+#+NAME: example-linguistic-examples
+#+BEGIN_SRC latex
+\ex. This is a simple example.
+
+\exg. [Noch am Boden liegend$_i$], sei [auf ihn$_i$] eingetreten worden.\\
+still on.the floor lying be on him PART.kicked got\\
+`While he was still on the floor he was kicked.'\\
+(Cf. (422) in \citealt{Mueller:02})
+
+\noindent $\Rightarrow$ \url{http://texdoc.net/texmf-dist/doc/latex/linguex/linguex-doc.pdf} \\
+Note the Leipzig glossing rules: \url{http://www.eva.mpg.de/lingua/resources/glossing-rules.php}
+#+END_SRC
+
+#+NAME: example-ipa
+#+BEGIN_SRC latex
+\ex. \textipa{[""Ekspl@"neIS@n]}
+
+$\Rightarrow$ \url{http://en.wikibooks.org/wiki/LaTeX/Linguistics#IPA_characters}
+#+END_SRC
+
+** Formulae
+
+#+NAME: example-formulae
+#+BEGIN_SRC latex
+Formulae in texts: $a^2 + b^2 = c^2$
+
+\noindent Formulae in equation environment:
+\begin{equation}
+a^2 + b^2 = c^2
+\end{equation}
+$\Rightarrow$ \url{http://en.wikibooks.org/wiki/LaTeX/Mathematics}
+#+END_SRC
+
+** Examples for texts
+
+#+NAME: text-examples
+#+BEGIN_SRC latex
+\section{Citation}
+
+<<example-citations>>
+
+\section{Linguistic examples}
+
+<<example-linguistic-examples>>
+
+\section{Trees}
+
+<<example-trees>>
+
+\section{AVM}
+
+<<example-avms>>
+
+\section{IPA symbols}
+
+<<example-ipa>>
+
+\section{Formulae}
+
+<<examples-formula>>
+
+\section{Tables}
+
+<<examples-tables>>
+#+END_SRC
+
+** Poster
+
+#+NAME: example-poster-notes
+#+BEGIN_SRC latex
+\note{Note with default behavior}
+\note[targetoffsetx=12cm, targetoffsety=-1cm, angle=20, rotate=25]{Note \\ offset and rotated}
+\note[targetoffsetx=-10cm, targetoffsety=1cm, angle=-10, connection=true]{Connected note}
+#+END_SRC
+
+** TikZ
+
+#+NAME: example-standalone-tikz
+#+BEGIN_SRC latex
+\documentclass[
+	%pstricks=true
+	,crop=true
+	,varwidth=\maxdimen
+	]{standalone}
+
+\input{settings/pdflatex_setup.tex}
+\input{settings/tikz_setup.tex}
+\input{settings/forest_setup.tex}
+\input{settings/avm_setup.tex}
+
+\begin{document}
+
+\begin{forest}
+[,phantom,s sep=2em
+  [NP,name=peter,tier=1 [\textit{Peter}]]
+  %%%%%%%%%%%%%%%%%
+  [VP,name=easily_r,tier=1
+    [ADV [\textit{easily}]]
+    [VP*,name=easily_f]]
+  %%%%%%%%%%%%%%%%%
+  [S
+    [NP,name=rep_np1]
+    [VP,name=rep_vp,tier=1  
+      [V [\textit{repaired}]]
+      [NP,name=rep_np2,tier=2]]]
+  %%%%%%%%%%%%%%%%%
+  [NP,name=fridge,tier=2 [\textit{the fridge},triangle]]
+]
+\draw[->,dashed,thick,draw=gray, bend angle=25, bend left] (peter) to (rep_np1);
+\draw[->,dashed,thick,draw=gray, bend angle=10, bend right,shorten >=-0.6em] (easily_f) to (rep_vp.south west);
+\draw[->,dashed,thick,draw=gray, bend angle=25, bend right] (fridge) to (rep_np2);
+\end{forest}
+
+\end{document}
+#+END_SRC
+
+** Tables
+
+#+NAME: example-tables
+#+BEGIN_SRC latex
+\begin{tabular}{c|c|c}
+\hline
+cell 11 & cell 12 & cell 13 \\
+\hline
+cell 21 & cell 22 & cell 23 \\
+\hline
+\end{tabular}
+#+END_SRC
+
+** Trees
+
+#+NAME: example-trees
+#+BEGIN_SRC latex
+% \Forest{
+%   [S [NP] 
+%     [VP [V  [\textit{eats}] ]
+%       [NP] ]]
+% }
+
+%% This example may cause problems together with TeX Live 2016
+% \Forest{
+%   [,phantom
+%     [S,--> [NP,--> [D [the]]]]
+%     [S,--> [NP,--> [A [absent]]]]
+%     [S, [NP [N [student]]]]
+%     ]
+% } 
+
+\Forest{
+  [,phantom
+    [S,name=root,red subtree
+      [AUX [\textit{does}] ]
+      [S
+        [NP]
+        [VP,name=vp[V [\textit{say}]] [S*]]]]
+    [S,Xs=10cm,Ys=5cm
+      [NP]
+      [S,name=s
+        [NP [$\varepsilon$] ]
+        [VP 
+          [VP [V [\textit{walks}]]] 
+          [PP]]]]
+    ]
+  \draw[->,gray,thick,dashed,bend right=10](vp)to(s);
+}
+
+\noindent $\Rightarrow$ \url{http://mirrors.ctan.org/graphics/pgf/contrib/forest/forest-doc.pdf}
+#+END_SRC
+
+
+* Makefile
+
+** Beamer
+
+#+NAME: beamer-makefile
+#+BEGIN_SRC bash :noweb yes :tangle templates/beamer-template/Makefile
+SHELL := /bin/bash
+
+BEAMER_FILES =  myMacros.tex references.bib \
+	beamer-settings.tex \
+	$(wildcard packages/*.sty) \
+	beamer-examples.tex \
+	$(wildcard bst/biblatex-sp-unified/[^.]*) \
+	$(wildcard graphics/*.pdf) 
+
+test_beamer:
+	cp beamer-template.tex ..
+	cp themes/beamer* ..
+	cp latexmkrc ..
+	cd ..; \
+			latexmk -pdf beamer-template.tex
+
+			# release_beamer:
+			# 	cp templates/beamer-template.tex .
+			# 	cp themes/beamer* .
+			# 	zip -r template-beamer.zip beamer* $(BEAMER_FILES) 
+			# 	rm beamer*
+			# 	mv template-beamer.zip beamer-template.zip
+
+			# clean_beamer:
+			# 	rm beamer*
+#+END_SRC
+
+* latexmk
+
+** Beamer
+
+#+NAME: beamer-latexmk
+#+BEGIN_SRC shell :noweb yes :tangle templates/beamer-template/latexmkrc 
+$pdflatex = 'pdflatex %O %S';
+#+END_SRC
 
 * Local variables
 
