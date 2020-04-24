@@ -7,3 +7,6 @@
 [submodule "templates/beamer-template"]
 	path = templates/beamer-template
 	url = https://github.com/timmli/beamer-template.git
+[submodule "templates/poster-template"]
+	path = templates/poster-template
+	url = https://github.com/timmli/poster-template.git
