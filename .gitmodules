@@ -4,3 +4,6 @@
 [submodule "templates/langscibook"]
 	path = templates/langscibook
 	url = https://github.com/langsci/langscibook.git
+[submodule "templates/beamer-template"]
+	path = templates/beamer-template
+	url = https://github.com/timmli/beamer-template.git
