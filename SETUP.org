@@ -2627,12 +2627,9 @@ pdfkeywords={},%
   \enlargethispage{#1\baselineskip}}
 #+END_SRC
 
-* TODO Examples
-:LOGBOOK:
-- State "TODO"       from              [2017-08-16 Mi 17:34]
-:END:
+* Examples
 
-** README
+** Readme
 
 #+NAME: readme
 #+BEGIN_SRC latex
@@ -3042,10 +3039,10 @@ cell 21 & cell 22 & cell 23 \\
 ** Beamer
 
 #+NAME: beamer-makefile
-#+BEGIN_SRC bash :noweb yes :tangle templates/beamer-template/Makefile
+#+BEGIN_SRC makefile :noweb yes :tangle templates/beamer-template/Makefile
 SHELL := /bin/bash
 
-BEAMER_FILES =  myMacros.tex references.bib \
+BEAMER_FILES =  myMacros.tex \
 	beamer-settings.tex \
 	$(wildcard packages/*.sty) \
 	beamer-examples.tex \
@@ -3053,21 +3050,28 @@ BEAMER_FILES =  myMacros.tex references.bib \
 	$(wildcard graphics/*.pdf) 
 
 test_beamer:
-	cp beamer-template.tex ..
-	cp themes/beamer* ..
-	cp latexmkrc ..
-	cd ..; \
+	mkdir test
+	cd test; mkdir beamer-template
+	cp -r --parents $(BEAMER_FILES) test/beamer-template
+	cp beamer-template.org beamer-template.tex \
+		themes/* \
+		references.bib \
+		latexmkrc \
+		test
+	cd test; \
 			latexmk -pdf beamer-template.tex
 
-			# release_beamer:
-			# 	cp templates/beamer-template.tex .
-			# 	cp themes/beamer* .
-			# 	zip -r template-beamer.zip beamer* $(BEAMER_FILES) 
-			# 	rm beamer*
-			# 	mv template-beamer.zip beamer-template.zip
-
-			# clean_beamer:
-			# 	rm beamer*
+release_beamer:
+	mkdir temp
+	cd temp; mkdir beamer-template
+	cp -r --parents $(BEAMER_FILES) temp/beamer-template
+	cp beamer-template.org beamer-template.tex \
+		themes/* \
+		references.bib \
+		latexmkrc \
+		temp
+	cd temp; zip -r beamer-template.zip *; mv beamer-template.zip ..
+	rm -fr temp
 #+END_SRC
 
 * latexmk
