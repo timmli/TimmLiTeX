@@ -22,3 +22,6 @@
 [submodule "templates/langscibook-template"]
 	path = templates/langscibook-template
 	url = https://github.com/timmli/langscibook-template.git
+[submodule "templates/standalone-template"]
+	path = templates/standalone-template
+	url = https://github.com/timmli/standalone-template.git

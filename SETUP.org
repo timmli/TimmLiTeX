@@ -1040,7 +1040,7 @@ numbers=noenddot,
 ** Standalone template
 
 #+NAME: standalone-template
-#+BEGIN_SRC latex :noweb yes :tangle templates/standalone-template.tex
+#+BEGIN_SRC latex :noweb yes :tangle templates/standalone-template/standalone-template.tex
 \documentclass[
 	%pstricks=true
 	,crop=true
@@ -1072,7 +1072,7 @@ numbers=noenddot,
 % \usepackage[inference]{semantic} % for CCG 
 % \usepackage{packages/ccg}
 
-% \input{myMacros}
+% \input{standalone-template/myMacros}
 
 \begin{document}
 
@@ -3520,6 +3520,37 @@ release_jlm:
 	cp -r --parents $(LANGSCI_FILES) temp
 	cp -r langscibook/langsci temp/
 	cd temp; zip -r langsci-template.zip *; mv langsci-template.zip ..
+	rm -fr temp
+
+#+END_SRC
+
+** Standalone
+
+#+NAME: standalone-makefile
+#+BEGIN_SRC makefile :noweb yes :tangle templates/standalone-template/Makefile
+SHELL := /bin/bash
+
+STANDALONE_FILES =  myMacros.tex \
+	$(wildcard packages/*.sty) 
+
+test_standalone:
+	rm -fr test
+	mkdir test
+	cd test; mkdir standalone-template
+	cp -r --parents $(STANDALONE_FILES) test/standalone-template
+	cp standalone-template.tex \
+		test
+	cd test; \
+			latexmk -pdf standalone-template.tex
+
+release_standalone:
+	rm -fr temp
+	mkdir temp
+	cd temp; mkdir standalone-template
+	cp -r --parents $(STANDALONE_FILES) temp/standalone-template
+	cp standalone-template.tex \
+		temp
+	cd temp; zip -r standalone-template.zip *; mv standalone-template.zip ..
 	rm -fr temp
 
 #+END_SRC
