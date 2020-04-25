@@ -159,7 +159,7 @@ Remember to first add the class [[https://github.com/langsci/latex][langscibook]
 #+END_SRC
 
 #+NAME: abstract-body
-#+BEGIN_SRC latex 
+#+BEGIN_SRC latex :noweb yes
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % HEADER
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -179,7 +179,7 @@ Remember to first add the class [[https://github.com/langsci/latex][langscibook]
 
 \paragraph{Citation example}
 
-<<citation-example>>
+<<example-citations>>
 
 \paragraph{Blindtext} \lipsum
 
