@@ -21,18 +21,16 @@
       - [[#duesseldorf][Duesseldorf]]
 - [[#packages][Packages]]
       - [[#tikz-settingssty][tikz-settings.sty]]
-      - [[#textpos-settingssty][textpos-settings.sty]]
 - [[#bundled-settings][Bundled settings]]
       - [[#abstract-settings][Abstract settings]]
       - [[#article-settings][Article settings]]
       - [[#beamer-settings][Beamer settings]]
       - [[#book-settings][Book settings]]
-      - [[#standard-settings][Standard settings]]
+      - [[#text-settings][Text settings]]
       - [[#poster-settings][Poster settings]]
 - [[#package-settings][Package settings]]
       - [[#forest][Forest]]
       - [[#avm][AVM]]
-      - [[#beamer][Beamer]]
       - [[#biblatex][BibLaTeX]]
       - [[#hyperrefs][Hyperrefs]]
       - [[#listings][Listings]]
@@ -43,8 +41,30 @@
       - [[#tabular][tabular]]
       - [[#tikz][tikz]]
       - [[#hausarbeit][hausarbeit]]
-- [[#macros][Macros]]
+- [[#mymacros][myMacros]]
 - [[#examples][Examples]]
+      - [[#teaching][Teaching]]
+      - [[#text][Text]]
+      - [[#beamer][Beamer]]
+      - [[#readme][Readme]]
+      - [[#avm][AVM]]
+      - [[#citations][Citations]]
+      - [[#linguistics][Linguistics]]
+      - [[#formulae][Formulae]]
+      - [[#examples-for-texts][Examples for texts]]
+      - [[#poster][Poster]]
+      - [[#tikz][TikZ]]
+      - [[#tables][Tables]]
+      - [[#trees][Trees]]
+- [[#makefile][Makefile]]
+      - [[#beamer][Beamer]]
+      - [[#poster][Poster]]
+      - [[#teaching][Teaching]]
+      - [[#text][Text]]
+      - [[#jlm][JLM]]
+      - [[#langscibook][Langscibook]]
+      - [[#standalone][Standalone]]
+- [[#latexmk][latexmk]]
 - [[#local-variables][Local variables]]
 
 * Installation with Emacs
@@ -68,7 +88,7 @@ In order to compile these templates, press =C-c C-v t= , or evaluate the followi
 ** Abstract template
 
 #+NAME: abstract-template-org
-#+BEGIN_SRC org :noweb yes :tangle templates/abstract-template.org
+#+BEGIN_SRC org :noweb yes :tangle templates/text-template/abstract-template.org
 ,#+TITLE: Title of paper
 ,#+AUTHOR: John Doe (Elfenbeinturm, Fantasien)
 :Settings:
@@ -83,7 +103,7 @@ In order to compile these templates, press =C-c C-v t= , or evaluate the followi
 ,#+LATEX_CLASS_OPTIONS: [<<abstract-options>>]
 ,#+LATEX_COMPILER: pdflatex
 ,#+LATEX_HEADER: <<abstract-settings>>
-,#+LATEX_HEADER: \input{myMacros}
+,#+LATEX_HEADER: \input{text-template/myMacros}
 ,#+LATEX_HEADER: %\bibliography{references}
 :end:
 
@@ -122,7 +142,7 @@ Remember to first add the class [[https://github.com/langsci/latex][langscibook]
 #+END_SRC
 
 #+NAME: abstract-template-tex
-#+BEGIN_SRC latex :noweb yes :tangle templates/abstract-template.tex
+#+BEGIN_SRC latex :noweb yes :tangle templates/text-template/abstract-template.tex
 \documentclass[
 <<abstract-options>>
 ]{article}
@@ -133,7 +153,7 @@ Remember to first add the class [[https://github.com/langsci/latex][langscibook]
 % HEADER
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input{myMacros}
+\input{text-template/myMacros}
 
 <<abstract-body>>
 #+END_SRC
@@ -155,9 +175,11 @@ Remember to first add the class [[https://github.com/langsci/latex][langscibook]
 
 \maketitle
 
+% TODO
+
 \paragraph{Citation example}
 
-\input{examples/citation.tex}
+<<citation-example>>
 
 \paragraph{Blindtext} \lipsum
 
@@ -172,7 +194,7 @@ Remember to first add the class [[https://github.com/langsci/latex][langscibook]
 ** Article template
 
 #+NAME: article-template-org
-#+BEGIN_SRC org :noweb yes :tangle templates/article-template.org
+#+BEGIN_SRC org :noweb yes :tangle templates/text-template/article-template.org
 ,#+TITLE: Title of paper
 ,#+AUTHOR: John Doe @@latex:\affiliation{Elfenbeinturm, Fantasien, \url{some@email.address}}@@
 :Settings:
@@ -187,7 +209,7 @@ Remember to first add the class [[https://github.com/langsci/latex][langscibook]
 ,#+LATEX_CLASS_OPTIONS: [<<article-options>>]
 ,#+LATEX_COMPILER: pdflatex
 ,#+LATEX_HEADER: <<article-settings>>
-,#+LATEX_HEADER: \input{myMacros}
+,#+LATEX_HEADER: \input{text-template/myMacros}
 ,#+LATEX_HEADER: %\bibliography{references}
 :end:
 
@@ -231,7 +253,7 @@ Remember to first add the class [[https://github.com/langsci/latex][langscibook]
 
 
 #+NAME: article-template-tex
-#+BEGIN_SRC latex :noweb yes :tangle templates/article-template.tex
+#+BEGIN_SRC latex :noweb yes :tangle templates/text-template/article-template.tex
 \documentclass[
 <<article-options>>
 ]{scrartcl}
@@ -242,7 +264,7 @@ Remember to first add the class [[https://github.com/langsci/latex][langscibook]
 %   Macros   % 
 %%%%%%%%%%%%%%
 
-\input{myMacros}
+\input{text-template/myMacros}
 
 <<article-body>>
 #+END_SRC
@@ -270,11 +292,9 @@ Remember to first add the class [[https://github.com/langsci/latex][langscibook]
 This is an abstract: \lipsum[1]
 \end{abstract}
 
-\section{Information about this template}
+% TODO
 
-\input{examples/README.tex}
-
-\input{examples/master-examples.tex}
+\input{text-template/article-examples}
 
 \section{Blindtext}
 
@@ -297,7 +317,7 @@ This is an abstract: \lipsum[1]
 ** Beamer template
 
 #+NAME: beamer-template-org
-#+BEGIN_SRC org :noweb yes :tangle templates/beamer-template.org
+#+BEGIN_SRC org :noweb yes :tangle templates/beamer-template/beamer-template.org
 ,#+TITLE: Beamer slides
 ,#+AUTHOR: John Doe
 ,#+SUBTITLE: Some subtitle
@@ -316,9 +336,9 @@ This is an abstract: \lipsum[1]
 ,#+LATEX_CLASS_OPTIONS: <<beamer-options-org>> 
 ,#+LATEX_COMPILER: pdflatex
 ,#+LATEX_HEADER: <<beamer-settings>>
-,#+LATEX_HEADER: \input{myMacros}
-,#+LATEX_HEADER: \usetheme{Lustnau}
-,#+LATEX_HEADER: \input{beamerlogosTuebingen}
+,#+LATEX_HEADER: \input{beamer-template/myMacros}
+,#+LATEX_HEADER: \usepackage{beamer-template/themes/beamerthemeLustnau} % \usetheme{Lustnau}
+,#+LATEX_HEADER: \input{beamer-template/themes/beamerlogosTuebingen}
 ,#+COLUMNS: %40ITEM %10TAGS %9BEAMER_act(Overlays) %4BEAMER_col(Col) %20BEAMER_opt(Options)
 :end:
 
@@ -415,7 +435,7 @@ Link type for typesetting linguistic examples:
 In order to position the =\maketitle= command manually, you need to add =# org-latex-title-command: ""= to the local variables.
 
 #+NAME: beamer-template-tex
-#+BEGIN_SRC latex :noweb yes :tangle templates/beamer-template.tex
+#+BEGIN_SRC latex :noweb yes :tangle templates/beamer-template/beamer-template.tex
 % -*- coding: utf-8 -*-
 
 \documentclass[
@@ -430,7 +450,7 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 %    CUSTOM MACROS     %
 %%%%%%%%%%%%%%%%%%%%%%%% 
 
-\input{myMacros}
+\input{beamer-template/myMacros}
 \definecolor{myblue}{rgb}{0,0,0.70}
 \definecolor{myred}{rgb}{0.8,0,0}
 \definecolor{mydarkgreen}{rgb}{0,0.55,0}
@@ -487,14 +507,7 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 %}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-  \frametitle{About the template}
-  
-\input{examples/README.tex}
-  
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\input{examples/beamer-examples.tex}
+\input{beamer-template/beamer-examples.tex}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \begin{frame}[plain,allowframebreaks]
 \frametitle{}
@@ -517,7 +530,7 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 ** Book template
 
 #+NAME: book-template-tex
-#+BEGIN_SRC latex :noweb yes :tangle templates/book-template.tex
+#+BEGIN_SRC latex :noweb yes :tangle templates/text-template/book-template.tex
 \documentclass[
 <<book-options>>
 ]{scrbook}
@@ -528,7 +541,7 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 %   Macros   % 
 %%%%%%%%%%%%%%
 
-\input{myMacros}   % the content of myMacros.tex goes here
+\input{text-template/myMacros}   % the content of myMacros.tex goes here
 
 <<book-body>>
 #+END_SRC
@@ -557,14 +570,7 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 \tableofcontents
 \mainmatter
 
-
-\chapter{Information about this template}
-
-\input{examples/README.tex}
-
-\chapter{\LaTeX\ Examples}
-
-\input{examples/master-examples.tex}
+\input{text-template/book-examples}
 
 \chapter{Blindtext}
 
@@ -594,8 +600,10 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 
 ** LangSci template
 
+https://langsci-press.org/
+
 #+NAME: langsci-paper-template-org
-#+BEGIN_SRC org :noweb yes :tangle templates/langsci-paper-template.org
+#+BEGIN_SRC org :noweb yes :tangle templates/langscibook-template/langsci-paper-template.org
 ,#+TITLE: Title of paper
 ,#+AUTHOR: John Doe\affiliation{Elfenbeinturm, Fantasien}
 :Settings:
@@ -695,8 +703,10 @@ Remember to first add the class [[https://github.com/langsci/latex][langscibook]
 
 ** JLM template
 
+http://jlm.ipipan.waw.pl/index.php/JLM
+
 #+NAME: jlm-article-template-org
-#+BEGIN_SRC org :noweb yes :tangle templates/jlm-article-template.org
+#+BEGIN_SRC org :noweb yes :tangle templates/jlm-template/jlm-article-template.org
 ,#+TITLE: Title of article
 ,#+LATEX_HEADER: \titlerunning{Title in header line}
 ,#+AUTHOR: Auhthor name
@@ -777,7 +787,7 @@ Remember to first add the class jlm to the set of known classes (in =init.el=).
 ** Hausarbeit template
 
 #+NAME: hausarbeit-template
-#+BEGIN_SRC latex :noweb yes :tangle templates/hausarbeit-template.tex
+#+BEGIN_SRC latex :noweb yes :tangle templates/teaching-template/hausarbeit-template.tex
 \documentclass[
 11pt,
 bibliography=totoc,
@@ -789,7 +799,9 @@ numbers=noenddot,
 %       SETTINGS       %
 %%%%%%%%%%%%%%%%%%%%%%%% 
 
-<<book-settings>>
+\usepackage{datetime}
+
+\input{settings/text-settings}
 
 \AtBeginDocument{
   \selectlanguage{german} % which language is available depends on how babel is loaded
@@ -827,13 +839,7 @@ numbers=noenddot,
 \tableofcontents
 \mainmatter 
 
-\chapter{Information about this template}
-
-\input{examples/README.tex}
-
-\chapter{\LaTeX\ Examples}
-
-\input{examples/master-examples.tex}
+\input{examples/hausarbeit-examples}
 
 \chapter{Blindtext}
 
@@ -860,17 +866,16 @@ numbers=noenddot,
 ** Essay template
 
 #+NAME: essay-template
-#+BEGIN_SRC latex :noweb yes :tangle templates/essay-template.tex
+#+BEGIN_SRC latex :noweb yes :tangle templates/teaching-template/essay-template.tex
 %%%%%%%%%%%%%%%%%%%%%%%% 
 %       SETTINGS       %
 %%%%%%%%%%%%%%%%%%%%%%%%
 
 \documentclass[11pt,twoside]{scrartcl}
 
-\input{settings/scrarticle_setup.tex}
+\input{settings/scrarticle-settings.tex}
 
-\input{settings/standard-settings}
-
+\input{settings/text-settings}
 
 \begin{document}
 
@@ -883,8 +888,9 @@ numbers=noenddot,
 \author{Max Mustermann}	% change name
 \affiliation{
 		Matrikelnummer: 123456789\\	% change Matrikelnummer
-		\url{mustermann@phil.hhu.de}\\	% change email address
-		Seminar: Complexity in grammar, Heinrich-Heine-Universität, WS 2015/2016}
+    Studiengang: BSc Neue Ätherwissenschaften \\ % change Studiengang
+		\url{mustermann@uni-tuebingen.de}\\	% change email address
+		Seminar: Seminar name, University of Tübingen, WS 2020/2021}
 
 \maketitle 
 
@@ -892,16 +898,11 @@ numbers=noenddot,
 %   Document start   % 
 %%%%%%%%%%%%%%%%%%%%%%
 
-\section{Information about the template}
-
-\input{examples/README.tex}
-
-\input{examples/master-examples}
+\input{examples/essay-examples.tex}
 
 \section{Blindtext}
 
 \lipsum
-
 
 %%%%%%%%%%%%%%%%%%%
 %   Document end  % 
@@ -920,7 +921,7 @@ numbers=noenddot,
 ** Poster template
 
 #+NAME: poster-template
-#+BEGIN_SRC latex :noweb yes :tangle templates/poster-template.tex
+#+BEGIN_SRC latex :noweb yes :tangle templates/poster-template/poster-template.tex
 \documentclass[
 	17pt,%12pt, 14pt, 17pt, 20pt, 25pt
 	a1paper,%a0paper,a1paper,a2paper
@@ -933,9 +934,9 @@ numbers=noenddot,
   dvipsnames,
 	]{tikzposter} 
 
-\input{settings/poster-settings}
+\input{poster-template/poster-settings}
 
-\input{myMacros}
+\input{poster-template/myMacros}
 
 \definecolor{mygray}{gray}{0.9}
 \definecolor{HHUblue}{HTML}{006AB3}
@@ -955,7 +956,7 @@ numbers=noenddot,
 \author{Author Name(s)\affilsup{1}}
 \institute{\affilsup{1}Affiliation}
 
-\titlegraphic{\hspace*{1cm}\raisebox{0ex}{\includegraphics[width=5cm]{graphics/sfb-logo-quer.pdf}}\hspace{36cm}\raisebox{0ex}{\includegraphics[width=10cm]{graphics/hhu-logo-hres.pdf}}} 
+\titlegraphic{\hspace*{1cm}\raisebox{0ex}{\includegraphics[width=5cm]{poster-template/graphics/sfb-logo-quer.pdf}}\hspace{36cm}\raisebox{0ex}{\includegraphics[width=10cm]{poster-template/graphics/hhu-logo-hres.pdf}}} 
 
 \settitle{
 	\centering
@@ -970,7 +971,7 @@ numbers=noenddot,
 %   POSTERSTYLE      % 
 %%%%%%%%%%%%%%%%%%%%%%
 
-\input{settings/myPosterstyle}
+\input{poster-template/poster-style}
 \tikzposterlatexaffectionproofoff
 
 \defineblockstyle{greybox}{}{
@@ -1002,7 +1003,7 @@ numbers=noenddot,
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   Block text
 }
-\input{examples/poster-note}
+\input{poster-template/poster-examples}
 
 \begin{columns} 
 
@@ -1059,7 +1060,7 @@ numbers=noenddot,
 ** Standalone template
 
 #+NAME: standalone-template
-#+BEGIN_SRC latex :noweb yes :tangle templates/standalone-template.tex
+#+BEGIN_SRC latex :noweb yes :tangle templates/standalone-template/standalone-template.tex
 \documentclass[
 	%pstricks=true
 	,crop=true
@@ -1085,12 +1086,13 @@ numbers=noenddot,
 \usepackage{linguex}
 \renewcommand{\firstrefdash}{}
 
+\usepackage{standalone-template/packages/avm}
 <<avm-settings>>
 
 % \usepackage[inference]{semantic} % for CCG 
 % \usepackage{packages/ccg}
 
-% \input{myMacros}
+% \input{standalone-template/myMacros}
 
 \begin{document}
 
@@ -1107,6 +1109,8 @@ numbers=noenddot,
 
 * Beamer themes
 
+Local Beamer themes are executed relative to the directory of the master file. Therefore, in order to avoid the use of specific relative paths in the code of the themes, they must later be put in the same directory as the master file.
+
 ** Theme settings
 
 #+NAME: beamer-theme-settings
@@ -1122,7 +1126,7 @@ numbers=noenddot,
 ** Tuebingen
 
 #+NAME: beamerthemeTuebingen.sty
-#+BEGIN_SRC latex :noweb yes :tangle themes/beamerthemeTuebingen.sty
+#+BEGIN_SRC latex :noweb yes :tangle templates/beamer-template/themes/beamerthemeTuebingen.sty
 \mode<presentation>
 
 %% Requirement
@@ -1154,7 +1158,7 @@ numbers=noenddot,
 #+END_SRC
 
 #+NAME: beamercolorthemeTuebingen.sty
-#+BEGIN_SRC latex :noweb yes :tangle themes/beamercolorthemeTuebingen.sty
+#+BEGIN_SRC latex :noweb yes :tangle templates/beamer-template/themes/beamercolorthemeTuebingen.sty
 \mode<presentation>
 
 \definecolor{UTred}{RGB}{165,30,55} 
@@ -1201,7 +1205,7 @@ numbers=noenddot,
 #+END_SRC
 
 #+NAME: beamerinnerthemeTuebingen.sty
-#+BEGIN_SRC latex :noweb yes :tangle themes/beamerinnerthemeTuebingen.sty
+#+BEGIN_SRC latex :noweb yes :tangle templates/beamer-template/themes/beamerinnerthemeTuebingen.sty
 \mode<presentation>
 
 %% General settings
@@ -1281,7 +1285,7 @@ numbers=noenddot,
 #+END_SRC
 
 #+NAME: beamerouterthemeTuebingen.sty
-#+BEGIN_SRC latex :noweb yes :tangle themes/beamerouterthemeTuebingen.sty
+#+BEGIN_SRC latex :noweb yes :tangle templates/beamer-template/themes/beamerouterthemeTuebingen.sty
 \mode<presentation>
 
 % Frame title
@@ -1331,37 +1335,37 @@ numbers=noenddot,
 #+END_SRC
 
 #+NAME: beamerlogosTuebingen.tex
-#+BEGIN_SRC latex :noweb yes :tangle themes/beamerlogosTuebingen.tex
+#+BEGIN_SRC latex :noweb yes :tangle templates/beamer-template/themes/beamerlogosTuebingen.tex
 \titlelogo{%
-  \includegraphics[width=3.967cm, keepaspectratio=true]{graphics/UT-logo.pdf}
+  \includegraphics[width=3.967cm, keepaspectratio=true]{beamer-template/graphics/UT-logo.pdf}
   \hskip0.4cm 
   %% Trajan
   \begin{minipage}[t]{0.5\textwidth}
   \vskip-0.95cm
-  \includegraphics[width=5.75cm, keepaspectratio=true]{graphics/UT-MNF-FBI-logo.pdf}
+  \includegraphics[width=5.75cm, keepaspectratio=true]{beamer-template/graphics/UT-MNF-FBI-logo.pdf}
   \end{minipage}%
 }
 
 %% Old version with relative measures
 % \titlelogo{%
-% \includegraphics[width=.31\paperwidth, keepaspectratio=true]{graphics/UT-logo.pdf}
+% \includegraphics[width=.31\paperwidth, keepaspectratio=true]{beamer-template/graphics/UT-logo.pdf}
 % \hskip0.4cm 
 %   %% Trajan
 % \begin{minipage}[t]{0.5\textwidth}
 % \vskip-0.104\paperheight
-% \includegraphics[width=.45\paperwidth, keepaspectratio=true]{graphics/UT-MNF-FBI-logo.pdf}
+% \includegraphics[width=.45\paperwidth, keepaspectratio=true]{beamer-template/graphics/UT-MNF-FBI-logo.pdf}
 % \end{minipage}%
 %   %% Trajan + Arial
 %   % \begin{minipage}[t]{0.5\textwidth}
 %   % \setlength{\baselineskip}{11pt}
 %   % \vskip-0.108\paperheight
-%   % \includegraphics[width=.45\paperwidth, keepaspectratio=true]{graphics/UT-MNF-logo.pdf}\newline
+%   % \includegraphics[width=.45\paperwidth, keepaspectratio=true]{beamer-template/graphics/UT-MNF-logo.pdf}\newline
 %   % \upshape\sffamily\color{UTred}\fontsize{7}{10}\selectfont\textbf{Fachbereich Informatik}
 %   % \end{minipage}%
 % }
 
 \headlinelogo{%
-  \includegraphics[width=2.52cm, keepaspectratio=true]{graphics/UT-logo.pdf}
+  \includegraphics[width=2.52cm, keepaspectratio=true]{beamer-template/graphics/UT-logo.pdf}
 }      
 
 \titlegraphic{
@@ -1372,7 +1376,7 @@ numbers=noenddot,
 ** Lustnau
 
 #+NAME: beamerthemeLustnau.sty
-#+BEGIN_SRC latex :noweb yes :tangle themes/beamerthemeLustnau.sty
+#+BEGIN_SRC latex :noweb yes :tangle templates/beamer-template/themes/beamerthemeLustnau.sty
 \mode<presentation>
 
 \usetheme{Tuebingen}
@@ -1419,7 +1423,7 @@ numbers=noenddot,
 ** Duesseldorf
 
 #+NAME: beamerthemeDuesseldorf.sty
-#+BEGIN_SRC latex :noweb yes :tangle themes/beamerthemeDuesseldorf.sty
+#+BEGIN_SRC latex :noweb yes :tangle templates/beamer-template/themes/beamerthemeDuesseldorf.sty
 \mode<presentation>
 
 \usepackage{libertine} % libertine tends to cause problems, e.g. when using tipa
@@ -1492,7 +1496,7 @@ numbers=noenddot,
 #+END_SRC
 
 #+NAME: beamerlogosDuesseldorf.tex
-#+BEGIN_SRC latex :noweb yes :tangle themes/beamerlogosDuesseldorf.tex
+#+BEGIN_SRC latex :noweb yes :tangle templates/beamer-template/themes/beamerlogosDuesseldorf.tex
 \titlegraphic{\includegraphics[height=1cm]{graphics/sfb-logo-quer} \hfil \includegraphics[height=1cm]{graphics/hhu-logo}}
 #+END_SRC
 
@@ -1500,8 +1504,18 @@ numbers=noenddot,
 
 ** tikz-settings.sty
 
+Some templates require it to have the tikz settings in a separate sty-file.
+
+#+BEGIN_SRC latex :noweb yes :tangle templates/jlm-template/packages/tikz-settings.sty
+<<tikz-settings.sty>>
+#+END_SRC
+
+#+BEGIN_SRC latex :noweb yes :tangle templates/langscibook-template/packages/tikz-settings.sty
+<<tikz-settings.sty>>
+#+END_SRC
+
 #+NAME: tikz-settings.sty
-#+BEGIN_SRC latex :noweb yes :tangle packages/tikz-settings.sty
+#+BEGIN_SRC latex :noweb yes
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{tikz-settings}
 
@@ -1512,7 +1526,7 @@ numbers=noenddot,
 \endinput
 #+END_SRC
 
-** textpos-settings.sty
+** COMMENT textpos-settings.sty
 
 #+NAME: textpos-settings.sty
 #+BEGIN_SRC latex :noweb yes :tangle packages/textpos-settings.sty
@@ -1535,7 +1549,7 @@ numbers=noenddot,
 
 #+NAME: abstract-settings
 #+BEGIN_SRC latex
-\input{settings/standard-settings}
+\input{text-template/text-settings}
 
 \usepackage[left=25mm, right=25mm, top=25mm, bottom=25mm, noheadfoot]{geometry}
 \pagenumbering{gobble}
@@ -1564,8 +1578,8 @@ numbers=noenddot,
 
 #+NAME: article-settings
 #+BEGIN_SRC latex
-\input{settings/scrarticle-settings}
-\input{settings/standard-settings}
+\input{text-template/scrarticle-settings}
+\input{text-template/text-settings}
 #+END_SRC
 
 ** Beamer settings
@@ -1591,10 +1605,10 @@ aspectratio=43,
 
 #+NAME: beamer-settings
 #+BEGIN_SRC latex
-\input{settings/beamer-settings.tex}
+\input{beamer-template/beamer-settings.tex}
 #+END_SRC
 
-#+BEGIN_SRC latex :noweb yes :tangle settings/beamer-settings.tex
+#+BEGIN_SRC latex :noweb yes :tangle templates/beamer-template/beamer-settings.tex
 <<pdflatex-settings>>
 
 \usepackage{etex} 
@@ -1622,6 +1636,7 @@ aspectratio=43,
   % \setlength{\Extopsep}{1ex}   % vertical margin in linguex examples
 }
 
+\usepackage{beamer-template/packages/avm}
 <<avm-settings>>
 
 <<listings-settings>>
@@ -1629,6 +1644,8 @@ aspectratio=43,
 %% Bibliography
 
 %% BibLaTeX
+\newcommand{\mycitestyle}{beamer-template/bst/biblatex-sp-unified/cbx/sp-authoryear-comp}
+\newcommand{\mystyle}{beamer-template/bst/biblatex-sp-unified/bbx/biblatex-sp-unified}
 <<biblatex-settings>>
 
 %% BibTeX 
@@ -1654,13 +1671,17 @@ numbers=noenddot,
 #+BEGIN_SRC latex
 \usepackage{datetime}
 
-\input{settings/standard-settings}
+\input{text-template/text-settings}
 #+END_SRC
 
-** Standard settings
+** Text settings
 
-#+NAME: standard-settings
-#+BEGIN_SRC latex :noweb yes :tangle settings/standard-settings.tex
+#+BEGIN_SRC latex :noweb yes :tangle templates/teaching-template/settings/text-settings.tex
+<<text-settings(nw-mycitestylepath="bst/biblatex-sp-unified/cbx/sp-authoryear-comp",nw-mystylepath="bst/biblatex-sp-unified/bbx/biblatex-sp-unified",nw-avmpath="packages/avm")>>
+#+END_SRC
+
+#+NAME: text-settings
+#+BEGIN_SRC latex :noweb yes :tangle templates/text-template/text-settings.tex :var nw-mycitestylepath="text-template/bst/biblatex-sp-unified/cbx/sp-authoryear-comp" nw-mystylepath="text-template/bst/biblatex-sp-unified/bbx/biblatex-sp-unified" nw-avmpath="text-template/packages/avm"
 <<pdflatex-settings>>
 
 %% Trees and graphics
@@ -1686,12 +1707,15 @@ numbers=noenddot,
 \usepackage{linguex}
 \renewcommand{\firstrefdash}{}
 
+\usepackage{nw-avmpath}
 <<avm-settings>>
 
 % \usepackage[inference]{semantic} % for CCG 
 % \usepackage{packages/ccg}
 
 %% Bibliography
+\newcommand{\mycitestyle}{nw-mycitestylepath}
+\newcommand{\mystyle}{nw-mystylepath}
 <<biblatex-settings>> 
 % \input{settings/natbib_bibtex_setup.tex} 
 
@@ -1706,7 +1730,7 @@ numbers=noenddot,
 ** Poster settings
 
 #+NAME: poster-settings
-#+BEGIN_SRC latex :noweb yes :tangle settings/poster-settings.tex
+#+BEGIN_SRC latex :noweb yes :tangle templates/poster-template/poster-settings.tex
 %%%%%%%%%%%%%%%%%%%%%%
 %   FONT             % 
 %%%%%%%%%%%%%%%%%%%%%%
@@ -1722,6 +1746,8 @@ numbers=noenddot,
 \usepackage[scaled=0.9]{beramono}  % for monospaced font
 \renewcommand*{\familydefault}{\sfdefault}
 
+\newcommand{\mycitestyle}{poster-template/bst/biblatex-sp-unified/cbx/sp-authoryear-comp}
+\newcommand{\mystyle}{poster-template/bst/biblatex-sp-unified/bbx/biblatex-sp-unified}
 <<biblatex-settings>>
 
 %%%%%%%%%%%%%%%%%%%%%%
@@ -1729,7 +1755,7 @@ numbers=noenddot,
 %%%%%%%%%%%%%%%%%%%%%%
 
 \usepackage{xcolor,enumitem}
-\usepackage{linguex,packages/avm} 
+\usepackage{linguex,poster-template/packages/avm} 
 \usepackage{amsmath,amssymb,amsfonts,marvosym}
 \usepackage{ulem}			% to cross out text
 \normalem
@@ -1742,6 +1768,105 @@ numbers=noenddot,
 
 <<forest-settings>>
 
+#+END_SRC
+
+#+NAME: poster-style
+#+BEGIN_SRC latex :noweb yes :tangle templates/poster-template/poster-style.tex
+%\usetheme{Basic}	% Default, Rays, Basic, Simple, Envelope, Wave, Board, Autumn, and Desert
+
+\usetitlestyle[
+	width=750mm,
+	linewidth=2pt,
+	titletoblockverticalspace=0mm
+	]{Filled}	% Default, Basic, Envelope, Wave, VerticalShading, Filled, Empty.
+
+%\usecolorpalette{Default}	% Default, BlueGrayOrange, GreenGrayViolet, PurpleGrayBlue, BrownBlueOrange
+
+%\usecolorstyle{Germany}	% Default, Australia, Britain, Sweden, Spain, Russia, Denmark, Germany
+
+\usebackgroundstyle{Empty}  % Default, Rays, VerticalGradation, BottomVerticalGradation, Empty 
+
+\useblockstyle[roundedcorners=5,linewidth=2pt]{Default} % Default, Basic, Minimal, Envelope, Corner, Slide, TornOut
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \settitle{
+% 	\@titlegraphic \\[\TP@titlegraphictotitledistance] \centering
+% 	\color{titlefgcolor} {\bfseries \Huge \sc \@title \par}
+% 	\vspace*{1em}
+% 	{\huge \@author \par} \vspace*{1em} {\LARGE \@institute}
+% }
+
+% \settitle{
+% 	\centering
+% 	\color{titlefgcolor} {\bfseries \Huge \sc \@title \par}
+% 	\vspace*{2em}
+% 	{\huge \@author \par} \vspace*{1em} {\LARGE \@institute}
+
+% 	\raisebox{0cm}[0pt]{\@titlegraphic}
+% }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \definetitlestyle{sampletitle}{
+% 	width=500mm, roundedcorners=20, linewidth=2pt, innersep=5pt,
+% 	titletotopverticalspace=15mm, titletoblockverticalspace=30mm
+% }{
+% 	\begin{scope}[line width=\titlelinewidth, rounded corners=\titleroundedcorners]
+% 		\draw[color=blocktitlebgcolor, fill=titlebgcolor] (\titleposleft,\titleposbottom) rectangle (\titleposright,\titlepostop);
+% 	\end{scope}
+% }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \defineblockstyle{sampleblockstyle}{
+% 	titlewidthscale=0.9, bodywidthscale=1,titleleft,
+% 	titleoffsetx=0pt, titleoffsety=0pt, bodyoffsetx=0mm, bodyoffsety=15mm,
+% 	bodyverticalshift=10mm, roundedcorners=5, linewidth=2pt,
+% 	titleinnersep=6mm, bodyinnersep=1cm
+% }{
+% 	\draw[color=framecolor, fill=blockbodybgcolor,
+% 		rounded corners=\blockroundedcorners] (blockbody.south west)
+% 		rectangle (blockbody.north east);
+% 	\ifBlockHasTitle
+% 		\draw[color=framecolor, fill=blocktitlebgcolor,
+% 			rounded corners=\blockroundedcorners] (blocktitle.south west)
+% 			rectangle (blocktitle.north east);
+% 	\fi
+% }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \definecolorstyle{sampleColorStyle} {
+% 	\definecolor{colorOne}{named}{blue}
+% 	\definecolor{colorTwo}{named}{yellow}
+% 	\definecolor{colorThree}{named}{orange}
+% }{
+% 	% Background Colors
+% 	\colorlet{backgroundcolor}{colorOne}
+% 	\colorlet{framecolor}{black}
+% 	% Title Colors
+% 	\colorlet{titlefgcolor}{black}
+% 	\colorlet{titlebgcolor}{colorOne}
+% 	% Block Colors
+% 	\colorlet{blocktitlebgcolor}{colorThree}
+% 	\colorlet{blocktitlefgcolor}{white}
+% 	\colorlet{blockbodybgcolor}{white}
+% 	\colorlet{blockbodyfgcolor}{black}
+% 	% Innerblock Colors
+% 	\colorlet{innerblocktitlebgcolor}{white}
+% 	\colorlet{innerblocktitlefgcolor}{black}
+% 	\colorlet{innerblockbodybgcolor}{colorThree!30!white}
+% 	\colorlet{innerblockbodyfgcolor{black}
+% 	% Note colors
+% 	\colorlet{notefgcolor}{black}
+% 	\colorlet{notebgcolor}{colorTwo!50!white}
+% 	\colorlet{noteframecolor}{colorTwo}
+% }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \definebackgroundstyle{samplebackgroundstyle}{
+% 	\draw[inner sep=0pt, line width=0pt, color=red, fill=backgroundcolor!30!black]
+% 	(bottomleft) rectangle (topright);
+% }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 #+END_SRC
 
 * Package settings
@@ -1909,19 +2034,6 @@ numbers=noenddot,
 
 #+END_SRC
 
-*** COMMENT Old stuff
-
-Draw horizontal edges between adjacent siblings:
-
-#+BEGIN_SRC latex
-  </.style={ % draw horizontal line to predecessor
-    no edge,
-    before drawing tree={tikz+={\draw[dashed](!)--(!p);}}},
-  >/.style={ % draw horizontal line to successor
-    no edge,
-    before drawing tree={tikz+={\draw[dashed](!)--(!n);}}},
-#+END_SRC
-
 ** AVM
 
 #+NAME: avm-settings
@@ -1929,8 +2041,6 @@ Draw horizontal edges between adjacent siblings:
 %%%%%%%%%%%%%%%%%%%%%%
 %   AVM SETTINGS     % 
 %%%%%%%%%%%%%%%%%%%%%%
-
-\usepackage{packages/avm}
 
 \avmoptions{center,topright}  % topright determines the position of \osort
 \avmfont{\scshape}
@@ -1963,7 +2073,6 @@ Draw horizontal edges between adjacent siblings:
 %%%%%%%%%%%%%%%%%%%%%%%%
 %   BIBLATEX SETTINGS  % 
 %%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\mycitestyle}{bst/biblatex-sp-unified/cbx/sp-authoryear-comp}
 \makeatletter
 \@ifclassloaded{beamer}{\renewcommand{\mycitestyle}{numeric-comp}}{}
 \@ifclassloaded{tikzposter}{\renewcommand{\mycitestyle}{numeric-comp}}{}
@@ -1971,7 +2080,7 @@ Draw horizontal edges between adjacent siblings:
 
 \usepackage[
   natbib=true,
-  style=bst/biblatex-sp-unified/bbx/biblatex-sp-unified,
+  style=\mystyle,
   citestyle=\mycitestyle,
   %refsection=chapter,
   maxbibnames=99,
@@ -2303,8 +2412,12 @@ Draw horizontal edges between adjacent siblings:
 
 ** scrarticle
 
+#+BEGIN_SRC latex :noweb yes :tangle templates/teaching-template/settings/scrarticle-settings.tex
+<<scrarticle-settings>>
+#+END_SRC
+
 #+NAME: scrarticle-settings
-#+BEGIN_SRC latex :noweb yes :tangle settings/scrarticle-settings.tex
+#+BEGIN_SRC latex :noweb yes :tangle templates/text-template/scrarticle-settings.tex
 \usepackage{datetime}
 \usepackage{ifdraft}
 
@@ -2513,7 +2626,10 @@ Draw horizontal edges between adjacent siblings:
 \usepackage[inference]{semantic} % for CCG 
 \usepackage{packages/ccg} 
 \usepackage{tipa}
+
+\usepackage{teaching-template/packages/avm}
 <<avm-settings>>
+
 <<forest-settings>>
 
 % BibTex
@@ -2534,10 +2650,38 @@ pdfkeywords={},%
 
 #+END_SRC
 
-* Macros
+* myMacros
+
+#+BEGIN_SRC latex :noweb yes :tangle templates/beamer-template/myMacros.tex
+<<myMacros.tex>>
+#+END_SRC
+
+#+BEGIN_SRC latex :noweb yes :tangle templates/poster-template/myMacros.tex
+<<myMacros.tex>>
+#+END_SRC
+
+#+BEGIN_SRC latex :noweb yes :tangle templates/teaching-template/myMacros.tex
+<<myMacros.tex>>
+#+END_SRC
+
+#+BEGIN_SRC latex :noweb yes :tangle templates/text-template/myMacros.tex
+<<myMacros.tex>>
+#+END_SRC
+
+#+BEGIN_SRC latex :noweb yes :tangle templates/jlm-template/myMacros.tex
+<<myMacros.tex>>
+#+END_SRC
+
+#+BEGIN_SRC latex :noweb yes :tangle templates/langscibook-template/myMacros.tex
+<<myMacros.tex>>
+#+END_SRC
+
+#+BEGIN_SRC latex :noweb yes :tangle templates/standalone-template/myMacros.tex
+<<myMacros.tex>>
+#+END_SRC
 
 #+NAME: myMacros.tex
-#+BEGIN_SRC latex :noweb yes :tangle myMacros.tex
+#+BEGIN_SRC latex :noweb yes
 %%%%%%%%%%%%%%%%%%%%%%
 %   TODONOTES        % 
 %%%%%%%%%%%%%%%%%%%%%%
@@ -2640,12 +2784,823 @@ pdfkeywords={},%
   \enlargethispage{#1\baselineskip}}
 #+END_SRC
 
-* TODO Examples
-:LOGBOOK:
-- State "TODO"       from              [2017-08-16 Mi 17:34]
-:END:
+* Examples
 
-- [ ] Move example here.
+** Teaching
+
+#+NAME: hausarbeit-examples
+#+BEGIN_SRC latex :noweb yes :tangle templates/teaching-template/examples/hausarbeit-examples.tex
+
+<<book-examples>>
+
+#+END_SRC
+
+#+NAME: essay-examples
+#+BEGIN_SRC latex :noweb yes :tangle templates/teaching-template/examples/essay-examples.tex
+
+<<article-examples>>
+
+#+END_SRC
+
+** Text
+
+#+NAME: abstract-examples
+#+BEGIN_SRC latex :noweb yes :tangle templates/text-template/abstract-examples.tex
+
+<<example-citations>>
+
+#+END_SRC
+
+#+NAME: article-examples
+#+BEGIN_SRC latex :noweb yes :tangle templates/text-template/article-examples.tex
+
+\section{Information about this template}
+
+<<readme>>
+
+<<example-citations>>
+
+#+END_SRC
+
+#+NAME: book-examples
+#+BEGIN_SRC latex :noweb yes :tangle templates/text-template/book-examples.tex
+
+\chapter{Information about this template}
+
+<<readme>>
+
+\chapter{Citation examples}
+
+<<example-citations>>
+
+#+END_SRC
+
+** Beamer
+
+#+NAME: beamer-examples
+#+BEGIN_SRC latex :noweb yes :tangle templates/beamer-template/beamer-examples.tex
+\begin{frame}
+  \frametitle{About the template}
+  
+<<readme>>
+  
+\end{frame}
+
+<<example-beamer-frames>>
+<<example-beamer-blocks>>
+<<example-beamer-overlays>>
+<<example-beamer-columns>>
+
+\begin{frame}
+\frametitle{Citation}
+<<example-citations>>
+\end{frame}
+
+\begin{frame}
+\frametitle{Linguistic examples}
+<<example-linguistic-examples>>
+\end{frame}
+
+\begin{frame}
+\frametitle{Trees}
+<<example-trees>>
+\end{frame}
+
+\begin{frame}
+\frametitle{AVM}
+<<example-avms>>
+\end{frame}
+
+% \begin{frame}
+% \frametitle{IPA symbols}
+% \input{examples/ipa.tex}
+% \end{frame}
+
+\begin{frame}
+\frametitle{Formulae}
+<<example-formulae>>
+\end{frame}
+
+\begin{frame}
+\frametitle{Tables}
+<<example-tables>>
+\end{frame}
+#+END_SRC
+
+#+NAME: example-beamer-blocks
+#+BEGIN_SRC latex
+\begin{frame}
+  \frametitle{Blocks}
+
+  \begin{block}{Title of a block}		% Titles may be left blank!
+    Body of a block
+  \end{block}
+
+  \begin{exampleblock}{Title of an exampleblock}
+    Body of an exampleblock
+  \end{exampleblock}
+
+  \begin{alertblock}{Title of an alertblock}
+    Body of an alertblock
+  \end{alertblock}
+  
+\end{frame}
+#+END_SRC
+
+#+NAME: example-beamer-columns
+#+BEGIN_SRC latex
+\begin{frame}
+  \frametitle{Columns}
+
+  \begin{columns}
+    \column{.55\textwidth}
+    First column
+		\pgfimage[width=\textwidth]{graphics/hhu-logo-hres}
+    \column{.45\textwidth}
+		Second column
+    \begin{enumerate}
+    \item bla
+    \item blupp
+    \end{enumerate}
+  \end{columns}
+
+\end{frame}
+#+END_SRC
+
+#+NAME: example-beamer-frames
+#+BEGIN_SRC latex
+\begin{frame}[label=frameoptions]
+\frametitle{The frame environment}
+
+  \hspace{-1em}{\tt $\backslash$begin\{frame\}[OVERLAY OPTION][OPTIONS]\{Title\}\{Subtitle\}}
+
+  \bigskip
+
+  {\bf OVERLAY OPTION:}
+  \begin{itemize}
+  \item {\tt <+->} 
+  \end{itemize}
+
+  \bigskip
+
+  {\bf OPTIONS:}
+  \begin{itemize}
+  \item {\tt b,c,t}: frame orientation
+  \item {\tt squeeze}: minimizes vertical margins
+  \item {\tt plain}: suppresses title, header and sidebar
+  \item {\tt label=name}: makes a frame reusable with {\tt $\backslash$againframe\{name\}} and can be used with hyperlinks.
+  \item {\tt allowframebreaks}: spread frame content over several slides 
+  \end{itemize}
+
+  \vfill 
+
+  Hyperlink: \hyperlink{frameoptions}{\beamerbutton{The frame environment}}
+
+\end{frame}
+#+END_SRC
+
+#+NAME: example-beamer-overlays
+#+BEGIN_SRC latex
+\begin{frame}
+  \frametitle{Overlays}
+  {\small 
+
+    Explicit specification of overlays:
+    \begin{itemize}
+    \item \color<2>{red}{Changing colors ...}
+    \item \alert<3>{Alert mode ...} 
+    \item \textbf<4>{Changing the font face ...}
+    \item \only<-5>{Changing existence ...} 
+    \item \visible<-6>{Changing visability ...}
+    \item \uncover<7->{Uncovering from grey ...}
+    \item \alt<8>{Specifying alternations ...}{... in one instruction}
+    \end{itemize}
+
+    \vfill
+    {\tt $\backslash$pause[<number>]} separates two overlays.
+
+    \vfill
+    Overlays in list environments:
+    \begin{itemize}
+    \item<9-> First item
+    \item<alert@10> Second item with alert
+    \item Alternatively, list environments can have an overlay option such as {\tt <+-> } or {\tt <+- alert@ +>}.
+    \end{itemize}
+
+    \vfill
+    Remember that you can declare overlays in the frame options.
+    \hyperlink{frameoptions}{\beamerbutton{The frame environment}}
+
+  }
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Overlays in Forest trees}
+
+%% This example may cause problems together with TeX Live 2016
+% \Forest{
+%   [,phantom
+%     [S,only=<+> [NP [N [I,lex]]]]
+%     [S,only=<+>,--> [NP [N [I,lex]]]]
+%     [S,only=<1-.> [V [wrote,lex]]]
+%     [S,only=<+>
+%       [NP [N [I,lex]]]
+%       [V [wrote,lex]]]
+%     [S,only=<+>,-->
+%       [NP [N [I,lex]]]
+%       [V [wrote,lex]]]
+%     [S,only=<1-.> [NP [D [a,lex]]]]
+%     [S,only=<+>
+%       [NP [N [I,lex]]]
+%       [V [wrote,lex]]
+%       [NP [D [a,lex]]]]
+%     [S,only=<+>,-->
+%       [NP [N [I,lex]]]
+%       [V [wrote,lex]]
+%       [NP,--> [D [a,lex]]]]
+%     [S,only=<1-.> [NP [N [novel,lex]]]]
+%     [S,only=<+>
+%       [NP [N [I,lex]]]
+%       [V [wrote,lex]]
+%       [NP
+%         [D [a,lex]]
+%         [N [novel,lex]]]]
+%     [S,only=<+->,alert=<.>,c=0
+%       [NP,c=1 [N [I,lex]]]
+%       [V [wrote,lex]]
+%       [NP,c=2
+%         [D [a,lex]]
+%         [N [novel,lex]]]] 
+%     ]
+%   }
+\end{frame}
+#+END_SRC
+
+** Readme
+
+#+NAME: readme
+#+BEGIN_SRC latex
+More \LaTeX{} templates on \url{https://github.com/timmli/latex-templates}.
+#+END_SRC
+
+** AVM
+
+#+NAME: example-avms
+#+BEGIN_SRC latex
+\begin{avm}
+  \@0\[\asort{eating}
+    actor & \@1 \\ 
+    theme & \@2 \]
+\end{avm}
+
+\medskip
+
+\noindent $\Rightarrow$ \url{http://nlp.stanford.edu/manning/tex/avm-doc.pdf}
+#+END_SRC
+
+** Citations
+
+#+NAME: example-citations
+#+BEGIN_SRC latex
+Example for invoking citations: \cite{Bech:63}, \citet[291]{Bech:63}, \citep{Bech:63}, \citealt{Bech:63}
+
+References are stored in \texttt{references.bib}.
+#+END_SRC
+
+** Linguistics
+
+#+NAME: example-linguistic-examples
+#+BEGIN_SRC latex
+\ex. This is a simple example.
+
+\exg. [Noch am Boden liegend$_i$], sei [auf ihn$_i$] eingetreten worden.\\
+still on.the floor lying be on him PART.kicked got\\
+`While he was still on the floor he was kicked.'\\
+(Cf. (422) in \citealt{Mueller:02})
+
+\noindent $\Rightarrow$ \url{http://texdoc.net/texmf-dist/doc/latex/linguex/linguex-doc.pdf} \\
+Note the Leipzig glossing rules: \url{http://www.eva.mpg.de/lingua/resources/glossing-rules.php}
+#+END_SRC
+
+#+NAME: example-ipa
+#+BEGIN_SRC latex
+\ex. \textipa{[""Ekspl@"neIS@n]}
+
+$\Rightarrow$ \url{http://en.wikibooks.org/wiki/LaTeX/Linguistics#IPA_characters}
+#+END_SRC
+
+** Formulae
+
+#+NAME: example-formulae
+#+BEGIN_SRC latex
+Formulae in texts: $a^2 + b^2 = c^2$
+
+\noindent Formulae in equation environment:
+\begin{equation}
+a^2 + b^2 = c^2
+\end{equation}
+$\Rightarrow$ \url{http://en.wikibooks.org/wiki/LaTeX/Mathematics}
+#+END_SRC
+
+** Examples for texts
+
+#+NAME: text-examples
+#+BEGIN_SRC latex
+\section{Citation}
+
+<<example-citations>>
+
+\section{Linguistic examples}
+
+<<example-linguistic-examples>>
+
+\section{Trees}
+
+<<example-trees>>
+
+\section{AVM}
+
+<<example-avms>>
+
+\section{IPA symbols}
+
+<<example-ipa>>
+
+\section{Formulae}
+
+<<examples-formula>>
+
+\section{Tables}
+
+<<examples-tables>>
+#+END_SRC
+
+** Poster
+
+#+NAME: poster-examples
+#+BEGIN_SRC latex :noweb yes :tangle templates/poster-template/poster-examples.tex
+<<example-poster-notes>>
+#+END_SRC
+
+#+NAME: example-poster-notes
+#+BEGIN_SRC latex
+\note{Note with default behavior}
+\note[targetoffsetx=12cm, targetoffsety=-1cm, angle=20, rotate=25]{Note \\ offset and rotated}
+\note[targetoffsetx=-10cm, targetoffsety=1cm, angle=-10, connection=true]{Connected note}
+#+END_SRC
+
+** TikZ
+
+#+NAME: example-standalone-tikz
+#+BEGIN_SRC latex
+\documentclass[
+	%pstricks=true
+	,crop=true
+	,varwidth=\maxdimen
+	]{standalone}
+
+\input{settings/pdflatex_setup.tex}
+\input{settings/tikz_setup.tex}
+\input{settings/forest_setup.tex}
+\input{settings/avm_setup.tex}
+
+\begin{document}
+
+\begin{forest}
+[,phantom,s sep=2em
+  [NP,name=peter,tier=1 [\textit{Peter}]]
+  %%%%%%%%%%%%%%%%%
+  [VP,name=easily_r,tier=1
+    [ADV [\textit{easily}]]
+    [VP*,name=easily_f]]
+  %%%%%%%%%%%%%%%%%
+  [S
+    [NP,name=rep_np1]
+    [VP,name=rep_vp,tier=1  
+      [V [\textit{repaired}]]
+      [NP,name=rep_np2,tier=2]]]
+  %%%%%%%%%%%%%%%%%
+  [NP,name=fridge,tier=2 [\textit{the fridge},triangle]]
+]
+\draw[->,dashed,thick,draw=gray, bend angle=25, bend left] (peter) to (rep_np1);
+\draw[->,dashed,thick,draw=gray, bend angle=10, bend right,shorten >=-0.6em] (easily_f) to (rep_vp.south west);
+\draw[->,dashed,thick,draw=gray, bend angle=25, bend right] (fridge) to (rep_np2);
+\end{forest}
+
+\end{document}
+#+END_SRC
+
+** Tables
+
+#+NAME: example-tables
+#+BEGIN_SRC latex
+\begin{tabular}{c|c|c}
+\hline
+cell 11 & cell 12 & cell 13 \\
+\hline
+cell 21 & cell 22 & cell 23 \\
+\hline
+\end{tabular}
+#+END_SRC
+
+** Trees
+
+#+NAME: example-trees
+#+BEGIN_SRC latex
+% \Forest{
+%   [S [NP] 
+%     [VP [V  [\textit{eats}] ]
+%       [NP] ]]
+% }
+
+%% This example may cause problems together with TeX Live 2016
+% \Forest{
+%   [,phantom
+%     [S,--> [NP,--> [D [the]]]]
+%     [S,--> [NP,--> [A [absent]]]]
+%     [S, [NP [N [student]]]]
+%     ]
+% } 
+
+\Forest{
+  [,phantom
+    [S,name=root,red subtree
+      [AUX [\textit{does}] ]
+      [S
+        [NP]
+        [VP,name=vp[V [\textit{say}]] [S*]]]]
+    [S,Xs=10cm,Ys=5cm
+      [NP]
+      [S,name=s
+        [NP [$\varepsilon$] ]
+        [VP 
+          [VP [V [\textit{walks}]]] 
+          [PP]]]]
+    ]
+  \draw[->,gray,thick,dashed,bend right=10](vp)to(s);
+}
+
+\noindent $\Rightarrow$ \url{http://mirrors.ctan.org/graphics/pgf/contrib/forest/forest-doc.pdf}
+#+END_SRC
+
+* Makefile
+
+** Beamer
+
+#+NAME: beamer-makefile
+#+BEGIN_SRC makefile :noweb yes :tangle templates/beamer-template/Makefile
+SHELL := /bin/bash
+
+BEAMER_FILES =  myMacros.tex \
+	beamer-settings.tex \
+	$(wildcard packages/*.sty) \
+	beamer-examples.tex \
+	$(wildcard bst/biblatex-sp-unified/[^.]*) \
+	$(wildcard graphics/*.pdf) 
+
+test_beamer:
+	rm -fr test
+	mkdir test
+	cd test; mkdir beamer-template
+	cp -r --parents $(BEAMER_FILES) test/beamer-template
+	cp beamer-template.org beamer-template.tex \
+		themes/* \
+		references.bib \
+		latexmkrc \
+		test
+	cd test; \
+			latexmk -pdf beamer-template.tex
+
+release_beamer:
+	rm -fr temp
+	mkdir temp
+	cd temp; mkdir beamer-template
+	cp -r --parents $(BEAMER_FILES) temp/beamer-template
+	cp beamer-template.org beamer-template.tex \
+		themes/* \
+		references.bib \
+		latexmkrc \
+		temp
+	cd temp; zip -r beamer-template.zip *; mv beamer-template.zip ..
+	rm -fr temp
+#+END_SRC
+
+** Poster
+
+#+NAME: poster-makefile
+#+BEGIN_SRC makefile :noweb yes :tangle templates/poster-template/Makefile
+SHELL := /bin/bash
+
+POSTER_FILES =  myMacros.tex \
+	poster-style.tex \
+	poster-settings.tex \
+	graphics/sfb-logo-quer.pdf \
+	graphics/hhu-logo-hres.pdf \
+	$(wildcard packages/*.sty) \
+	poster-examples.tex  \
+	$(wildcard bst/biblatex-sp-unified/[^.]*)
+
+test_poster:
+	rm -fr test
+	mkdir test
+	cd test; mkdir poster-template
+	cp -r --parents $(POSTER_FILES) test/poster-template
+	cp poster-template.tex \
+		references.bib \
+		latexmkrc \
+		test
+	cd test; \
+			latexmk -pdf poster-template.tex
+
+release_poster:
+	rm -fr temp
+	mkdir temp
+	cd temp; mkdir poster-template
+	cp -r --parents $(POSTER_FILES) temp/poster-template
+	cp poster-template.tex \
+		references.bib \
+		latexmkrc \
+		temp
+	cd temp; zip -r poster-template.zip *; mv poster-template.zip ..
+	rm -fr temp
+#+END_SRC
+
+** Teaching
+
+#+NAME: teaching-makefile
+#+BEGIN_SRC makefile :noweb yes :tangle templates/teaching-template/Makefile
+SHELL := /bin/bash
+
+HAUSARBEIT_FILES =  myMacros.tex \
+	settings/text-settings.tex \
+	$(wildcard packages/*.sty) \
+	examples/hausarbeit-examples.tex \
+	$(wildcard bst/biblatex-sp-unified/[^.]*) \
+	hausarbeit-template.tex \
+	references.bib
+
+test_hausarbeit:
+	rm -fr test
+	mkdir test
+	cp -r --parents $(HAUSARBEIT_FILES) test
+	cd test; \
+			latexmk -pdf hausarbeit-template.tex
+
+release_hausarbeit:
+	rm -fr temp
+	mkdir temp
+	cp -r --parents $(HAUSARBEIT_FILES) temp
+	cd temp; zip -r hausarbeit-template.zip *; mv hausarbeit-template.zip ..
+	rm -fr temp
+
+#-------------------------------------------------------------------------------
+
+ESSAY_FILES =  myMacros.tex \
+	settings/text-settings.tex \
+	settings/scrarticle-settings.tex \
+	$(wildcard packages/*.sty) \
+	examples/essay-examples.tex  \
+	$(wildcard bst/biblatex-sp-unified/[^.]*) \
+	references.bib \
+  essay-template.tex
+
+test_essay:
+	rm -fr test
+	mkdir test
+	cp -r --parents $(ESSAY_FILES) test
+	cd test; \
+			latexmk -pdf essay-template.tex
+
+release_essay:
+	rm -fr tmp
+	mkdir temp
+	cp -r --parents $(ESSAY_FILES) temp
+	cd temp; zip -r essay-template.zip *; mv essay-template.zip ..
+	rm -fr temp
+
+
+#-------------------------------------------------------------------------------
+
+release_all: release_hausarbeit release_essay
+
+test_all: test_hausarbeit test_essay
+
+#+END_SRC
+
+** Text
+
+#+NAME: text-makefile
+#+BEGIN_SRC makefile :noweb yes :tangle templates/text-template/Makefile
+SHELL := /bin/bash
+
+ABSTRACT_FILES =  myMacros.tex \
+	text-settings.tex \
+	$(wildcard packages/*.sty) \
+	abstract-examples.tex  \
+	$(wildcard bst/biblatex-sp-unified/[^.]*)
+
+test_abstract:
+	rm -fr test
+	mkdir test
+	cd test; mkdir text-template
+	cp -r --parents $(ABSTRACT_FILES) test/text-template
+	cp abstract-template.tex \
+		references.bib \
+		latexmkrc \
+		test
+	cd test; \
+			latexmk -pdf abstract-template.tex
+
+release_abstract:
+	rm -fr temp
+	mkdir temp
+	cd temp; mkdir text-template
+	cp -r --parents $(ABSTRACT_FILES) temp/text-template
+	cp abstract-template.tex \
+		references.bib \
+		latexmkrc \
+		temp
+	cd temp; zip -r abstract-template.zip *; mv abstract-template.zip ..
+	rm -fr temp
+
+#-------------------------------------------------------------------------------
+
+ARTICLE_FILES =  myMacros.tex \
+	text-settings.tex \
+	scrarticle-settings.tex \
+	$(wildcard packages/*.sty) \
+	article-examples.tex  \
+	$(wildcard bst/biblatex-sp-unified/[^.]*)
+
+test_article:
+	rm -fr test
+	mkdir test
+	cd test; mkdir text-template
+	cp -r --parents $(ARTICLE_FILES) test/text-template
+	cp article-template.tex \
+		references.bib \
+		latexmkrc \
+		test
+	cd test; \
+			latexmk -pdf article-template.tex
+
+release_article:
+	rm -fr tmp
+	mkdir temp
+	cd temp; mkdir text-template
+	cp -r --parents $(ARTICLE_FILES) temp/text-template
+	cp article-template.tex \
+		references.bib \
+		latexmkrc \
+		temp
+	cd temp; zip -r article-template.zip *; mv article-template.zip ..
+	rm -fr temp
+
+#-------------------------------------------------------------------------------
+
+BOOK_FILES =  myMacros.tex \
+	text-settings.tex \
+	$(wildcard packages/*.sty) \
+	book-examples.tex  \
+	$(wildcard bst/biblatex-sp-unified/[^.]*)
+
+test_book:
+	rm -fr test
+	mkdir test
+	cd test; mkdir text-template
+	cp -r --parents $(BOOK_FILES) test/text-template
+	cp book-template.tex \
+		references.bib \
+		latexmkrc \
+		test
+	cd test; \
+			latexmk -pdf book-template.tex
+
+release_book:
+	rm -fr tmp
+	mkdir temp
+	cd temp; mkdir text-template
+	cp -r --parents $(BOOK_FILES) temp/text-template
+	cp book-template.tex \
+		references.bib \
+		latexmkrc \
+		temp
+	cd temp; zip -r book-template.zip *; mv book-template.zip ..
+	rm -fr temp
+
+#-------------------------------------------------------------------------------
+
+release_all: release_abstract release_article release_book
+
+test_all: test_abstract test_article test_book
+
+#+END_SRC
+
+** JLM
+
+#+NAME: jlm-makefile
+#+BEGIN_SRC makefile :noweb yes :tangle templates/jlm-template/Makefile
+SHELL := /bin/bash
+
+JLM_FILES =  myMacros.tex \
+	references.bib \
+	jlm-article-template.org \
+	latexmkrc \
+	jlm.bst jlm.cls \
+	cc-by.pdf \
+	$(wildcard packages/*.sty) \
+	fonts/* \
+	doc/*
+
+release_jlm:
+	rm -fr temp
+	mkdir temp
+	cp -r --parents $(JLM_FILES) temp
+	cd temp; zip -r jlm-template.zip *; mv jlm-template.zip ..
+	rm -fr temp
+
+#+END_SRC
+
+** Langscibook
+
+#+NAME: langscibook-makefile
+#+BEGIN_SRC makefile :noweb yes :tangle templates/langscibook-template/Makefile
+SHELL := /bin/bash
+
+LANGSCI_FILES =  myMacros.tex \
+	references.bib \
+	langsci-paper-template.org \
+	latexmkrc \
+	$(wildcard packages/*.sty) 
+
+release_langscibook:
+	rm -fr temp
+	mkdir temp
+	cp -r --parents $(LANGSCI_FILES) temp
+	cp -r langscibook/langsci temp/
+	cd temp; zip -r langscibook-template.zip *; mv langscibook-template.zip ..
+	rm -fr temp
+
+#+END_SRC
+
+** Standalone
+
+#+NAME: standalone-makefile
+#+BEGIN_SRC makefile :noweb yes :tangle templates/standalone-template/Makefile
+SHELL := /bin/bash
+
+STANDALONE_FILES =  myMacros.tex \
+	$(wildcard packages/*.sty) 
+
+test_standalone:
+	rm -fr test
+	mkdir test
+	cd test; mkdir standalone-template
+	cp -r --parents $(STANDALONE_FILES) test/standalone-template
+	cp standalone-template.tex \
+		test
+	cd test; \
+			latexmk -pdf standalone-template.tex
+
+release_standalone:
+	rm -fr temp
+	mkdir temp
+	cd temp; mkdir standalone-template
+	cp -r --parents $(STANDALONE_FILES) temp/standalone-template
+	cp standalone-template.tex \
+		temp
+	cd temp; zip -r standalone-template.zip *; mv standalone-template.zip ..
+	rm -fr temp
+
+#+END_SRC
+
+* latexmk
+
+#+NAME: beamer-latexmk
+#+BEGIN_SRC shell :noweb yes :tangle templates/beamer-template/latexmkrc 
+$pdflatex = 'pdflatex %O %S';
+#+END_SRC
+
+#+NAME: poster-latexmk
+#+BEGIN_SRC shell :noweb yes :tangle templates/poster-template/latexmkrc 
+$pdflatex = 'pdflatex %O %S';
+#+END_SRC
+
+#+NAME: text-latexmk
+#+BEGIN_SRC shell :noweb yes :tangle templates/text-template/latexmkrc 
+$pdflatex = 'pdflatex %O %S';
+#+END_SRC
+
+#+NAME: jlm-latexmk
+#+BEGIN_SRC shell :noweb yes :tangle templates/jlm-template/latexmkrc 
+$pdflatex = 'xelatex %O %S';
+#+END_SRC
+
+#+NAME: langscibook-latexmk
+#+BEGIN_SRC shell :noweb yes :tangle templates/langscibook-template/latexmkrc 
+$pdflatex = 'xelatex %O %S';
+#+END_SRC
 
 * Local variables
 

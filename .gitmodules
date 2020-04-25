@@ -1,6 +1,21 @@
-[submodule "bst/biblatex-sp-unified"]
-	path = bst/biblatex-sp-unified
-	url = https://github.com/semprag/biblatex-sp-unified.git
-[submodule "templates/langscibook"]
-	path = templates/langscibook
-	url = https://github.com/langsci/langscibook.git
+[submodule "templates/beamer-template"]
+	path = templates/beamer-template
+	url = https://github.com/timmli/beamer-template.git
+[submodule "templates/poster-template"]
+	path = templates/poster-template
+	url = https://github.com/timmli/poster-template.git
+[submodule "templates/text-template"]
+	path = templates/text-template
+	url = https://github.com/timmli/text-template.git
+[submodule "templates/teaching-template"]
+	path = templates/teaching-template
+	url = https://github.com/timmli/teaching-template.git
+[submodule "templates/jlm-template"]
+	path = templates/jlm-template
+	url = https://github.com/timmli/jlm-template.git
+[submodule "templates/langscibook-template"]
+	path = templates/langscibook-template
+	url = https://github.com/timmli/langscibook-template.git
+[submodule "templates/standalone-template"]
+	path = templates/standalone-template
+	url = https://github.com/timmli/standalone-template.git
