@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 
-release_all: release_abstract release_article release_beamer release_book release_jlm release_langscibook release_poster release_standalone
+release_all: release_abstract release_article release_beamer release_book release_jlm release_langscibook release_poster release_standalone release_hausarbeit release_essay
 
 release_abstract:
 	cd templates/text-template; \
@@ -41,3 +41,13 @@ release_standalone:
 	cd templates/standalone-template; \
 		make release_standalone; \
 		mv standalone-template.zip ..
+
+release_hausarbeit:
+	cd templates/teaching-template; \
+		make release_hausarbeit; \
+		mv hausarbeit-template.zip ..
+
+release_essay:
+	cd templates/teaching-template; \
+		make release_essay; \
+		mv essay-template.zip ..
