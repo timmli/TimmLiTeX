@@ -19,3 +19,6 @@
 [submodule "templates/jlm-template"]
 	path = templates/jlm-template
 	url = https://github.com/timmli/jlm-template.git
+[submodule "templates/langscibook-template"]
+	path = templates/langscibook-template
+	url = https://github.com/timmli/langscibook-template.git

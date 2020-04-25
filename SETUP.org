@@ -580,8 +580,10 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 
 ** LangSci template
 
+https://langsci-press.org/
+
 #+NAME: langsci-paper-template-org
-#+BEGIN_SRC org :noweb yes :tangle templates/langsci-paper-template.org
+#+BEGIN_SRC org :noweb yes :tangle templates/langscibook-template/langsci-paper-template.org
 ,#+TITLE: Title of paper
 ,#+AUTHOR: John Doe\affiliation{Elfenbeinturm, Fantasien}
 :Settings:
@@ -680,6 +682,8 @@ Remember to first add the class [[https://github.com/langsci/latex][langscibook]
 #+END_SRC
 
 ** JLM template
+
+http://jlm.ipipan.waw.pl/index.php/JLM
 
 #+NAME: jlm-article-template-org
 #+BEGIN_SRC org :noweb yes :tangle templates/jlm-template/jlm-article-template.org
@@ -1483,6 +1487,10 @@ Local Beamer themes are executed relative to the directory of the master file. T
 Some templates require it to have the tikz settings in a separate sty-file.
 
 #+BEGIN_SRC latex :noweb yes :tangle templates/jlm-template/packages/tikz-settings.sty
+<<tikz-settings.sty>>
+#+END_SRC
+
+#+BEGIN_SRC latex :noweb yes :tangle templates/langscibook-template/packages/tikz-settings.sty
 <<tikz-settings.sty>>
 #+END_SRC
 
@@ -2622,7 +2630,7 @@ pdfkeywords={},%
 
 #+END_SRC
 
-* Macros
+* myMacros
 
 #+BEGIN_SRC latex :noweb yes :tangle templates/beamer-template/myMacros.tex
 <<myMacros.tex>>
@@ -2641,6 +2649,14 @@ pdfkeywords={},%
 #+END_SRC
 
 #+BEGIN_SRC latex :noweb yes :tangle templates/jlm-template/myMacros.tex
+<<myMacros.tex>>
+#+END_SRC
+
+#+BEGIN_SRC latex :noweb yes :tangle templates/langscibook-template/myMacros.tex
+<<myMacros.tex>>
+#+END_SRC
+
+#+BEGIN_SRC latex :noweb yes :tangle templates/standalone-template/myMacros.tex
 <<myMacros.tex>>
 #+END_SRC
 
@@ -3463,7 +3479,7 @@ test_all: test_abstract test_article test_book
 
 ** JLM
 
-#+NAME: teaching-makefile
+#+NAME: jlm-makefile
 #+BEGIN_SRC makefile :noweb yes :tangle templates/jlm-template/Makefile
 SHELL := /bin/bash
 
@@ -3482,6 +3498,28 @@ release_jlm:
 	mkdir temp
 	cp -r --parents $(JLM_FILES) temp
 	cd temp; zip -r jlm-template.zip *; mv jlm-template.zip ..
+	rm -fr temp
+
+#+END_SRC
+
+** Langscibook
+
+#+NAME: langscibook-makefile
+#+BEGIN_SRC makefile :noweb yes :tangle templates/langscibook-template/Makefile
+SHELL := /bin/bash
+
+LANGSCI_FILES =  myMacros.tex \
+	references.bib \
+	langsci-paper-template.org \
+	latexmkrc \
+	$(wildcard packages/*.sty) 
+
+release_jlm:
+	rm -fr temp
+	mkdir temp
+	cp -r --parents $(LANGSCI_FILES) temp
+	cp -r langscibook/langsci temp/
+	cd temp; zip -r langsci-template.zip *; mv langsci-template.zip ..
 	rm -fr temp
 
 #+END_SRC
@@ -3505,6 +3543,11 @@ $pdflatex = 'pdflatex %O %S';
 
 #+NAME: jlm-latexmk
 #+BEGIN_SRC shell :noweb yes :tangle templates/jlm-template/latexmkrc 
+$pdflatex = 'xelatex %O %S';
+#+END_SRC
+
+#+NAME: langscibook-latexmk
+#+BEGIN_SRC shell :noweb yes :tangle templates/langscibook-template/latexmkrc 
 $pdflatex = 'xelatex %O %S';
 #+END_SRC
 
