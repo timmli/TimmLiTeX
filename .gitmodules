@@ -10,3 +10,6 @@
 [submodule "templates/poster-template"]
 	path = templates/poster-template
 	url = https://github.com/timmli/poster-template.git
+[submodule "templates/text-template"]
+	path = templates/text-template
+	url = https://github.com/timmli/text-template.git

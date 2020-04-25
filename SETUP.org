@@ -68,7 +68,7 @@ In order to compile these templates, press =C-c C-v t= , or evaluate the followi
 ** Abstract template
 
 #+NAME: abstract-template-org
-#+BEGIN_SRC org :noweb yes :tangle templates/abstract-template.org
+#+BEGIN_SRC org :noweb yes :tangle templates/text-template/abstract-template.org
 ,#+TITLE: Title of paper
 ,#+AUTHOR: John Doe (Elfenbeinturm, Fantasien)
 :Settings:
@@ -83,7 +83,7 @@ In order to compile these templates, press =C-c C-v t= , or evaluate the followi
 ,#+LATEX_CLASS_OPTIONS: [<<abstract-options>>]
 ,#+LATEX_COMPILER: pdflatex
 ,#+LATEX_HEADER: <<abstract-settings>>
-,#+LATEX_HEADER: \input{myMacros}
+,#+LATEX_HEADER: \input{text-template/myMacros}
 ,#+LATEX_HEADER: %\bibliography{references}
 :end:
 
@@ -122,7 +122,7 @@ Remember to first add the class [[https://github.com/langsci/latex][langscibook]
 #+END_SRC
 
 #+NAME: abstract-template-tex
-#+BEGIN_SRC latex :noweb yes :tangle templates/abstract-template.tex
+#+BEGIN_SRC latex :noweb yes :tangle templates/text-template/abstract-template.tex
 \documentclass[
 <<abstract-options>>
 ]{article}
@@ -133,7 +133,7 @@ Remember to first add the class [[https://github.com/langsci/latex][langscibook]
 % HEADER
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input{myMacros}
+\input{text-template/myMacros}
 
 <<abstract-body>>
 #+END_SRC
@@ -155,9 +155,11 @@ Remember to first add the class [[https://github.com/langsci/latex][langscibook]
 
 \maketitle
 
+% TODO
+
 \paragraph{Citation example}
 
-\input{examples/citation.tex}
+<<citation-example>>
 
 \paragraph{Blindtext} \lipsum
 
@@ -172,7 +174,7 @@ Remember to first add the class [[https://github.com/langsci/latex][langscibook]
 ** Article template
 
 #+NAME: article-template-org
-#+BEGIN_SRC org :noweb yes :tangle templates/article-template.org
+#+BEGIN_SRC org :noweb yes :tangle templates/text-template/article-template.org
 ,#+TITLE: Title of paper
 ,#+AUTHOR: John Doe @@latex:\affiliation{Elfenbeinturm, Fantasien, \url{some@email.address}}@@
 :Settings:
@@ -187,7 +189,7 @@ Remember to first add the class [[https://github.com/langsci/latex][langscibook]
 ,#+LATEX_CLASS_OPTIONS: [<<article-options>>]
 ,#+LATEX_COMPILER: pdflatex
 ,#+LATEX_HEADER: <<article-settings>>
-,#+LATEX_HEADER: \input{myMacros}
+,#+LATEX_HEADER: \input{text-template/myMacros}
 ,#+LATEX_HEADER: %\bibliography{references}
 :end:
 
@@ -231,7 +233,7 @@ Remember to first add the class [[https://github.com/langsci/latex][langscibook]
 
 
 #+NAME: article-template-tex
-#+BEGIN_SRC latex :noweb yes :tangle templates/article-template.tex
+#+BEGIN_SRC latex :noweb yes :tangle templates/text-template/article-template.tex
 \documentclass[
 <<article-options>>
 ]{scrartcl}
@@ -242,7 +244,7 @@ Remember to first add the class [[https://github.com/langsci/latex][langscibook]
 %   Macros   % 
 %%%%%%%%%%%%%%
 
-\input{myMacros}
+\input{text-template/myMacros}
 
 <<article-body>>
 #+END_SRC
@@ -270,11 +272,9 @@ Remember to first add the class [[https://github.com/langsci/latex][langscibook]
 This is an abstract: \lipsum[1]
 \end{abstract}
 
-\section{Information about this template}
+% TODO
 
-\input{examples/README.tex}
-
-\input{examples/master-examples.tex}
+\input{text-template/article-examples}
 
 \section{Blindtext}
 
@@ -510,7 +510,7 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 ** Book template
 
 #+NAME: book-template-tex
-#+BEGIN_SRC latex :noweb yes :tangle templates/book-template.tex
+#+BEGIN_SRC latex :noweb yes :tangle templates/text-template/book-template.tex
 \documentclass[
 <<book-options>>
 ]{scrbook}
@@ -521,7 +521,7 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 %   Macros   % 
 %%%%%%%%%%%%%%
 
-\input{myMacros}   % the content of myMacros.tex goes here
+\input{text-template/myMacros}   % the content of myMacros.tex goes here
 
 <<book-body>>
 #+END_SRC
@@ -550,14 +550,7 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 \tableofcontents
 \mainmatter
 
-
-\chapter{Information about this template}
-
-\input{examples/README.tex}
-
-\chapter{\LaTeX\ Examples}
-
-\input{examples/master-examples.tex}
+\input{text-template/book-examples}
 
 \chapter{Blindtext}
 
@@ -862,7 +855,7 @@ numbers=noenddot,
 
 \input{settings/scrarticle_setup.tex}
 
-\input{settings/standard-settings}
+\input{settings/text-settings}
 
 
 \begin{document}
@@ -1078,6 +1071,7 @@ numbers=noenddot,
 \usepackage{linguex}
 \renewcommand{\firstrefdash}{}
 
+\usepackage{standalone-template/packages/avm}
 <<avm-settings>>
 
 % \usepackage[inference]{semantic} % for CCG 
@@ -1507,7 +1501,7 @@ Local Beamer themes are executed relative to the directory of the master file. T
 \endinput
 #+END_SRC
 
-** textpos-settings.sty
+** COMMENT textpos-settings.sty
 
 #+NAME: textpos-settings.sty
 #+BEGIN_SRC latex :noweb yes :tangle packages/textpos-settings.sty
@@ -1530,7 +1524,7 @@ Local Beamer themes are executed relative to the directory of the master file. T
 
 #+NAME: abstract-settings
 #+BEGIN_SRC latex
-\input{settings/standard-settings}
+\input{text-template/text-settings}
 
 \usepackage[left=25mm, right=25mm, top=25mm, bottom=25mm, noheadfoot]{geometry}
 \pagenumbering{gobble}
@@ -1559,8 +1553,8 @@ Local Beamer themes are executed relative to the directory of the master file. T
 
 #+NAME: article-settings
 #+BEGIN_SRC latex
-\input{settings/scrarticle-settings}
-\input{settings/standard-settings}
+\input{text-template/scrarticle-settings}
+\input{text-template/text-settings}
 #+END_SRC
 
 ** Beamer settings
@@ -1617,6 +1611,7 @@ aspectratio=43,
   % \setlength{\Extopsep}{1ex}   % vertical margin in linguex examples
 }
 
+\usepackage{beamer-template/packages/avm}
 <<avm-settings>>
 
 <<listings-settings>>
@@ -1651,13 +1646,13 @@ numbers=noenddot,
 #+BEGIN_SRC latex
 \usepackage{datetime}
 
-\input{settings/standard-settings}
+\input{text-template/text-settings}
 #+END_SRC
 
-** Standard settings
+** Text settings
 
-#+NAME: standard-settings
-#+BEGIN_SRC latex :noweb yes :tangle settings/standard-settings.tex
+#+NAME: text-settings
+#+BEGIN_SRC latex :noweb yes :tangle templates/text-template/text-settings.tex
 <<pdflatex-settings>>
 
 %% Trees and graphics
@@ -1683,12 +1678,15 @@ numbers=noenddot,
 \usepackage{linguex}
 \renewcommand{\firstrefdash}{}
 
+\usepackage{text-template/packages/avm}
 <<avm-settings>>
 
 % \usepackage[inference]{semantic} % for CCG 
 % \usepackage{packages/ccg}
 
 %% Bibliography
+\newcommand{\mycitestyle}{text-template/bst/biblatex-sp-unified/cbx/sp-authoryear-comp}
+\newcommand{\mystyle}{text-template/bst/biblatex-sp-unified/bbx/biblatex-sp-unified}
 <<biblatex-settings>> 
 % \input{settings/natbib_bibtex_setup.tex} 
 
@@ -1841,7 +1839,6 @@ numbers=noenddot,
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 #+END_SRC
-
 
 * Package settings
 
@@ -2015,8 +2012,6 @@ numbers=noenddot,
 %%%%%%%%%%%%%%%%%%%%%%
 %   AVM SETTINGS     % 
 %%%%%%%%%%%%%%%%%%%%%%
-
-\usepackage{beamer-template/packages/avm}
 
 \avmoptions{center,topright}  % topright determines the position of \osort
 \avmfont{\scshape}
@@ -2389,7 +2384,7 @@ numbers=noenddot,
 ** scrarticle
 
 #+NAME: scrarticle-settings
-#+BEGIN_SRC latex :noweb yes :tangle settings/scrarticle-settings.tex
+#+BEGIN_SRC latex :noweb yes :tangle templates/text-template/scrarticle-settings.tex
 \usepackage{datetime}
 \usepackage{ifdraft}
 
@@ -2598,7 +2593,10 @@ numbers=noenddot,
 \usepackage[inference]{semantic} % for CCG 
 \usepackage{packages/ccg} 
 \usepackage{tipa}
+
+\usepackage{teaching-template/packages/avm}
 <<avm-settings>>
+
 <<forest-settings>>
 
 % BibTex
@@ -2626,6 +2624,10 @@ pdfkeywords={},%
 #+END_SRC
 
 #+BEGIN_SRC latex :noweb yes :tangle templates/poster-template/myMacros.tex
+<<myMacros.tex>>
+#+END_SRC
+
+#+BEGIN_SRC latex :noweb yes :tangle templates/text-template/myMacros.tex
 <<myMacros.tex>>
 #+END_SRC
 
@@ -2734,6 +2736,39 @@ pdfkeywords={},%
 #+END_SRC
 
 * Examples
+
+** Text
+
+#+NAME: abstract-examples
+#+BEGIN_SRC latex :noweb yes :tangle templates/text-template/abstract-examples.tex
+
+<<citation-example>>
+
+#+END_SRC
+
+#+NAME: article-examples
+#+BEGIN_SRC latex :noweb yes :tangle templates/text-template/article-examples.tex
+
+\section{Information about this template}
+
+<<readme-example>>
+
+<<citation-example>>
+
+#+END_SRC
+
+#+NAME: book-examples
+#+BEGIN_SRC latex :noweb yes :tangle templates/text-template/book-examples.tex
+
+\chapter{Information about this template}
+
+<<readme-example>>
+
+\chapter{Citation examples}
+
+<<citation-example>>
+
+#+END_SRC
 
 ** Readme
 
@@ -3144,7 +3179,6 @@ cell 21 & cell 22 & cell 23 \\
 \noindent $\Rightarrow$ \url{http://mirrors.ctan.org/graphics/pgf/contrib/forest/forest-doc.pdf}
 #+END_SRC
 
-
 * Makefile
 
 ** Beamer
@@ -3161,6 +3195,7 @@ BEAMER_FILES =  myMacros.tex \
 	$(wildcard graphics/*.pdf) 
 
 test_beamer:
+	rm -fr test
 	mkdir test
 	cd test; mkdir beamer-template
 	cp -r --parents $(BEAMER_FILES) test/beamer-template
@@ -3173,6 +3208,7 @@ test_beamer:
 			latexmk -pdf beamer-template.tex
 
 release_beamer:
+	rm -fr temp
 	mkdir temp
 	cd temp; mkdir beamer-template
 	cp -r --parents $(BEAMER_FILES) temp/beamer-template
@@ -3201,6 +3237,7 @@ POSTER_FILES =  myMacros.tex \
 	$(wildcard bst/biblatex-sp-unified/[^.]*)
 
 test_poster:
+	rm -fr test
 	mkdir test
 	cd test; mkdir poster-template
 	cp -r --parents $(POSTER_FILES) test/poster-template
@@ -3212,6 +3249,7 @@ test_poster:
 			latexmk -pdf poster-template.tex
 
 release_poster:
+	rm -fr temp
 	mkdir temp
 	cd temp; mkdir poster-template
 	cp -r --parents $(POSTER_FILES) temp/poster-template
@@ -3223,9 +3261,116 @@ release_poster:
 	rm -fr temp
 #+END_SRC
 
-* latexmk
+** Text
 
-** Beamer
+#+NAME: poster-makefile
+#+BEGIN_SRC makefile :noweb yes :tangle templates/text-template/Makefile
+SHELL := /bin/bash
+
+ABSTRACT_FILES =  myMacros.tex \
+	text-settings.tex \
+	$(wildcard packages/*.sty) \
+	abstract-examples.tex  \
+	$(wildcard bst/biblatex-sp-unified/[^.]*)
+
+test_abstract:
+	rm -fr test
+	mkdir test
+	cd test; mkdir text-template
+	cp -r --parents $(ABSTRACT_FILES) test/text-template
+	cp abstract-template.tex \
+		references.bib \
+		latexmkrc \
+		test
+	cd test; \
+			latexmk -pdf abstract-template.tex
+
+release_abstract:
+	rm -fr temp
+	mkdir temp
+	cd temp; mkdir text-template
+	cp -r --parents $(ABSTRACT_FILES) temp/text-template
+	cp abstract-template.tex \
+		references.bib \
+		latexmkrc \
+		temp
+	cd temp; zip -r abstract-template.zip *; mv abstract-template.zip ..
+	rm -fr temp
+
+#-------------------------------------------------------------------------------
+
+ARTICLE_FILES =  myMacros.tex \
+	text-settings.tex \
+	scrarticle-settings.tex \
+	$(wildcard packages/*.sty) \
+	article-examples.tex  \
+	$(wildcard bst/biblatex-sp-unified/[^.]*)
+
+test_article:
+	rm -fr test
+	mkdir test
+	cd test; mkdir text-template
+	cp -r --parents $(ARTICLE_FILES) test/text-template
+	cp article-template.tex \
+		references.bib \
+		latexmkrc \
+		test
+	cd test; \
+			latexmk -pdf article-template.tex
+
+release_article:
+	rm -fr tmp
+	mkdir temp
+	cd temp; mkdir text-template
+	cp -r --parents $(ARTICLE_FILES) temp/text-template
+	cp article-template.tex \
+		references.bib \
+		latexmkrc \
+		temp
+	cd temp; zip -r article-template.zip *; mv article-template.zip ..
+	rm -fr temp
+
+#-------------------------------------------------------------------------------
+
+BOOK_FILES =  myMacros.tex \
+	text-settings.tex \
+	$(wildcard packages/*.sty) \
+	book-examples.tex  \
+	$(wildcard bst/biblatex-sp-unified/[^.]*)
+
+test_book:
+	rm -fr test
+	mkdir test
+	cd test; mkdir text-template
+	cp -r --parents $(BOOK_FILES) test/text-template
+	cp book-template.tex \
+		references.bib \
+		latexmkrc \
+		test
+	cd test; \
+			latexmk -pdf book-template.tex
+
+release_book:
+	rm -fr tmp
+	mkdir temp
+	cd temp; mkdir text-template
+	cp -r --parents $(BOOK_FILES) temp/text-template
+	cp book-template.tex \
+		references.bib \
+		latexmkrc \
+		temp
+	cd temp; zip -r book-template.zip *; mv book-template.zip ..
+	rm -fr temp
+
+#-------------------------------------------------------------------------------
+
+release_all: release_abstract release_article release_book
+
+test_all: test_abstract test_article test_book
+
+#+END_SRC
+
+* latexmk
 
 #+NAME: beamer-latexmk
 #+BEGIN_SRC shell :noweb yes :tangle templates/beamer-template/latexmkrc 
@@ -3234,6 +3379,11 @@ $pdflatex = 'pdflatex %O %S';
 
 #+NAME: poster-latexmk
 #+BEGIN_SRC shell :noweb yes :tangle templates/poster-template/latexmkrc 
+$pdflatex = 'pdflatex %O %S';
+#+END_SRC
+
+#+NAME: text-latexmk
+#+BEGIN_SRC shell :noweb yes :tangle templates/text-template/latexmkrc 
 $pdflatex = 'pdflatex %O %S';
 #+END_SRC
 
