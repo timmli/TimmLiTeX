@@ -57,13 +57,13 @@
       - [[#tables][Tables]]
       - [[#trees][Trees]]
 - [[#makefile][Makefile]]
-      - [[#beamer][Beamer]]
-      - [[#poster][Poster]]
-      - [[#teaching][Teaching]]
-      - [[#text][Text]]
-      - [[#jlm][JLM]]
-      - [[#langscibook][Langscibook]]
-      - [[#standalone][Standalone]]
+      - [[#beamer-makefile][Beamer Makefile]]
+      - [[#poster-makefile][Poster Makefile]]
+      - [[#teaching-makefile][Teaching Makefile]]
+      - [[#text-makefile][Text Makefile]]
+      - [[#jlm-makefile][JLM Makefile]]
+      - [[#langscibook-makefile][Langscibook Makefile]]
+      - [[#standalone-makefile][Standalone Makefile]]
 - [[#latexmk][latexmk]]
 - [[#local-variables][Local variables]]
 
@@ -75,15 +75,7 @@ In order to compile these templates, press =C-c C-v t= , or evaluate the followi
 (org-babel-tangle)
 #+END_SRC
 
-* TODO Document templates
-:LOGBOOK:
-- State "TODO"       from              [2020-04-19 So 23:48]
-:END:
-
-- [ ] create repository for each template and import them as submodule in /templates
-      - These repositories are also included as submodules in projects so that changes are propagated in both directions.
-- [ ] tangle complete templates into the submodules in /templates
-      - Beamer themes don't have to be in the same directory: https://tex.stackexchange.com/a/214081/61499
+* Document templates
 
 ** Abstract template
 
@@ -3246,7 +3238,7 @@ cell 21 & cell 22 & cell 23 \\
 
 * Makefile
 
-** Beamer
+** Beamer Makefile
 
 #+NAME: beamer-makefile
 #+BEGIN_SRC makefile :noweb yes :tangle templates/beamer-template/Makefile
@@ -3286,7 +3278,7 @@ release_beamer:
 	rm -fr temp
 #+END_SRC
 
-** Poster
+** Poster Makefile
 
 #+NAME: poster-makefile
 #+BEGIN_SRC makefile :noweb yes :tangle templates/poster-template/Makefile
@@ -3326,7 +3318,7 @@ release_poster:
 	rm -fr temp
 #+END_SRC
 
-** Teaching
+** Teaching Makefile
 
 #+NAME: teaching-makefile
 #+BEGIN_SRC makefile :noweb yes :tangle templates/teaching-template/Makefile
@@ -3388,7 +3380,7 @@ test_all: test_hausarbeit test_essay
 
 #+END_SRC
 
-** Text
+** Text Makefile
 
 #+NAME: text-makefile
 #+BEGIN_SRC makefile :noweb yes :tangle templates/text-template/Makefile
@@ -3497,7 +3489,7 @@ test_all: test_abstract test_article test_book
 
 #+END_SRC
 
-** JLM
+** JLM Makefile
 
 #+NAME: jlm-makefile
 #+BEGIN_SRC makefile :noweb yes :tangle templates/jlm-template/Makefile
@@ -3522,7 +3514,7 @@ release_jlm:
 
 #+END_SRC
 
-** Langscibook
+** Langscibook Makefile
 
 #+NAME: langscibook-makefile
 #+BEGIN_SRC makefile :noweb yes :tangle templates/langscibook-template/Makefile
@@ -3544,7 +3536,7 @@ release_langscibook:
 
 #+END_SRC
 
-** Standalone
+** Standalone Makefile
 
 #+NAME: standalone-makefile
 #+BEGIN_SRC makefile :noweb yes :tangle templates/standalone-template/Makefile
