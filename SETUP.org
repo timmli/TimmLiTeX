@@ -682,7 +682,7 @@ Remember to first add the class [[https://github.com/langsci/latex][langscibook]
 ** JLM template
 
 #+NAME: jlm-article-template-org
-#+BEGIN_SRC org :noweb yes :tangle templates/jlm-article-template.org
+#+BEGIN_SRC org :noweb yes :tangle templates/jlm-template/jlm-article-template.org
 ,#+TITLE: Title of article
 ,#+LATEX_HEADER: \titlerunning{Title in header line}
 ,#+AUTHOR: Auhthor name
@@ -1480,8 +1480,14 @@ Local Beamer themes are executed relative to the directory of the master file. T
 
 ** tikz-settings.sty
 
+Some templates require it to have the tikz settings in a separate sty-file.
+
+#+BEGIN_SRC latex :noweb yes :tangle templates/jlm-template/packages/tikz-settings.sty
+<<tikz-settings.sty>>
+#+END_SRC
+
 #+NAME: tikz-settings.sty
-#+BEGIN_SRC latex :noweb yes :tangle packages/tikz-settings.sty
+#+BEGIN_SRC latex :noweb yes
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{tikz-settings}
 
@@ -2634,6 +2640,10 @@ pdfkeywords={},%
 <<myMacros.tex>>
 #+END_SRC
 
+#+BEGIN_SRC latex :noweb yes :tangle templates/jlm-template/myMacros.tex
+<<myMacros.tex>>
+#+END_SRC
+
 #+NAME: myMacros.tex
 #+BEGIN_SRC latex :noweb yes
 %%%%%%%%%%%%%%%%%%%%%%
@@ -3342,7 +3352,6 @@ test_all: test_hausarbeit test_essay
 
 #+END_SRC
 
-
 ** Text
 
 #+NAME: text-makefile
@@ -3452,6 +3461,31 @@ test_all: test_abstract test_article test_book
 
 #+END_SRC
 
+** JLM
+
+#+NAME: teaching-makefile
+#+BEGIN_SRC makefile :noweb yes :tangle templates/jlm-template/Makefile
+SHELL := /bin/bash
+
+JLM_FILES =  myMacros.tex \
+	references.bib \
+	jlm-article-template.org \
+	latexmkrc \
+	jlm.bst jlm.cls \
+	cc-by.pdf \
+	$(wildcard packages/*.sty) \
+	fonts/* \
+	doc/*
+
+release_jlm:
+	rm -fr temp
+	mkdir temp
+	cp -r --parents $(JLM_FILES) temp
+	cd temp; zip -r jlm-template.zip *; mv jlm-template.zip ..
+	rm -fr temp
+
+#+END_SRC
+
 * latexmk
 
 #+NAME: beamer-latexmk
@@ -3467,6 +3501,11 @@ $pdflatex = 'pdflatex %O %S';
 #+NAME: text-latexmk
 #+BEGIN_SRC shell :noweb yes :tangle templates/text-template/latexmkrc 
 $pdflatex = 'pdflatex %O %S';
+#+END_SRC
+
+#+NAME: jlm-latexmk
+#+BEGIN_SRC shell :noweb yes :tangle templates/jlm-template/latexmkrc 
+$pdflatex = 'xelatex %O %S';
 #+END_SRC
 
 * Local variables

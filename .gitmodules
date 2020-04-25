@@ -16,3 +16,6 @@
 [submodule "templates/teaching-template"]
 	path = templates/teaching-template
 	url = https://github.com/timmli/teaching-template.git
+[submodule "templates/jlm-template"]
+	path = templates/jlm-template
+	url = https://github.com/timmli/jlm-template.git
