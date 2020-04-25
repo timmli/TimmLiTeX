@@ -763,7 +763,7 @@ Remember to first add the class jlm to the set of known classes (in =init.el=).
 ** Hausarbeit template
 
 #+NAME: hausarbeit-template
-#+BEGIN_SRC latex :noweb yes :tangle templates/hausarbeit-template.tex
+#+BEGIN_SRC latex :noweb yes :tangle templates/teaching-template/hausarbeit-template.tex
 \documentclass[
 11pt,
 bibliography=totoc,
@@ -775,7 +775,9 @@ numbers=noenddot,
 %       SETTINGS       %
 %%%%%%%%%%%%%%%%%%%%%%%% 
 
-<<book-settings>>
+\usepackage{datetime}
+
+\input{settings/text-settings}
 
 \AtBeginDocument{
   \selectlanguage{german} % which language is available depends on how babel is loaded
@@ -813,13 +815,7 @@ numbers=noenddot,
 \tableofcontents
 \mainmatter 
 
-\chapter{Information about this template}
-
-\input{examples/README.tex}
-
-\chapter{\LaTeX\ Examples}
-
-\input{examples/master-examples.tex}
+\input{examples/hausarbeit-examples}
 
 \chapter{Blindtext}
 
@@ -846,17 +842,16 @@ numbers=noenddot,
 ** Essay template
 
 #+NAME: essay-template
-#+BEGIN_SRC latex :noweb yes :tangle templates/essay-template.tex
+#+BEGIN_SRC latex :noweb yes :tangle templates/teaching-template/essay-template.tex
 %%%%%%%%%%%%%%%%%%%%%%%% 
 %       SETTINGS       %
 %%%%%%%%%%%%%%%%%%%%%%%%
 
 \documentclass[11pt,twoside]{scrartcl}
 
-\input{settings/scrarticle_setup.tex}
+\input{settings/scrarticle-settings.tex}
 
 \input{settings/text-settings}
-
 
 \begin{document}
 
@@ -869,8 +864,9 @@ numbers=noenddot,
 \author{Max Mustermann}	% change name
 \affiliation{
 		Matrikelnummer: 123456789\\	% change Matrikelnummer
-		\url{mustermann@phil.hhu.de}\\	% change email address
-		Seminar: Complexity in grammar, Heinrich-Heine-Universität, WS 2015/2016}
+    Studiengang: BSc Neue Ätherwissenschaften \\ % change Studiengang
+		\url{mustermann@uni-tuebingen.de}\\	% change email address
+		Seminar: Seminar name, University of Tübingen, WS 2020/2021}
 
 \maketitle 
 
@@ -878,16 +874,11 @@ numbers=noenddot,
 %   Document start   % 
 %%%%%%%%%%%%%%%%%%%%%%
 
-\section{Information about the template}
-
-\input{examples/README.tex}
-
-\input{examples/master-examples}
+\input{examples/essay-examples.tex}
 
 \section{Blindtext}
 
 \lipsum
-
 
 %%%%%%%%%%%%%%%%%%%
 %   Document end  % 
@@ -1651,8 +1642,12 @@ numbers=noenddot,
 
 ** Text settings
 
+#+BEGIN_SRC latex :noweb yes :tangle templates/teaching-template/settings/text-settings.tex
+<<text-settings(nw-mycitestylepath="bst/biblatex-sp-unified/cbx/sp-authoryear-comp",nw-mystylepath="bst/biblatex-sp-unified/bbx/biblatex-sp-unified",nw-avmpath="packages/avm")>>
+#+END_SRC
+
 #+NAME: text-settings
-#+BEGIN_SRC latex :noweb yes :tangle templates/text-template/text-settings.tex
+#+BEGIN_SRC latex :noweb yes :tangle templates/text-template/text-settings.tex :var nw-mycitestylepath="text-template/bst/biblatex-sp-unified/cbx/sp-authoryear-comp" nw-mystylepath="text-template/bst/biblatex-sp-unified/bbx/biblatex-sp-unified" nw-avmpath="text-template/packages/avm"
 <<pdflatex-settings>>
 
 %% Trees and graphics
@@ -1678,15 +1673,15 @@ numbers=noenddot,
 \usepackage{linguex}
 \renewcommand{\firstrefdash}{}
 
-\usepackage{text-template/packages/avm}
+\usepackage{nw-avmpath}
 <<avm-settings>>
 
 % \usepackage[inference]{semantic} % for CCG 
 % \usepackage{packages/ccg}
 
 %% Bibliography
-\newcommand{\mycitestyle}{text-template/bst/biblatex-sp-unified/cbx/sp-authoryear-comp}
-\newcommand{\mystyle}{text-template/bst/biblatex-sp-unified/bbx/biblatex-sp-unified}
+\newcommand{\mycitestyle}{nw-mycitestylepath}
+\newcommand{\mystyle}{nw-mystylepath}
 <<biblatex-settings>> 
 % \input{settings/natbib_bibtex_setup.tex} 
 
@@ -2383,6 +2378,10 @@ numbers=noenddot,
 
 ** scrarticle
 
+#+BEGIN_SRC latex :noweb yes :tangle templates/teaching-template/settings/scrarticle-settings.tex
+<<scrarticle-settings>>
+#+END_SRC
+
 #+NAME: scrarticle-settings
 #+BEGIN_SRC latex :noweb yes :tangle templates/text-template/scrarticle-settings.tex
 \usepackage{datetime}
@@ -2627,6 +2626,10 @@ pdfkeywords={},%
 <<myMacros.tex>>
 #+END_SRC
 
+#+BEGIN_SRC latex :noweb yes :tangle templates/teaching-template/myMacros.tex
+<<myMacros.tex>>
+#+END_SRC
+
 #+BEGIN_SRC latex :noweb yes :tangle templates/text-template/myMacros.tex
 <<myMacros.tex>>
 #+END_SRC
@@ -2737,12 +2740,28 @@ pdfkeywords={},%
 
 * Examples
 
+** Teaching
+
+#+NAME: hausarbeit-examples
+#+BEGIN_SRC latex :noweb yes :tangle templates/teaching-template/examples/hausarbeit-examples.tex
+
+<<book-examples>>
+
+#+END_SRC
+
+#+NAME: essay-examples
+#+BEGIN_SRC latex :noweb yes :tangle templates/teaching-template/examples/essay-examples.tex
+
+<<article-examples>>
+
+#+END_SRC
+
 ** Text
 
 #+NAME: abstract-examples
 #+BEGIN_SRC latex :noweb yes :tangle templates/text-template/abstract-examples.tex
 
-<<citation-example>>
+<<example-citations>>
 
 #+END_SRC
 
@@ -2751,9 +2770,9 @@ pdfkeywords={},%
 
 \section{Information about this template}
 
-<<readme-example>>
+<<readme>>
 
-<<citation-example>>
+<<example-citations>>
 
 #+END_SRC
 
@@ -2762,34 +2781,12 @@ pdfkeywords={},%
 
 \chapter{Information about this template}
 
-<<readme-example>>
+<<readme>>
 
 \chapter{Citation examples}
 
-<<citation-example>>
+<<example-citations>>
 
-#+END_SRC
-
-** Readme
-
-#+NAME: readme
-#+BEGIN_SRC latex
-More \LaTeX{} templates on \url{https://github.com/timmli/latex-templates}.
-#+END_SRC
-
-** AVM
-
-#+NAME: example-avms
-#+BEGIN_SRC latex
-\begin{avm}
-  \@0\[\asort{eating}
-    actor & \@1 \\ 
-    theme & \@2 \]
-\end{avm}
-
-\medskip
-
-\noindent $\Rightarrow$ \url{http://nlp.stanford.edu/manning/tex/avm-doc.pdf}
 #+END_SRC
 
 ** Beamer
@@ -2992,6 +2989,28 @@ More \LaTeX{} templates on \url{https://github.com/timmli/latex-templates}.
 %     ]
 %   }
 \end{frame}
+#+END_SRC
+
+** Readme
+
+#+NAME: readme
+#+BEGIN_SRC latex
+More \LaTeX{} templates on \url{https://github.com/timmli/latex-templates}.
+#+END_SRC
+
+** AVM
+
+#+NAME: example-avms
+#+BEGIN_SRC latex
+\begin{avm}
+  \@0\[\asort{eating}
+    actor & \@1 \\ 
+    theme & \@2 \]
+\end{avm}
+
+\medskip
+
+\noindent $\Rightarrow$ \url{http://nlp.stanford.edu/manning/tex/avm-doc.pdf}
 #+END_SRC
 
 ** Citations
@@ -3261,9 +3280,72 @@ release_poster:
 	rm -fr temp
 #+END_SRC
 
+** Teaching
+
+#+NAME: teaching-makefile
+#+BEGIN_SRC makefile :noweb yes :tangle templates/teaching-template/Makefile
+SHELL := /bin/bash
+
+HAUSARBEIT_FILES =  myMacros.tex \
+	settings/text-settings.tex \
+	$(wildcard packages/*.sty) \
+	examples/hausarbeit-examples.tex \
+	$(wildcard bst/biblatex-sp-unified/[^.]*) \
+	hausarbeit-template.tex \
+	references.bib
+
+test_hausarbeit:
+	rm -fr test
+	mkdir test
+	cp -r --parents $(HAUSARBEIT_FILES) test
+	cd test; \
+			latexmk -pdf hausarbeit-template.tex
+
+release_hausarbeit:
+	rm -fr temp
+	mkdir temp
+	cp -r --parents $(HAUSARBEIT_FILES) temp
+	cd temp; zip -r hausarbeit-template.zip *; mv hausarbeit-template.zip ..
+	rm -fr temp
+
+#-------------------------------------------------------------------------------
+
+ESSAY_FILES =  myMacros.tex \
+	settings/text-settings.tex \
+	settings/scrarticle-settings.tex \
+	$(wildcard packages/*.sty) \
+	examples/essay-examples.tex  \
+	$(wildcard bst/biblatex-sp-unified/[^.]*) \
+	references.bib \
+  essay-template.tex
+
+test_essay:
+	rm -fr test
+	mkdir test
+	cp -r --parents $(ESSAY_FILES) test
+	cd test; \
+			latexmk -pdf essay-template.tex
+
+release_essay:
+	rm -fr tmp
+	mkdir temp
+	cp -r --parents $(ESSAY_FILES) temp
+	cd temp; zip -r essay-template.zip *; mv essay-template.zip ..
+	rm -fr temp
+
+
+#-------------------------------------------------------------------------------
+
+release_all: release_hausarbeit release_essay
+
+test_all: test_hausarbeit test_essay
+
+#+END_SRC
+
+
 ** Text
 
-#+NAME: poster-makefile
+#+NAME: text-makefile
 #+BEGIN_SRC makefile :noweb yes :tangle templates/text-template/Makefile
 SHELL := /bin/bash
 

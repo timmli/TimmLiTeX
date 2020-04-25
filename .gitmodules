@@ -13,3 +13,6 @@
 [submodule "templates/text-template"]
 	path = templates/text-template
 	url = https://github.com/timmli/text-template.git
+[submodule "templates/teaching-template"]
+	path = templates/teaching-template
+	url = https://github.com/timmli/teaching-template.git
