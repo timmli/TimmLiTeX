@@ -9,12 +9,15 @@ Collection of LaTeX settings and templates
 
 ** Included templates
 
-| short abstract            | [[file:templates/abstract-template.tex][tex]],[[file:templates/abstract-template.org][org]] | [[https://www.overleaf.com/docs?snip_uri=https://github.com/timmli/latex-templates/releases/download/v0.2.3/abstract-template.zip][Overleaf]] |
-| standard article          | [[file:templates/article-template.tex][tex]],[[file:templates/article-template.org][org]] | [[https://www.overleaf.com/docs?snip_uri=https://github.com/timmli/latex-templates/releases/download/v0.2.3/article-template.zip][Overleaf]] |
-| standard book             | [[file:templates/book-template.tex][tex]]     |          |
-| beamer slides (Tuebingen) | [[file:templates/beamer-template.tex][tex]],[[file:templates/beamer-template.org][org]] | [[https://www.overleaf.com/docs?snip_uri=https://github.com/timmli/latex-templates/releases/download/v0.2.3/beamer-template.zip][Overleaf]] |
-| langsci paper             | [[file:templates/langsci-paper-template.tex][tex]],[[file:templates/langsci-paper-template.org][org]] |          |
-| jlm article               | [[file:templates/jlm-article-template.org][org]]     |          |
-| poster                    | [[file:templates/poster-template.tex][tex]]     | [[https://www.overleaf.com/docs?snip_uri=https://github.com/timmli/latex-templates/releases/download/v0.2.3/poster-template.zip][Overleaf]] |
-| Hausarbeit (for teaching) | [[file:templates/hausarbeit-template.tex][tex]]     | [[https://www.overleaf.com/docs?snip_uri=https://github.com/timmli/latex-templates/releases/download/v0.2.3/hausarbeit-template.zip][Overleaf]] |
-| Essay (for teaching)      | [[file:templates/essay-template.tex][tex]]     |          |
+
+| Template                  | Repository           | zip | Overleaf |
+|---------------------------+----------------------+-----+----------|
+| short abstract            | [[https://github.com/timmli/text-template][text-template]]        |     | [[https://www.overleaf.com/docs?snip_uri=https://github.com/timmli/latex-templates/releases/download/v0.2.3/abstract-template.zip][Overleaf]] |
+| standard article          | [[https://github.com/timmli/text-template][text-template]]        |     | [[https://www.overleaf.com/docs?snip_uri=https://github.com/timmli/latex-templates/releases/download/v0.2.3/article-template.zip][Overleaf]] |
+| standard book             | [[https://github.com/timmli/text-template][text-template]]        |     |          |
+| beamer slides (Tuebingen) | [[https://github.com/timmli/beamer-template][beamer-template]]      |     | [[https://www.overleaf.com/docs?snip_uri=https://github.com/timmli/latex-templates/releases/download/v0.2.3/beamer-template.zip][Overleaf]] |
+| langscibook paper         | [[https://github.com/timmli/langscibook-template][langscibook-template]] |     |          |
+| jlm article               | [[https://github.com/timmli/jlm-template][jlm-template]]         |     |          |
+| poster                    | [[https://github.com/timmli/poster-template][poster-template]]      |     | [[https://www.overleaf.com/docs?snip_uri=https://github.com/timmli/latex-templates/releases/download/v0.2.3/poster-template.zip][Overleaf]] |
+| Hausarbeit (for teaching) | [[https://github.com/timmli/teaching-template][teaching-template]]    |     | [[https://www.overleaf.com/docs?snip_uri=https://github.com/timmli/latex-templates/releases/download/v0.2.3/hausarbeit-template.zip][Overleaf]] |
+| Essay (for teaching)      | [[https://github.com/timmli/teaching-template][teaching-template]]    |     |          |
