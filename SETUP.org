@@ -2582,66 +2582,6 @@ numbers=noenddot,
 \newcommand\tikztreeset[1]{\matrix [matrix of nodes,left delimiter=\{,right delimiter=\}](set){#1};}
 #+END_SRC
 
-** hausarbeit
-
-#+NAME: hausarbeit-settings
-#+BEGIN_SRC latex :noweb yes :tangle templates/teaching-template/hausarbeit-settings.tex
-\usepackage{datetime}
-
-% Font & Encoding
-\usepackage{libertine}
-\usepackage[T1]{tipa}		% IPA symbols 
-\usepackage[libertine]{newtxmath}
-\usepackage{microtype}		% micro-typographic aspects of the fonts
-\usepackage[T1]{fontenc}	% special fonts, e.g. for German umlaute
-\usepackage{ucs}
-\usepackage[utf8x]{inputenc}
-\usepackage[scaled=0.83]{beramono}  % for monospaced font
-
-% Language
-\usepackage[ngerman]{babel}	% uncomment for German
-
-% Trees and graphics
-\usepackage{graphics,tikz}
-\usepackage{multirow}		% similar to \multicolumn
-
-% Symbols
-\usepackage{latexsym,amsmath,amssymb,wasysym}
-\usepackage{marvosym}		% for thunderbolt and Euro symbol
-\usepackage{ulem}			% to cross out text
-\normalem
-\usepackage{url}
-\urlstyle{sf}
-
-% Linguistics
-\usepackage{linguex}
-\usepackage[inference]{semantic} % for CCG 
-\usepackage{packages/ccg} 
-\usepackage{tipa}
-
-\usepackage{teaching-template/packages/avm}
-<<avm-settings>>
-
-<<forest-settings>>
-
-% BibTex
-\usepackage{natbib}
-\setcitestyle{notesep={: $\!$}} 
-
-% Hyperrefs in PDF 
-\usepackage[bookmarks=true,bookmarksopen=true,%
-hyperindex=true,%
-breaklinks=true,
-draft=false,plainpages=false,
-pdfauthor={},%
-pdfkeywords={},%
-]{hyperref}
-\hypersetup{colorlinks=false, pdfborder={0 0 0}}
-
-\usepackage{lipsum}
-
-#+END_SRC
-
 * myMacros
 
 #+BEGIN_SRC latex :noweb yes :tangle templates/beamer-template/myMacros.tex
