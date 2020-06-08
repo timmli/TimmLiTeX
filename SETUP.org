@@ -313,13 +313,12 @@ This is an abstract: \lipsum[1]
 ,#+TITLE: Beamer slides
 ,#+AUTHOR: John Doe
 ,#+SUBTITLE: Some subtitle
+,#+FILETAGS: research
 :Settings:
 # #+DATE: 
-,#+BEAMER_HEADER: %\date[]{}
-,#+BEAMER_HEADER: %\institute[]{}
-,#+BEAMER_HEADER: %\titlegraphic{\includegraphics[height=1cm]{path/to/picture}}	% on title slide
-,#+FILETAGS: research
-,#+LANGUAGE:  en
+# #+BEAMER_HEADER: \date[]{}
+# #+BEAMER_HEADER: \institute[]{}
+# #+BEAMER_HEADER: \titlegraphic{\includegraphics[height=1cm]{path/to/picture}}	% on title slide
 ,#+OPTIONS:   H:2 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t ':t
 ,#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
 ,#+STARTUP: beamer
@@ -329,8 +328,10 @@ This is an abstract: \lipsum[1]
 ,#+LATEX_COMPILER: pdflatex
 ,#+LATEX_HEADER: <<beamer-settings>>
 ,#+LATEX_HEADER: \input{beamer-template/myMacros}
-,#+LATEX_HEADER: \usepackage{beamer-template/themes/beamerthemeLustnau} % \usetheme{Lustnau}
-,#+LATEX_HEADER: \input{beamer-template/themes/beamerlogosTuebingen}
+,#+LATEX_HEADER: \usetheme{Lustnau}
+,#+LATEX_HEADER: \input{beamerlogosTuebingen}
+,#+LANGUAGE:  en
+# #+LATEX_HEADER: \AtBeginDocument{\selectlanguage{german}}
 ,#+COLUMNS: %40ITEM %10TAGS %9BEAMER_act(Overlays) %4BEAMER_col(Col) %20BEAMER_opt(Options)
 :end:
 
@@ -348,7 +349,8 @@ This is an abstract: \lipsum[1]
 % \renewcommand{\bsp}[1]{{\color{HHUblue}\itshape\bfseries #1}} % already defined in myMacros.tex
 \renewcommand{\bsp}[1]{{\usebeamercolor[bg!80]{block title example}\itshape\bfseries #1}}
 \newcommand{\term}[1]{{\color{UTblue}\scshape\bfseries #1}} 
-\newcommand{\bspcolor}[1]{{\color{UTlightgreen}\bfseries #1}}
+%\newcommand{\bspcolor}[1]{{\color{UTlightgreen}\bfseries #1}}
+\newcommand{\bspcolor}[1]{{\usebeamercolor[bg!80]{block title example}\bfseries #1}}
 
 \AtBeginSection[]
 {
@@ -377,22 +379,6 @@ This is an abstract: \lipsum[1]
 \insertBib
 
 ,* COMMENT org-mode settings
-
-,** DEPRECATED: Installation of =tl-beamer=
-
-The virtual LaTeX class =tl-beamer= has to be propagated to org-mode before export.
-
-,#+BEGIN_SRC elisp :results output slient
-(add-to-list 'org-latex-classes
-         '("tl-beamer" 
-						"\\documentclass{beamer}
-						[NO-DEFAULT-PACKAGES]"
-            ("\\section{%s}" . "\\section*{%s}")
-            ("\\subsection{%s}" . "\\subsection*{%s}")
-            ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-            ("\\paragraph{%s}" . "\\paragraph*{%s}")
-            ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-,#+END_SRC
 
 ,** Installation of special link types
 
@@ -2669,6 +2655,8 @@ numbers=noenddot,
 \RequirePackage{pifont}
 \newcommand{\cmark}{\ding{51}}  % checkmark
 \newcommand{\xmark}{\ding{55}}  % xmark
+
+\DeclareMathOperator*{\argmax}{argmax}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 %   COLORS & HIGHLIGHTING          % 
