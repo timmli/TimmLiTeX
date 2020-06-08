@@ -2585,7 +2585,7 @@ numbers=noenddot,
 ** hausarbeit
 
 #+NAME: hausarbeit-settings
-#+BEGIN_SRC latex :noweb yes :tangle settings/hausarbeit-settings.tex
+#+BEGIN_SRC latex :noweb yes :tangle templates/teaching-template/hausarbeit-settings.tex
 \usepackage{datetime}
 
 % Font & Encoding
@@ -2724,6 +2724,11 @@ pdfkeywords={},%
   \endgroup
 }
 \makeatother
+
+%% Dingbats, i.e. symbolic, decorative glyphs
+\RequirePackage{pifont}
+\newcommand{\cmark}{\ding{51}}  % checkmark
+\newcommand{\xmark}{\ding{55}}  % xmark
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 %   COLORS & HIGHLIGHTING          % 
