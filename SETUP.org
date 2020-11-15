@@ -3087,6 +3087,49 @@ This is how \term{terminology} can be introduced with \verb|\term|.
 \end{frame}
 
 \begin{frame}
+\frametitle{Overlays in Forest trees}
+
+%% This example may cause problems together with TeX Live 2016
+A TUCO derivation:\newline
+
+\Forest{
+  [,phantom
+    [S,only=<+> [NP [N [I,lex]]]]
+    [S,only=<+>,--> [NP [N [I,lex]]]]
+    [S,only=<1-.> [V [wrote,lex]]]
+    [S,only=<+>
+      [NP [N [I,lex]]]
+      [V [wrote,lex]]]
+    [S,only=<+>,-->
+      [NP [N [I,lex]]]
+      [V [wrote,lex]]]
+    [S,only=<1-.> [NP [D [a,lex]]]]
+    [S,only=<+>
+      [NP [N [I,lex]]]
+      [V [wrote,lex]]
+      [NP [D [a,lex]]]]
+    [S,only=<+>,-->
+      [NP [N [I,lex]]]
+      [V [wrote,lex]]
+      [NP,--> [D [a,lex]]]]
+    [S,only=<1-.> [NP [N [novel,lex]]]]
+    [S,only=<+>
+      [NP [N [I,lex]]]
+      [V [wrote,lex]]
+      [NP
+        [D [a,lex]]
+        [N [novel,lex]]]]
+    [S,only=<+->,alert=<.>,c=0
+      [NP,c=1 [N [I,lex]]]
+      [V [wrote,lex]]
+      [NP,c=2
+        [D [a,lex]]
+        [N [novel,lex]]]] 
+    ]
+  }
+\end{frame}
+
+\begin{frame}
 \frametitle{AVM}
 <<example-avms>>
 \end{frame}
@@ -3135,7 +3178,7 @@ This is how \term{terminology} can be introduced with \verb|\term|.
   \begin{columns}
     \column{.55\textwidth}
     First column
-		\pgfimage[width=\textwidth]{graphics/hhu-logo-hres}
+		\pgfimage[width=\textwidth]{beamer-template/graphics/hhu-logo-hres}
     \column{.45\textwidth}
 		Second column
     \begin{enumerate}
@@ -3212,48 +3255,6 @@ This is how \term{terminology} can be introduced with \verb|\term|.
     \hyperlink{frameoptions}{\beamerbutton{The frame environment}}
 
   }
-\end{frame}
-
-
-\begin{frame}
-\frametitle{Overlays in Forest trees}
-
-%% This example may cause problems together with TeX Live 2016
-% \Forest{
-%   [,phantom
-%     [S,only=<+> [NP [N [I,lex]]]]
-%     [S,only=<+>,--> [NP [N [I,lex]]]]
-%     [S,only=<1-.> [V [wrote,lex]]]
-%     [S,only=<+>
-%       [NP [N [I,lex]]]
-%       [V [wrote,lex]]]
-%     [S,only=<+>,-->
-%       [NP [N [I,lex]]]
-%       [V [wrote,lex]]]
-%     [S,only=<1-.> [NP [D [a,lex]]]]
-%     [S,only=<+>
-%       [NP [N [I,lex]]]
-%       [V [wrote,lex]]
-%       [NP [D [a,lex]]]]
-%     [S,only=<+>,-->
-%       [NP [N [I,lex]]]
-%       [V [wrote,lex]]
-%       [NP,--> [D [a,lex]]]]
-%     [S,only=<1-.> [NP [N [novel,lex]]]]
-%     [S,only=<+>
-%       [NP [N [I,lex]]]
-%       [V [wrote,lex]]
-%       [NP
-%         [D [a,lex]]
-%         [N [novel,lex]]]]
-%     [S,only=<+->,alert=<.>,c=0
-%       [NP,c=1 [N [I,lex]]]
-%       [V [wrote,lex]]
-%       [NP,c=2
-%         [D [a,lex]]
-%         [N [novel,lex]]]] 
-%     ]
-%   }
 \end{frame}
 #+END_SRC
 
