@@ -3060,6 +3060,12 @@ numbers=noenddot,
   
 \end{frame}
 
+\begin{frame}[fragile]
+\frametitle{Inline highlighting}
+This is an \bsp{inline example} included with \verb|\bsp|.
+This is how \term{terminology} can be introduced with \verb|\term|.
+\end{frame}
+
 <<example-beamer-frames>>
 <<example-beamer-blocks>>
 <<example-beamer-overlays>>
@@ -3443,8 +3449,8 @@ cell 21 & cell 22 & cell 23 \\
       [AUX [\textit{does}] ]
       [S
         [NP]
-        [VP,name=vp[V [\textit{say}]] [S*]]]]
-    [S,Xs=10cm,Ys=5cm
+        [VP,name=vp[V [\textit{say}]] [S*,name=foot]]]]
+    [S,Xs=5cm,Ys=2cm
       [NP]
       [S,name=s
         [NP [$\varepsilon$] ]
@@ -3452,7 +3458,8 @@ cell 21 & cell 22 & cell 23 \\
           [VP [V [\textit{walks}]]] 
           [PP]]]]
     ]
-  \draw[->,gray,thick,dashed,bend right=10](vp)to(s);
+  \draw[->,gray,thick,dashed,bend right=10](root)to(s);
+  \draw[->,gray,thick,dashed,bend right=10](foot)to(s);
 }
 
 \noindent $\Rightarrow$ \url{http://mirrors.ctan.org/graphics/pgf/contrib/forest/forest-doc.pdf}
