@@ -348,11 +348,13 @@ This is an abstract: \lipsum[1]
 
 \newcommand{\mypause}{\pause}
 
-% \renewcommand{\bsp}[1]{{\color{HHUblue}\itshape\bfseries #1}} % already defined in myMacros.tex
-\renewcommand{\bsp}[1]{{\usebeamercolor[bg!80]{block title example}\itshape\bfseries #1}}
-\newcommand{\term}[1]{{\color{UTblue}\scshape\bfseries #1}} 
-%\newcommand{\bspcolor}[1]{{\color{UTlightgreen}\bfseries #1}}
-\newcommand{\bspcolor}[1]{{\usebeamercolor[bg!80]{block title example}\bfseries #1}}
+\definecolor{myblue}{rgb}{0,0,0.70}
+\definecolor{myred}{rgb}{0.8,0,0}
+\definecolor{mydarkgreen}{rgb}{0,0.55,0}
+
+\renewcommand{\bsp}[1]{{\usebeamercolor[bg!90]{block title example}\itshape\bfseries #1}}
+\newcommand{\term}[1]{{\usebeamercolor[fg!100]{math text displayed}\scshape\bfseries #1}} 
+\newcommand{\bspcolor}[1]{{\usebeamercolor[bg!90]{block title example}\bfseries #1}}
 
 \AtBeginSection[]
 {
@@ -436,7 +438,7 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 \definecolor{mydarkgreen}{rgb}{0,0.55,0}
 
 \renewcommand{\bsp}[1]{{\usebeamercolor[bg!90]{block title example}\itshape\bfseries #1}}
-\newcommand{\term}[1]{{\usebeamercolor[bg!90]{block title}\scshape\bfseries #1}} 
+\newcommand{\term}[1]{{\usebeamercolor[fg!100]{math text displayed}\scshape\bfseries #1}} 
 \newcommand{\bspcolor}[1]{{\usebeamercolor[bg!90]{block title example}\bfseries #1}}
 
 <<beamer-body>>
@@ -1560,7 +1562,7 @@ Template for slides in the corporate design of the [[https://www.uni-bielefeld.d
 \setbeamercolor*{item}{fg=black}
 
 % \setbeamercolor{math text}{fg=UBnavyblue}
-\setbeamercolor{math text displayed}{fg=UBnavyblue}
+\setbeamercolor{math text displayed}{fg=UBblue}
 
 \setbeamercolor*{section in toc}{fg=black}
 \setbeamercolor*{section number projected}{bg=UBlightgreen,fg=black}
