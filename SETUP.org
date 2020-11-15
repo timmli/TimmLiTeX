@@ -41,7 +41,6 @@
       - [[#textpos][textpos]]
       - [[#tabular][tabular]]
       - [[#tikz][tikz]]
-      - [[#hausarbeit][hausarbeit]]
 - [[#mymacros][myMacros]]
 - [[#examples][Examples]]
       - [[#teaching][Teaching]]
@@ -418,8 +417,8 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 % -*- coding: utf-8 -*-
 
 \documentclass[
-<<beamer-options>>
-]{beamer}
+  <<beamer-options>>
+  ]{beamer}
 
 <<beamer-settings>>
 
@@ -1094,9 +1093,12 @@ Local Beamer themes are executed relative to the directory of the master file. T
 
 #+NAME: beamer-theme-settings
 #+BEGIN_SRC latex :noweb yes
-\usetheme{Lustnau}  
-% \usetheme{Tuebingen}
-\input{beamerlogosTuebingen.tex}
+% \usetheme{Lustnau}  
+% % \usetheme{Tuebingen}
+% \input{beamerlogosTuebingen.tex}
+
+\usetheme{Bielefeld}
+\input{beamerlogosBielefeld.tex}
 
 % \usetheme{Duesseldorf}
 % \input{beamerlogosDuesseldorf.tex}
@@ -1280,7 +1282,7 @@ Local Beamer themes are executed relative to the directory of the master file. T
 
 \setbeamertemplate{navigation symbols}{}
 \defbeamertemplate*{sidebar}{Tuebingen}{}
-  
+
 \defbeamertemplate*{headline}{Tuebingen} %headline format
 {
   \vspace*{2.5mm}
@@ -1301,7 +1303,13 @@ Local Beamer themes are executed relative to the directory of the master file. T
   {footline} 
   {\color{UTred}\vhrulefill{0.2pt}}
   \end{beamercolorbox} \begin{beamercolorbox}[wd=\paperwidth,leftskip=1cm,rightskip=1cm,ht=0.37cm,dp=0.25cm]{footline} 
-  ~\insertframenumber{} | \insertshortauthor\insertshortinstitute, \insertshorttitle%
+  ~\insertframenumber{} | %
+  \insertshortauthor%
+  \ifx\insertinstitute\@empty%
+  \else%
+  \ (\insertshortinstitute)%
+  \fi%
+  , \insertshorttitle%
   \ifx\insertdate\@empty%
   \else%
   , \insertshortdate
@@ -1310,7 +1318,7 @@ Local Beamer themes are executed relative to the directory of the master file. T
   \end{beamercolorbox}
 }
 
-\mode<all>  
+\mode<all>
 #+END_SRC
 
 #+NAME: beamerlogosTuebingen.tex
@@ -1651,13 +1659,13 @@ Template for slides in the corporate design of the [[https://www.uni-bielefeld.d
 \setbeamerfont{frametitle}{size=\large,series=\bfseries}
 % \defbeamertemplate*{frametitle}{Bielefeld}[1][]
 % {
-%   \vspace*{2mm}
-%   \usebeamerfont{frametitle}\insertframetitle
-%   \vspace*{-1.5mm}
+% \vspace*{2mm}
+% \usebeamerfont{frametitle}\insertframetitle
+% \vspace*{-1.5mm}
 % }
-  
-% \defbeamertemplate*{headline}{Bielefeld} %headline format
-% {
+
+%   \defbeamertemplate*{headline}{Bielefeld} %headline format
+%   {
 %   \vspace*{2.5mm}
 %   \begin{beamercolorbox}[wd=\paperwidth,leftskip=1.01cm,rightskip=1.01cm]
 %   {headline}
@@ -1704,7 +1712,13 @@ Template for slides in the corporate design of the [[https://www.uni-bielefeld.d
   {footline} 
   {\color{UBlightgreen}\vhrulefill{0.2pt}}
   \end{beamercolorbox} \begin{beamercolorbox}[wd=\paperwidth,leftskip=1cm,rightskip=1cm,ht=0.37cm,dp=0.25cm]{footline} 
-  ~\insertframenumber{} | \insertshortauthor\insertshortinstitute, \insertshorttitle%
+  ~\insertframenumber{} | %
+  \insertshortauthor%
+  \ifx\insertinstitute\@empty%
+  \else%
+  \ (\insertshortinstitute)%
+  \fi%
+  , \insertshorttitle%
   \ifx\insertdate\@empty%
   \else%
   , \insertshortdate
@@ -1714,7 +1728,6 @@ Template for slides in the corporate design of the [[https://www.uni-bielefeld.d
 }
 
 \mode<all>
-
 #+END_SRC
 
 #+NAME: beamerlogosBielefeld.tex
