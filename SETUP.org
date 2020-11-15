@@ -19,6 +19,7 @@
       - [[#tuebingen][Tuebingen]]
       - [[#lustnau][Lustnau]]
       - [[#duesseldorf][Duesseldorf]]
+      - [[#bielefeld][Bielefeld]]
 - [[#packages][Packages]]
       - [[#tikz-settingssty][tikz-settings.sty]]
 - [[#bundled-settings][Bundled settings]]
@@ -1476,6 +1477,277 @@ Local Beamer themes are executed relative to the directory of the master file. T
 #+NAME: beamerlogosDuesseldorf.tex
 #+BEGIN_SRC latex :noweb yes :tangle templates/beamer-template/themes/beamerlogosDuesseldorf.tex
 \titlegraphic{\includegraphics[height=1cm]{graphics/sfb-logo-quer} \hfil \includegraphics[height=1cm]{graphics/hhu-logo}}
+#+END_SRC
+
+** Bielefeld
+
+Template for slides in the corporate design of the [[https://www.uni-bielefeld.de/][University of Bielefeld]] (Fakulty of Literature and Language). 
+
+#+NAME: beamerthemeBielefeld.sty
+#+BEGIN_SRC latex :noweb yes :tangle templates/beamer-template/themes/beamerthemeBielefeld.sty
+\mode<presentation>
+
+%% Requirement
+\RequirePackage{tikz}
+\RequirePackage{helvet}
+\RequirePackage{beramono}  % for monospaced font
+\PassOptionsToPackage{scaled=0.95}{beramono}
+
+%% Additional fields
+\def\titlelogo#1{\gdef\@titlelogo{#1}}
+\titlelogo{}
+\def\inserttitlelogo{\@titlelogo}
+
+\def\headlinelogo#1{\gdef\@headlinelogo{#1}}
+\headlinelogo{}
+\def\insertheadlinelogo{\@headlinelogo}
+
+%% Generic macros
+\def\vhrulefill#1{\leavevmode\leaders\hrule\@height#1\hfill \kern\z@}
+
+%% Settings
+\usecolortheme{Bielefeld}
+\useinnertheme{Bielefeld}
+\useoutertheme{Bielefeld}
+
+\setbeamersize{text margin left=1cm,text margin right=1cm}
+
+\mode<all>
+#+END_SRC
+
+#+NAME: beamercolorthemeBielefeld.sty
+#+BEGIN_SRC latex :noweb yes :tangle templates/beamer-template/themes/beamercolorthemeBielefeld.sty
+\mode<presentation>
+
+\definecolor{UBred}{RGB}{220,90,90} 
+\definecolor{UBgray}{RGB}{240,240,240} 
+\definecolor{UBgold}{RGB}{180,160,105}
+\definecolor{UBanthracite}{RGB}{50,65,75}
+\definecolor{UBlightgreen}{RGB}{20,245,180}
+\definecolor{UBgreen}{RGB}{0,140,100} 
+\definecolor{UBblue}{RGB}{20,95,120}
+\definecolor{UBlightblue}{RGB}{125,180,190}
+\definecolor{UBnavyblue}{RGB}{85,140,160}
+\definecolor{UBbrown}{RGB}{145,105,70}
+\definecolor{UBlightbrown}{RGB}{215,180,105}
+
+%% Settings
+\setbeamercolor*{author}{fg=black}
+\setbeamercolor*{date}{fg=black}
+\setbeamercolor*{title}{fg=black}
+\setbeamercolor*{subtitle}{fg=black}
+\setbeamercolor*{titlegraphic}{bg=UBgray}
+
+\setbeamercolor*{block title}{bg=UBnavyblue,fg=white}
+\setbeamercolor*{block body}{bg=UBnavyblue!30!white}
+\setbeamercolor*{block title alerted}{bg=UBred,fg=white}
+\setbeamercolor*{block body alerted}{bg=UBred!30!white}
+\setbeamercolor*{block title example}{bg=UBgreen,fg=white}
+\setbeamercolor*{block body example}{bg=UBgreen!30!white}
+
+\setbeamercolor*{item}{fg=black}
+
+% \setbeamercolor{math text}{fg=UBnavyblue}
+\setbeamercolor{math text displayed}{fg=UBnavyblue}
+
+\setbeamercolor*{section in toc}{fg=black}
+\setbeamercolor*{section number projected}{bg=UBlightgreen,fg=black}
+
+\setbeamercolor*{bibliography entry title}{fg=black}
+\setbeamercolor*{bibliography entry author}{fg=black}
+\setbeamercolor*{bibliography entry location}{fg=black}
+\setbeamercolor*{bibliography entry note}{fg=black}
+
+\mode
+<all>
+#+END_SRC
+
+#+NAME: beamerinnerthemeBielefeld.sty
+#+BEGIN_SRC latex :noweb yes :tangle templates/beamer-template/themes/beamerinnerthemeBielefeld.sty
+\mode<presentation>
+
+%% General settings
+
+\setbeamertemplate*{background}{}
+
+\setbeamerfont*{title}{size*={15}{16},series=\bfseries\scshape}
+\setbeamerfont*{subtitle}{size*={12}{15},series=\upshape}
+\setbeamerfont*{author}{size*={10}{12},series=\upshape}
+\setbeamerfont*{date}{size*={10}{12},series=\upshape}
+
+\setbeamertemplate{itemize item}{\color{black}$\bullet$}
+\setbeamertemplate{itemize subitem}{\color{black}--}
+\setbeamertemplate{itemize subsubitem}{\color{black}\tiny$\blacksquare$}
+
+\setbeamertemplate{blocks}[default]
+\setbeamerfont*{block title}{size=\normalsize}
+
+\setbeamertemplate{section in toc}[square]
+
+\setbeamertemplate{bibliography item}{\insertbiblabel}  % insert label from bib(la)tex
+\setbeamerfont{bibliography entry author}{size=\tiny}%
+\setbeamerfont{bibliography entry title}{size=\tiny}
+\setbeamerfont{bibliography entry journal}{size=\tiny}
+\setbeamerfont{bibliography entry note}{size=\tiny}
+
+%% Title page
+
+\defbeamertemplate*{title page}{Bielefeld}[1][t]
+{
+  \thispagestyle{empty}
+  \setlength{\baselineskip}{11pt}
+  % \vskip-0.15\paperheight  % only needed with headlines sometimes ...
+  %% Title logo
+  \inserttitlelogo
+  % \vskip0.025\paperheight
+  %% Title graphic
+  \begin{beamercolorbox}[wd=\textwidth,ht=0.375\paperheight]{titlegraphic}
+  %% Savebox for \titlegraphic
+  %% In order to be able to directly include tikzpictures 
+  \newsavebox\mytitlebox
+  \begin{lrbox}{\mytitlebox}
+  \begin{minipage}{\textwidth}
+  {\inserttitlegraphic}
+  \end{minipage}
+  \end{lrbox}
+  %% Autocrop \titlegraphic (inspired by https://tex.stackexchange.com/a/193558/61499)
+  \tikz\node[
+    minimum width=\textwidth,
+    minimum height=0.375\paperheight,
+    path picture={
+      \node at (path picture bounding box.center){
+        \usebox\mytitlebox
+      };
+    }]{};
+  \end{beamercolorbox}
+  \vskip-5pt
+  {\color{UBlightgreen}\rule{\textwidth}{7pt}}
+  \vskip0pt
+  %% Title, subtitle, author, date etc.
+  {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par}%
+  \vskip0.6ex
+  {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle}
+  \vskip0pt plus 1filll
+  \ifx\insertdate\@empty%
+  \else%
+  {\usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate}, %
+  \fi
+  {\usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor}%
+  \par
+}
+
+\mode<all>
+#+END_SRC
+
+#+NAME: beamerouterthemeBielefeld.sty
+#+BEGIN_SRC latex :noweb yes :tangle templates/beamer-template/themes/beamerouterthemeBielefeld.sty
+\mode<presentation>
+
+\setbeamertemplate{navigation symbols}{}
+\defbeamertemplate*{sidebar}{Bielefeld}{}
+
+% Frame title
+\setbeamercolor{frametitle}{fg=black}
+\setbeamerfont{frametitle}{size=\large,series=\bfseries}
+% \defbeamertemplate*{frametitle}{Bielefeld}[1][]
+% {
+%   \vspace*{2mm}
+%   \usebeamerfont{frametitle}\insertframetitle
+%   \vspace*{-1.5mm}
+% }
+  
+% \defbeamertemplate*{headline}{Bielefeld} %headline format
+% {
+%   \vspace*{2.5mm}
+%   \begin{beamercolorbox}[wd=\paperwidth,leftskip=1.01cm,rightskip=1.01cm]
+%   {headline}
+%   \hspace*{0mm}
+%   \insertheadlinelogo
+%   \end{beamercolorbox}
+% }
+
+\defbeamertemplate*{frametitle}{Bielefeld}[1][left] % inspired by the definition of the default frametitle
+{%
+  % \ifbeamercolorempty[bg]{frametitle}{}{\nointerlineskip}%
+  % \@tempdima=\textwidth%
+  % \advance\@tempdima by\beamer@leftmargin%
+  % \advance\@tempdima by\beamer@rightmargin%
+  \hspace{-0.475cm}               %due to sep in beamercolorbox
+  \begin{beamercolorbox}[sep=0.35cm,#1,wd=.82\textwidth]{frametitle}
+  \usebeamerfont{frametitle}%
+  % \vbox{}\vskip-1ex%
+  \vbox{}\vskip-0.8ex%
+  \if@tempswa\else\csname beamer@fte#1\endcsname\fi%
+  \strut\insertframetitle\strut\par%
+  {%
+    \ifx\insertframesubtitle\@empty%
+    \else%
+    {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle\strut\par}%
+    \fi
+  }%
+  \vskip-1ex%
+  \if@tempswa\else\vskip-.3cm\fi% set inside beamercolorbox... evil here...
+  \end{beamercolorbox}%
+}
+
+\addtobeamertemplate{frametitle}{}{%
+  \begin{tikzpicture}[remember picture,overlay]
+  \node[anchor=north east,xshift=-0.5cm,yshift=0.2ex] at (current page.north east) {\insertheadlinelogo};
+  % \node[anchor=north west,xshift=0.8cm,yshift=0.2ex] at (current page.north west) {\insertheadlinelogo};
+  \end{tikzpicture}}
+
+
+\setbeamerfont{footline}{size=\tiny}
+\defbeamertemplate*{footline}{Bielefeld} %footline format
+{
+  \begin{beamercolorbox}[wd=\paperwidth,leftskip=1cm,rightskip=1cm]
+  {footline} 
+  {\color{UBlightgreen}\vhrulefill{0.2pt}}
+  \end{beamercolorbox} \begin{beamercolorbox}[wd=\paperwidth,leftskip=1cm,rightskip=1cm,ht=0.37cm,dp=0.25cm]{footline} 
+  ~\insertframenumber{} | \insertshortauthor\insertshortinstitute, \insertshorttitle%
+  \ifx\insertdate\@empty%
+  \else%
+  , \insertshortdate
+  \fi
+  % \fussnote \hfill \crtext \hspace*{20mm}
+  \end{beamercolorbox}
+}
+
+\mode<all>
+
+#+END_SRC
+
+#+NAME: beamerlogosBielefeld.tex
+#+BEGIN_SRC latex :noweb yes :tangle templates/beamer-template/themes/beamerlogosBielefeld.tex
+\titlelogo{%
+  \includegraphics[width=3.967cm, keepaspectratio=true]{beamer-template/graphics/UB-LiLi-logo.pdf}
+}
+
+%% Old version with relative measures
+% \titlelogo{%
+% \includegraphics[width=.31\paperwidth, keepaspectratio=true]{beamer-template/graphics/UT-logo.pdf}
+% \hskip0.4cm 
+%   %% Trajan
+% \begin{minipage}[t]{0.5\textwidth}
+% \vskip-0.104\paperheight
+% \includegraphics[width=.45\paperwidth, keepaspectratio=true]{beamer-template/graphics/UT-MNF-FBI-logo.pdf}
+% \end{minipage}%
+%   %% Trajan + Arial
+%   % \begin{minipage}[t]{0.5\textwidth}
+%   % \setlength{\baselineskip}{11pt}
+%   % \vskip-0.108\paperheight
+%   % \includegraphics[width=.45\paperwidth, keepaspectratio=true]{beamer-template/graphics/UT-MNF-logo.pdf}\newline
+%   % \upshape\sffamily\color{UTred}\fontsize{7}{10}\selectfont\textbf{Fachbereich Informatik}
+%   % \end{minipage}%
+% }
+
+\headlinelogo{%
+  \includegraphics[width=2.52cm, keepaspectratio=true]{beamer-template/graphics/UB-LiLi-logo.pdf}
+}      
+
+\titlegraphic{
+% TODO
+}
 #+END_SRC
 
 * Packages
@@ -3504,7 +3776,15 @@ release_standalone:
 
 #+NAME: beamer-latexmk
 #+BEGIN_SRC shell :noweb yes :tangle templates/beamer-template/latexmkrc 
-$pdflatex = 'pdflatex %O %S';
+# -*- mode: Perl; eval: (flycheck-mode -1);-*-
+# Manual: http://mirror.physik-pool.tu-berlin.de/pub/CTAN/support/latexmk/latexmk.pdf
+
+$cleanup_mode = 2;
+# 1 for full cleanup,
+# 2 for cleanup except for .dvi, .ps and .pdf files,
+# 3 for cleanup except for dep and aux files.
+$clean_ex = "*.fls";
+$pdflatex = 'pdflatex -shell-escape %O %S';
 #+END_SRC
 
 #+NAME: poster-latexmk
