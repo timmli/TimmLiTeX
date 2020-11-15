@@ -3794,7 +3794,15 @@ $pdflatex = 'pdflatex %O %S';
 
 #+NAME: text-latexmk
 #+BEGIN_SRC shell :noweb yes :tangle templates/text-template/latexmkrc 
-$pdflatex = 'pdflatex %O %S';
+# -*- mode: Perl; eval: (flycheck-mode -1);-*-
+# Manual: http://mirror.physik-pool.tu-berlin.de/pub/CTAN/support/latexmk/latexmk.pdf
+
+$cleanup_mode = 2;
+# 1 for full cleanup,
+# 2 for cleanup except for .dvi, .ps and .pdffiles,
+# 3 for cleanup except for dep and aux files.
+$clean_ex = "*.fls";
+$pdflatex = 'pdflatex -shell-escape %O %S';
 #+END_SRC
 
 #+NAME: jlm-latexmk
