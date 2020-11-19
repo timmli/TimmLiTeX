@@ -96,7 +96,7 @@ In order to compile these templates, press =C-c C-v t= , or evaluate the followi
 ,#+LATEX_COMPILER: pdflatex
 ,#+LATEX_HEADER: <<abstract-settings>>
 ,#+LATEX_HEADER: \input{text-template/myMacros}
-,#+LATEX_HEADER: %\bibliography{references}
+,#+LATEX_HEADER: %\addbibresource[datatype=bibtex]{references.bib}  % BibLaTeX
 :end:
 
 ,* Paragraph title
@@ -202,7 +202,7 @@ Remember to first add the class [[https://github.com/langsci/latex][langscibook]
 ,#+LATEX_COMPILER: pdflatex
 ,#+LATEX_HEADER: <<article-settings>>
 ,#+LATEX_HEADER: \input{text-template/myMacros}
-,#+LATEX_HEADER: %\bibliography{references}
+,#+LATEX_HEADER: %\addbibresource[datatype=bibtex]{references.bib}   % BibLaTeX 
 :end:
 
 ,#+BEGIN_abstract
@@ -334,6 +334,7 @@ This is an abstract: \lipsum[1]
 ,#+LATEX_HEADER: \input{beamerlogosTuebingen}
 ,#+LANGUAGE:  en
 # #+LATEX_HEADER: \AtBeginDocument{\selectlanguage{german}}
+,#+LATEX_HEADER: \addbibresource[datatype=bibtex]{references.bib}  % BibLaTeX
 ,#+COLUMNS: %40ITEM %10TAGS %9BEAMER_act(Overlays) %4BEAMER_col(Col) %20BEAMER_opt(Options)
 :end:
 
@@ -608,7 +609,7 @@ https://langsci-press.org/
 ,#+LATEX_HEADER: \usepackage{booktabs}
 ,#+LATEX_HEADER: \usepackage{packages/tikz-settings} % tikz, forest, etc.
 ,#+LATEX_HEADER: %\input{myMacros}
-,#+LATEX_HEADER: \bibliography{references}
+,#+LATEX_HEADER: \addbibresource[datatype=bibtex]{references.bib}  % BibLaTeX
 :end: 
 # Eventually appears after \begin{document}.
 ,#+BEGIN_EXPORT latex
@@ -768,6 +769,7 @@ Remember to first add the class jlm to the set of known classes (in =init.el=).
 # ispell-local-dictionary: "british"
 # end:
 #+END_SRC
+
 ** Hausarbeit template
 
 #+NAME: hausarbeit-template
@@ -837,6 +839,7 @@ numbers=noenddot,
 %  Document end   % 
 %%%%%%%%%%%%%%%%%%% 
 
+\addbibresource[datatype=bibtex]{references.bib} % BibLaTeX
 \insertBib
 
 \end{document}
@@ -892,6 +895,7 @@ numbers=noenddot,
 %   Document end  % 
 %%%%%%%%%%%%%%%%%%%
 
+\addbibresource[datatype=bibtex]{references.bib} % BibLaTeX
 \insertBib
 
 \end{document}
@@ -2488,7 +2492,8 @@ numbers=noenddot,
 }{}
 \makeatother
 
-\addbibresource[datatype=bibtex]{references.bib}
+%% The bibliography file is specified like this
+%\addbibresource[datatype=bibtex]{references.bib}
 
 \newcommand{\insertBib}{
   \printbibliography[
