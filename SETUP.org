@@ -2896,16 +2896,16 @@ numbers=noenddot,
 
 #+NAME: myMacros.tex
 #+BEGIN_SRC latex :noweb yes
-%%%%%%%%%%%%%%%%%%%%%%
-%   TODONOTES        % 
-%%%%%%%%%%%%%%%%%%%%%%
- 
+%%%%%%%%%%%%%%%%%%%%%% 
+% TODONOTES          % 
+%%%%%%%%%%%%%%%%%%%%%% 
+
 \usepackage{soul}   % for text highlighting
 \usepackage[textsize=scriptsize,textwidth=2.5cm]{todonotes}
 \newcommand{\todoregion}[2]{\hl{#1}\todo{#2}}    
 
 %%%%%%%%%%%%%%%%%%%%%% 
-%   SYMBOLS          % 
+% SYMBOLS            % 
 %%%%%%%%%%%%%%%%%%%%%% 
 
 \newcommand{\bsp}[1]{\textit{#1}}
@@ -2955,7 +2955,7 @@ numbers=noenddot,
 \DeclareMathOperator*{\argmax}{argmax}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-%   COLORS & HIGHLIGHTING          % 
+% COLORS & HIGHLIGHTING            % 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
 \definecolor{myblue}{rgb}{0,0,0.70}
@@ -2964,9 +2964,9 @@ numbers=noenddot,
 
 \newcommand{\emphR}[1]{{\color{myred}#1}}
 
-%%%%%%%%%%%%%%%%%%%%%%
-%   MISCELLANEOUS    % 
-%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%% 
+% MISCELLANEOUS      % 
+%%%%%%%%%%%%%%%%%%%%%% 
 
 % \newcommand{\circled}[1]{\textcircled{\raisebox{-0.9pt}{#1}}}
 \DeclareRobustCommand\circled[1]{\tikz[baseline=(char.base)]{ % works better compared to \newcommand*
@@ -2975,14 +2975,13 @@ numbers=noenddot,
 % \newcommand{circled}[1]{\Circled{#1}}
 
 
-\newcommand{\prule}[3]{
-      $\begin{array}{c} #1\\ \hline
-                        #2\end{array} ~~ #3$}
+\newcommand{\prule}[3]{\ensuremath{\begin{array}{c} #1\\ \hline #2\end{array} ~~ #3}}
 
 \newcommand{\minitab}[2][c]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
 
-\newlength{\stmueTmp}
-\newcommand*{\hspaceThis}[1]{\settowidth{\stmueTmp}{#1}\hspace*{\stmueTmp}}
+\newlength{\thisWidth}
+\newcommand*{\hspaceThis}[1]{\settowidth{\thisWidth}{#1}\hspace*{\thisWidth}}
+\newcommand*{\hspaceMinusThis}[1]{\settowidth{\thisWidth}{#1}\hspace*{-\thisWidth}}
 
 \newenvironment{changemargin}[2]{%
   \begin{list}{}{%
@@ -2994,7 +2993,7 @@ numbers=noenddot,
     \setlength{\parsep}{\parskip}%
   }%
   \item[]}{\end{list}}
-  
+
 % \newtheorem{definition}{Definition}
 % \newtheorem{corollary}{Corollary}
 % \newtheorem{theorem}{Theorem}
