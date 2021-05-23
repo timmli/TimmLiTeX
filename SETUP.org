@@ -1909,8 +1909,7 @@ aspectratio=43,
   % \setlength{\Extopsep}{1ex}   % vertical margin in linguex examples
 }
 
-\usepackage{beamer-template/packages/avm}
-<<avm-settings>>
+\usepackage{langsci-avm/langsci-avm}
 
 <<listings-settings>>
 
