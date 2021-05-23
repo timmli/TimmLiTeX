@@ -1909,7 +1909,7 @@ aspectratio=43,
   % \setlength{\Extopsep}{1ex}   % vertical margin in linguex examples
 }
 
-\usepackage{langsci-avm/langsci-avm}
+\usepackage{beamer-template/packages/langsci-avm}
 
 <<listings-settings>>
 
@@ -3136,7 +3136,7 @@ A TUCO derivation:\newline
 
 \begin{frame}
 \frametitle{AVM}
-<<example-avms>>
+<<example-langsci-avms>>
 \end{frame}
 
 % \begin{frame}
@@ -3271,6 +3271,20 @@ More \LaTeX{} templates on \url{https://github.com/timmli/latex-templates}.
 #+END_SRC
 
 ** AVM
+
+#+NAME: example-langsci-avms
+#+BEGIN_SRC latex
+\avm{
+  \0 [ \type{eating} \\
+    actor & \1 \\ 
+    theme & \2 ]
+}
+
+\medskip
+
+\noindent $\Rightarrow$ \url{https://github.com/langsci/langsci-avm/blob/master/langsci-avm.pdf}
+#+END_SRC
+
 
 #+NAME: example-avms
 #+BEGIN_SRC latex
