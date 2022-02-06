@@ -775,11 +775,10 @@ Remember to first add the class jlm to the set of known classes (in =init.el=).
 #+NAME: hausarbeit-template
 #+BEGIN_SRC latex :noweb yes :tangle templates/teaching-template/hausarbeit-template.tex
 \documentclass[
-11pt,
-bibliography=totoc,
-numbers=noenddot,
-% draft
-]{scrbook}
+  11pt,
+  bibliography=totoc,
+  numbers=noenddot,
+  ]{scrbook}
 
 %%%%%%%%%%%%%%%%%%%%%%%% 
 %       SETTINGS       %
@@ -814,9 +813,14 @@ numbers=noenddot,
 \date{\ddmmyyyydate\today, \currenttime}
 \publishers{Seminarart \\ Seminartitel \\ Semester Jahr}
 
-%%%%%%%%%%%%%%%%
-%   Document   % 
-%%%%%%%%%%%%%%%%
+% comment for final version
+\usepackage{draftwatermark}
+\SetWatermarkScale{1}
+\AtBeginDocument{\SetWatermarkText{DRAFT}}
+
+%%%%%%%%%%%%%%%%%%%%%%
+%   Document start   % 
+%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
 
@@ -839,8 +843,11 @@ numbers=noenddot,
 %  Document end   % 
 %%%%%%%%%%%%%%%%%%% 
 
-\addbibresource[datatype=bibtex]{references.bib} % BibLaTeX
 \insertBib
+
+\chapter*{Erklärung}
+
+<<selbständigkeitserklärung>>
 
 \end{document}
 
@@ -850,21 +857,43 @@ numbers=noenddot,
 %%% End:
 #+END_SRC
 
+#+NAME: selbständigkeitserklärung
+#+BEGIN_SRC latex
+Hiermit erkläre ich, dass ich die vorliegende Arbeit selbstständig verfasst und keine anderen Hilfsmittel als die angegebenen verwendet habe.
+
+Insbesondere versichere ich, dass ich alle wörtlichen und sinngemäßen Übernahmen aus anderen Werken als solche kenntlich gemacht habe.
+
+\vspace{10ex}
+
+\noindent
+\begin{tabular}{lcl}
+\rule{6cm}{1pt} & \hspace{1cm} & \rule{6cm}{1pt} \\
+Ort/Datum & & Unterschrift
+\end{tabular}
+#+END_SRC
+
+
 ** Essay template
 
 #+NAME: essay-template
 #+BEGIN_SRC latex :noweb yes :tangle templates/teaching-template/essay-template.tex
+\documentclass[
+  11pt,
+  twoside,
+  ]{scrartcl}
+
 %%%%%%%%%%%%%%%%%%%%%%%% 
 %       SETTINGS       %
 %%%%%%%%%%%%%%%%%%%%%%%%
 
-\documentclass[11pt,twoside]{scrartcl}
-
 \input{settings/scrarticle-settings.tex}
-
 \input{settings/text-settings}
 
-\begin{document}
+\AtBeginDocument{
+  \selectlanguage{german} % which language is available depends on how babel is loaded
+}
+
+\input{myMacros}   % the content of myMacros.tex goes here
 
 %%%%%%%%%%%%%
 %   Title   % 
@@ -876,14 +905,23 @@ numbers=noenddot,
 \affiliation{
 		Matrikelnummer: 123456789\\	% change Matrikelnummer
     Studiengang: BSc Neue Ätherwissenschaften \\ % change Studiengang
-		\url{mustermann@uni-tuebingen.de}\\	% change email address
-		Seminar: Seminar name, University of Tübingen, WS 2020/2021}
+		Emailaddresse: \url{mustermann@uni-tuebingen.de}\\[1ex]	% change email address
+		Seminar: Seminarname, Universität Tübingen, WS 2021/2022\\ % change seminar and date
+    Datum der Fassung: \today, \currenttime
+}
 
-\maketitle 
+% comment for final version
+\usepackage{draftwatermark}
+\SetWatermarkScale{1}
+\AtBeginDocument{\SetWatermarkText{DRAFT}}
 
 %%%%%%%%%%%%%%%%%%%%%%
 %   Document start   % 
 %%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\maketitle 
 
 \input{examples/essay-examples.tex}
 
@@ -895,8 +933,11 @@ numbers=noenddot,
 %   Document end  % 
 %%%%%%%%%%%%%%%%%%%
 
-\addbibresource[datatype=bibtex]{references.bib} % BibLaTeX
 \insertBib
+
+\section*{Erklärung}
+
+<<selbständigkeitserklärung>>
 
 \end{document}
 
@@ -1949,11 +1990,11 @@ numbers=noenddot,
 ** Text settings
 
 #+BEGIN_SRC latex :noweb yes :tangle templates/teaching-template/settings/text-settings.tex
-<<text-settings(nw-mycitestylepath="bst/biblatex-sp-unified/cbx/sp-authoryear-comp",nw-mystylepath="bst/biblatex-sp-unified/bbx/biblatex-sp-unified",nw-avmpath="packages/avm")>>
+<<text-settings(nw-mycitestylepath="bst/biblatex-sp-unified/cbx/sp-authoryear-comp",nw-mystylepath="bst/biblatex-sp-unified/bbx/biblatex-sp-unified",nw-avmpath="packages/langsci-avm")>>
 #+END_SRC
 
 #+NAME: text-settings
-#+BEGIN_SRC latex :noweb yes :tangle templates/text-template/text-settings.tex :var nw-mycitestylepath="text-template/bst/biblatex-sp-unified/cbx/sp-authoryear-comp" nw-mystylepath="text-template/bst/biblatex-sp-unified/bbx/biblatex-sp-unified" nw-avmpath="text-template/packages/avm"
+#+BEGIN_SRC latex :noweb yes :tangle templates/text-template/text-settings.tex :var nw-mycitestylepath="text-template/bst/biblatex-sp-unified/cbx/sp-authoryear-comp" nw-mystylepath="text-template/bst/biblatex-sp-unified/bbx/biblatex-sp-unified" nw-avmpath="text-template/packages/langsci-avm"
 <<pdflatex-settings>>
 
 %% Trees and graphics
@@ -1980,7 +2021,7 @@ numbers=noenddot,
 \renewcommand{\firstrefdash}{}
 
 \usepackage{nw-avmpath}
-<<avm-settings>>
+<<langsci-avm-settings>>
 
 % \usepackage[inference]{semantic} % for CCG 
 % \usepackage{packages/ccg}
@@ -2307,6 +2348,17 @@ numbers=noenddot,
 #+END_SRC
 
 ** AVM
+
+#+NAME: langsci-avm-settings
+#+BEGIN_SRC latex
+%%%%%%%%%%%%%%%%%%%%%%
+%   AVM SETTINGS     % 
+%%%%%%%%%%%%%%%%%%%%%%
+
+% none
+
+#+END_SRC
+
 
 #+NAME: avm-settings
 #+BEGIN_SRC latex
@@ -2702,7 +2754,7 @@ numbers=noenddot,
 \ihead{}
 \ifdraft{\ifoot[]{Draft of \today, \currenttime\ -- comments are welcome!}}{}
 \cfoot{}
-\ofoot[]{\pagemark}
+\ofoot[\pagemark]{\pagemark}
 \pagestyle{scrheadings}
 
 \makeatletter
@@ -3039,6 +3091,33 @@ numbers=noenddot,
 
 <<example-citations>>
 
+\section{Examples}
+
+\subsection{Citation}
+
+<<example-citations>>
+
+\subsection{AVM}
+
+<<example-langsci-avms>>
+
+\subsection{Linguistic examples}
+
+<<example-linguistic-examples>>
+
+\subsection{Formulae}
+
+<<example-formulae>>
+
+\subsection{Tables}
+
+<<example-tables>>
+
+\subsection{Trees}
+
+<<example-trees>>
+
+
 #+END_SRC
 
 #+NAME: book-examples
@@ -3048,9 +3127,31 @@ numbers=noenddot,
 
 <<readme>>
 
-\chapter{Citation examples}
+\chapter{Examples}
+
+\section{Citation}
 
 <<example-citations>>
+
+\section{AVM}
+
+<<example-langsci-avms>>
+
+\section{Linguistic examples}
+
+<<example-linguistic-examples>>
+
+\section{Formulae}
+
+<<example-formulae>>
+
+\section{Tables}
+
+<<example-tables>>
+
+\section{Trees}
+
+<<example-trees>>
 
 #+END_SRC
 
