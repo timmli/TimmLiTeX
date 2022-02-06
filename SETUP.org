@@ -3715,7 +3715,7 @@ test_essay:
 			latexmk -pdf essay-template.tex
 
 release_essay:
-	rm -fr tmp
+	rm -fr temp
 	mkdir temp
 	cp -r --parents $(ESSAY_FILES) temp
 	cd temp; zip -r essay-template.zip *; mv essay-template.zip ..
@@ -3788,7 +3788,7 @@ test_article:
 			latexmk -pdf article-template.tex
 
 release_article:
-	rm -fr tmp
+	rm -fr temp
 	mkdir temp
 	cd temp; mkdir text-template
 	cp -r --parents $(ARTICLE_FILES) temp/text-template
@@ -3900,7 +3900,7 @@ release_langscibook:
 	cp -r --parents $(LANGSCI_FILES) temp
 	mv temp/langscibook/* temp
 	rm -fr temp/langscibook
-	mv temp/langsi-fonts/* test
+	mv temp/langsci-fonts/* temp
 	rm -fr temp/langsci-fonts
 	cd temp; zip -r langscibook-template.zip *; mv langscibook-template.zip ..
 	rm -fr temp
