@@ -1144,12 +1144,12 @@ Local Beamer themes are executed relative to the directory of the master file. T
 
 #+NAME: beamer-theme-settings
 #+BEGIN_SRC latex :noweb yes
-% \usetheme{Lustnau}  
-% % \usetheme{Tuebingen}
-% \input{beamerlogosTuebingen.tex}
+\usetheme{Lustnau}  
+% \usetheme{Tuebingen}
+\input{beamerlogosTuebingen.tex}
 
-\usetheme{Bielefeld}
-\input{beamerlogosBielefeld.tex}
+% \usetheme{Bielefeld}
+% \input{beamerlogosBielefeld.tex}
 
 % \usetheme{Duesseldorf}
 % \input{beamerlogosDuesseldorf.tex}
@@ -1909,7 +1909,7 @@ Some templates require it to have the tikz settings in a separate sty-file.
 compress,
 xcolor=table,
 dvipsnames,
-aspectratio=43,
+aspectratio=169,
 #+END_SRC
 
 #+NAME: beamer-options-org
