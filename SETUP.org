@@ -3089,8 +3089,6 @@ numbers=noenddot,
 
 <<readme>>
 
-<<example-citations>>
-
 \section{Examples}
 
 \subsection{Citation}
