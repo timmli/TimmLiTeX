@@ -2730,7 +2730,7 @@ numbers=noenddot,
 
 \newcommand{\newlineTitle}{\\}
 
-\usepackage{scrpage2}
+\usepackage{scrlayer-scrpage}
 \ohead{\headmark}
 \chead{}
 \ihead{}
