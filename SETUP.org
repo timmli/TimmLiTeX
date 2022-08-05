@@ -459,8 +459,6 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 \date{\today}
 %\logo{\pgfimage[width=2cm,height=1cm]{logo-emmy}}			% Logo on all slides (pdf,png,jpg,eps)
 %\titlegraphic{\includegraphics[height=1cm]{path/to/picture}}	% on title slide
-\RequirePackage{lipsum}
-\titlegraphic{{\rmfamily \lipsum}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SLIDES
@@ -1390,9 +1388,8 @@ Local Beamer themes are executed relative to the directory of the master file. T
   \includegraphics[width=2.52cm, keepaspectratio=true]{beamer-template/graphics/UT-logo.pdf}
 }      
 
-\titlegraphic{
-% TODO
-} 
+\RequirePackage{lipsum}
+\titlegraphic{{\rmfamily \lipsum}}
 #+END_SRC
 
 ** Lustnau
@@ -1519,7 +1516,9 @@ Local Beamer themes are executed relative to the directory of the master file. T
 
 #+NAME: beamerlogosDuesseldorf.tex
 #+BEGIN_SRC latex :noweb yes :tangle templates/beamer-template/themes/beamerlogosDuesseldorf.tex
-\titlegraphic{\includegraphics[height=1cm]{graphics/sfb-logo-quer} \hfil \includegraphics[height=1cm]{graphics/hhu-logo}}
+\titlegraphic{%
+  \includegraphics[height=1cm]{beamer-template/graphics/HHU-logo}%
+}
 #+END_SRC
 
 ** Bielefeld
@@ -1793,9 +1792,8 @@ Template for slides in the corporate design of the [[https://www.uni-bielefeld.d
   \includegraphics[width=2.52cm, keepaspectratio=true]{beamer-template/graphics/UB-LiLi-logo.pdf}
 }      
 
-\titlegraphic{
-% TODO
-}
+\RequirePackage{lipsum}
+\titlegraphic{{\rmfamily \lipsum}}
 #+END_SRC
 
 * Packages
@@ -3281,7 +3279,7 @@ A TUCO derivation:\newline
   \begin{columns}
     \column{.55\textwidth}
     First column
-		\pgfimage[width=\textwidth]{beamer-template/graphics/hhu-logo-hres}
+		\pgfimage[width=\textwidth]{beamer-template/graphics/HHU-logo}
     \column{.45\textwidth}
 		Second column
     \begin{enumerate}
