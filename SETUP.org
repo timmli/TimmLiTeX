@@ -847,17 +847,7 @@ Remember to first add the class jlm to the set of known classes (in =init.el=).
 
 \chapter*{Erklärung}
 
-Hiermit erkläre ich, dass ich die vorliegende Arbeit selbstständig verfasst und keine anderen Hilfsmittel als die angegebenen verwendet habe.
-
-Insbesondere versichere ich, dass ich alle wörtlichen und sinngemäßen Übernahmen aus anderen Werken als solche kenntlich gemacht habe.
-
-\vspace{10ex}
-
-\noindent
-\begin{tabular}{lcl}
-  \rule{6cm}{1pt} & \hspace{1cm} & \rule{6cm}{1pt} \\
-  Ort/Datum & & Unterschrift
-\end{tabular}
+<<selbständigkeitserklärung>>
 
 \end{document}
 
@@ -866,22 +856,6 @@ Insbesondere versichere ich, dass ich alle wörtlichen und sinngemäßen Überna
 %%% TeX-master: t
 %%% End:
 #+END_SRC
-
-#+NAME: selbständigkeitserklärung
-#+BEGIN_SRC latex
-Hiermit erkläre ich, dass ich die vorliegende Arbeit selbstständig verfasst und keine anderen Hilfsmittel als die angegebenen verwendet habe.
-
-Insbesondere versichere ich, dass ich alle wörtlichen und sinngemäßen Übernahmen aus anderen Werken als solche kenntlich gemacht habe.
-
-\vspace{10ex}
-
-\noindent
-\begin{tabular}{lcl}
-\rule{6cm}{1pt} & \hspace{1cm} & \rule{6cm}{1pt} \\
-Ort/Datum & & Unterschrift
-\end{tabular}
-#+END_SRC
-
 
 ** Hausarbeit template
 
@@ -947,17 +921,7 @@ Ort/Datum & & Unterschrift
 
 \section*{Erklärung}
 
-Hiermit erkläre ich, dass ich die vorliegende Arbeit selbstständig verfasst und keine anderen Hilfsmittel als die angegebenen verwendet habe.
-
-Insbesondere versichere ich, dass ich alle wörtlichen und sinngemäßen Übernahmen aus anderen Werken als solche kenntlich gemacht habe.
-
-\vspace{10ex}
-
-\noindent
-\begin{tabular}{lcl}
-  \rule{6cm}{1pt} & \hspace{1cm} & \rule{6cm}{1pt} \\
-  Ort/Datum & & Unterschrift
-\end{tabular}
+<<selbständigkeitserklärung>>
 
 \end{document}
 
@@ -3091,6 +3055,21 @@ numbers=noenddot,
 
 <<article-examples>>
 
+#+END_SRC
+
+#+NAME: selbständigkeitserklärung
+#+BEGIN_SRC latex
+Hiermit erkläre ich, dass ich die vorliegende Arbeit selbstständig verfasst und keine anderen Hilfsmittel als die angegebenen verwendet habe.
+
+Insbesondere versichere ich, dass ich alle wörtlichen und sinngemäßen Übernahmen aus anderen Werken als solche kenntlich gemacht habe.
+
+\vspace{10ex}
+
+\noindent
+\begin{tabular}{lcl}
+  \rule{6cm}{1pt} & \hspace{1cm} & \rule{6cm}{1pt} \\
+  Ort/Datum & & Unterschrift
+\end{tabular}
 #+END_SRC
 
 ** Text
