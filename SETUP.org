@@ -10,8 +10,8 @@
       - [[#book-template][Book template]]
       - [[#langsci-template][LangSci template]]
       - [[#jlm-template][JLM template]]
+      - [[#abschlussarbeit-template][Abschlussarbeit template]]
       - [[#hausarbeit-template][Hausarbeit template]]
-      - [[#essay-template][Essay template]]
       - [[#poster-template][Poster template]]
       - [[#standalone-template][Standalone template]]
 - [[#beamer-themes][Beamer themes]]
@@ -770,10 +770,10 @@ Remember to first add the class jlm to the set of known classes (in =init.el=).
 # end:
 #+END_SRC
 
-** Hausarbeit template
+** Abschlussarbeit template
 
-#+NAME: hausarbeit-template
-#+BEGIN_SRC latex :noweb yes :tangle templates/teaching-template/hausarbeit-template.tex
+#+NAME: abschlussarbeit-template
+#+BEGIN_SRC latex :noweb yes :tangle templates/teaching-template/abschlussarbeit-template.tex
 \documentclass[
   11pt,
   bibliography=totoc,
@@ -781,7 +781,7 @@ Remember to first add the class jlm to the set of known classes (in =init.el=).
   ]{scrbook}
 
 %%%%%%%%%%%%%%%%%%%%%%%% 
-%       SETTINGS       %
+% SETTINGS
 %%%%%%%%%%%%%%%%%%%%%%%% 
 
 \usepackage{datetime}
@@ -792,35 +792,35 @@ Remember to first add the class jlm to the set of known classes (in =init.el=).
   \selectlanguage{german} % which language is available depends on how babel is loaded
 }
 
-%%%%%%%%%%%%%%
-%   Macros   % 
-%%%%%%%%%%%%%%
+%%%%%%%%%%%%%% 
+% Macros
+%%%%%%%%%%%%%% 
 
 \input{myMacros}   % the content of myMacros.tex goes here
 
-%%%%%%%%%%%%%
-%   Title   % 
-%%%%%%%%%%%%%
+%%%%%%%%%%%%% 
+% Title
+%%%%%%%%%%%%% 
 
-\subject{Hausarbeit}
+\subject{Typ der Abschlussarbeit}
 \title{Titel}
 \author{{\LARGE Max Mustermann} \\
-		\\
-		Matrikelnummer: 123456789\\
-		Studiengang: BSc Neue Ätherwissenschaften \\
-		\url{mustermann@uni-tuebingen.de}\\ 
-		Eberhard-Karls-Universität Tübingen\\}  
+  \\
+  Matrikelnummer: 123456789\\
+  Studiengang: BSc Neue Ätherwissenschaften \\
+  \url{mustermann@uni-tuebingen.de}\\ 
+  Eberhard-Karls-Universität Tübingen\\}  
 \date{\ddmmyyyydate\today, \currenttime}
-\publishers{Seminarart \\ Seminartitel \\ Semester Jahr}
+\publishers{Betreuerteam \\ Prof. Dr. Martina Musterfrau}
 
 % comment for final version
 \usepackage{draftwatermark}
 \SetWatermarkScale{1}
 \AtBeginDocument{\SetWatermarkText{DRAFT}}
 
-%%%%%%%%%%%%%%%%%%%%%%
-%   Document start   % 
-%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%% 
+% Document start
+%%%%%%%%%%%%%%%%%%%%%% 
 
 \begin{document}
 
@@ -829,7 +829,7 @@ Remember to first add the class jlm to the set of known classes (in =init.el=).
 \tableofcontents
 \mainmatter 
 
-\input{examples/hausarbeit-examples}
+\input{examples/abschlussarbeit-examples}
 
 \chapter{Blindtext}
 
@@ -840,14 +840,24 @@ Remember to first add the class jlm to the set of known classes (in =init.el=).
 \lipsum
 
 %%%%%%%%%%%%%%%%%%% 
-%  Document end   % 
+% Document end
 %%%%%%%%%%%%%%%%%%% 
 
 \insertBib
 
 \chapter*{Erklärung}
 
-<<selbständigkeitserklärung>>
+Hiermit erkläre ich, dass ich die vorliegende Arbeit selbstständig verfasst und keine anderen Hilfsmittel als die angegebenen verwendet habe.
+
+Insbesondere versichere ich, dass ich alle wörtlichen und sinngemäßen Übernahmen aus anderen Werken als solche kenntlich gemacht habe.
+
+\vspace{10ex}
+
+\noindent
+\begin{tabular}{lcl}
+  \rule{6cm}{1pt} & \hspace{1cm} & \rule{6cm}{1pt} \\
+  Ort/Datum & & Unterschrift
+\end{tabular}
 
 \end{document}
 
@@ -873,18 +883,18 @@ Ort/Datum & & Unterschrift
 #+END_SRC
 
 
-** Essay template
+** Hausarbeit template
 
-#+NAME: essay-template
-#+BEGIN_SRC latex :noweb yes :tangle templates/teaching-template/essay-template.tex
+#+NAME: hausarbeit-template
+#+BEGIN_SRC latex :noweb yes :tangle templates/teaching-template/hausarbeit-template.tex
 \documentclass[
   11pt,
   twoside,
   ]{scrartcl}
 
 %%%%%%%%%%%%%%%%%%%%%%%% 
-%       SETTINGS       %
-%%%%%%%%%%%%%%%%%%%%%%%%
+% SETTINGS
+%%%%%%%%%%%%%%%%%%%%%%%% 
 
 \input{settings/scrarticle-settings.tex}
 \input{settings/text-settings}
@@ -895,19 +905,19 @@ Ort/Datum & & Unterschrift
 
 \input{myMacros}   % the content of myMacros.tex goes here
 
-%%%%%%%%%%%%%
-%   Title   % 
-%%%%%%%%%%%%%
+%%%%%%%%%%%%% 
+% Title
+%%%%%%%%%%%%% 
 
-\subject{Essay}
+\subject{Hausarbeit}
 \title{Titel over two \newlineTitle lines}	% change title
 \author{Max Mustermann}	% change name
 \affiliation{
-		Matrikelnummer: 123456789\\	% change Matrikelnummer
-    Studiengang: BSc Neue Ätherwissenschaften \\ % change Studiengang
-		Emailaddresse: \url{mustermann@uni-tuebingen.de}\\[1ex]	% change email address
-		Seminar: Seminarname, Universität Tübingen, WS 2021/2022\\ % change seminar and date
-    Datum der Fassung: \today, \currenttime
+  Matrikelnummer: 123456789\\	% change Matrikelnummer
+  Studiengang: BSc Neue Ätherwissenschaften \\ % change Studiengang
+  Emailaddresse: \url{mustermann@uni-tuebingen.de}\\[1ex]	% change email address
+  Seminar: Seminarname, Universität Tübingen, WS 2021/2022\\ % change seminar and date
+  Datum der Fassung: \today, \currenttime
 }
 
 % comment for final version
@@ -915,29 +925,39 @@ Ort/Datum & & Unterschrift
 \SetWatermarkScale{1}
 \AtBeginDocument{\SetWatermarkText{DRAFT}}
 
-%%%%%%%%%%%%%%%%%%%%%%
-%   Document start   % 
-%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%% 
+% Document start
+%%%%%%%%%%%%%%%%%%%%%% 
 
 \begin{document}
 
 \maketitle 
 
-\input{examples/essay-examples.tex}
+\input{examples/hausarbeit-examples.tex}
 
 \section{Blindtext}
 
 \lipsum
 
-%%%%%%%%%%%%%%%%%%%
-%   Document end  % 
-%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%% 
+% Document end
+%%%%%%%%%%%%%%%%%%% 
 
 \insertBib
 
 \section*{Erklärung}
 
-<<selbständigkeitserklärung>>
+Hiermit erkläre ich, dass ich die vorliegende Arbeit selbstständig verfasst und keine anderen Hilfsmittel als die angegebenen verwendet habe.
+
+Insbesondere versichere ich, dass ich alle wörtlichen und sinngemäßen Übernahmen aus anderen Werken als solche kenntlich gemacht habe.
+
+\vspace{10ex}
+
+\noindent
+\begin{tabular}{lcl}
+  \rule{6cm}{1pt} & \hspace{1cm} & \rule{6cm}{1pt} \\
+  Ort/Datum & & Unterschrift
+\end{tabular}
 
 \end{document}
 
@@ -2786,7 +2806,7 @@ numbers=noenddot,
   {\raggedright
     \ifdraft{{\large\color{gray} (Draft of \today, \currenttime)\par}}{}%
     {\LARGE\sffamily%
-      \ifx\@subject\empty\else{(\@subject) }\fi%
+      \ifx\@subject\empty\else{\textsc{(\@subject) }}\fi%
       \textbf{\@title}\\[1ex]\par}
     {\Large\@author \\}%
     \@ifundefined{@affiliation}{}
@@ -3059,15 +3079,15 @@ numbers=noenddot,
 
 ** Teaching
 
-#+NAME: hausarbeit-examples
-#+BEGIN_SRC latex :noweb yes :tangle templates/teaching-template/examples/hausarbeit-examples.tex
+#+NAME: abschlussarbeit-examples
+#+BEGIN_SRC latex :noweb yes :tangle templates/teaching-template/examples/abschlussarbeit-examples.tex
 
 <<book-examples>>
 
 #+END_SRC
 
-#+NAME: essay-examples
-#+BEGIN_SRC latex :noweb yes :tangle templates/teaching-template/examples/essay-examples.tex
+#+NAME: hausarbeit-examples
+#+BEGIN_SRC latex :noweb yes :tangle templates/teaching-template/examples/hausarbeit-examples.tex
 
 <<article-examples>>
 
@@ -3672,13 +3692,38 @@ release_poster:
 #+BEGIN_SRC makefile :noweb yes :tangle templates/teaching-template/Makefile
 SHELL := /bin/bash
 
-HAUSARBEIT_FILES =  myMacros.tex \
+ABSCHLUSSARBEIT_FILES =  myMacros.tex \
 	settings/text-settings.tex \
 	$(wildcard packages/*.sty) \
-	examples/hausarbeit-examples.tex \
+	examples/abschlussarbeit-examples.tex \
 	$(wildcard bst/biblatex-sp-unified/[^.]*) \
-	hausarbeit-template.tex \
+	abschlussarbeit-template.tex \
 	references.bib
+
+test_abschlussarbeit:
+	rm -fr test
+	mkdir test
+	cp -r --parents $(ABSCHLUSSARBEIT_FILES) test
+	cd test; \
+			latexmk -pdf abschlussarbeit-template.tex
+
+release_abschlussarbeit:
+	rm -fr temp
+	mkdir temp
+	cp -r --parents $(ABSCHLUSSARBEIT_FILES) temp
+	cd temp; zip -r abschlussarbeit-template.zip *; mv abschlussarbeit-template.zip ..
+	rm -fr temp
+
+#-------------------------------------------------------------------------------
+
+HAUSARBEIT_FILES =  myMacros.tex \
+	settings/text-settings.tex \
+	settings/scrarticle-settings.tex \
+	$(wildcard packages/*.sty) \
+	examples/hausarbeit-examples.tex  \
+	$(wildcard bst/biblatex-sp-unified/[^.]*) \
+	references.bib \
+  hausarbeit-template.tex
 
 test_hausarbeit:
 	rm -fr test
@@ -3694,38 +3739,12 @@ release_hausarbeit:
 	cd temp; zip -r hausarbeit-template.zip *; mv hausarbeit-template.zip ..
 	rm -fr temp
 
-#-------------------------------------------------------------------------------
-
-ESSAY_FILES =  myMacros.tex \
-	settings/text-settings.tex \
-	settings/scrarticle-settings.tex \
-	$(wildcard packages/*.sty) \
-	examples/essay-examples.tex  \
-	$(wildcard bst/biblatex-sp-unified/[^.]*) \
-	references.bib \
-  essay-template.tex
-
-test_essay:
-	rm -fr test
-	mkdir test
-	cp -r --parents $(ESSAY_FILES) test
-	cd test; \
-			latexmk -pdf essay-template.tex
-
-release_essay:
-	rm -fr temp
-	mkdir temp
-	cp -r --parents $(ESSAY_FILES) temp
-	cd temp; zip -r essay-template.zip *; mv essay-template.zip ..
-	rm -fr temp
-
 
 #-------------------------------------------------------------------------------
 
-release_all: release_hausarbeit release_essay
+release_all: release_abschlussarbeit release_hausarbeit
 
-test_all: test_hausarbeit test_essay
-
+test_all: test_abschlussarbeit test_hausarbeit
 #+END_SRC
 
 ** Text Makefile
