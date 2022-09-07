@@ -2966,13 +2966,13 @@ numbers=noenddot,
 
 % Taken from https://tex.stackexchange.com/a/60253/61499
 \makeatletter
-\newcommand*\rel@kern[1]{\kern#1\dimexpr\macc@kerna}
-\newcommand*\widebar[1]{%
+\newcommand*\myrel@kern[1]{\kern#1\dimexpr\macc@kerna}
+\def\widebar#1{% use \def to optionally overwrite \widebar 
   \begingroup
   \def\mathaccent##1##2{%
-    \rel@kern{0.8}%
-    \overline{\rel@kern{-0.8}\macc@nucleus\rel@kern{0.2}}%
-    \rel@kern{-0.2}%
+    \myrel@kern{0.8}%
+    \overline{\myrel@kern{-0.8}\macc@nucleus\myrel@kern{0.2}}%
+    \myrel@kern{-0.2}%
   }%
   \macc@depth\@ne
   \let\math@bgroup\@empty \let\math@egroup\macc@set@skewchar
