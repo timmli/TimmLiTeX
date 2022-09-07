@@ -1240,7 +1240,9 @@ Local Beamer themes are executed relative to the directory of the master file. T
 
 \setbeamertemplate{section in toc}[square]
 
-\setbeamertemplate{bibliography item}{\insertbiblabel}  % insert label from bib(la)tex
+\setbeamertemplate{bibliography item}{[\printfield{labelnumber}]}  % insert label from bib(la)tex 
+% \setbeamertemplate{bibliography item}{\insertbiblabel}  % insert label from bib(la)tex (Does not work when using authoryear.)
+
 \setbeamerfont{bibliography entry author}{size=\tiny}%
 \setbeamerfont{bibliography entry title}{size=\tiny}
 \setbeamerfont{bibliography entry journal}{size=\tiny}
@@ -1488,7 +1490,10 @@ Local Beamer themes are executed relative to the directory of the master file. T
 \setbeamercolor*{bibliography entry location}{fg=black}
 \setbeamercolor*{bibliography entry note}{fg=black}
 % and kill the abominable icon
-\setbeamertemplate{bibliography item}{\insertbiblabel}  % insert label from bib(la)tex
+
+\setbeamertemplate{bibliography item}{[\printfield{labelnumber}]}  % insert label from bib(la)tex 
+% \setbeamertemplate{bibliography item}{\insertbiblabel}  % insert label from bib(la)tex (Does not work when using authoryear.)
+
 \AtBeginDocument{
   \renewcommand*{\bibfont}{\scriptsize}
 }
@@ -1889,14 +1894,13 @@ Some templates require it to have the tikz settings in a separate sty-file.
 % ngerman,
 % handout,	% remove overlays
 compress,
-xcolor=table,
-dvipsnames,
+xcolor={table,dvipsnames},
 aspectratio=169,
 #+END_SRC
 
 #+NAME: beamer-options-org
 #+BEGIN_SRC latex
-[compress,xcolor=table,dvipsnames,10pt,aspectratio=43] 
+[compress,xcolor={table,dvipsnames},10pt,aspectratio=43] 
 #+END_SRC
 
 #+NAME: beamer-settings
