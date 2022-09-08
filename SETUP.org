@@ -903,7 +903,10 @@ Remember to first add the class jlm to the set of known classes (in =init.el=).
 
 \begin{document}
 
-\maketitle 
+\maketitle
+\newpage
+\tableofcontents
+\newpage
 
 \input{examples/hausarbeit-examples.tex}
 
@@ -1943,8 +1946,8 @@ aspectratio=169,
 %% Bibliography
 
 %% BibLaTeX
-\newcommand{\mycitestyle}{beamer-template/bst/biblatex-sp-unified/cbx/sp-authoryear-comp}
-\newcommand{\mystyle}{beamer-template/bst/biblatex-sp-unified/bbx/biblatex-sp-unified}
+\newcommand{\mycitestyle}{beamer-template/muss}
+\newcommand{\mybibstyle}{beamer-template/muss}
 <<biblatex-settings>>
 
 %% BibTeX 
@@ -1976,11 +1979,11 @@ numbers=noenddot,
 ** Text settings
 
 #+BEGIN_SRC latex :noweb yes :tangle templates/teaching-template/settings/text-settings.tex
-<<text-settings(nw-mycitestylepath="bst/biblatex-sp-unified/cbx/sp-authoryear-comp",nw-mystylepath="bst/biblatex-sp-unified/bbx/biblatex-sp-unified",nw-avmpath="packages/langsci-avm")>>
+<<text-settings(nw-mycitestylepath="text-template/muss",nw-mystylepath="text-template/muss",nw-avmpath="text-template/packages/langsci-avm")>>
 #+END_SRC
 
 #+NAME: text-settings
-#+BEGIN_SRC latex :noweb yes :tangle templates/text-template/text-settings.tex :var nw-mycitestylepath="text-template/bst/biblatex-sp-unified/cbx/sp-authoryear-comp" nw-mystylepath="text-template/bst/biblatex-sp-unified/bbx/biblatex-sp-unified" nw-avmpath="text-template/packages/langsci-avm"
+#+BEGIN_SRC latex :noweb yes :tangle templates/text-template/text-settings.tex :var nw-mycitestylepath="text-template/muss" nw-mystylepath="text-template/muss" nw-avmpath="text-template/packages/langsci-avm"
 <<pdflatex-settings>>
 
 %% Trees and graphics
@@ -2014,7 +2017,7 @@ numbers=noenddot,
 
 %% Bibliography
 \newcommand{\mycitestyle}{nw-mycitestylepath}
-\newcommand{\mystyle}{nw-mystylepath}
+\newcommand{\mybibstyle}{nw-mystylepath}
 <<biblatex-settings>> 
 % \input{settings/natbib_bibtex_setup.tex} 
 
@@ -2045,8 +2048,8 @@ numbers=noenddot,
 \usepackage[scaled=0.9]{beramono}  % for monospaced font
 \renewcommand*{\familydefault}{\sfdefault}
 
-\newcommand{\mycitestyle}{poster-template/bst/biblatex-sp-unified/cbx/sp-authoryear-comp}
-\newcommand{\mystyle}{poster-template/bst/biblatex-sp-unified/bbx/biblatex-sp-unified}
+\newcommand{\mycitestyle}{poster-template/muss}
+\newcommand{\mybibstyle}{poster-template/muss}
 <<biblatex-settings>>
 
 %%%%%%%%%%%%%%%%%%%%%%
@@ -2390,7 +2393,7 @@ numbers=noenddot,
 
 \usepackage[
   natbib=true,
-  style=\mystyle,
+  bibstyle=\mybibstyle,
   citestyle=\mycitestyle,
   %refsection=chapter,
   maxbibnames=99,
@@ -2772,7 +2775,7 @@ numbers=noenddot,
   {\raggedright
     \ifdraft{{\large\color{gray} (Draft of \today, \currenttime)\par}}{}%
     {\LARGE\sffamily%
-      \ifx\@subject\empty\else{\textsc{(\@subject) }}\fi%
+      \ifx\@subject\empty\else{\textsc{(\@subject)\\[1ex]}}\fi%
       \textbf{\@title}\\[1ex]\par}
     {\Large\@author \\}%
     \@ifundefined{@affiliation}{}
@@ -3597,7 +3600,8 @@ BEAMER_FILES =  myMacros.tex \
 	beamer-settings.tex \
 	$(wildcard packages/*.sty) \
 	beamer-examples.tex \
-	$(wildcard bst/biblatex-sp-unified/[^.]*) \
+  muss.bbx \
+  muss.cbx \
 	$(wildcard graphics/*.pdf) 
 
 test_beamer:
@@ -3640,7 +3644,8 @@ POSTER_FILES =  myMacros.tex \
 	graphics/hhu-logo-hres.pdf \
 	$(wildcard packages/*.sty) \
 	poster-examples.tex  \
-	$(wildcard bst/biblatex-sp-unified/[^.]*)
+  muss.bbx \
+	muss.cbx
 
 test_poster:
 	rm -fr test
@@ -3675,9 +3680,10 @@ SHELL := /bin/bash
 
 ABSCHLUSSARBEIT_FILES =  myMacros.tex \
 	settings/text-settings.tex \
+  settings/muss.bbx \
+  settings/muss.cbx \
 	$(wildcard packages/*.sty) \
 	examples/abschlussarbeit-examples.tex \
-	$(wildcard bst/biblatex-sp-unified/[^.]*) \
 	abschlussarbeit-template.tex \
 	references.bib
 
@@ -3700,9 +3706,10 @@ release_abschlussarbeit:
 HAUSARBEIT_FILES =  myMacros.tex \
 	settings/text-settings.tex \
 	settings/scrarticle-settings.tex \
+  settings/muss.bbx \
+  settings/muss.cbx \
 	$(wildcard packages/*.sty) \
 	examples/hausarbeit-examples.tex  \
-	$(wildcard bst/biblatex-sp-unified/[^.]*) \
 	references.bib \
   hausarbeit-template.tex
 
@@ -3738,7 +3745,8 @@ ABSTRACT_FILES =  myMacros.tex \
 	text-settings.tex \
 	$(wildcard packages/*.sty) \
 	abstract-examples.tex  \
-	$(wildcard bst/biblatex-sp-unified/[^.]*)
+  muss.bbx \
+  muss.cbx
 
 test_abstract:
 	rm -fr test
@@ -3771,7 +3779,8 @@ ARTICLE_FILES =  myMacros.tex \
 	scrarticle-settings.tex \
 	$(wildcard packages/*.sty) \
 	article-examples.tex  \
-	$(wildcard bst/biblatex-sp-unified/[^.]*)
+  muss.bbx \
+  muss.cbx
 
 test_article:
 	rm -fr test
@@ -3803,7 +3812,8 @@ BOOK_FILES =  myMacros.tex \
 	text-settings.tex \
 	$(wildcard packages/*.sty) \
 	book-examples.tex  \
-	$(wildcard bst/biblatex-sp-unified/[^.]*)
+  muss.bbx \
+  muss.cbx
 
 test_book:
 	rm -fr test
