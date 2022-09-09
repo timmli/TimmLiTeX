@@ -1,0 +1,99 @@
+% -*- coding: utf-8 -*-
+
+\documentclass[
+  10pt, % 8pt, 9pt, 10pt, 11pt, 12pt, 14pt, 17pt, 20pt
+  % serif,
+  % table, % for table coloring
+  % draft,
+  % ngerman,
+  % handout,	% remove overlays
+  compress,
+  xcolor={table,dvipsnames},
+  aspectratio=169,
+  ]{beamer}
+
+\input{template-files/beamer-settings.tex}
+
+\usetheme{Lustnau}  
+% \usetheme{Tuebingen}
+\input{beamerlogosTuebingen.tex} 
+
+% \usetheme{Bielefeld}
+% \input{beamerlogosBielefeld.tex}
+
+% \usetheme{Duesseldorf}
+% \input{beamerlogosDuesseldorf.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%% 
+% CUSTOM MACROS        %
+%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\input{template-files/myMacros}
+\definecolor{myblue}{rgb}{0,0,0.70}
+\definecolor{myred}{rgb}{0.8,0,0}
+\definecolor{mydarkgreen}{rgb}{0,0.55,0}
+
+\renewcommand{\bsp}[1]{{\usebeamercolor[bg!90]{block title example}\itshape\bfseries #1}}
+\newcommand{\term}[1]{{\usebeamercolor[fg!100]{math text displayed}\scshape\bfseries #1}} 
+\newcommand{\bspcolor}[1]{{\usebeamercolor[bg!90]{block title example}\bfseries #1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% HEADER
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Beamer Template}
+\subtitle{Subtitle}	
+\author{Max Mustermann}
+\institute[Inst.]{Institute/Affiliation}
+\date{\today}
+%\logo{\pgfimage[width=2cm,height=1cm]{logo-emmy}}			% Logo on all slides (pdf,png,jpg,eps)
+%\titlegraphic{\includegraphics[height=1cm]{path/to/picture}}	% on title slide
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SLIDES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\maketitle
+
+% \begin{frame}[plain]
+%   \titlepage
+% \end{frame}
+
+%\frame{\titlepage}
+
+%\frame{
+%\frametitle{Table of contents}
+%  \tableofcontents
+%  [pausesections]
+%}
+
+%\AtBeginSection[]
+%{
+%  \begin{frame}{Outline}
+%    \tableofcontents[
+%    currentsection
+%    ]
+%  \end{frame}
+%}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{template-files/beamer-examples.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\begin{frame}[plain,allowframebreaks]
+\frametitle{}
+
+\insertBib
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% eval: (TeX-run-style-hooks "beamer")
+%%% End:

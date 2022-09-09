@@ -1,0 +1,133 @@
+\documentclass[
+	17pt,%12pt, 14pt, 17pt, 20pt, 25pt
+	a1paper,%a0paper,a1paper,a2paper
+	%landscape,portrait
+	%margin=0mm, 		% between paper and poster
+	%innermargin=15mm, 	% between poster and outermost blocks
+	%colspace=15mm,		% horizontal spacing between successive columns
+	%subcolspace=8mm,	% horizontal spacing between successive columns in the subcolumn environment
+	%blockverticalspace=15mm,	% between two blocks
+  dvipsnames,
+	]{tikzposter} 
+
+\input{template-files/poster-settings}
+
+\input{template-files/myMacros}
+
+\definecolor{mygray}{gray}{0.9}
+\definecolor{HHUblue}{HTML}{006AB3}
+\definecolor{lightgray}{gray}{0.7}
+
+\newcommand{\affilsup}[1]{{\color{gray}$^{\text{#1}}$}}
+
+%%%%%%%%%%%%%%%%%%%%%%
+%   TITLE            % 
+%%%%%%%%%%%%%%%%%%%%%%
+
+\setlength{\fboxsep}{3pt}
+\title{Title of poster}
+%% \parbox is needed with linebreaks
+% \title{\hspace{-2em}\parbox{\textwidth}{\centering
+%     Title of poster}}
+\author{Author Name(s)\affilsup{1}}
+\institute{\affilsup{1}Affiliation}
+
+\titlegraphic{\hspace*{1cm}\raisebox{0ex}{\includegraphics[width=5cm]{template-files/graphics/sfb-logo-quer.pdf}}\hspace{36cm}\raisebox{0ex}{\includegraphics[width=10cm]{template-files/graphics/hhu-logo-hres.pdf}}} 
+
+\settitle{
+	\centering
+	\color{titlefgcolor}{\bfseries\Huge\@title\par}
+	\vspace*{2em}
+	{\huge\@author\par} \vspace*{1em} {\LARGE\@institute}
+
+	\raisebox{0cm}[0pt]{\@titlegraphic}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%
+%   POSTERSTYLE      % 
+%%%%%%%%%%%%%%%%%%%%%%
+
+\input{template-files/poster-style}
+\tikzposterlatexaffectionproofoff
+
+\defineblockstyle{greybox}{}{
+	\draw[color=gray,fill=mygray] (blockbody.south west)
+		rectangle (blockbody.north east);
+	\ifBlockHasTitle
+		\draw[color=white] (blocktitle.south west)
+			rectangle (blocktitle.north east);
+	\fi
+}
+
+%%%%%%%%%%%%%%%%%%%%%%
+%   POSTER           % 
+%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\maketitle[
+	%width=10cm,	% width of the title portion of the poster
+	%roundedcorners, linewidth, innersep	% box style of the title
+	%titletotopverticalspace=0cmm, titletoblockverticalspace=0cm
+	%titlegraphictotitledistance=0cm, 	% vertical distance between the titlegraphic and title description
+	%titletextscale=2, 		% relative scaling of the text of the title
+	]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{-5cm}
+\block{Big box}{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  Block text
+}
+\input{template-files/poster-examples}
+
+\begin{columns} 
+
+\column{0.5}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\block{First column block}{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  Block text
+}
+
+\column{0.5}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\block{Second column block}{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  Block text  
+}
+
+\end{columns}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%  List of References    % 
+%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\defineblockstyle{noframe}{}{
+	\draw[color=white] (blockbody.south west)
+		rectangle (blockbody.north east);
+	\ifBlockHasTitle
+		\draw[color=white] (blocktitle.south west)
+			rectangle (blocktitle.north east);
+	\fi
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\useblockstyle[linewidth=0pt]{noframe}
+\block[linewidth=0pt]{}{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{-5.5ex}
+\tiny
+
+\printbibliography[heading=none]
+
+}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

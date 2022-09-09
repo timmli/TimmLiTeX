@@ -1,0 +1,205 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% ccg.sty - LaTeX commands for drawing CCG derivations.
+%%
+%% Authors: B. Hoffman, M. Steedman, and J. Baldridge.
+%%
+%% Date: 8-APRIL-2007
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Example uses:
+%
+%\deriv{3}{
+%{\rm Mary}&{\rm prefers}& {\rm corduroy}\\
+%\uline{1}& \uline{1}    & \uline{1}\\
+%\it NP   &\it (S\bs NP)/NP &\it  NP\\
+%         &     \fapply{2}\\
+%         & \mcc{2}{\it S\bs NP}\\
+%\bapply{2}&\\
+%\mcc{2}{\it S}&
+%}
+%
+%\deriv{5}{
+%\rm Mary &\rm  requests  &\rm  and   &\rm prefers &\rm corduroy\\
+%\uline{1}&\uline{1}&\uline{1}&\uline{1}&\uline{1}\\
+%\it NP &\it  (S\bs NP)/NP &\it CONJ&\it  (S\bs NP)/NP&\it       NP\\
+%&\conj{3}\\
+%&\mcc{3}{\it  (S\bs NP)/NP}\\
+%&&\fapply{3}\\
+%&&\mcc{3}{\it S\bs NP}\\
+%\bapply{4}\\
+%\mcc{4}{\it S}
+%}
+%\deriv{6}{
+%\rm   Mary &\rm   prefers &\rm  and  &\rm  I &\rm     detest&\rm   corduroy\\
+%\uline{1}&\uline{1}&\uline{1}&\uline{1}&\uline{1}&\uline{1}\\
+%\it   NP &\it   (S\bs NP)/NP&\it CONJ&\it    NP &\it   (S\bs NP)/NP &\it  NP\\
+%\ftype{1}&&&\ftype{1}\\
+%\it S/(S\bs NP) &&&\it S/(S\bs NP)\\
+%\fcomp{2}&&\fcomp{2}\\
+%\mcc{2}{\it S/NP}&& \mcc{2}{\it                  S/NP}\\
+%\conj{5}\\
+%\mcc{5}{\it                    S/NP}\\
+%&&\fapply{4}\\
+%&&\mcc{3}{\it                                S}
+%}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%frig \mathbf for combinators to sans:
+\DeclareMathAlphabet{\mathbf}{OT1}{cmss}{bx}{n}
+
+
+% Easy backslash
+\newcommand{\bs}{\ensuremath{\backslash}}
+
+% Combinators
+\newcommand{\Bcomb}{\ensuremath{\mathbf{B}}}
+\newcommand{\Tcomb}{\ensuremath{\mathbf{T}}}
+\newcommand{\Scomb}{\ensuremath{\mathbf{S}}}
+\newcommand{\Ccomb}{\ensuremath{\mathbf{C}}}
+
+% Rule abbreviations
+\newcommand{\fapp}{\ensuremath{{>}}}
+\newcommand{\bapp}{\ensuremath{{<}}}
+\newcommand{\fbh}[1][]{\ensuremath{{>}\Bcomb^{#1}}}
+\newcommand{\bbh}[1][]{\ensuremath{{<}\Bcomb^{#1}}}
+\newcommand{\fbx}[1][]{\ensuremath{{>}\Bcomb_\times^{#1}}}
+\newcommand{\bbx}[1][]{\ensuremath{{<}\Bcomb_\times^{#1}}}
+\newcommand{\ftr}{\ensuremath{{>}\Tcomb}}
+\newcommand{\btr}{\ensuremath{{<}\Tcomb}}
+\newcommand{\fsh}{\ensuremath{{>}\Scomb}}
+\newcommand{\bsh}{\ensuremath{{<}\Scomb}}
+\newcommand{\fsx}{\ensuremath{{>}\Scomb_\times}}
+\newcommand{\bsx}{\ensuremath{{<}\Scomb_\times}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Display rules
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\unaryrule}[4] {   
+  \textit{#1}\\
+  \ensuremath{\begin{array}{cccc} 
+    #3 & \Rightarrow_{\scriptstyle #2} & #4
+  \end{array}}
+}
+
+\newcommand{\unaryruleOneLine}[4] {   
+  \ensuremath{\begin{array}{cccc} 
+    #3 & \Rightarrow_{\scriptstyle #2} & #4
+  \end{array}} \hfill \ensuremath{(#1)}
+}
+
+\newcommand{\binaryrule}[5] {   
+  \textit{#1}\\
+  \ensuremath{\begin{array}{cccc} 
+    #3 & #4 & \Rightarrow_{\scriptstyle #2} & #5
+  \end{array}} 
+}
+
+\newcommand{\binaryruleOneLine}[5] {   
+  \ensuremath{\begin{array}{cccc} 
+    #3 & #4 & \Rightarrow_{\scriptstyle #2} & #5
+  \end{array}} \hfill \ensuremath{(#1)}
+}
+
+\newcommand{\binaryruleSimple}[3] {   
+  \ensuremath{\begin{array}{cccc} 
+    #1 & #2 & \Rightarrow & #3
+  \end{array}} 
+}
+
+\newcommand{\ternaryruleOneLine}[6] {   
+  \ensuremath{\begin{array}{cccc} 
+    #3 & #4 & #5 \Rightarrow_{\scriptstyle #2} & #6
+  \end{array}} \hfill \ensuremath{(#1)}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CCG derivations. Does #1 many columns's.
+%
+% Arguments: 
+%     #1 = no. of words
+%     #2 = body of the derivation, in tabular format.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\deriv}[2] { 
+   \renewcommand{\arraystretch}{.5}
+  $\begin{array}[t]{@{}*{#1}{c}}
+     #2
+   \end{array}$ 
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Abbreviations for use inside CCG derivations.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% centered multicolumn, 
+\newcommand{\cmc}[2] {\multicolumn{#1}{c}{#2}}
+
+% Rules, argument #1 gives the number of columns to cover.
+
+% Removed by T.L.
+%\newcommand{\uline}[1]{\cmc{#1}{\hrulefill} }
+%\newcommand{\ul}{\uline{1}}
+
+% Added by T.L.
+\newcommand{\bareline}[1]{\cmc{#1}{\hrulefill} }
+
+
+% an arbitrary combinator
+\newcommand{\CCGrule}[2]{\cmc{#1}{\hrulefill_{#2}} }
+
+% Application rules
+\newcommand{\fapply}[1]{\CCGrule{#1}{>}}
+\newcommand{\bapply}[1]{\CCGrule{#1}{<}}
+
+% Composition rules
+\newcommand{\fcomp}[1]{\CCGrule{#1}{>\Bcomb}}
+\newcommand{\fcomptwo}[1]{\CCGrule{#1}{>\Bcomb^2}}
+\newcommand{\fcompthree}[1]{\CCGrule{#1}{>\Bcomb^3}}
+\newcommand{\fcompN}[2]{\CCGrule{#1}{>\Bcomb^{#2}}}
+
+\newcommand{\fxcomp}[1]{\CCGrule{#1}{>\Bcomb_{\times}}}
+\newcommand{\fxcomptwo}[1]{\CCGrule{#1}{>\Bcomb_{\times}^2}}
+\newcommand{\fxcompthree}[1]{\CCGrule{#1}{>\Bcomb_{\times}^3}}
+\newcommand{\fxcompN}[2]{\CCGrule{#1}{>\Bcomb_{\times}^{#2}}}
+
+\newcommand{\bcomp}[1]{\CCGrule{#1}{<\Bcomb}}
+\newcommand{\bcomptwo}[1]{\CCGrule{#1}{<\Bcomb^2}}
+\newcommand{\bcompthree}[1]{\CCGrule{#1}{<\Bcomb^3}}
+\newcommand{\bcompN}[2]{\CCGrule{#1}{<\Bcomb^{#2}}}
+
+\newcommand{\bxcomp}[1]{\CCGrule{#1}{<\Bcomb_{\times}}}
+\newcommand{\bxcomptwo}[1]{\CCGrule{#1}{<\Bcomb_{\times}^2}}
+\newcommand{\bxcompthree}[1]{\CCGrule{#1}{<\Bcomb_{\times}^3}}
+\newcommand{\bxcompN}[2]{\CCGrule{#1}{<\Bcomb_{\times}^{#2}}}
+
+% Type-raising rules
+\newcommand{\ftype}[1]{\CCGrule{#1}{>\Tcomb}}
+\newcommand{\btype}[1]{\CCGrule{#1}{<\Tcomb}}
+
+% Substitution rules
+\newcommand{\fsubst}[1]{\CCGrule{#1}{>\Scomb}}
+\newcommand{\fxsubst}[1]{\CCGrule{#1}{>\Scomb_{\times}}}
+
+\newcommand{\bsubst}[1]{\CCGrule{#1}{<\Scomb}}
+\newcommand{\bxsubst}[1]{\CCGrule{#1}{<\Scomb_{\times}}}
+
+% Coordination
+\newcommand{\conj}[1]{\CCGrule{#1}{<\Phi{>}}}
+
+% A boundary
+\newcommand{\boundary}[1]{\CCGrule{#1}{<\mathbf{\%}}}
+
+% a blocked derivation
+\newcommand{\asterisk}[1]{ \cmc{#1}{\hrulefill_{\mathbf{*}}}}
+
+% an inappropriate use of a combinator
+\newcommand{\badcomb}[2] { \cmc{#1}{***\hrulefill_{#2}***}}
+
+% an arbitrary decomposition
+\newcommand{\dcomp}[2] { \cmc{#1}{\dotfill_{#2}}}
+\newcommand{\unfreeze}[1] {\cmc{#1}{\hrulefill_{\mathbf{@}}}  }
+
+
+

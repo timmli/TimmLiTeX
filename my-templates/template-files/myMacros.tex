@@ -1,0 +1,106 @@
+%%%%%%%%%%%%%%%%%%%%%% 
+% TODONOTES          % 
+%%%%%%%%%%%%%%%%%%%%%% 
+
+\usepackage{soul}   % for text highlighting
+\usepackage[textsize=scriptsize,textwidth=2.5cm]{todonotes}
+\newcommand{\todoregion}[2]{\hl{#1}\todo{#2}}    
+
+%%%%%%%%%%%%%%%%%%%%%% 
+% SYMBOLS            % 
+%%%%%%%%%%%%%%%%%%%%%% 
+
+\newcommand{\bsp}[1]{\textit{#1}}
+\newcommand{\am}{\parallel}
+\newcommand{\unify}{\sqcup}
+\newcommand{\word}{\overline}
+\newcommand{\Nonterminals}{\mathcal{N}}
+\newcommand{\Terminals}{\Sigma}
+\newcommand{\Productions}{\mathcal{P}}
+
+\newcommand{\svar}[1]
+{\setbox2=\hbox{$\scriptstyle #1$}\lower.2ex\vbox{\hrule
+    \hbox{\vrule\kern1.25pt 
+      \vbox{\kern1.25pt\box2\kern1.25pt}\kern1.25pt\vrule}\hrule}}
+\newcommand{\ssvar}[1]
+{\setbox2=\hbox{\scalebox{.7}{$#1$}}\lower.3ex\vbox{\hrule
+    \hbox{\vrule\kern1pt 
+      \vbox{\kern1pt\box2\kern1pt}\kern1pt\vrule}\hrule}}
+\newcommand{\anvar}{\rule{0.4em}{0.4pt}\,}
+\newcommand{\trace}[0]{\raisebox{1pt}{\underline{$~~~$}}}
+
+% Taken from https://tex.stackexchange.com/a/60253/61499
+\makeatletter
+\newcommand*\myrel@kern[1]{\kern#1\dimexpr\macc@kerna}
+\def\widebar#1{% use \def to optionally overwrite \widebar 
+  \begingroup
+  \def\mathaccent##1##2{%
+    \myrel@kern{0.8}%
+    \overline{\myrel@kern{-0.8}\macc@nucleus\myrel@kern{0.2}}%
+    \myrel@kern{-0.2}%
+  }%
+  \macc@depth\@ne
+  \let\math@bgroup\@empty \let\math@egroup\macc@set@skewchar
+  \mathsurround\z@ \frozen@everymath{\mathgroup\macc@group\relax}%
+  \macc@set@skewchar\relax
+  \let\mathaccentV\macc@nested@a
+  \macc@nested@a\relax111{#1}%
+  \endgroup
+}
+\makeatother
+
+%% Dingbats, i.e. symbolic, decorative glyphs
+\RequirePackage{pifont}
+\newcommand{\cmark}{\ding{51}}  % checkmark
+\newcommand{\xmark}{\ding{55}}  % xmark
+
+\DeclareMathOperator*{\argmax}{argmax}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% COLORS & HIGHLIGHTING            % 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\definecolor{myblue}{rgb}{0,0,0.70}
+\definecolor{myred}{rgb}{0.8,0,0}
+\definecolor{mydarkgreen}{rgb}{0,0.55,0}
+
+\newcommand{\emphR}[1]{{\color{myred}#1}}
+
+%%%%%%%%%%%%%%%%%%%%%% 
+% MISCELLANEOUS      % 
+%%%%%%%%%%%%%%%%%%%%%% 
+
+% \newcommand{\circled}[1]{\textcircled{\raisebox{-0.9pt}{#1}}}
+\DeclareRobustCommand\circled[1]{\tikz[baseline=(char.base)]{ % works better compared to \newcommand*
+    \node[shape=circle,draw,inner sep=.15ex] (char) {\small{#1}};}}
+% \usepackage{circledsteps}       % provides the macro \Circled; not included in TeXLive 2018
+% \newcommand{circled}[1]{\Circled{#1}}
+
+
+\newcommand{\prule}[3]{\ensuremath{\begin{array}{c} #1\\ \hline #2\end{array} ~~ #3}}
+
+\newcommand{\minitab}[2][c]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
+
+\newlength{\thisWidth}
+\newcommand*{\hspaceThis}[1]{\settowidth{\thisWidth}{#1}\hspace*{\thisWidth}}
+\newcommand*{\hspaceMinusThis}[1]{\settowidth{\thisWidth}{#1}\hspace*{-\thisWidth}}
+
+\newenvironment{changemargin}[2]{%
+  \begin{list}{}{%
+    \setlength{\topsep}{0pt}%
+    \setlength{\leftmargin}{#1}%
+    \setlength{\rightmargin}{#2}%
+    \setlength{\listparindent}{\parindent}%
+    \setlength{\itemindent}{\parindent}%
+    \setlength{\parsep}{\parskip}%
+  }%
+  \item[]}{\end{list}}
+
+% \newtheorem{definition}{Definition}
+% \newtheorem{corollary}{Corollary}
+% \newtheorem{theorem}{Theorem}
+
+\newcommand\redout{\bgroup\markoverwith{\textcolor{red}{\rule[.4ex]{2pt}{1pt}}}\ULon}
+
+\newcommand{\largerpage}[1][1]{
+  \enlargethispage{#1\baselineskip}}
