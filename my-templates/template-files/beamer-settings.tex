@@ -377,19 +377,20 @@
 \makeatother
 
 \usepackage[
-  natbib=true,
   bibstyle=\mybibstyle,
   citestyle=\mycitestyle,
-  %refsection=chapter,
-  maxbibnames=99,
-  isbn=false,
-  doi=false,
-  eprint=false,
-  backend=biber,
+  %% The remaining options are set in muss.bbx.
+  % natbib=true,
+  % refsection=chapter,
+  % maxbibnames=99,
+  % isbn=false,
+  % doi=false,
+  % eprint=false,
+  % backend=biber,
   % sorting=ydnt,  % sort in descending chronological order
-  indexing=cite,
-  labelnumber,  % for numeric bibliography in beamer
-  %toc=bib    % make bibliography appear in toc, incompatible with beamer
+  % indexing=cite,
+  % labelnumber,  % for numeric bibliography in beamer
+  % toc=bib    % make bibliography appear in toc, incompatible with beamer
   ]{biblatex}
 \renewcommand{\postnotedelim}{: }%
 \renewcommand{\multicitedelim}{\addsemicolon\space}%

@@ -11,7 +11,7 @@
 #+LATEX_CLASS: tl-abstract 
 #+LATEX_CLASS_OPTIONS: [12pt,a4paper]
 #+LATEX_COMPILER: pdflatex
-#+LATEX_HEADER: \input{text-template/text-settings}
+#+LATEX_HEADER: \input{template-files/text-settings}
 #+LATEX_HEADER: 
 #+LATEX_HEADER: \usepackage[left=25mm, right=25mm, top=25mm, bottom=25mm, noheadfoot]{geometry}
 #+LATEX_HEADER: \pagenumbering{gobble}
@@ -28,7 +28,7 @@
 #+LATEX_HEADER: }
 #+LATEX_HEADER: \makeatother
 #+LATEX_HEADER: 
-#+LATEX_HEADER: \input{text-template/myMacros}
+#+LATEX_HEADER: \input{template-files/myMacros}
 # Just mention the link to the references file [[addbibresource:references.bib]] in order to make it available to org-ref but not override the default bibliography which is helpful when looking for references which are not yet included in the local bibliography. 
 :end:
 
@@ -46,7 +46,7 @@
 
 ** Installation of =tl-abstract=
 
-Remember to first add the class [[https://github.com/langsci/latex][langscibook]] to the set of known classes (in =init.el=).
+Remember to first add the class to the set of known classes (in =init.el=).
 
 #+BEGIN_SRC emacs-lisp :exports none
 (add-to-list 'org-latex-classes
