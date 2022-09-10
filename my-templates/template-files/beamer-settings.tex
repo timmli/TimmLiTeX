@@ -276,8 +276,9 @@
 \usepackage{template-files/packages/langsci-avm}
 
 %%%%%%%%%%%%%%%%%%%%%%%% 
-% LISTINGS SETTINGS  % 
+%  LISTINGS SETTINGS   % 
 %%%%%%%%%%%%%%%%%%%%%%%% 
+
 \usepackage{listings}
 
 \lstset{basicstyle=\ttfamily,tabsize=2,breaklines=true}
@@ -365,12 +366,13 @@
 
 %% Bibliography
 
-%% BibLaTeX
-\newcommand{\mycitestyle}{template-files/muss}
-\newcommand{\mybibstyle}{template-files/muss}
 %%%%%%%%%%%%%%%%%%%%%%%%
 %   BIBLATEX SETTINGS  % 
 %%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\mycitestyle}{template-files/muss}
+\newcommand{\mybibstyle}{template-files/muss}
+
 \makeatletter
 \@ifclassloaded{beamer}{\renewcommand{\mycitestyle}{numeric-comp}}{}
 \@ifclassloaded{tikzposter}{\renewcommand{\mycitestyle}{numeric-comp}}{}

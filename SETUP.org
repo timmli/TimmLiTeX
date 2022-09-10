@@ -1,5 +1,6 @@
 #+TITLE: LaTeX settings in one file
 #+AUTHOR: Timm Lichte
+#+PROPERTY: header-args :noweb yes
 
 * Table of contents :TOC_2_gh:
 - [[#installation-with-emacs][Installation with Emacs]]
@@ -1102,7 +1103,6 @@ Remember to first add the class jlm to the set of known classes (in =init.el=).
 \usepackage{linguex}
 \renewcommand{\firstrefdash}{}
 
-\usepackage{template-files/packages/langsci-avm}
 <<langsci-avm-settings>>
 
 % \usepackage[inference]{semantic} % for CCG 
@@ -1855,7 +1855,7 @@ Some templates require it to have the tikz settings in a separate sty-file.
 
 #+NAME: abstract-settings
 #+BEGIN_SRC latex
-\input{template-files/text-settings}
+<<text-settings-input>>
 
 \usepackage[left=25mm, right=25mm, top=25mm, bottom=25mm, noheadfoot]{geometry}
 \pagenumbering{gobble}
@@ -1884,8 +1884,8 @@ Some templates require it to have the tikz settings in a separate sty-file.
 
 #+NAME: article-settings
 #+BEGIN_SRC latex
-\input{template-files/scrarticle-settings}
-\input{template-files/text-settings}
+<<scrarticle-settings-input>>
+<<text-settings-input>>
 #+END_SRC
 
 ** Beamer settings
@@ -1947,9 +1947,6 @@ aspectratio=169,
 
 %% Bibliography
 
-%% BibLaTeX
-\newcommand{\mycitestyle}{template-files/muss}
-\newcommand{\mybibstyle}{template-files/muss}
 <<biblatex-settings>>
 
 %% BibTeX 
@@ -1975,10 +1972,15 @@ numbers=noenddot,
 #+BEGIN_SRC latex
 \usepackage{datetime}
 
-\input{template-files/text-settings}
+<<text-settings-input>>
 #+END_SRC
 
 ** Text settings
+
+#+NAME: text-settings-input
+#+BEGIN_SRC latex :noweb yes :tangle no
+\input{template-files/text-settings}
+#+END_SRC
 
 #+NAME: text-settings
 #+BEGIN_SRC latex :noweb yes :tangle my-templates/template-files/text-settings.tex
@@ -2007,19 +2009,13 @@ numbers=noenddot,
 \usepackage{linguex}
 \renewcommand{\firstrefdash}{}
 
-\usepackage{template-files/packages/langsci-avm}
 <<langsci-avm-settings>>
 
 % \usepackage[inference]{semantic} % for CCG 
 % \usepackage{packages/ccg}
 
-%% Bibliography
-\newcommand{\mycitestyle}{template-files/muss}
-\newcommand{\mybibstyle}{template-files/muss}
 <<biblatex-settings>> 
-% \input{settings/natbib_bibtex_setup.tex} 
 
-% Hyperrefs in PDF 
 <<hyperrefs-settings>>
 
 %% for blindtext
@@ -2046,8 +2042,6 @@ numbers=noenddot,
 \usepackage[scaled=0.9]{beramono}  % for monospaced font
 \renewcommand*{\familydefault}{\sfdefault}
 
-\newcommand{\mycitestyle}{template-files/muss}
-\newcommand{\mybibstyle}{template-files/muss}
 <<biblatex-settings>>
 
 %%%%%%%%%%%%%%%%%%%%%%
@@ -2342,7 +2336,8 @@ numbers=noenddot,
 %   AVM SETTINGS     % 
 %%%%%%%%%%%%%%%%%%%%%%
 
-% none
+\usepackage{template-files/packages/langsci-avm}
+
 
 #+END_SRC
 
@@ -2384,6 +2379,10 @@ numbers=noenddot,
 %%%%%%%%%%%%%%%%%%%%%%%%
 %   BIBLATEX SETTINGS  % 
 %%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\mycitestyle}{template-files/muss}
+\newcommand{\mybibstyle}{template-files/muss}
+
 \makeatletter
 \@ifclassloaded{beamer}{\renewcommand{\mycitestyle}{numeric-comp}}{}
 \@ifclassloaded{tikzposter}{\renewcommand{\mycitestyle}{numeric-comp}}{}
@@ -2550,7 +2549,10 @@ numbers=noenddot,
 
 #+NAME: hyperrefs-settings
 #+BEGIN_SRC latex
-% Hyperrefs in PDF 
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%   HYBPERREF SETTINGS  % 
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \usepackage[bookmarks=true,bookmarksopen=true,%
   hyperindex=true,%
   breaklinks=true,
@@ -2576,8 +2578,9 @@ numbers=noenddot,
 #+NAME: listings-settings
 #+BEGIN_SRC latex
 %%%%%%%%%%%%%%%%%%%%%%%% 
-% LISTINGS SETTINGS  % 
+%  LISTINGS SETTINGS   % 
 %%%%%%%%%%%%%%%%%%%%%%%% 
+
 \usepackage{listings}
 
 \lstset{basicstyle=\ttfamily,tabsize=2,breaklines=true}
@@ -2724,6 +2727,11 @@ numbers=noenddot,
 #+END_SRC
 
 ** scrarticle
+
+#+NAME: scrarticle-settings-input
+#+BEGIN_SRC latex :noweb yes :tangle no
+\input{template-files/scrarticle-settings}
+#+END_SRC
 
 #+NAME: scrarticle-settings
 #+BEGIN_SRC latex :noweb yes :tangle my-templates/template-files/scrarticle-settings.tex
@@ -3919,7 +3927,7 @@ release_standalone:
 
 * latexmk
 
-#+NAME: beamer-latexmk
+#+NAME: pdflatex-latexmk
 #+BEGIN_SRC shell :noweb yes :tangle my-templates/latexmkrc 
 # -*- mode: Perl; eval: (flycheck-mode -1);-*-
 # Manual: http://mirror.physik-pool.tu-berlin.de/pub/CTAN/support/latexmk/latexmk.pdf

@@ -13,11 +13,13 @@
 \usepackage[scaled=0.9]{beramono}  % for monospaced font
 \renewcommand*{\familydefault}{\sfdefault}
 
-\newcommand{\mycitestyle}{template-files/muss}
-\newcommand{\mybibstyle}{template-files/muss}
 %%%%%%%%%%%%%%%%%%%%%%%%
 %   BIBLATEX SETTINGS  % 
 %%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\mycitestyle}{template-files/muss}
+\newcommand{\mybibstyle}{template-files/muss}
+
 \makeatletter
 \@ifclassloaded{beamer}{\renewcommand{\mycitestyle}{numeric-comp}}{}
 \@ifclassloaded{tikzposter}{\renewcommand{\mycitestyle}{numeric-comp}}{}
@@ -194,8 +196,9 @@
 \usepackage{booktabs}
 
 %%%%%%%%%%%%%%%%%%%%%%%% 
-% LISTINGS SETTINGS  % 
+%  LISTINGS SETTINGS   % 
 %%%%%%%%%%%%%%%%%%%%%%%% 
+
 \usepackage{listings}
 
 \lstset{basicstyle=\ttfamily,tabsize=2,breaklines=true}

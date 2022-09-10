@@ -271,23 +271,24 @@
 \usepackage{linguex}
 \renewcommand{\firstrefdash}{}
 
-\usepackage{template-files/packages/langsci-avm}
 %%%%%%%%%%%%%%%%%%%%%%
 %   AVM SETTINGS     % 
 %%%%%%%%%%%%%%%%%%%%%%
 
-% none
+\usepackage{template-files/packages/langsci-avm}
+
 
 
 % \usepackage[inference]{semantic} % for CCG 
 % \usepackage{packages/ccg}
 
-%% Bibliography
-\newcommand{\mycitestyle}{template-files/muss}
-\newcommand{\mybibstyle}{template-files/muss}
 %%%%%%%%%%%%%%%%%%%%%%%%
 %   BIBLATEX SETTINGS  % 
 %%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\mycitestyle}{template-files/muss}
+\newcommand{\mybibstyle}{template-files/muss}
+
 \makeatletter
 \@ifclassloaded{beamer}{\renewcommand{\mycitestyle}{numeric-comp}}{}
 \@ifclassloaded{tikzposter}{\renewcommand{\mycitestyle}{numeric-comp}}{}
@@ -448,10 +449,11 @@
 \newcommand{\citeauthoryear}[1]{\citeauthor{#1} (\citeyear{#1})}
 \newcommand{\citealtauthoryear}[1]{\citeauthor{#1} \citeyear{#1}}
  
-% \input{settings/natbib_bibtex_setup.tex} 
 
-% Hyperrefs in PDF 
-% Hyperrefs in PDF 
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%   HYBPERREF SETTINGS  % 
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \usepackage[bookmarks=true,bookmarksopen=true,%
   hyperindex=true,%
   breaklinks=true,
