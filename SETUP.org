@@ -78,10 +78,97 @@ In order to compile these templates, press =C-c C-v t= , or evaluate the followi
 
 * Document templates
 
+** Abschlussarbeit template
+
+#+NAME: abschlussarbeit-template
+#+BEGIN_SRC latex :noweb yes :tangle abschlussarbeit-main.tex
+\documentclass[
+  11pt,
+  bibliography=totoc,
+  numbers=noenddot,
+  ]{scrbook}
+
+%%%%%%%%%%%%%%%%%%%%%%%% 
+% SETTINGS
+%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\usepackage{datetime}
+
+\input{template-files/text-settings}
+
+\AtBeginDocument{
+  \selectlanguage{german} % which language is available depends on how babel is loaded
+}
+
+%%%%%%%%%%%%%% 
+% Macros
+%%%%%%%%%%%%%% 
+
+<<myMacros-input>>   % the content of myMacros.tex goes here
+
+%%%%%%%%%%%%% 
+% Title
+%%%%%%%%%%%%% 
+
+\subject{Typ der Abschlussarbeit}
+\title{Titel}
+\author{{\LARGE Max Mustermann} \\
+  \\
+  Matrikelnummer: 123456789\\
+  Studiengang: BSc Neue Ätherwissenschaften \\
+  \url{mustermann@uni-tuebingen.de}\\ 
+  Eberhard-Karls-Universität Tübingen\\}  
+\date{\ddmmyyyydate\today, \currenttime}
+\publishers{Betreuerteam \\ Prof. Dr. Martina Musterfrau}
+
+% comment for final version
+\usepackage{draftwatermark}
+\SetWatermarkScale{1}
+\AtBeginDocument{\SetWatermarkText{DRAFT}}
+
+%%%%%%%%%%%%%%%%%%%%%% 
+% Document start
+%%%%%%%%%%%%%%%%%%%%%% 
+
+\begin{document}
+
+\maketitle
+\frontmatter
+\tableofcontents
+\mainmatter 
+
+\input{template-files/abschlussarbeit-examples}
+
+\chapter{Blindtext}
+
+\lipsum
+
+\section{Blindtext section}
+
+\lipsum
+
+%%%%%%%%%%%%%%%%%%% 
+% Document end
+%%%%%%%%%%%%%%%%%%% 
+
+\insertBib
+
+\chapter*{Erklärung}
+
+<<selbständigkeitserklärung>>
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
+#+END_SRC
+
 ** Abstract template
 
 #+NAME: abstract-template-org
-#+BEGIN_SRC org :noweb yes :tangle my-templates/abstract-template.org
+#+BEGIN_SRC org :noweb yes :tangle abstract-main.org
 ,#+TITLE: Title of paper
 ,#+AUTHOR: John Doe (Elfenbeinturm, Fantasien)
 :Settings:
@@ -96,7 +183,7 @@ In order to compile these templates, press =C-c C-v t= , or evaluate the followi
 ,#+LATEX_CLASS_OPTIONS: [<<abstract-options>>]
 ,#+LATEX_COMPILER: pdflatex
 ,#+LATEX_HEADER: <<abstract-settings>>
-,#+LATEX_HEADER: \input{template-files/myMacros}
+,#+LATEX_HEADER: <<myMacros-input>>>
 # Just mention the link to the references file [[addbibresource:references.bib]] in order to make it available to org-ref but not override the default bibliography which is helpful when looking for references which are not yet included in the local bibliography. 
 :end:
 
@@ -135,7 +222,7 @@ Remember to first add the class to the set of known classes (in =init.el=).
 #+END_SRC
 
 #+NAME: abstract-template-tex
-#+BEGIN_SRC latex :noweb yes :tangle my-templates/abstract-template.tex
+#+BEGIN_SRC latex :noweb yes :tangle abstract-main.tex
 \documentclass[
 <<abstract-options>>
 ]{article}
@@ -146,7 +233,7 @@ Remember to first add the class to the set of known classes (in =init.el=).
 % HEADER
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input{template-files/myMacros}
+<<myMacros-input>>
 
 <<abstract-body>>
 #+END_SRC
@@ -187,7 +274,7 @@ Remember to first add the class to the set of known classes (in =init.el=).
 ** Article template
 
 #+NAME: article-template-org
-#+BEGIN_SRC org :noweb yes :tangle my-templates/article-template.org
+#+BEGIN_SRC org :noweb yes :tangle article-main.org
 ,#+TITLE: Title of paper
 ,#+AUTHOR: John Doe @@latex:\affiliation{Elfenbeinturm, Fantasien, \url{some@email.address}}@@
 :Settings:
@@ -202,7 +289,7 @@ Remember to first add the class to the set of known classes (in =init.el=).
 ,#+LATEX_CLASS_OPTIONS: [<<article-options>>]
 ,#+LATEX_COMPILER: pdflatex
 ,#+LATEX_HEADER: <<article-settings>>
-,#+LATEX_HEADER: \input{template-files/myMacros}
+,#+LATEX_HEADER: <<myMacros-input>>
 # Just mention the link to the references file [[addbibresource:references.bib]] in order to make it available to org-ref but not override the default bibliography which is helpful when looking for references which are not yet included in the local bibliography. 
 :end:
 
@@ -246,7 +333,7 @@ Remember to first add the class to the set of known classes (in =init.el=).
 
 
 #+NAME: article-template-tex
-#+BEGIN_SRC latex :noweb yes :tangle my-templates/article-template.tex
+#+BEGIN_SRC latex :noweb yes :tangle article-main.tex
 \documentclass[
 <<article-options>>
 ]{scrartcl}
@@ -257,7 +344,7 @@ Remember to first add the class to the set of known classes (in =init.el=).
 %   Macros   % 
 %%%%%%%%%%%%%%
 
-\input{template-files/myMacros}
+<<myMacros-input>>
 
 <<article-body>>
 #+END_SRC
@@ -310,7 +397,7 @@ This is an abstract: \lipsum[1]
 ** Beamer template
 
 #+NAME: beamer-template-org
-#+BEGIN_SRC org :noweb yes :tangle my-templates/beamer-template.org
+#+BEGIN_SRC org :noweb yes :tangle beamer-main.org
 ,#+TITLE: Beamer slides
 ,#+AUTHOR: John Doe
 ,#+SUBTITLE: Some subtitle
@@ -330,7 +417,7 @@ This is an abstract: \lipsum[1]
 ,#+LATEX_CLASS_OPTIONS: <<beamer-options-org>> 
 ,#+LATEX_COMPILER: pdflatex
 ,#+LATEX_HEADER: <<beamer-settings>>
-,#+LATEX_HEADER: \input{template-files/myMacros}
+,#+LATEX_HEADER: <<myMacros-input>>
 ,#+LATEX_HEADER: \usetheme{Lustnau}
 ,#+LATEX_HEADER: \input{beamerlogosTuebingen}
 ,#+LANGUAGE:  en
@@ -419,7 +506,7 @@ Link type for typesetting linguistic examples:
 In order to position the =\maketitle= command manually, you need to add =# org-latex-title-command: ""= to the local variables.
 
 #+NAME: beamer-template-tex
-#+BEGIN_SRC latex :noweb yes :tangle my-templates/beamer-template.tex
+#+BEGIN_SRC latex :noweb yes :tangle beamer-main.tex
 % -*- coding: utf-8 -*-
 
 \documentclass[
@@ -434,7 +521,7 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 % CUSTOM MACROS        %
 %%%%%%%%%%%%%%%%%%%%%%%% 
 
-\input{template-files/myMacros}
+<<myMacros-input>>
 \definecolor{myblue}{rgb}{0,0,0.70}
 \definecolor{myred}{rgb}{0.8,0,0}
 \definecolor{mydarkgreen}{rgb}{0,0.55,0}
@@ -514,7 +601,7 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 ** Book template
 
 #+NAME: book-template-tex
-#+BEGIN_SRC latex :noweb yes :tangle my-templates/book-template.tex
+#+BEGIN_SRC latex :noweb yes :tangle book-main.tex
 \documentclass[
 <<book-options>>
 ]{scrbook}
@@ -525,7 +612,7 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 %   Macros   % 
 %%%%%%%%%%%%%%
 
-\input{template-files/myMacros}   % the content of myMacros.tex goes here
+<<myMacros-input>>   % the content of myMacros.tex goes here
 
 <<book-body>>
 #+END_SRC
@@ -580,6 +667,273 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 %%% End:
 
 
+#+END_SRC
+
+** Hausarbeit template
+
+#+NAME: hausarbeit-template
+#+BEGIN_SRC latex :noweb yes :tangle hausarbeit-main.tex
+\documentclass[
+  11pt,
+  twoside,
+  ]{scrartcl}
+
+%%%%%%%%%%%%%%%%%%%%%%%% 
+% SETTINGS
+%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\input{template-files/scrarticle-settings.tex}
+\input{template-files/text-settings}
+
+\AtBeginDocument{
+  \selectlanguage{german} % which language is available depends on how babel is loaded
+}
+
+<<myMacros-input>>   % the content of myMacros.tex goes here
+
+%%%%%%%%%%%%% 
+% Title
+%%%%%%%%%%%%% 
+
+\subject{Hausarbeit}
+\title{Titel over two \newlineTitle lines}	% change title
+\author{Max Mustermann}	% change name
+\affiliation{
+  Matrikelnummer: 123456789\\	% change Matrikelnummer
+  Studiengang: BSc Neue Ätherwissenschaften \\ % change Studiengang
+  Emailaddresse: \url{mustermann@uni-tuebingen.de}\\[1ex]	% change email address
+  Seminar: Seminarname, Universität Tübingen, WS 2021/2022\\ % change seminar and date
+  Datum der Fassung: \today, \currenttime
+}
+
+% comment for final version
+\usepackage{draftwatermark}
+\SetWatermarkScale{1}
+\AtBeginDocument{\SetWatermarkText{DRAFT}}
+
+%%%%%%%%%%%%%%%%%%%%%% 
+% Document start
+%%%%%%%%%%%%%%%%%%%%%% 
+
+\begin{document}
+
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+
+\input{template-files/hausarbeit-examples.tex}
+
+\section{Blindtext}
+
+\lipsum
+
+%%%%%%%%%%%%%%%%%%% 
+% Document end
+%%%%%%%%%%%%%%%%%%% 
+
+\insertBib
+
+\newpage
+
+\section*{Erklärung}
+
+<<selbständigkeitserklärung>>
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
+#+END_SRC
+
+** Poster template
+
+#+NAME: poster-template
+#+BEGIN_SRC latex :noweb yes :tangle poster-main.tex
+\documentclass[
+	17pt,%12pt, 14pt, 17pt, 20pt, 25pt
+	a1paper,%a0paper,a1paper,a2paper
+	%landscape,portrait
+	%margin=0mm, 		% between paper and poster
+	%innermargin=15mm, 	% between poster and outermost blocks
+	%colspace=15mm,		% horizontal spacing between successive columns
+	%subcolspace=8mm,	% horizontal spacing between successive columns in the subcolumn environment
+	%blockverticalspace=15mm,	% between two blocks
+  dvipsnames,
+	]{tikzposter} 
+
+\input{template-files/poster-settings}
+
+<<myMacros-input>>
+
+\definecolor{mygray}{gray}{0.9}
+\definecolor{HHUblue}{HTML}{006AB3}
+\definecolor{lightgray}{gray}{0.7}
+
+\newcommand{\affilsup}[1]{{\color{gray}$^{\text{#1}}$}}
+
+%%%%%%%%%%%%%%%%%%%%%%
+%   TITLE            % 
+%%%%%%%%%%%%%%%%%%%%%%
+
+\setlength{\fboxsep}{3pt}
+\title{Title of poster}
+%% \parbox is needed with linebreaks
+% \title{\hspace{-2em}\parbox{\textwidth}{\centering
+%     Title of poster}}
+\author{Author Name(s)\affilsup{1}}
+\institute{\affilsup{1}Affiliation}
+
+\titlegraphic{\hspace*{1cm}\raisebox{0ex}{\includegraphics[width=5cm]{template-files/graphics/sfb-logo-quer.pdf}}\hspace{36cm}\raisebox{0ex}{\includegraphics[width=10cm]{template-files/graphics/hhu-logo-hres.pdf}}} 
+
+\settitle{
+	\centering
+	\color{titlefgcolor}{\bfseries\Huge\@title\par}
+	\vspace*{2em}
+	{\huge\@author\par} \vspace*{1em} {\LARGE\@institute}
+
+	\raisebox{0cm}[0pt]{\@titlegraphic}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%
+%   POSTERSTYLE      % 
+%%%%%%%%%%%%%%%%%%%%%%
+
+\input{template-files/poster-style}
+\tikzposterlatexaffectionproofoff
+
+\defineblockstyle{greybox}{}{
+	\draw[color=gray,fill=mygray] (blockbody.south west)
+		rectangle (blockbody.north east);
+	\ifBlockHasTitle
+		\draw[color=white] (blocktitle.south west)
+			rectangle (blocktitle.north east);
+	\fi
+}
+
+%%%%%%%%%%%%%%%%%%%%%%
+%   POSTER           % 
+%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\maketitle[
+	%width=10cm,	% width of the title portion of the poster
+	%roundedcorners, linewidth, innersep	% box style of the title
+	%titletotopverticalspace=0cmm, titletoblockverticalspace=0cm
+	%titlegraphictotitledistance=0cm, 	% vertical distance between the titlegraphic and title description
+	%titletextscale=2, 		% relative scaling of the text of the title
+	]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{-5cm}
+\block{Big box}{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  Block text
+}
+\input{template-files/poster-examples}
+
+\begin{columns} 
+
+\column{0.5}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\block{First column block}{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  Block text
+}
+
+\column{0.5}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\block{Second column block}{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  Block text  
+}
+
+\end{columns}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%  List of References    % 
+%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\defineblockstyle{noframe}{}{
+	\draw[color=white] (blockbody.south west)
+		rectangle (blockbody.north east);
+	\ifBlockHasTitle
+		\draw[color=white] (blocktitle.south west)
+			rectangle (blocktitle.north east);
+	\fi
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\useblockstyle[linewidth=0pt]{noframe}
+\block[linewidth=0pt]{}{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{-5.5ex}
+\tiny
+
+\printbibliography[heading=none]
+
+}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
+#+END_SRC
+
+** Standalone template
+
+#+NAME: standalone-template
+#+BEGIN_SRC latex :noweb yes :tangle standalone-main.tex
+\documentclass[
+	%pstricks=true
+	,crop=true
+	,varwidth=\maxdimen
+	]{standalone}
+
+<<pdflatex-settings>>
+
+<<tikz-settings>>
+
+<<forest-settings>>
+
+%% Symbols
+\usepackage{latexsym,amsmath,amssymb,wasysym}
+\usepackage{marvosym}		% for thunderbolt symbol
+\usepackage{ulem}			% to cross out text
+\normalem
+\usepackage{url}
+\urlstyle{sf}
+
+%% Linguistics
+\usepackage{tipa}	% for phonetic symbols; has to appear before fontspec
+\usepackage{linguex}
+\renewcommand{\firstrefdash}{}
+
+<<langsci-avm-settings>>
+
+% \usepackage[inference]{semantic} % for CCG 
+% \usepackage{template-files/packages/ccg}
+
+% \input{template-files/myMacros}
+
+\begin{document}
+
+\Forest{
+  [S
+    [NP] 
+    [VP
+      [V  [\textit{eats}] ]
+      [NP] ]]
+}
+
+\end{document}
 #+END_SRC
 
 ** LangSci template
@@ -769,360 +1123,6 @@ Remember to first add the class jlm to the set of known classes (in =init.el=).
 # end:
 #+END_SRC
 
-** Abschlussarbeit template
-
-#+NAME: abschlussarbeit-template
-#+BEGIN_SRC latex :noweb yes :tangle my-templates/abschlussarbeit-template.tex
-\documentclass[
-  11pt,
-  bibliography=totoc,
-  numbers=noenddot,
-  ]{scrbook}
-
-%%%%%%%%%%%%%%%%%%%%%%%% 
-% SETTINGS
-%%%%%%%%%%%%%%%%%%%%%%%% 
-
-\usepackage{datetime}
-
-\input{template-files/text-settings}
-
-\AtBeginDocument{
-  \selectlanguage{german} % which language is available depends on how babel is loaded
-}
-
-%%%%%%%%%%%%%% 
-% Macros
-%%%%%%%%%%%%%% 
-
-\input{template-files/myMacros}   % the content of myMacros.tex goes here
-
-%%%%%%%%%%%%% 
-% Title
-%%%%%%%%%%%%% 
-
-\subject{Typ der Abschlussarbeit}
-\title{Titel}
-\author{{\LARGE Max Mustermann} \\
-  \\
-  Matrikelnummer: 123456789\\
-  Studiengang: BSc Neue Ätherwissenschaften \\
-  \url{mustermann@uni-tuebingen.de}\\ 
-  Eberhard-Karls-Universität Tübingen\\}  
-\date{\ddmmyyyydate\today, \currenttime}
-\publishers{Betreuerteam \\ Prof. Dr. Martina Musterfrau}
-
-% comment for final version
-\usepackage{draftwatermark}
-\SetWatermarkScale{1}
-\AtBeginDocument{\SetWatermarkText{DRAFT}}
-
-%%%%%%%%%%%%%%%%%%%%%% 
-% Document start
-%%%%%%%%%%%%%%%%%%%%%% 
-
-\begin{document}
-
-\maketitle
-\frontmatter
-\tableofcontents
-\mainmatter 
-
-\input{template-files/abschlussarbeit-examples}
-
-\chapter{Blindtext}
-
-\lipsum
-
-\section{Blindtext section}
-
-\lipsum
-
-%%%%%%%%%%%%%%%%%%% 
-% Document end
-%%%%%%%%%%%%%%%%%%% 
-
-\insertBib
-
-\chapter*{Erklärung}
-
-<<selbständigkeitserklärung>>
-
-\end{document}
-
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: t
-%%% End:
-#+END_SRC
-
-** Hausarbeit template
-
-#+NAME: hausarbeit-template
-#+BEGIN_SRC latex :noweb yes :tangle my-templates/hausarbeit-template.tex
-\documentclass[
-  11pt,
-  twoside,
-  ]{scrartcl}
-
-%%%%%%%%%%%%%%%%%%%%%%%% 
-% SETTINGS
-%%%%%%%%%%%%%%%%%%%%%%%% 
-
-\input{template-files/scrarticle-settings.tex}
-\input{template-files/text-settings}
-
-\AtBeginDocument{
-  \selectlanguage{german} % which language is available depends on how babel is loaded
-}
-
-\input{template-files/myMacros}   % the content of myMacros.tex goes here
-
-%%%%%%%%%%%%% 
-% Title
-%%%%%%%%%%%%% 
-
-\subject{Hausarbeit}
-\title{Titel over two \newlineTitle lines}	% change title
-\author{Max Mustermann}	% change name
-\affiliation{
-  Matrikelnummer: 123456789\\	% change Matrikelnummer
-  Studiengang: BSc Neue Ätherwissenschaften \\ % change Studiengang
-  Emailaddresse: \url{mustermann@uni-tuebingen.de}\\[1ex]	% change email address
-  Seminar: Seminarname, Universität Tübingen, WS 2021/2022\\ % change seminar and date
-  Datum der Fassung: \today, \currenttime
-}
-
-% comment for final version
-\usepackage{draftwatermark}
-\SetWatermarkScale{1}
-\AtBeginDocument{\SetWatermarkText{DRAFT}}
-
-%%%%%%%%%%%%%%%%%%%%%% 
-% Document start
-%%%%%%%%%%%%%%%%%%%%%% 
-
-\begin{document}
-
-\maketitle
-\newpage
-\tableofcontents
-\newpage
-
-\input{template-files/hausarbeit-examples.tex}
-
-\section{Blindtext}
-
-\lipsum
-
-%%%%%%%%%%%%%%%%%%% 
-% Document end
-%%%%%%%%%%%%%%%%%%% 
-
-\insertBib
-
-\newpage
-
-\section*{Erklärung}
-
-<<selbständigkeitserklärung>>
-
-\end{document}
-
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: t
-%%% End:
-#+END_SRC
-
-** Poster template
-
-#+NAME: poster-template
-#+BEGIN_SRC latex :noweb yes :tangle my-templates/poster-template.tex
-\documentclass[
-	17pt,%12pt, 14pt, 17pt, 20pt, 25pt
-	a1paper,%a0paper,a1paper,a2paper
-	%landscape,portrait
-	%margin=0mm, 		% between paper and poster
-	%innermargin=15mm, 	% between poster and outermost blocks
-	%colspace=15mm,		% horizontal spacing between successive columns
-	%subcolspace=8mm,	% horizontal spacing between successive columns in the subcolumn environment
-	%blockverticalspace=15mm,	% between two blocks
-  dvipsnames,
-	]{tikzposter} 
-
-\input{template-files/poster-settings}
-
-\input{template-files/myMacros}
-
-\definecolor{mygray}{gray}{0.9}
-\definecolor{HHUblue}{HTML}{006AB3}
-\definecolor{lightgray}{gray}{0.7}
-
-\newcommand{\affilsup}[1]{{\color{gray}$^{\text{#1}}$}}
-
-%%%%%%%%%%%%%%%%%%%%%%
-%   TITLE            % 
-%%%%%%%%%%%%%%%%%%%%%%
-
-\setlength{\fboxsep}{3pt}
-\title{Title of poster}
-%% \parbox is needed with linebreaks
-% \title{\hspace{-2em}\parbox{\textwidth}{\centering
-%     Title of poster}}
-\author{Author Name(s)\affilsup{1}}
-\institute{\affilsup{1}Affiliation}
-
-\titlegraphic{\hspace*{1cm}\raisebox{0ex}{\includegraphics[width=5cm]{template-files/graphics/sfb-logo-quer.pdf}}\hspace{36cm}\raisebox{0ex}{\includegraphics[width=10cm]{template-files/graphics/hhu-logo-hres.pdf}}} 
-
-\settitle{
-	\centering
-	\color{titlefgcolor}{\bfseries\Huge\@title\par}
-	\vspace*{2em}
-	{\huge\@author\par} \vspace*{1em} {\LARGE\@institute}
-
-	\raisebox{0cm}[0pt]{\@titlegraphic}
-}
-
-%%%%%%%%%%%%%%%%%%%%%%
-%   POSTERSTYLE      % 
-%%%%%%%%%%%%%%%%%%%%%%
-
-\input{template-files/poster-style}
-\tikzposterlatexaffectionproofoff
-
-\defineblockstyle{greybox}{}{
-	\draw[color=gray,fill=mygray] (blockbody.south west)
-		rectangle (blockbody.north east);
-	\ifBlockHasTitle
-		\draw[color=white] (blocktitle.south west)
-			rectangle (blocktitle.north east);
-	\fi
-}
-
-%%%%%%%%%%%%%%%%%%%%%%
-%   POSTER           % 
-%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{document}
-
-\maketitle[
-	%width=10cm,	% width of the title portion of the poster
-	%roundedcorners, linewidth, innersep	% box style of the title
-	%titletotopverticalspace=0cmm, titletoblockverticalspace=0cm
-	%titlegraphictotitledistance=0cm, 	% vertical distance between the titlegraphic and title description
-	%titletextscale=2, 		% relative scaling of the text of the title
-	]
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\vspace{-5cm}
-\block{Big box}{
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  Block text
-}
-\input{template-files/poster-examples}
-
-\begin{columns} 
-
-\column{0.5}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\block{First column block}{
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  Block text
-}
-
-\column{0.5}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\block{Second column block}{
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  Block text  
-}
-
-\end{columns}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%% 
-%  List of References    % 
-%%%%%%%%%%%%%%%%%%%%%%%%%% 
-
-\defineblockstyle{noframe}{}{
-	\draw[color=white] (blockbody.south west)
-		rectangle (blockbody.north east);
-	\ifBlockHasTitle
-		\draw[color=white] (blocktitle.south west)
-			rectangle (blocktitle.north east);
-	\fi
-}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\useblockstyle[linewidth=0pt]{noframe}
-\block[linewidth=0pt]{}{
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\vspace{-5.5ex}
-\tiny
-
-\printbibliography[heading=none]
-
-}
-
-\end{document}
-
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: t
-%%% End:
-#+END_SRC
-
-** Standalone template
-
-#+NAME: standalone-template
-#+BEGIN_SRC latex :noweb yes :tangle my-templates/standalone-template.tex
-\documentclass[
-	%pstricks=true
-	,crop=true
-	,varwidth=\maxdimen
-	]{standalone}
-
-<<pdflatex-settings>>
-
-<<tikz-settings>>
-
-<<forest-settings>>
-
-%% Symbols
-\usepackage{latexsym,amsmath,amssymb,wasysym}
-\usepackage{marvosym}		% for thunderbolt symbol
-\usepackage{ulem}			% to cross out text
-\normalem
-\usepackage{url}
-\urlstyle{sf}
-
-%% Linguistics
-\usepackage{tipa}	% for phonetic symbols; has to appear before fontspec
-\usepackage{linguex}
-\renewcommand{\firstrefdash}{}
-
-<<langsci-avm-settings>>
-
-% \usepackage[inference]{semantic} % for CCG 
-% \usepackage{template-files/packages/ccg}
-
-% \input{template-files/myMacros}
-
-\begin{document}
-
-\Forest{
-  [S
-    [NP] 
-    [VP
-      [V  [\textit{eats}] ]
-      [NP] ]]
-}
-
-\end{document}
-#+END_SRC
-
 * Beamer themes
 
 Local Beamer themes are executed relative to the directory of the master file. Therefore, in order to avoid the use of specific relative paths in the code of the themes, they must later be put in the same directory as the master file.
@@ -1145,7 +1145,7 @@ Local Beamer themes are executed relative to the directory of the master file. T
 ** Tuebingen
 
 #+NAME: beamerthemeTuebingen.sty
-#+BEGIN_SRC latex :noweb yes :tangle my-templates/beamerthemeTuebingen.sty
+#+BEGIN_SRC latex :noweb yes :tangle beamerthemeTuebingen.sty
 \mode<presentation>
 
 %% Requirement
@@ -1177,7 +1177,7 @@ Local Beamer themes are executed relative to the directory of the master file. T
 #+END_SRC
 
 #+NAME: beamercolorthemeTuebingen.sty
-#+BEGIN_SRC latex :noweb yes :tangle my-templates/beamercolorthemeTuebingen.sty
+#+BEGIN_SRC latex :noweb yes :tangle beamercolorthemeTuebingen.sty
 \mode<presentation>
 
 \definecolor{UTred}{RGB}{165,30,55} 
@@ -1224,7 +1224,7 @@ Local Beamer themes are executed relative to the directory of the master file. T
 #+END_SRC
 
 #+NAME: beamerinnerthemeTuebingen.sty
-#+BEGIN_SRC latex :noweb yes :tangle my-templates/beamerinnerthemeTuebingen.sty
+#+BEGIN_SRC latex :noweb yes :tangle beamerinnerthemeTuebingen.sty
 \mode<presentation>
 
 %% General settings
@@ -1306,7 +1306,7 @@ Local Beamer themes are executed relative to the directory of the master file. T
 #+END_SRC
 
 #+NAME: beamerouterthemeTuebingen.sty
-#+BEGIN_SRC latex :noweb yes :tangle my-templates/beamerouterthemeTuebingen.sty
+#+BEGIN_SRC latex :noweb yes :tangle beamerouterthemeTuebingen.sty
 \mode<presentation>
 
 % Frame title
@@ -1362,7 +1362,7 @@ Local Beamer themes are executed relative to the directory of the master file. T
 #+END_SRC
 
 #+NAME: beamerlogosTuebingen.tex
-#+BEGIN_SRC latex :noweb yes :tangle my-templates/beamerlogosTuebingen.tex
+#+BEGIN_SRC latex :noweb yes :tangle beamerlogosTuebingen.tex
 \titlelogo{%
   \includegraphics[width=3.967cm, keepaspectratio=true]{template-files/graphics/UT-logo.pdf}
   \hskip0.4cm 
@@ -1402,7 +1402,7 @@ Local Beamer themes are executed relative to the directory of the master file. T
 ** Lustnau
 
 #+NAME: beamerthemeLustnau.sty
-#+BEGIN_SRC latex :noweb yes :tangle my-templates/beamerthemeLustnau.sty
+#+BEGIN_SRC latex :noweb yes :tangle beamerthemeLustnau.sty
 \mode<presentation>
 
 \usetheme{Tuebingen}
@@ -1449,7 +1449,7 @@ Local Beamer themes are executed relative to the directory of the master file. T
 ** Duesseldorf
 
 #+NAME: beamerthemeDuesseldorf.sty
-#+BEGIN_SRC latex :noweb yes :tangle my-templates/beamerthemeDuesseldorf.sty
+#+BEGIN_SRC latex :noweb yes :tangle template-files/beamerthemeDuesseldorf.sty
 \mode<presentation>
 
 \usepackage{libertine} % libertine tends to cause problems, e.g. when using tipa
@@ -1525,7 +1525,7 @@ Local Beamer themes are executed relative to the directory of the master file. T
 #+END_SRC
 
 #+NAME: beamerlogosDuesseldorf.tex
-#+BEGIN_SRC latex :noweb yes :tangle my-templates/beamerlogosDuesseldorf.tex
+#+BEGIN_SRC latex :noweb yes :tangle template-files/beamerlogosDuesseldorf.tex
 \titlegraphic{%
   \includegraphics[height=1cm]{template-files/graphics/HHU-logo}%
 }
@@ -1536,7 +1536,7 @@ Local Beamer themes are executed relative to the directory of the master file. T
 Template for slides in the corporate design of the [[https://www.uni-bielefeld.de/][University of Bielefeld]] (Faculty of Literature and Language). 
 
 #+NAME: beamerthemeBielefeld.sty
-#+BEGIN_SRC latex :noweb yes :tangle my-templates/beamerthemeBielefeld.sty
+#+BEGIN_SRC latex :noweb yes :tangle template-files/beamerthemeBielefeld.sty
 \mode<presentation>
 
 %% Requirement
@@ -1568,7 +1568,7 @@ Template for slides in the corporate design of the [[https://www.uni-bielefeld.d
 #+END_SRC
 
 #+NAME: beamercolorthemeBielefeld.sty
-#+BEGIN_SRC latex :noweb yes :tangle my-templates/beamercolorthemeBielefeld.sty
+#+BEGIN_SRC latex :noweb yes :tangle template-files/beamercolorthemeBielefeld.sty
 \mode<presentation>
 
 \definecolor{UBred}{RGB}{220,90,90} 
@@ -1615,7 +1615,7 @@ Template for slides in the corporate design of the [[https://www.uni-bielefeld.d
 #+END_SRC
 
 #+NAME: beamerinnerthemeBielefeld.sty
-#+BEGIN_SRC latex :noweb yes :tangle my-templates/beamerinnerthemeBielefeld.sty
+#+BEGIN_SRC latex :noweb yes :tangle template-files/beamerinnerthemeBielefeld.sty
 \mode<presentation>
 
 %% General settings
@@ -1692,7 +1692,7 @@ Template for slides in the corporate design of the [[https://www.uni-bielefeld.d
 #+END_SRC
 
 #+NAME: beamerouterthemeBielefeld.sty
-#+BEGIN_SRC latex :noweb yes :tangle my-templates/beamerouterthemeBielefeld.sty
+#+BEGIN_SRC latex :noweb yes :tangle template-files/beamerouterthemeBielefeld.sty
 \mode<presentation>
 
 \setbeamertemplate{navigation symbols}{}
@@ -1775,7 +1775,7 @@ Template for slides in the corporate design of the [[https://www.uni-bielefeld.d
 #+END_SRC
 
 #+NAME: beamerlogosBielefeld.tex
-#+BEGIN_SRC latex :noweb yes :tangle my-templates/beamerlogosBielefeld.tex
+#+BEGIN_SRC latex :noweb yes :tangle beamerlogosBielefeld.tex
 \titlelogo{%
   \includegraphics[width=3.967cm, keepaspectratio=true]{template-files/graphics/UB-LiLi-logo.pdf}
 }
@@ -1913,7 +1913,7 @@ aspectratio=169,
 \input{template-files/beamer-settings.tex}
 #+END_SRC
 
-#+BEGIN_SRC latex :noweb yes :tangle my-templates/template-files/beamer-settings.tex
+#+BEGIN_SRC latex :noweb yes :tangle template-files/beamer-settings.tex
 <<pdflatex-settings>>
 
 \usepackage{etex} 
@@ -1983,7 +1983,7 @@ numbers=noenddot,
 #+END_SRC
 
 #+NAME: text-settings
-#+BEGIN_SRC latex :noweb yes :tangle my-templates/template-files/text-settings.tex
+#+BEGIN_SRC latex :noweb yes :tangle template-files/text-settings.tex
 <<pdflatex-settings>>
 
 %% Trees and graphics
@@ -2026,7 +2026,7 @@ numbers=noenddot,
 ** Poster settings
 
 #+NAME: poster-settings
-#+BEGIN_SRC latex :noweb yes :tangle my-templates/template-files/poster-settings.tex
+#+BEGIN_SRC latex :noweb yes :tangle template-files/poster-settings.tex
 %%%%%%%%%%%%%%%%%%%%%%
 %   FONT             % 
 %%%%%%%%%%%%%%%%%%%%%%
@@ -2065,7 +2065,7 @@ numbers=noenddot,
 #+END_SRC
 
 #+NAME: poster-style
-#+BEGIN_SRC latex :noweb yes :tangle my-templates/template-files/poster-style.tex
+#+BEGIN_SRC latex :noweb yes :tangle template-files/poster-style.tex
 %\usetheme{Basic}	% Default, Rays, Basic, Simple, Envelope, Wave, Board, Autumn, and Desert
 
 \usetitlestyle[
@@ -2539,7 +2539,11 @@ numbers=noenddot,
     ] 
 }
 
-\let\cite=\citet  % in order to prevent inconsistencies between \cite and \citet
+% Compat definitions to make available BibTeX macros in BibLaTeX 
+\let\citealt=\cite
+\let\cite=\textcite
+\let\citep=\parencite
+\let\citet=\cite
 \newcommand{\citeauthoryear}[1]{\citeauthor{#1} (\citeyear{#1})}
 \newcommand{\citealtauthoryear}[1]{\citeauthor{#1} \citeyear{#1}}
 
@@ -2667,23 +2671,6 @@ numbers=noenddot,
 %   ]}
 #+END_SRC
 
-** natbib/BibTeX
-
-#+NAME: natbib_bibtex-settings
-#+BEGIN_SRC latex
-\usepackage{natbib}
-\setlength{\bibsep}{0mm}
-%\setcitestyle{notesep={: }} 
-\bibpunct[: ]{(}{)}{;}{a}{}{;}
-\bibliographystyle{bst/unified}
-
-\newcommand{\insertBib}{
-	\bibliography{references}
-}
-
-\let\cite=\citet 	% in order to prevent inconsistencies between \cite and \citet
-#+END_SRC
-
 ** PDFLaTeX
 
 #+NAME: pdflatex-settings
@@ -2734,7 +2721,7 @@ numbers=noenddot,
 #+END_SRC
 
 #+NAME: scrarticle-settings
-#+BEGIN_SRC latex :noweb yes :tangle my-templates/template-files/scrarticle-settings.tex
+#+BEGIN_SRC latex :noweb yes :tangle template-files/scrarticle-settings.tex
 \usepackage{datetime}
 \usepackage{ifdraft}
 
@@ -2907,10 +2894,32 @@ numbers=noenddot,
 \newcommand\tikztreeset[1]{\matrix [matrix of nodes,left delimiter=\{,right delimiter=\}](set){#1};}
 #+END_SRC
 
+** natbib/BibTeX
+
+#+NAME: natbib_bibtex-settings
+#+BEGIN_SRC latex
+\usepackage{natbib}
+\setlength{\bibsep}{0mm}
+%\setcitestyle{notesep={: }} 
+\bibpunct[: ]{(}{)}{;}{a}{}{;}
+\bibliographystyle{bst/unified}
+
+\newcommand{\insertBib}{
+	\bibliography{references}
+}
+
+\let\cite=\citet 	% in order to prevent inconsistencies between \cite and \citet
+#+END_SRC
+
 * myMacros
 
-#+BEGIN_SRC latex :noweb yes :tangle my-templates/template-files/myMacros.tex
+#+BEGIN_SRC latex :noweb yes :tangle template-files/myMacros.tex
 <<myMacros.tex>>
+#+END_SRC
+
+#+NAME: myMacros-input
+#+BEGIN_SRC latex :noweb yes :tangle no
+\input{template-files/myMacros}
 #+END_SRC
 
 #+NAME: myMacros.tex
@@ -3025,17 +3034,17 @@ numbers=noenddot,
 
 * Examples
 
-** Teaching
+** Text
 
 #+NAME: abschlussarbeit-examples
-#+BEGIN_SRC latex :noweb yes :tangle my-templates/template-files/abschlussarbeit-examples.tex
+#+BEGIN_SRC latex :noweb yes :tangle template-files/abschlussarbeit-examples.tex
 
 <<book-examples>>
 
 #+END_SRC
 
 #+NAME: hausarbeit-examples
-#+BEGIN_SRC latex :noweb yes :tangle my-templates/template-files/hausarbeit-examples.tex
+#+BEGIN_SRC latex :noweb yes :tangle template-files/hausarbeit-examples.tex
 
 <<article-examples>>
 
@@ -3056,17 +3065,15 @@ Insbesondere versichere ich, dass ich alle wörtlichen und sinngemäßen Überna
 \end{tabular}
 #+END_SRC
 
-** Text
-
 #+NAME: abstract-examples
-#+BEGIN_SRC latex :noweb yes :tangle my-templates/template-files/abstract-examples.tex
+#+BEGIN_SRC latex :noweb yes :tangle template-files/abstract-examples.tex
 
 <<example-citations>>
 
 #+END_SRC
 
 #+NAME: article-examples
-#+BEGIN_SRC latex :noweb yes :tangle my-templates/template-files/article-examples.tex
+#+BEGIN_SRC latex :noweb yes :tangle template-files/article-examples.tex
 
 \section{Information about this template}
 
@@ -3102,7 +3109,7 @@ Insbesondere versichere ich, dass ich alle wörtlichen und sinngemäßen Überna
 #+END_SRC
 
 #+NAME: book-examples
-#+BEGIN_SRC latex :noweb yes :tangle my-templates/template-files/book-examples.tex
+#+BEGIN_SRC latex :noweb yes :tangle template-files/book-examples.tex
 
 \chapter{Information about this template}
 
@@ -3139,7 +3146,7 @@ Insbesondere versichere ich, dass ich alle wörtlichen und sinngemäßen Überna
 ** Beamer
 
 #+NAME: beamer-examples
-#+BEGIN_SRC latex :noweb yes :tangle my-templates/template-files/beamer-examples.tex
+#+BEGIN_SRC latex :noweb yes :tangle template-files/beamer-examples.tex
 \begin{frame}
   \frametitle{About the template}
   
@@ -3381,7 +3388,12 @@ More \LaTeX{} templates on \url{https://github.com/timmli/latex-templates}.
 \noindent $\Rightarrow$ \url{http://nlp.stanford.edu/manning/tex/avm-doc.pdf}
 #+END_SRC
 
-** Citations
+** TODO Citations
+:LOGBOOK:
+- State "TODO"       from              [2022-09-15 Thu 00:09]
+:END:
+
+- [ ] Add cite commands to examples
 
 #+NAME: example-citations
 #+BEGIN_SRC latex
@@ -3389,6 +3401,61 @@ Example for invoking citations: \cite{Bech:63}, \citet[291]{Bech:63}, \citep{Bec
 
 References are stored in \texttt{references.bib}.
 #+END_SRC
+
+#+BEGIN_SRC latex :noweb yes :tangle text-templates/references.bib
+<<example-references.bib>>
+#+END_SRC
+
+#+BEGIN_SRC latex :noweb yes :tangle slides-templates/references.bib
+<<example-references.bib>>
+#+END_SRC
+
+#+BEGIN_SRC latex :noweb yes :tangle poster-templates/references.bib
+<<example-references.bib>>
+#+END_SRC
+
+#+BEGIN_SRC latex :noweb yes :tangle standalone-templates/references.bib
+<<example-references.bib>>
+#+END_SRC
+
+#+NAME: example-references.bib
+#+BEGIN_SRC latex
+
+@article{Bech:63,
+  author = {Bech, Gunnar},
+  title = {Grammatische {G}esetze im {W}iderspruch},
+  year = {1963},
+  volume = {12},
+  pages = {291--299},
+  journal = {Lingua},
+  owner = {tl},
+  timestamp = {2008.09.08},
+}
+
+@InProceedings{EckartDeCastilho:etal:16,
+  author    = {Eckart de Castilho, Richard and M\'{u}jdricza-Maydt, \'{E}va and Yimam, Seid Muhie and Hartmann, Silvana and Gurevych, Iryna and Frank, Anette and Biemann, Chris},
+  title     = {A Web-based Tool for the Integrated Annotation of Semantic and Syntactic Structures},
+  booktitle = {Proceedings of the Workshop on Language Technology Resources and Tools for Digital Humanities ({LT4DH})},
+  year      = {2016},
+  pages     = {76--84},
+  address   = {Osaka, Japan},
+  owner     = {timm},
+  timestamp = {2017-08-16},
+}
+
+@book{Mueller:02,
+  author = {M\"uller, Stefan},
+  title = {Complex Predicates. Verbal Complexes, Resultative Constructions, and Particle Verbs in {German}},
+  year = {2002},
+  series = {Studies in Constraint-Based Lexicalism},
+  publisher = {CSLI Publications},
+  address = {Stanford},
+  owner = {tl},
+  timestamp = {2010.07.30},
+}
+
+#+END_SRC
+
 
 ** Linguistics
 
@@ -3461,7 +3528,7 @@ $\Rightarrow$ \url{http://en.wikibooks.org/wiki/LaTeX/Mathematics}
 ** Poster
 
 #+NAME: poster-examples
-#+BEGIN_SRC latex :noweb yes :tangle my-templates/template-files/poster-examples.tex
+#+BEGIN_SRC latex :noweb yes :tangle template-files/poster-examples.tex
 <<example-poster-notes>>
 #+END_SRC
 
@@ -3927,8 +3994,12 @@ release_standalone:
 
 * latexmk
 
+#+BEGIN_SRC shell :noweb yes :tangle latexmkrc   
+<<pdflatex-latexmk>>
+#+END_SRC
+
 #+NAME: pdflatex-latexmk
-#+BEGIN_SRC shell :noweb yes :tangle my-templates/latexmkrc 
+#+BEGIN_SRC shell :noweb yes   
 # -*- mode: Perl; eval: (flycheck-mode -1);-*-
 # Manual: http://mirror.physik-pool.tu-berlin.de/pub/CTAN/support/latexmk/latexmk.pdf
 

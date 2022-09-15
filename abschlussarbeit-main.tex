@@ -1,0 +1,91 @@
+\documentclass[
+  11pt,
+  bibliography=totoc,
+  numbers=noenddot,
+  ]{scrbook}
+
+%%%%%%%%%%%%%%%%%%%%%%%% 
+% SETTINGS
+%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\usepackage{datetime}
+
+\input{template-files/text-settings}
+
+\AtBeginDocument{
+  \selectlanguage{german} % which language is available depends on how babel is loaded
+}
+
+%%%%%%%%%%%%%% 
+% Macros
+%%%%%%%%%%%%%% 
+
+\input{template-files/myMacros}   % the content of myMacros.tex goes here
+
+%%%%%%%%%%%%% 
+% Title
+%%%%%%%%%%%%% 
+
+\subject{Typ der Abschlussarbeit}
+\title{Titel}
+\author{{\LARGE Max Mustermann} \\
+  \\
+  Matrikelnummer: 123456789\\
+  Studiengang: BSc Neue Ätherwissenschaften \\
+  \url{mustermann@uni-tuebingen.de}\\ 
+  Eberhard-Karls-Universität Tübingen\\}  
+\date{\ddmmyyyydate\today, \currenttime}
+\publishers{Betreuerteam \\ Prof. Dr. Martina Musterfrau}
+
+% comment for final version
+\usepackage{draftwatermark}
+\SetWatermarkScale{1}
+\AtBeginDocument{\SetWatermarkText{DRAFT}}
+
+%%%%%%%%%%%%%%%%%%%%%% 
+% Document start
+%%%%%%%%%%%%%%%%%%%%%% 
+
+\begin{document}
+
+\maketitle
+\frontmatter
+\tableofcontents
+\mainmatter 
+
+\input{template-files/abschlussarbeit-examples}
+
+\chapter{Blindtext}
+
+\lipsum
+
+\section{Blindtext section}
+
+\lipsum
+
+%%%%%%%%%%%%%%%%%%% 
+% Document end
+%%%%%%%%%%%%%%%%%%% 
+
+\insertBib
+
+\chapter*{Erklärung}
+
+Hiermit erkläre ich, dass ich die vorliegende Arbeit selbstständig verfasst und keine anderen Hilfsmittel als die angegebenen verwendet habe.
+
+Insbesondere versichere ich, dass ich alle wörtlichen und sinngemäßen Übernahmen aus anderen Werken als solche kenntlich gemacht habe.
+
+\vspace{10ex}
+
+\noindent
+\begin{tabular}{lcl}
+  \rule{6cm}{1pt} & \hspace{1cm} & \rule{6cm}{1pt} \\
+  Ort/Datum & & Unterschrift
+\end{tabular}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

@@ -1,0 +1,28 @@
+\mode<presentation>
+
+%% Requirement
+\RequirePackage{tikz}
+\RequirePackage{helvet}
+\RequirePackage{beramono}  % for monospaced font
+\PassOptionsToPackage{scaled=0.95}{beramono}
+
+%% Additional fields
+\def\titlelogo#1{\gdef\@titlelogo{#1}}
+\titlelogo{}
+\def\inserttitlelogo{\@titlelogo}
+
+\def\headlinelogo#1{\gdef\@headlinelogo{#1}}
+\headlinelogo{}
+\def\insertheadlinelogo{\@headlinelogo}
+
+%% Generic macros
+\def\vhrulefill#1{\leavevmode\leaders\hrule\@height#1\hfill \kern\z@}
+
+%% Settings
+\usecolortheme{Bielefeld}
+\useinnertheme{Bielefeld}
+\useoutertheme{Bielefeld}
+
+\setbeamersize{text margin left=1cm,text margin right=1cm}
+
+\mode<all>

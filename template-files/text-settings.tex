@@ -1,0 +1,481 @@
+%%%%%%%%%%%%%%%%%%%%%%%%
+%   PDFLATEX SETTINGS  % 
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%   Font & Encoding
+
+% \usepackage{libertine} % libertine tends to cause problems, e.g. when using tipa
+% \usepackage[libertine]{newtxmath}
+\usepackage{times}
+
+\makeatletter
+
+\@ifclassloaded{beamer}{
+  \usepackage{libertine} % libertine tends to cause problems, e.g. when using tipa
+  \usepackage[libertine]{newtxmath}}{}
+
+\@ifclassloaded{tikzposter}{
+  \usepackage{DejaVuSans} 
+  \renewcommand*{\familydefault}{\sfdefault}}{}
+
+\makeatother
+
+\usepackage[scaled=0.8]{beramono}  % for monospaced font
+\usepackage{microtype}		% micro-typographic aspects of the fonts
+\usepackage[T1]{fontenc}	% special fonts, e.g. for German umlaute
+
+%% compatible with BibLaTeX
+\usepackage[utf8]{inputenc}
+%% incompabtible with BibLaTeX
+% \usepackage{ucs}
+% \usepackage[utf8x]{inputenc}
+
+%% Language
+%\usepackage{german} % is this useful anymore?
+\usepackage[german,english]{babel} % the last language in the options is loaded; the other one can be chosen with \selectlanguage
+\usepackage{iflang}                % for language specific settings
+
+%% Trees and graphics
+\usepackage{graphics}
+
+%%%%%%%%%%%%%%%%%%%%%%
+%   TIKZ SETTINGS    % 
+%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{tikz}
+\usepackage{tikz-dependency}
+
+\tikzset{every tree node/.style={align=center,anchor=north}}	% to allow linebreaks
+\usetikzlibrary{calc} % for positioning arrows with ($(t.center)-(1,0)$)
+\usetikzlibrary{shapes,decorations}
+\usetikzlibrary{backgrounds,fit}
+\usetikzlibrary{arrows}
+\usetikzlibrary{matrix}
+\usetikzlibrary{positioning}
+\usetikzlibrary{automata}
+\usetikzlibrary{tikzmark}
+\usetikzlibrary{decorations.pathreplacing} % needed for braces in unify children
+
+% Define box and box title style (see http://www.texample.net/tikz/examples/boxes-with-text-and-math/)
+\tikzstyle{mybox} = [draw=gray, very thick,
+    rectangle, rounded corners, inner sep=10pt, inner ysep=17pt,yshift=3pt]
+\tikzstyle{fancytitle} =[draw=gray, very thick, fill=white,
+    rectangle, rounded corners, inner sep=5pt, inner ysep=5pt]
+\tikzstyle{mydouble} = [double distance=1pt]
+    
+\tikzset{
+  %% Define standard arrow tip
+  >=stealth',
+  %% Define style for boxes
+  box/.style={
+    rectangle,
+    rounded corners,
+    draw=black, very thick,
+    text width=10em,
+    minimum height=2em,
+    text centered},
+  %% Define arrow style
+  arrow/.style={
+    ->,
+    thick,
+    shorten <=2pt,
+    shorten >=2pt,},
+  %% Beamer overlays (https://tex.stackexchange.com/a/253384/61499)
+  invisible/.style={opacity=0,text opacity=0},
+  visible/.style={alt=#1{}{invisible}},
+  alt/.code args={<#1>#2#3}{%
+    \alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}}},
+  transparent/.style={opacity=0.1,text opacity=0.1},
+  opaque/.style={alt=#1{}{transparent}},
+  alerted/.style={color=alerted text.fg},
+  alert/.style={alt=#1{alerted}{}},
+}
+
+\newcommand\centertikz[1]{\tikz[baseline=(current bounding box.center)]{#1}}
+\newcommand\tikzcenter{baseline=(current bounding box.center)}
+\newcommand\tikztop{baseline=(current bounding box.north)}
+
+\newcommand\tikztreeset[1]{\matrix [matrix of nodes,left delimiter=\{,right delimiter=\}](set){#1};}
+
+%%%%%%%%%%%%%%%%%%%%%%% 
+%   FOREST SETTINGS   % 
+%%%%%%%%%%%%%%%%%%%%%%% 
+
+\usepackage{forest}
+
+\makeatletter
+
+\@ifpackagelater{forest}{2016/01/01}
+{\useforestlibrary{linguistics}%
+ \useforestlibrary{edges}}
+{}
+
+\@ifpackagelater{forest}{2016/01/01}
+{\newcommand{\forestPreamble}{default preamble}} % version >=2 of forest
+{\newcommand{\forestPreamble}{.style}} % version <=1 of forest
+
+\makeatother
+
+\forestset{
+  \forestPreamble ={
+    % .style={ % version <=1 of forest
+    % default preamble={ % version >=2 of forest    
+		for tree={
+			parent anchor=south, 
+			child anchor=north,
+			% align=center,			% bad: adds space below label
+			fit=rectangle,
+			base=top,				% vertical orientation of nodes
+			% inner sep=3,			% necesssary?
+			begin draw/.code={\begin{tikzpicture}[baseline=(current bounding box.center)]},
+    }},
+  htree/.style={for tree={grow'=east,parent anchor=east,child anchor=west,anchor=base west}},
+  sn edges/.style={for tree={parent anchor=south, child anchor=north}},
+  red subtree/.style={for tree={text=red},for descendants={edge=red}},
+  black subtree/.style={for tree={text=black},for descendants={edge=black}},
+  blue subtree/.style={for tree={text=blue},for descendants={edge=blue}},
+  green subtree/.style={for tree={text=green},for descendants={edge=green}},
+  gray subtree/.style={for tree={text=gray},for descendants={edge=gray}},
+  color subtree/.style={for tree={text=#1},for descendants={edge={draw=#1}}},
+  subtree color/.style={for tree={text=#1},for descendants={edge={draw=#1}}},
+  vcenter/.style={begin draw/.code={\begin{tikzpicture}[baseline=(current bounding box.center)]}},
+  empty nodes/.style={	% from the forest manual
+    for tree={
+      % calign=fixed edge angles,
+      yshift=1ex},
+    delay={where content={}{shape=coordinate,for parent={for children={anchor=north}}}{}}},
+  derivation tree/.style={.style={
+      for tree={parent anchor={},child anchor={},font=\ttfamily}}},
+  derivation/.style={for children={fit=tight}},
+  description/.style={
+    for tree={parent anchor={},child anchor={},edge=->}},
+  dt label/.style 2 args={
+    edge label={node[midway,font=\ttfamily\scriptsize, #1]{#2}},},
+  %% for drawing STUG sequences
+  %% conn, <-- and --> are take from https://tex.stackexchange.com/a/414444/61499
+  conn/.style n args=2{
+    tikz+={\draw [dashed] (#1) -- (#2);}},
+  -->/.style={ % draw horizontal line to predecessor
+    before drawing tree={
+      temptoksa=,
+      tempcounta/.option=level,
+      if nodewalk valid={n}{conn={}{!n}}{
+        for nodewalk={
+          while nodewalk valid={u}{
+            tempcountb/.option=n,
+            u,
+            if={> OR>{n children}{tempcountb} }{
+              tempcountc/.register=tempcountb,
+              tempcountc'+=1,
+              n/.register=tempcountc,
+              while nodewalk valid={1}{
+                1,
+                if={ > OR= {level}{tempcounta} }{
+                  temptoksa/.option=name,
+                  break=1
+                }{}
+              }
+            }{}
+          }
+        }{},
+        if temptoksa={}{}{conn/.process={_R {}{temptoksa}}}
+      },
+    },
+  },
+  <--/.style={ % draw horizontal line to successor
+    before drawing tree={
+      temptoksa=,
+      tempcounta/.option=level,
+      if nodewalk valid={p}{conn={}{!p}}{
+        for nodewalk={
+          while nodewalk valid={u}{
+            u,
+            if n=1{}{
+              p,
+              while nodewalk valid={last}{
+                last,
+                if={ > OR= {level}{tempcounta} }{
+                  temptoksa/.option=name,
+                  break=1
+                }{}
+              }
+            },
+          }
+        }{},
+        if temptoksa={}{}{conn/.process={_R {}{temptoksa}}}
+      },
+    },
+  },
+  t/.style={calign with current}, % trunk 
+  lex/.style={                    % terminal nodes with lexical material
+    no edge,
+    for parent={l sep=0ex},
+    yshift=3ex,
+    draw=gray,
+    content={\textit{##1}}},
+  c/.style args={#1}{            % visual link with argument
+    % edge label={node[xshift={0.8em},scale=0.8,fill=white,draw,inner sep=.10ex,circle]{#1}}
+    % tikz={\node[yshift={1.5ex},scale=0.8,fill=white,draw,inner sep=.10ex,circle, right=-0.5em of .east]  {1};}
+    label={[yshift={0.5ex},scale=.8,circle, draw, fill=white, inner sep=.1ex, label distance=-.65em, anchor=west]north east:#1}},
+  Xs/.style={for tree={xshift=#1}},
+  Ys/.style={for tree={yshift=#1}},
+  %% Beamer overlays (https://tex.stackexchange.com/a/253384/61499)
+  invisible/.style={%
+    for tree={%
+      /tikz/invisible={#1},
+      edge={/tikz/invisible={#1}}}},
+  visible/.style={%
+    for tree={%
+      /tikz/visible={#1},
+      edge={/tikz/visible={#1}}}},
+  visible ancestors/.style={%
+    edge={/tikz/visible={#1}},
+    for ancestors={%
+      /tikz/visible={#1},
+      edge={/tikz/visible={#1}}}},
+  opaque/.style={%
+    for tree={%
+      /tikz/opaque={#1},
+      edge={/tikz/opaque={#1}}}},
+  alert/.style={%
+    for tree={%
+      /tikz/alert={#1},
+      edge={/tikz/alert={#1}}}},
+  only/.code args={<#1>}{% https://tex.stackexchange.com/a/417110/61499
+    \alt<#1>{}{\pgfkeysalso{before typesetting nodes={remove}}}},
+  unify children/.style={
+    if nodewalk valid={1}{
+      l sep=5pt,
+      for children={l=0mm},
+      for nodewalk={1}{
+        for siblings={no edge},
+        edge={decorate, decoration={brace, amplitude=5pt}},
+        edge path'={(!u1.west |- .north) -- (!ul.east |- .north)}
+      }}{}}
+}
+
+
+% \usepackage{arydshln} 		    % for dashed horizontal lines in tables (incompatible with avm)
+\usepackage{multirow}           % similar to \multicolumn
+
+%% Symbols
+\usepackage{latexsym,amsmath,amssymb,wasysym}
+\usepackage{marvosym}           % for thunderbolt symbol
+\usepackage{ulem}               % to cross out text
+\normalem
+\usepackage{url}
+\urlstyle{tt}                   % tt,rm,sf,same
+
+%% Linguistics
+\usepackage{tipa}	% for phonetic symbols; has to appear before fontspec
+\usepackage{linguex}
+\renewcommand{\firstrefdash}{}
+
+%%%%%%%%%%%%%%%%%%%%%%
+%   AVM SETTINGS     % 
+%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{template-files/packages/langsci-avm}
+
+
+
+% \usepackage[inference]{semantic} % for CCG 
+% \usepackage{packages/ccg}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%   BIBLATEX SETTINGS  % 
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\mycitestyle}{template-files/muss}
+\newcommand{\mybibstyle}{template-files/muss}
+
+\makeatletter
+\@ifclassloaded{beamer}{\renewcommand{\mycitestyle}{numeric-comp}}{}
+\@ifclassloaded{tikzposter}{\renewcommand{\mycitestyle}{numeric-comp}}{}
+\makeatother
+
+\usepackage[
+  bibstyle=\mybibstyle,
+  citestyle=\mycitestyle,
+  %% The remaining options are set in muss.bbx.
+  % natbib=true,
+  % refsection=chapter,
+  % maxbibnames=99,
+  % isbn=false,
+  % doi=false,
+  % eprint=false,
+  % backend=biber,
+  % sorting=ydnt,  % sort in descending chronological order
+  % indexing=cite,
+  % labelnumber,  % for numeric bibliography in beamer
+  % toc=bib    % make bibliography appear in toc, incompatible with beamer
+  ]{biblatex}
+\renewcommand{\postnotedelim}{: }%
+\renewcommand{\multicitedelim}{\addsemicolon\space}%
+\renewcommand{\compcitedelim}{\multicitedelim}%
+\DeclareFieldFormat{postnote}{#1}%
+
+%% beamer settings
+\makeatletter
+\@ifclassloaded{beamer}{  
+  \DeclareFieldFormat{labelnumberwidth}{[#1]}
+  \defbibenvironment{bibliography}  % from numeric.bbx
+      {\list
+        {\printtext[labelnumberwidth]{%
+          \printfield{prefixnumber}%
+          \printfield{labelnumber}}}
+        {\setlength{\labelwidth}{\labelnumberwidth}%
+            \setlength{\leftmargin}{\labelwidth}%
+            \setlength{\labelsep}{1em}%
+            \addtolength{\leftmargin}{1em}%
+            \setlength{\itemsep}{\bibitemsep}%
+            \setlength{\parsep}{\bibparsep}}%
+            \renewcommand*{\makelabel}[1]{\hss##1}}
+      {\endlist}
+      {\item}
+    % \DeclareCiteCommand{\supercite}[\mkbibsuperscript]{
+    %   \iffieldundef{prenote}
+    %     {}
+  %     {\BibliographyWarning{Ignoring prenote argument}}%
+  %   \iffieldundef{postnote}
+  %     {}
+  %     {\BibliographyWarning{Ignoring postnote argument}}}
+    %   {\usebibmacro{citeindex}%
+  %      \color{gray}\bibopenbracket\usebibmacro{cite}\bibclosebracket}
+    %   {\supercitedelim}
+    %   {}
+    \DeclareCiteCommand{\supercite}[\mkbibsuperscript]
+      {\color{gray} % added color
+      \usebibmacro{cite:init}%
+      \let\multicitedelim=\supercitedelim
+      \iffieldundef{prenote}
+        {}
+        {\BibliographyWarning{Ignoring prenote argument}}%
+      \iffieldundef{postnote}
+        {}
+        {\BibliographyWarning{Ignoring postnote argument}}%
+      \bibopenbracket}%
+      {\usebibmacro{citeindex}%
+       \usebibmacro{cite:comp}}
+      {}
+      {\usebibmacro{cite:dump}\bibclosebracket}
+
+  \DeclareCiteCommand{\citeauthor}  % from sp-authoryear-comp.cbx; to add hyperref link  
+    {\boolfalse{citetracker}%
+     \boolfalse{pagetracker}%
+     \usebibmacro{prenote}}
+    {\ifciteindex
+       {\indexnames{labelname}}
+       {}%
+     \printtext[bibhyperref]{\printnames{labelname}}}
+    {\multicitedelim}
+    {\usebibmacro{postnote}}
+
+  \DeclareCiteCommand{\citeyear}  % from sp-authoryear-comp.cbx; to add hyperref link  
+    {\boolfalse{citetracker}%
+     \boolfalse{pagetracker}%
+     \usebibmacro{prenote}}
+    {\printfield[bibhyperref]{year}}
+    {\multicitedelim}
+    {\usebibmacro{postnote}}
+}{}
+\makeatother
+
+%% tikzposter settings
+\makeatletter
+\@ifclassloaded{tikzposter}{  
+\DeclareFieldFormat{labelnumberwidth}{#1}
+\defbibenvironment{bibliography}
+{\footnotesize\noindent}
+{\unspace}
+{}
+\renewbibmacro*{begentry}{%
+\textbf{\color{HHUblue}%
+\printtext[labelnumberwidth]{%
+[\printfield{prefixnumber}%
+\printfield{labelnumber}]}%
+\space
+%\setunit{\addspace}
+}}
+\renewcommand*{\finentrypunct}{\addperiod\space}
+
+\DeclareCiteCommand{\supercite}[\mkbibsuperscript]
+{\color{gray} % added color
+\usebibmacro{cite:init}%
+\let\multicitedelim=\supercitedelim
+\iffieldundef{prenote}
+{}
+{\BibliographyWarning{Ignoring prenote argument}}%
+\iffieldundef{postnote}
+{}
+{\BibliographyWarning{Ignoring postnote argument}}%
+\bibopenbracket}%
+{\usebibmacro{citeindex}%
+\usebibmacro{cite:comp}}
+{}
+{\usebibmacro{cite:dump}\bibclosebracket}
+
+\DeclareCiteCommand{\citeauthor}  % from sp-authoryear-comp.cbx; to add hyperref link  
+{\boolfalse{citetracker}%
+\boolfalse{pagetracker}%
+\usebibmacro{prenote}}
+{\ifciteindex
+{\indexnames{labelname}}
+{}%
+\printtext[bibhyperref]{\printnames{labelname}}}
+{\multicitedelim}
+{\usebibmacro{postnote}}
+
+\DeclareCiteCommand{\citeyear}  % from sp-authoryear-comp.cbx; to add hyperref link  
+{\boolfalse{citetracker}%
+\boolfalse{pagetracker}%
+\usebibmacro{prenote}}
+{\printfield[bibhyperref]{year}}
+{\multicitedelim}
+{\usebibmacro{postnote}}
+}{}
+\makeatother
+
+%% The bibliography file is specified like this
+\addbibresource[datatype=bibtex]{references.bib}
+
+\newcommand{\insertBib}{
+  \printbibliography[
+    %notkeyword=this
+    ] 
+}
+
+% Compat definitions to make available BibTeX macros in BibLaTeX 
+\let\citealt=\cite
+\let\cite=\textcite
+\let\citep=\parencite
+\let\citet=\cite
+\newcommand{\citeauthoryear}[1]{\citeauthor{#1} (\citeyear{#1})}
+\newcommand{\citealtauthoryear}[1]{\citeauthor{#1} \citeyear{#1}}
+ 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%   HYBPERREF SETTINGS  % 
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[bookmarks=true,bookmarksopen=true,%
+  hyperindex=true,%
+  breaklinks=true,
+  draft=false,plainpages=false,
+  pdfauthor={},%
+  pdfkeywords={},%
+  ]{hyperref}
+\hypersetup{colorlinks=false, pdfborder={0 0 0}}
+
+\IfLanguageName{english}{
+  \renewcommand{\chapterautorefname}{Chapter}%
+  \renewcommand{\figureautorefname}{Figure}%
+  \renewcommand{\tableautorefname}{Table}%
+  \renewcommand{\sectionautorefname}{Section}%
+  \renewcommand{\subsectionautorefname}{Section}%
+  \renewcommand{\subsubsectionautorefname}{Section}%
+  \renewcommand{\Hfootnoteautorefname}{Footnote}%
+}{}
+
+%% for blindtext
+\usepackage{lipsum}

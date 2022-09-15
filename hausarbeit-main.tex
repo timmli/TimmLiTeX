@@ -1,0 +1,83 @@
+\documentclass[
+  11pt,
+  twoside,
+  ]{scrartcl}
+
+%%%%%%%%%%%%%%%%%%%%%%%% 
+% SETTINGS
+%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\input{template-files/scrarticle-settings.tex}
+\input{template-files/text-settings}
+
+\AtBeginDocument{
+  \selectlanguage{german} % which language is available depends on how babel is loaded
+}
+
+\input{template-files/myMacros}   % the content of myMacros.tex goes here
+
+%%%%%%%%%%%%% 
+% Title
+%%%%%%%%%%%%% 
+
+\subject{Hausarbeit}
+\title{Titel over two \newlineTitle lines}	% change title
+\author{Max Mustermann}	% change name
+\affiliation{
+  Matrikelnummer: 123456789\\	% change Matrikelnummer
+  Studiengang: BSc Neue Ätherwissenschaften \\ % change Studiengang
+  Emailaddresse: \url{mustermann@uni-tuebingen.de}\\[1ex]	% change email address
+  Seminar: Seminarname, Universität Tübingen, WS 2021/2022\\ % change seminar and date
+  Datum der Fassung: \today, \currenttime
+}
+
+% comment for final version
+\usepackage{draftwatermark}
+\SetWatermarkScale{1}
+\AtBeginDocument{\SetWatermarkText{DRAFT}}
+
+%%%%%%%%%%%%%%%%%%%%%% 
+% Document start
+%%%%%%%%%%%%%%%%%%%%%% 
+
+\begin{document}
+
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+
+\input{template-files/hausarbeit-examples.tex}
+
+\section{Blindtext}
+
+\lipsum
+
+%%%%%%%%%%%%%%%%%%% 
+% Document end
+%%%%%%%%%%%%%%%%%%% 
+
+\insertBib
+
+\newpage
+
+\section*{Erklärung}
+
+Hiermit erkläre ich, dass ich die vorliegende Arbeit selbstständig verfasst und keine anderen Hilfsmittel als die angegebenen verwendet habe.
+
+Insbesondere versichere ich, dass ich alle wörtlichen und sinngemäßen Übernahmen aus anderen Werken als solche kenntlich gemacht habe.
+
+\vspace{10ex}
+
+\noindent
+\begin{tabular}{lcl}
+  \rule{6cm}{1pt} & \hspace{1cm} & \rule{6cm}{1pt} \\
+  Ort/Datum & & Unterschrift
+\end{tabular}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

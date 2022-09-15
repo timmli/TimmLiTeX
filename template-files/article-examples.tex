@@ -1,0 +1,93 @@
+\section{Information about this template}
+
+More \LaTeX{} templates on \url{https://github.com/timmli/latex-templates}.
+
+\section{Examples}
+
+\subsection{Citation}
+
+Example for invoking citations: \cite{Bech:63}, \citet[291]{Bech:63}, \citep{Bech:63}, \citealt{Bech:63}
+
+References are stored in \texttt{references.bib}.
+
+\subsection{AVM}
+
+\avm{
+  \0 [ \type{eating} \\
+    actor & \1 \\ 
+    theme & \2 ]
+}
+
+\medskip
+
+\noindent $\Rightarrow$ \url{https://github.com/langsci/langsci-avm/blob/master/langsci-avm.pdf}
+
+\subsection{Linguistic examples}
+
+\ex. This is a simple example.
+
+\exg. [Noch am Boden liegend$_i$], sei [auf ihn$_i$] eingetreten worden.\\
+still on.the floor lying be on him PART.kicked got\\
+`While he was still on the floor he was kicked.'\\
+(Cf. (422) in \citealt{Mueller:02})
+
+\noindent $\Rightarrow$ \url{http://texdoc.net/texmf-dist/doc/latex/linguex/linguex-doc.pdf} \\
+Note the Leipzig glossing rules: \url{http://www.eva.mpg.de/lingua/resources/glossing-rules.php}
+
+\subsection{Formulae}
+
+Formulae in texts: $a^2 + b^2 = c^2$
+
+\noindent Formulae in equation environment:
+\begin{equation}
+a^2 + b^2 = c^2
+\end{equation}
+$\Rightarrow$ \url{http://en.wikibooks.org/wiki/LaTeX/Mathematics}
+
+\subsection{Tables}
+
+\begin{tabular}{c|c|c}
+\hline
+cell 11 & cell 12 & cell 13 \\
+\hline
+cell 21 & cell 22 & cell 23 \\
+\hline
+\end{tabular}
+
+\subsection{Trees}
+
+% \Forest{
+%   [S [NP] 
+%     [VP [V  [\textit{eats}] ]
+%       [NP] ]]
+% }
+
+%% This example may cause problems together with TeX Live 2016
+% \Forest{
+%   [,phantom
+%     [S,--> [NP,--> [D [the]]]]
+%     [S,--> [NP,--> [A [absent]]]]
+%     [S, [NP [N [student]]]]
+%     ]
+% } 
+
+\Forest{
+  [,phantom
+    [S,name=root,red subtree
+      [AUX [\textit{does}] ]
+      [S
+        [NP]
+        [VP,name=vp[V [\textit{say}]] [S*,name=foot]]]]
+    [S,Xs=5cm,Ys=2cm
+      [NP]
+      [S,name=s
+        [NP [$\varepsilon$] ]
+        [VP 
+          [VP [V [\textit{walks}]]] 
+          [PP]]]]
+    ]
+  \draw[->,gray,thick,dashed,bend right=10](root)to(s);
+  \draw[->,gray,thick,dashed,bend right=10](foot)to(s);
+}
+
+\noindent $\Rightarrow$ \url{http://mirrors.ctan.org/graphics/pgf/contrib/forest/forest-doc.pdf}

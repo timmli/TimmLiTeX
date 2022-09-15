@@ -1,0 +1,327 @@
+% File:    muss.bbx
+% Author:  Timm Lichte (http://timm-lichte.de)
+% Date:    2022-09-07T15:00:20+02:00
+% Version: 0.1 (tested with BibLaTeX v3.17)
+% License: 
+%
+% ----------------------------------
+% MUSS: Minimal Unified Style Sheet
+% ----------------------------------
+%
+% MUSS is a style sheet for BibLaTeX that seeks minimality in different ways:
+%
+% (1) Minimality of supported entry types: MUSS supports only a small set of entry types and
+%     fields that I consider most important in my field (natural language processing). 
+% (2) Minimality of backward compatiblity: MUSS will only be compatible with recent
+%     versions of BibLaTeX.
+% (3) Minimality of code: Because of (1) and (2), MUSS has a very slim codebase and is maximally
+%     self-contained. In fact, there is only *one* generic driver which is used for articles,
+%     books, etc.
+%
+% MUSS was heavily inspired by, but uses only certain characteristics of,
+%
+% - Unified Style Sheet (USS), a set of general style rules for references
+%   (see https://www.linguisticsociety.org/resource/unified-style-sheet)
+% - langsci-unified.bbx, an BibLaTeX implementation of the USS that is part of the
+%   langscibook class (see https://github.com/langsci/langscibook),
+%   and therefore also biblatex-unified.bbx, on which langsci-unified.bbx is based
+%   (see https://github.com/semprag/biblatex-sp-unified)
+%
+% MUSS comes with two files:
+%
+% - muss.bbx (this file) specifies the structure and formatting of entries in a list of references.
+% - muss.cbx specifies the look of cite commands in the text.
+%
+% List of currently supported entry types:
+% article, book, collection, incollection, inproceedings, manual, online, phdthesis,
+% techreport, thesis
+%
+% List of currently supported entry fields (depending on the entry type):
+% author, booksubtitle, booktitle, doi, edition, editor, institution, journal, note, number, pages,
+% publisher, school, subtitle, title, type, url, volume, year
+%
+% Yes, there is no address field; this is a deliberate decision.
+%
+
+\ProvidesFile{muss.bbx}
+
+% Set general options.
+\ExecuteBibliographyOptions{
+  sorting=nyt,                  % sorting in list of references: name --> year --> title
+  abbreviate,                   % use abbreviated strings in citations and in the bibliography
+  dateabbrev=false,             % do not abbreviate dates
+  useprefix=true,               % use name prefix (von, van, of, da, de, della, etc)
+  labeldateparts,               % provides special fields
+}
+
+% MUSS is derived from authoryear.bbx, which extends standard.bbx.
+\RequireBibliographyStyle{authoryear}
+
+% Set options defined in authoryear.
+\ExecuteBibliographyOptions{
+  dashed=false,                 % do not replace same list of authors with a dash
+  isbn=false,                   % do not use the isbn field
+  eprint=false                  % do not use the eprint field
+}
+
+\AtBeginBibliography{\sloppy}   % allow for sloppy line breaking
+
+
+%%%%%%%%%%%%%%%%%%%%%%%% 
+% Special strings
+%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\DefineBibliographyStrings{english}{%
+  edition          = {edn\adddot},
+  phdthesis        = {Doctoral dissertation},
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%% 
+% Special symbols
+%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\renewcommand*{\intitlepunct}{\addspace} % Remove colon from "In:".
+\renewcommand*{\subtitlepunct}{\addcolon\space} % Separate title and subtitle with a colon
+\renewcommand*{\finalnamedelim}{\addspace\&\addspace} % Use ampersand in name lists
+\renewcommand*{\finallistdelim}{\addspace\&\addspace} % Use ampersand in name lists
+% \renewcommand*{\finentrypunct}{} % Remove period from end of entry.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%% 
+% Field formats
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Display pages without page prefix (p., pp.)
+\DeclareFieldFormat{pages}{#1}
+
+% No quotes around titles (drivers have to be specified)
+\DeclareFieldFormat[article,inbook,incollection,inproceedings,patent,thesis,unpublished]{title}{#1}
+
+% The titles of books and theses are printed with italics.
+\DeclareFieldFormat[book,collection,thesis]{title}{\mkbibemph{#1}}
+
+% Put square brackets around note.
+\DeclareFieldFormat{note}{\mkbibbrackets{#1\isdot}}
+
+% The booktitles are printed with italics.
+\DeclareFieldFormat{booktitle}{\mkbibemph{#1}}
+
+\DeclareFieldFormat{doi}{%
+  \mkbibacro{DOI}\addcolon\space%
+  \ifhyperref%
+  {\href{https://doi.org/#1}{\nolinkurl{#1}}}%
+  {\nolinkurl{#1}}}%
+
+\DeclareFieldFormat{url}{%
+  \mkbibacro{URL}\addcolon\space%
+  \url{#1}}%
+
+%%%%%%%%%%%%%%%%%%%%%%%% 
+% Macros
+%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\newbibmacro*{muss:author}{%
+  \ifboolexpr{
+    test \ifuseauthor
+    and
+    not test {\ifnameundef{author}}
+  }
+  {\usebibmacro{bbx:savehash}%
+    \printnames{author}%
+  }                               
+  {\global\undef\bbx@lasthash
+    \usebibmacro{labeltitle}%
+  }     
+}
+
+\newbibmacro*{muss:booktitle}{%
+  \ifboolexpr{
+    test {\iffieldundef{booktitle}}
+    and
+    test {\iffieldundef{booksubtitle}}
+  }
+  {}
+  {\printtext[booktitle]{%
+      \printfield[titlecase]{booktitle}%
+      \setunit{\subtitlepunct}%
+      \printfield[titlecase]{booksubtitle}}%
+  }%
+  \printfield{booktitleaddon}}
+
+\newbibmacro*{muss:byeditor+others}{%
+  \ifnameundef{editor}
+  {}
+  {\printnames[byeditor]{editor}% don't swap name parts of first editor
+    \setunit{\addspace}%
+    \printtext[parens]{\usebibmacro{editor+othersstrg}}%  putting (ed.) or (eds.) after editors of books
+  }%
+}
+
+\newbibmacro*{muss:editor+others}{%
+  \ifnameundef{editor}
+  {}
+  {\printnames{editor}% swap name parts of first editor
+    \setunit{\addspace}%
+    \printtext[parens]{\usebibmacro{editor+othersstrg}}%  putting (ed.) or (eds.) after editors of books
+  }%
+}
+
+\newbibmacro*{muss:date+extradate}{%
+  \iffieldundef{labelyear}
+  {}
+  {\printtext{\printlabeldateextra}}% no parentheses around year
+}
+
+\newbibmacro*{muss:doi+url+publisher}{%
+  \iffieldundef{doi}
+  {\iffieldundef{url}
+    {\ifentrytype{article}
+      {}
+      {\printlist{publisher}}}
+    {\usebibmacro{url+urldate}}}
+  {\printfield{doi}}
+}%
+
+\newbibmacro*{muss:journal+volume+number+eid}{%
+  \usebibmacro{journal}%
+  \setunit*{\addspace}%
+  \printfield{volume}%
+  \printfield[parens]{number}%        parentheses instead of dot before issue number
+  \setunit{\addcomma\space}%
+  \printfield{eid}%
+}
+
+\newbibmacro*{muss:note}{%
+  \printfield{note}%
+}
+
+\newbibmacro*{muss:pages}{%
+  \printfield{pages}%
+}
+
+\newbibmacro*{muss:partof}{%
+  \ifentrytype{article}
+  {\usebibmacro{in:}%
+    \usebibmacro{muss:journal+volume+number+eid}%
+    \setunit{\addcomma\space}%
+    \usebibmacro{muss:pages}}% 
+  {}
+  \ifentrytype{inproceedings}
+  {\usebibmacro{in:}%
+    \usebibmacro{muss:booktitle}
+    \setunit{\addcomma\space}%
+    \usebibmacro{muss:pages}}% 
+  {}
+  \ifentrytype{incollection}
+  {\usebibmacro{in:}%
+    \ifnameundef{editor}
+    {\setunit{\addspace}}
+    {\usebibmacro{muss:byeditor+others}
+      \setunit{\addcomma\space}}
+    \usebibmacro{muss:booktitle}%
+    \setunit{\addcomma\space}%
+    \printfield{edition}%
+    \setunit{\addcomma\space}%
+    \usebibmacro{muss:pages}}%
+  {}
+  \ifboolexpr{
+    test {\ifentrytype{book}}
+    or
+    test {\ifentrytype{collection}}
+  }
+  {\printfield{edition}}
+  {}
+}
+
+\newbibmacro*{muss:thesistype+institution}{%
+  \printfield{type} at \printlist{institution}%
+}
+
+\newbibmacro*{muss:title}{%
+  \ifboolexpr{
+    test {\iffieldundef{title}}
+    and
+    test {\iffieldundef{subtitle}}
+  }
+  {}
+  {\printtext[title]{%
+      \printfield[titlecase]{title}%
+      \setunit{\subtitlepunct}%
+      \printfield[titlecase]{subtitle}}%
+  }
+  \printfield{titleaddon}}
+
+\newbibmacro*{muss:typeof}{%
+  \ifentrytype{thesis}
+  {\printtext[parens]{\usebibmacro{muss:thesistype+institution}}}
+  {}
+  \ifboolexpr{%
+    test {\ifentrytype{book}}
+    or
+    test {\ifentrytype{collection}}
+  }
+  {\iffieldundef{series}
+    {}
+    {\printtext[parens]{\usebibmacro{series+number}}}}
+  {}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%% 
+% Entry drivers
+%%%%%%%%%%%%%%%%%%%%%%%% 
+
+
+\DeclareBibliographyDriver{object}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \ifentrytype{collection}
+  {\usebibmacro{muss:editor+others}}
+  {\usebibmacro{muss:author}}
+  \newunit
+  \usebibmacro{muss:date+extradate}%
+  \setunit{\printdelim{nametitledelim}}%
+  \newblock%
+  \usebibmacro{muss:title}% booktitle is not considered here
+  \setunit{\addspace}%
+  \usebibmacro{muss:typeof}%
+  \newunit%
+  \usebibmacro{muss:partof}%
+  \newunit%
+  \usebibmacro{muss:doi+url+publisher}%
+  \newunit%
+  \usebibmacro{finentry}%
+  \usebibmacro{muss:note}%
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%% 
+% Entry aliases
+%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\DeclareBibliographyAlias{article}{object}
+\DeclareBibliographyAlias{inproceedings}{object}
+\DeclareBibliographyAlias{incollection}{object}
+\DeclareBibliographyAlias{thesis}{object}
+\DeclareBibliographyAlias{book}{object}
+\DeclareBibliographyAlias{online}{object}
+\DeclareBibliographyAlias{collection}{object} % TODO: editors
+
+\DeclareBibliographyAlias{phdthesis}{thesis}
+\DeclareBibliographyAlias{techreport}{book}
+\DeclareBibliographyAlias{manual}{book}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%% 
+% Constraints
+%%%%%%%%%%%%%%%%%%%%%%%% 
+
+% https://tex.stackexchange.com/a/283671/61499
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Archive
+%%%%%%%%%%%%%%%%%%%%%%%%
+
