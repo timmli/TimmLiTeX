@@ -1775,7 +1775,7 @@ Template for slides in the corporate design of the [[https://www.uni-bielefeld.d
 #+END_SRC
 
 #+NAME: beamerlogosBielefeld.tex
-#+BEGIN_SRC latex :noweb yes :tangle beamerlogosBielefeld.tex
+#+BEGIN_SRC latex :noweb yes :tangle template-files/beamerlogosBielefeld.tex
 \titlelogo{%
   \includegraphics[width=3.967cm, keepaspectratio=true]{template-files/graphics/UB-LiLi-logo.pdf}
 }
@@ -3402,19 +3402,7 @@ Example for invoking citations: \cite{Bech:63}, \citet[291]{Bech:63}, \citep{Bec
 References are stored in \texttt{references.bib}.
 #+END_SRC
 
-#+BEGIN_SRC latex :noweb yes :tangle text-templates/references.bib
-<<example-references.bib>>
-#+END_SRC
-
-#+BEGIN_SRC latex :noweb yes :tangle slides-templates/references.bib
-<<example-references.bib>>
-#+END_SRC
-
-#+BEGIN_SRC latex :noweb yes :tangle poster-templates/references.bib
-<<example-references.bib>>
-#+END_SRC
-
-#+BEGIN_SRC latex :noweb yes :tangle standalone-templates/references.bib
+#+BEGIN_SRC latex :noweb yes :tangle references.bib
 <<example-references.bib>>
 #+END_SRC
 
