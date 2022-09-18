@@ -16,8 +16,8 @@
 #+LATEX_CLASS: beamer
 #+LATEX_CLASS_OPTIONS: [compress,xcolor={table,dvipsnames},10pt,aspectratio=43]  
 #+LATEX_COMPILER: pdflatex
-#+LATEX_HEADER: \input{template-files/beamer-settings.tex}
-#+LATEX_HEADER: \input{template-files/myMacros}
+#+LATEX_HEADER: \input{beamer-settings.tex}
+#+LATEX_HEADER: \input{myMacros}
 #+LATEX_HEADER: \usetheme{Lustnau}
 #+LATEX_HEADER: \input{beamerlogosTuebingen}
 #+LANGUAGE:  en

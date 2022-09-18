@@ -8,10 +8,14 @@
 % SETTINGS
 %%%%%%%%%%%%%%%%%%%%%%%% 
 
+\newcommand{\settingsPath}[1]{#1}
+\newcommand{\graphicsPath}{}
+\newcommand{\packagesPath}{}
+
 \usepackage{datetime}
 
-\input{template-files/text-settings}
-
+\input{\settingsPath{text-settings}}
+  
 \AtBeginDocument{
   \selectlanguage{german} % which language is available depends on how babel is loaded
 }
@@ -20,7 +24,7 @@
 % Macros
 %%%%%%%%%%%%%% 
 
-\input{template-files/myMacros}   % the content of myMacros.tex goes here
+\input{{\settingsPath{myMacros}}   % the content of myMacros.tex goes here
 
 %%%%%%%%%%%%% 
 % Title

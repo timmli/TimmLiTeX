@@ -11,9 +11,9 @@
 #+LATEX_CLASS: tl-article 
 #+LATEX_CLASS_OPTIONS: [11pt,draft,twoside]
 #+LATEX_COMPILER: pdflatex
-#+LATEX_HEADER: \input{template-files/scrarticle-settings}
-#+LATEX_HEADER: \input{template-files/text-settings}
-#+LATEX_HEADER: \input{template-files/myMacros}
+#+LATEX_HEADER: \input{scrarticle-settings}
+#+LATEX_HEADER: \input{text-settings}
+#+LATEX_HEADER: \input{myMacros}
 # Just mention the link to the references file [[addbibresource:references.bib]] in order to make it available to org-ref but not override the default bibliography which is helpful when looking for references which are not yet included in the local bibliography. 
 :end:
 

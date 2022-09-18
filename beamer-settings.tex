@@ -35,7 +35,7 @@
 \usepackage[german,english]{babel} % the last language in the options is loaded; the other one can be chosen with \selectlanguage
 \usepackage{iflang}                % for language specific settings
 
-%% Trees and graphics
+\usepackage{etex} 
 \usepackage{graphics}
 
 %%%%%%%%%%%%%%%%%%%%%%
@@ -255,39 +255,123 @@
 }
 
 
-% \usepackage{arydshln} 		    % for dashed horizontal lines in tables (incompatible with avm)
-\usepackage{multirow}           % similar to \multicolumn
-
-%% Symbols
-\usepackage{latexsym,amsmath,amssymb,wasysym}
-\usepackage{marvosym}           % for thunderbolt symbol
-\usepackage{ulem}               % to cross out text
-\normalem
 \usepackage{url}
-\urlstyle{tt}                   % tt,rm,sf,same
+\usepackage{amsmath,amssymb,amsfonts,marvosym}
+\usepackage{ulem}			% to cross out text
+\normalem
 
-%% Linguistics
-\usepackage{tipa}	% for phonetic symbols; has to appear before fontspec
-\usepackage{linguex}
-\renewcommand{\firstrefdash}{}
+\usepackage{ragged2e}
+\let\raggedright=\RaggedRight
 
-%%%%%%%%%%%%%%%%%%%%%%
-%   AVM SETTINGS     % 
-%%%%%%%%%%%%%%%%%%%%%%
+% \usepackage{tipa}
+\usepackage{linguex}   % must be loaded below \usepackage[T1]{fontenc}
+\AtBeginDocument{
+  \setlength{\Exlabelsep}{0em}		% for linguex examples
+  \setlength{\SubExleftmargin}{1,5em}	% for linguex examples
+  \renewcommand\eachwordone{\sffamily}	% for glossing with linguex
+  \renewcommand\eachwordtwo{\sffamily}	% for glossing with linguex
+  % \setlength{\Extopsep}{1ex}   % vertical margin in linguex examples
+}
 
-\usepackage{template-files/packages/langsci-avm}
+\usepackage{packages/langsci-avm}
+
+%%%%%%%%%%%%%%%%%%%%%%%% 
+%  LISTINGS SETTINGS   % 
+%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\usepackage{listings}
+
+\lstset{basicstyle=\ttfamily,tabsize=2,breaklines=true}
+\usepackage{color}
+\definecolor{lightgray}{gray}{0.7}
+
+\lstnewenvironment{xmg}{%
+  \lstset{language=,
+    numbers=left,numbersep=8pt,numberstyle=\color{lightgray},
+    % frame=l,
+    basicstyle=\small\ttfamily,%
+    xleftmargin=0.7cm,framexleftmargin=12pt,%
+    framerule=0.5mm,rulecolor=\color{lightgray},%
+    escapeinside={|\%}{\%|},%
+    commentstyle=\color{lightgray},
+    literate={->}{{{\textbf{->}}}}1 {<-}{{{\textbf{<-}}}}1 {\{}{{{\textbf{\{}}}}1 {\}}{{{\textbf{\}}}}}1 {\;}{{{\textbf{;}}}}1 {|}{{{\textbf{|}}}}1 {=}{{{\textbf{=}}}}1 {[}{{{\textbf{[}}}}1 {]}{{{\textbf{]}}}}1 {<}{{{\textbf{<}}}}1 {>}{{{\textbf{>}}}}1 {!}{{{\textbf{!}}}}1 {?}{{{\textbf{?}}}}1 {*=}{{{\textbf{*=}}}}1,% 
+    morekeywords={node,type,feature,iface,include,class,import,export,declare,syn,sem,value, use, with, dims,frame,morph,lemma,morpho,fam,entry}
+  }}{}
+
+\lstdefinestyle{xmg}{
+  % keywordstyle = \color{HHUblue}\bfseries,
+  % stringstyle=\color{red}\ttfamily,
+  commentstyle=\color{lightgray},
+  literate={->}{{{\textbf{->}}}}1 {<-}{{{\textbf{<-}}}}1 {\{}{{{\textbf{\{}}}}1 {\}}{{{\textbf{\}}}}}1 {\;}{{{\textbf{;}}}}1 {|}{{{\textbf{|}}}}1 {=}{{{\textbf{=}}}}1 {[}{{{\textbf{[}}}}1 {]}{{{\textbf{]}}}}1 {<}{{{\textbf{<}}}}1 {>}{{{\textbf{>}}}}1 {!}{{{\textbf{!}}}}1 {?}{{{\textbf{?}}}}1 {*=}{{{\textbf{*=}}}}1  {'c}{{\'c}}1,% 
+  morekeywords={node,type,feature,iface,include,class,import,export,declare,syn,sem,value, use, with, dims,frame,morph,lemma,morpho,fam,entry}
+}
+
+\lstnewenvironment{duelme}{%
+  \lstset{language=,
+    numbers=left,numbersep=8pt,numberstyle=\color{lightgray},
+    % frame=l,
+    basicstyle=\small\ttfamily,%
+    xleftmargin=0.7cm,framexleftmargin=12pt,%
+    framerule=0.5mm,rulecolor=\color{lightgray},%
+    escapeinside={|\%}{\%|},%
+    commentstyle=\color{lightgray},     morekeywords={PATERN,NAME,POS,PATTERN,MAPPING,EXAMPLE,MWE,SENTENCE,DESCRIPTION,COMMENT,LISTA,LISTB,SUBJECT,OBJECT,MODIFIER,RPRON,CONJUGATION,POLARITY,EXPRESSION,CL}}}{}
+
+\lstnewenvironment{patr-listing}{%
+  \lstset{language=,
+    numbers=left,numbersep=8pt,numberstyle=\color{lightgray},
+    % frame=l,
+    basicstyle=\small\ttfamily,%
+    xleftmargin=0.7cm,framexleftmargin=12pt,%
+    framerule=0.5mm,rulecolor=\color{lightgray},%
+    escapeinside={|\%}{\%|},%
+    commentstyle=\color{lightgray},
+    literate={:}{{{\textbf{:}}}}1 {\{}{{{\textbf{\{}}}}1 {\}}{{{\textbf{\}}}}}1 {=}{{{\textbf{=}}}}1 {[}{{{\textbf{[}}}}1 {]}{{{\textbf{]}}}}1 {<}{{{\textbf{<}}}}1 {>}{{{\textbf{>}}}}1 {!}{{{\textbf{!}}}}1, 
+    morekeywords={Define,as,Word}}}{}
 
 
+\newcommand{\ixmg}{%
+  \lstinline[language=,keepspaces,%
+    literate={->}{{{\textbf{->}}}}1 {\{}{{{\textbf{\{}}}}1 {\}}{{{\textbf{\}}}}}1 {\;}{{{\textbf{;}}}}1 {|}{{{\textbf{|}}}}1 {=}{{{\textbf{=}}}}1 {[}{{{\textbf{[}}}}1 {]}{{{\textbf{]}}}}1 {<}{{{\textbf{<}}}}1 {>}{{{\textbf{>}}}}1 {!}{{{\textbf{!}}}}1 {?}{{{\textbf{?}}}}1 {*=}{{{\textbf{*=}}}}1,%
+    morekeywords={node,type,feature,include,class,import,export,declare,syn,sem,frame,morph,value, use, with, dims}
+    ]}
 
-% \usepackage[inference]{semantic} % for CCG 
-% \usepackage{packages/ccg}
+% \lstset{
+% basicstyle=\small\ttfamily,       
+%   % stepnumber=1,
+% tabsize=2,
+% breaklines=true,
+% linewidth=\textwidth,
+% escapeinside={<ESC>}{</ESC>},
+%   % prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\rhookswarrow}},
+%   % postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\rcurvearrowse\space}}
+% }           
+
+%   \lstnewenvironment{xmg}{%
+%   \lstset{
+%   language=,
+%   frame=l,
+%   basicstyle=\normalsize\ttfamily,%
+%   xleftmargin=0.6cm,framexleftmargin=0.3cm,%
+%   framerule=0.5mm,rulecolor=\color{lightgray},%
+%   escapeinside={<ESC>}{</ESC>},%
+%   commentstyle=\color{lightgray},
+%   literate={->}{{{\textbf{->}}}}1 {\{}{{{\textbf{\{}}}}1 {\}}{{{\textbf{\}}}}}1 {\;}{{{\textbf{;}}}}1 {|}{{{\textbf{|}}}}1 {=}{{{\textbf{=}}}}1 {[}{{{\textbf{[}}}}1 {]}{{{\textbf{]}}}}1 {<}{{{\textbf{<}}}}1 {>}{{{\textbf{>}}}}1 {!}{{{\textbf{!}}}}1 {?}{{{\textbf{?}}}}1 {*=}{{{\textbf{*=}}}}1,% 
+%   morekeywords={node,type,feature,include,class,import,export,declare,syn,sem,value, use, with, dims,frame,morph}}}{}
+
+%   \newcommand{\ixmg}{%
+%   \lstinline[language=,keepspaces,%
+%   literate={->}{{{\textbf{->}}}}1 {\{}{{{\textbf{\{}}}}1 {\}}{{{\textbf{\}}}}}1 {\;}{{{\textbf{;}}}}1 {|}{{{\textbf{|}}}}1 {=}{{{\textbf{=}}}}1 {[}{{{\textbf{[}}}}1 {]}{{{\textbf{]}}}}1 {<}{{{\textbf{<}}}}1 {>}{{{\textbf{>}}}}1 {!}{{{\textbf{!}}}}1 {?}{{{\textbf{?}}}}1 {*=}{{{\textbf{*=}}}}1,%
+%   morekeywords={node,type,feature,include,class,import,export,declare,syn,sem,value, use, with, dims,frame,morph}
+%   ]}
+
+%% Bibliography
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 %   BIBLATEX SETTINGS  % 
 %%%%%%%%%%%%%%%%%%%%%%%%
 
-\newcommand{\mycitestyle}{template-files/muss}
-\newcommand{\mybibstyle}{template-files/muss}
+\newcommand{\mycitestyle}{muss}
+\newcommand{\mybibstyle}{muss}
 
 \makeatletter
 \@ifclassloaded{beamer}{\renewcommand{\mycitestyle}{numeric-comp}}{}
@@ -452,30 +536,30 @@
 \let\citet=\cite
 \newcommand{\citeauthoryear}[1]{\citeauthor{#1} (\citeyear{#1})}
 \newcommand{\citealtauthoryear}[1]{\citeauthor{#1} \citeyear{#1}}
- 
+
+
+%% BibTeX 
+% \input{settings/natbib_bibtex_setup.tex} 
+% \PassOptionsToPackage{round}{natbib}
+% \renewcommand{\newblock}{}    % to make natbib compatible with beamer
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
-%   HYBPERREF SETTINGS  % 
+%   TEXTPOS SETTINGS    % 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 
-\usepackage[bookmarks=true,bookmarksopen=true,%
-  hyperindex=true,%
-  breaklinks=true,
-  draft=false,plainpages=false,
-  pdfauthor={},%
-  pdfkeywords={},%
-  ]{hyperref}
-\hypersetup{colorlinks=false, pdfborder={0 0 0}}
+\usepackage{calc}
+\usepackage[absolute,overlay]{textpos}
+\setlength{\TPHorizModule}{1em}
+\setlength{\TPVertModule}{1ex}
 
-\IfLanguageName{english}{
-  \renewcommand{\chapterautorefname}{Chapter}%
-  \renewcommand{\figureautorefname}{Figure}%
-  \renewcommand{\tableautorefname}{Table}%
-  \renewcommand{\sectionautorefname}{Section}%
-  \renewcommand{\subsectionautorefname}{Section}%
-  \renewcommand{\subsubsectionautorefname}{Section}%
-  \renewcommand{\Hfootnoteautorefname}{Footnote}%
-}{}
+\newlength{\textposOriginH}
+\newlength{\textposOriginV}
+\setlength{\textposOriginH}{10mm}
+\setlength{\textposOriginV}{10mm}
+\textblockorigin{\textposOriginH}{\textposOriginV}
 
-%% for blindtext
-\usepackage{lipsum}
+\newcommand{\freeblock}[2]{
+  \begin{textblock}{0.1}(#1)
+  #2
+  \end{textblock}
+}

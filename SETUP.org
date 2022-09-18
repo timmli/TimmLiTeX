@@ -78,6 +78,15 @@ In order to compile these templates, press =C-c C-v t= , or evaluate the followi
 
 * Document templates
 
+** COMMENT Path settings
+
+#+NAME: path-settings
+#+BEGIN_SRC latex
+\newcommand{\settingsPath}[1]{#1}
+\newcommand{\graphicsPath}[1]{graphics/#1}
+\newcommand{\packagesPath}[1]{packages/#1}
+#+END_SRC
+
 ** Abschlussarbeit template
 
 #+NAME: abschlussarbeit-template
@@ -94,7 +103,7 @@ In order to compile these templates, press =C-c C-v t= , or evaluate the followi
 
 \usepackage{datetime}
 
-\input{template-files/text-settings}
+\input{text-settings}
 
 \AtBeginDocument{
   \selectlanguage{german} % which language is available depends on how babel is loaded
@@ -137,7 +146,7 @@ In order to compile these templates, press =C-c C-v t= , or evaluate the followi
 \tableofcontents
 \mainmatter 
 
-\input{template-files/abschlussarbeit-examples}
+\input{abschlussarbeit-examples}
 
 \chapter{Blindtext}
 
@@ -374,7 +383,7 @@ This is an abstract: \lipsum[1]
 
 % TODO
 
-\input{template-files/article-examples}
+\input{article-examples}
 
 \section{Blindtext}
 
@@ -578,7 +587,7 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 %}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\input{template-files/beamer-examples.tex}
+\input{beamer-examples.tex}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \begin{frame}[plain,allowframebreaks]
 \frametitle{}
@@ -641,7 +650,7 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 \tableofcontents
 \mainmatter
 
-\input{template-files/book-examples}
+\input{book-examples}
 
 \chapter{Blindtext}
 
@@ -682,8 +691,8 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 % SETTINGS
 %%%%%%%%%%%%%%%%%%%%%%%% 
 
-\input{template-files/scrarticle-settings.tex}
-\input{template-files/text-settings}
+\input{scrarticle-settings.tex}
+\input{text-settings}
 
 \AtBeginDocument{
   \selectlanguage{german} % which language is available depends on how babel is loaded
@@ -722,7 +731,7 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 \tableofcontents
 \newpage
 
-\input{template-files/hausarbeit-examples.tex}
+\input{hausarbeit-examples.tex}
 
 \section{Blindtext}
 
@@ -764,7 +773,7 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
   dvipsnames,
 	]{tikzposter} 
 
-\input{template-files/poster-settings}
+\input{poster-settings}
 
 <<myMacros-input>>
 
@@ -786,7 +795,7 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 \author{Author Name(s)\affilsup{1}}
 \institute{\affilsup{1}Affiliation}
 
-\titlegraphic{\hspace*{1cm}\raisebox{0ex}{\includegraphics[width=5cm]{template-files/graphics/sfb-logo-quer.pdf}}\hspace{36cm}\raisebox{0ex}{\includegraphics[width=10cm]{template-files/graphics/hhu-logo-hres.pdf}}} 
+\titlegraphic{\hspace*{1cm}\raisebox{0ex}{\includegraphics[width=5cm]{graphics/sfb-logo-quer.pdf}}\hspace{36cm}\raisebox{0ex}{\includegraphics[width=10cm]{graphics/hhu-logo-hres.pdf}}} 
 
 \settitle{
 	\centering
@@ -801,7 +810,7 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 %   POSTERSTYLE      % 
 %%%%%%%%%%%%%%%%%%%%%%
 
-\input{template-files/poster-style}
+\input{poster-style}
 \tikzposterlatexaffectionproofoff
 
 \defineblockstyle{greybox}{}{
@@ -833,7 +842,7 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   Block text
 }
-\input{template-files/poster-examples}
+\input{poster-examples}
 
 \begin{columns} 
 
@@ -919,9 +928,9 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 <<langsci-avm-settings>>
 
 % \usepackage[inference]{semantic} % for CCG 
-% \usepackage{template-files/packages/ccg}
+% \usepackage{packages/ccg}
 
-% \input{template-files/myMacros}
+% \input{myMacros}
 
 \begin{document}
 
@@ -941,7 +950,7 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 https://langsci-press.org/
 
 #+NAME: langsci-paper-template-org
-#+BEGIN_SRC org :noweb yes :tangle templates/langscibook-template/langsci-paper-template.org
+#+BEGIN_SRC org :noweb yes :tangle langscibook-template/langsci-paper-template.org
 ,#+TITLE: Title of paper
 ,#+AUTHOR: John Doe\affiliation{Elfenbeinturm, Fantasien}
 :Settings:
@@ -1044,7 +1053,7 @@ Remember to first add the class [[https://github.com/langsci/latex][langscibook]
 http://jlm.ipipan.waw.pl/index.php/JLM
 
 #+NAME: jlm-article-template-org
-#+BEGIN_SRC org :noweb yes :tangle templates/jlm-template/jlm-article-template.org
+#+BEGIN_SRC org :noweb yes :tangle jlm-template/jlm-article-template.org
 ,#+TITLE: Title of article
 ,#+LATEX_HEADER: \titlerunning{Title in header line}
 ,#+AUTHOR: Auhthor name
@@ -1364,35 +1373,35 @@ Local Beamer themes are executed relative to the directory of the master file. T
 #+NAME: beamerlogosTuebingen.tex
 #+BEGIN_SRC latex :noweb yes :tangle beamerlogosTuebingen.tex
 \titlelogo{%
-  \includegraphics[width=3.967cm, keepaspectratio=true]{template-files/graphics/UT-logo.pdf}
+  \includegraphics[width=3.967cm, keepaspectratio=true]{graphics/UT-logo.pdf}
   \hskip0.4cm 
   %% Trajan
   \begin{minipage}[t]{0.5\textwidth}
   \vskip-0.95cm
-  \includegraphics[width=5.75cm, keepaspectratio=true]{template-files/graphics/UT-MNF-FBI-logo.pdf}
+  \includegraphics[width=5.75cm, keepaspectratio=true]{graphics/UT-MNF-FBI-logo.pdf}
   \end{minipage}%
 }
 
 %% Old version with relative measures
 % \titlelogo{%
-% \includegraphics[width=.31\paperwidth, keepaspectratio=true]{template-files/graphics/UT-logo.pdf}
+% \includegraphics[width=.31\paperwidth, keepaspectratio=true]{graphics/UT-logo.pdf}
 % \hskip0.4cm 
 %   %% Trajan
 % \begin{minipage}[t]{0.5\textwidth}
 % \vskip-0.104\paperheight
-% \includegraphics[width=.45\paperwidth, keepaspectratio=true]{template-files/graphics/UT-MNF-FBI-logo.pdf}
+% \includegraphics[width=.45\paperwidth, keepaspectratio=true]{graphics/UT-MNF-FBI-logo.pdf}
 % \end{minipage}%
 %   %% Trajan + Arial
 %   % \begin{minipage}[t]{0.5\textwidth}
 %   % \setlength{\baselineskip}{11pt}
 %   % \vskip-0.108\paperheight
-%   % \includegraphics[width=.45\paperwidth, keepaspectratio=true]{template-files/graphics/UT-MNF-logo.pdf}\newline
+%   % \includegraphics[width=.45\paperwidth, keepaspectratio=true]{graphics/UT-MNF-logo.pdf}\newline
 %   % \upshape\sffamily\color{UTred}\fontsize{7}{10}\selectfont\textbf{Fachbereich Informatik}
 %   % \end{minipage}%
 % }
 
 \headlinelogo{%
-  \includegraphics[width=2.52cm, keepaspectratio=true]{template-files/graphics/UT-logo.pdf}
+  \includegraphics[width=2.52cm, keepaspectratio=true]{graphics/UT-logo.pdf}
 }      
 
 \RequirePackage{lipsum}
@@ -1449,7 +1458,7 @@ Local Beamer themes are executed relative to the directory of the master file. T
 ** Duesseldorf
 
 #+NAME: beamerthemeDuesseldorf.sty
-#+BEGIN_SRC latex :noweb yes :tangle template-files/beamerthemeDuesseldorf.sty
+#+BEGIN_SRC latex :noweb yes :tangle beamerthemeDuesseldorf.sty
 \mode<presentation>
 
 \usepackage{libertine} % libertine tends to cause problems, e.g. when using tipa
@@ -1525,9 +1534,9 @@ Local Beamer themes are executed relative to the directory of the master file. T
 #+END_SRC
 
 #+NAME: beamerlogosDuesseldorf.tex
-#+BEGIN_SRC latex :noweb yes :tangle template-files/beamerlogosDuesseldorf.tex
+#+BEGIN_SRC latex :noweb yes :tangle beamerlogosDuesseldorf.tex
 \titlegraphic{%
-  \includegraphics[height=1cm]{template-files/graphics/HHU-logo}%
+  \includegraphics[height=1cm]{graphics/HHU-logo}%
 }
 #+END_SRC
 
@@ -1536,7 +1545,7 @@ Local Beamer themes are executed relative to the directory of the master file. T
 Template for slides in the corporate design of the [[https://www.uni-bielefeld.de/][University of Bielefeld]] (Faculty of Literature and Language). 
 
 #+NAME: beamerthemeBielefeld.sty
-#+BEGIN_SRC latex :noweb yes :tangle template-files/beamerthemeBielefeld.sty
+#+BEGIN_SRC latex :noweb yes :tangle beamerthemeBielefeld.sty
 \mode<presentation>
 
 %% Requirement
@@ -1568,7 +1577,7 @@ Template for slides in the corporate design of the [[https://www.uni-bielefeld.d
 #+END_SRC
 
 #+NAME: beamercolorthemeBielefeld.sty
-#+BEGIN_SRC latex :noweb yes :tangle template-files/beamercolorthemeBielefeld.sty
+#+BEGIN_SRC latex :noweb yes :tangle beamercolorthemeBielefeld.sty
 \mode<presentation>
 
 \definecolor{UBred}{RGB}{220,90,90} 
@@ -1615,7 +1624,7 @@ Template for slides in the corporate design of the [[https://www.uni-bielefeld.d
 #+END_SRC
 
 #+NAME: beamerinnerthemeBielefeld.sty
-#+BEGIN_SRC latex :noweb yes :tangle template-files/beamerinnerthemeBielefeld.sty
+#+BEGIN_SRC latex :noweb yes :tangle beamerinnerthemeBielefeld.sty
 \mode<presentation>
 
 %% General settings
@@ -1692,7 +1701,7 @@ Template for slides in the corporate design of the [[https://www.uni-bielefeld.d
 #+END_SRC
 
 #+NAME: beamerouterthemeBielefeld.sty
-#+BEGIN_SRC latex :noweb yes :tangle template-files/beamerouterthemeBielefeld.sty
+#+BEGIN_SRC latex :noweb yes :tangle beamerouterthemeBielefeld.sty
 \mode<presentation>
 
 \setbeamertemplate{navigation symbols}{}
@@ -1775,31 +1784,31 @@ Template for slides in the corporate design of the [[https://www.uni-bielefeld.d
 #+END_SRC
 
 #+NAME: beamerlogosBielefeld.tex
-#+BEGIN_SRC latex :noweb yes :tangle template-files/beamerlogosBielefeld.tex
+#+BEGIN_SRC latex :noweb yes :tangle beamerlogosBielefeld.tex
 \titlelogo{%
-  \includegraphics[width=3.967cm, keepaspectratio=true]{template-files/graphics/UB-LiLi-logo.pdf}
+  \includegraphics[width=3.967cm, keepaspectratio=true]{graphics/UB-LiLi-logo.pdf}
 }
 
 %% Old version with relative measures
 % \titlelogo{%
-% \includegraphics[width=.31\paperwidth, keepaspectratio=true]{template-files/graphics/UT-logo.pdf}
+% \includegraphics[width=.31\paperwidth, keepaspectratio=true]{graphics/UT-logo.pdf}
 % \hskip0.4cm 
 %   %% Trajan
 % \begin{minipage}[t]{0.5\textwidth}
 % \vskip-0.104\paperheight
-% \includegraphics[width=.45\paperwidth, keepaspectratio=true]{template-files/graphics/UT-MNF-FBI-logo.pdf}
+% \includegraphics[width=.45\paperwidth, keepaspectratio=true]{graphics/UT-MNF-FBI-logo.pdf}
 % \end{minipage}%
 %   %% Trajan + Arial
 %   % \begin{minipage}[t]{0.5\textwidth}
 %   % \setlength{\baselineskip}{11pt}
 %   % \vskip-0.108\paperheight
-%   % \includegraphics[width=.45\paperwidth, keepaspectratio=true]{template-files/graphics/UT-MNF-logo.pdf}\newline
+%   % \includegraphics[width=.45\paperwidth, keepaspectratio=true]{graphics/UT-MNF-logo.pdf}\newline
 %   % \upshape\sffamily\color{UTred}\fontsize{7}{10}\selectfont\textbf{Fachbereich Informatik}
 %   % \end{minipage}%
 % }
 
 \headlinelogo{%
-  \includegraphics[width=2.52cm, keepaspectratio=true]{template-files/graphics/UB-LiLi-logo.pdf}
+  \includegraphics[width=2.52cm, keepaspectratio=true]{graphics/UB-LiLi-logo.pdf}
 }      
 
 \RequirePackage{lipsum}
@@ -1812,11 +1821,11 @@ Template for slides in the corporate design of the [[https://www.uni-bielefeld.d
 
 Some templates require it to have the tikz settings in a separate sty-file.
 
-#+BEGIN_SRC latex :noweb yes :tangle templates/jlm-template/packages/tikz-settings.sty
+#+BEGIN_SRC latex :noweb yes :tangle jlm-template/packages/tikz-settings.sty
 <<tikz-settings.sty>>
 #+END_SRC
 
-#+BEGIN_SRC latex :noweb yes :tangle templates/langscibook-template/packages/tikz-settings.sty
+#+BEGIN_SRC latex :noweb yes :tangle langscibook-template/packages/tikz-settings.sty
 <<tikz-settings.sty>>
 #+END_SRC
 
@@ -1910,10 +1919,10 @@ aspectratio=169,
 
 #+NAME: beamer-settings
 #+BEGIN_SRC latex
-\input{template-files/beamer-settings.tex}
+\input{beamer-settings.tex}
 #+END_SRC
 
-#+BEGIN_SRC latex :noweb yes :tangle template-files/beamer-settings.tex
+#+BEGIN_SRC latex :noweb yes :tangle beamer-settings.tex
 <<pdflatex-settings>>
 
 \usepackage{etex} 
@@ -1941,7 +1950,7 @@ aspectratio=169,
   % \setlength{\Extopsep}{1ex}   % vertical margin in linguex examples
 }
 
-\usepackage{template-files/packages/langsci-avm}
+\usepackage{packages/langsci-avm}
 
 <<listings-settings>>
 
@@ -1979,11 +1988,11 @@ numbers=noenddot,
 
 #+NAME: text-settings-input
 #+BEGIN_SRC latex :noweb yes :tangle no
-\input{template-files/text-settings}
+\input{text-settings}
 #+END_SRC
 
 #+NAME: text-settings
-#+BEGIN_SRC latex :noweb yes :tangle template-files/text-settings.tex
+#+BEGIN_SRC latex :noweb yes :tangle text-settings.tex
 <<pdflatex-settings>>
 
 %% Trees and graphics
@@ -2026,7 +2035,7 @@ numbers=noenddot,
 ** Poster settings
 
 #+NAME: poster-settings
-#+BEGIN_SRC latex :noweb yes :tangle template-files/poster-settings.tex
+#+BEGIN_SRC latex :noweb yes :tangle poster-settings.tex
 %%%%%%%%%%%%%%%%%%%%%%
 %   FONT             % 
 %%%%%%%%%%%%%%%%%%%%%%
@@ -2049,7 +2058,7 @@ numbers=noenddot,
 %%%%%%%%%%%%%%%%%%%%%%
 
 \usepackage{xcolor,enumitem}
-\usepackage{linguex,template-files/packages/langsci-avm} 
+\usepackage{linguex,packages/langsci-avm} 
 \usepackage{amsmath,amssymb,amsfonts,marvosym}
 \usepackage{ulem}			% to cross out text
 \normalem
@@ -2065,7 +2074,7 @@ numbers=noenddot,
 #+END_SRC
 
 #+NAME: poster-style
-#+BEGIN_SRC latex :noweb yes :tangle template-files/poster-style.tex
+#+BEGIN_SRC latex :noweb yes :tangle poster-style.tex
 %\usetheme{Basic}	% Default, Rays, Basic, Simple, Envelope, Wave, Board, Autumn, and Desert
 
 \usetitlestyle[
@@ -2336,7 +2345,7 @@ numbers=noenddot,
 %   AVM SETTINGS     % 
 %%%%%%%%%%%%%%%%%%%%%%
 
-\usepackage{template-files/packages/langsci-avm}
+\usepackage{packages/langsci-avm}
 
 
 #+END_SRC
@@ -2380,8 +2389,8 @@ numbers=noenddot,
 %   BIBLATEX SETTINGS  % 
 %%%%%%%%%%%%%%%%%%%%%%%%
 
-\newcommand{\mycitestyle}{template-files/muss}
-\newcommand{\mybibstyle}{template-files/muss}
+\newcommand{\mycitestyle}{muss}
+\newcommand{\mybibstyle}{muss}
 
 \makeatletter
 \@ifclassloaded{beamer}{\renewcommand{\mycitestyle}{numeric-comp}}{}
@@ -2717,11 +2726,11 @@ numbers=noenddot,
 
 #+NAME: scrarticle-settings-input
 #+BEGIN_SRC latex :noweb yes :tangle no
-\input{template-files/scrarticle-settings}
+\input{scrarticle-settings}
 #+END_SRC
 
 #+NAME: scrarticle-settings
-#+BEGIN_SRC latex :noweb yes :tangle template-files/scrarticle-settings.tex
+#+BEGIN_SRC latex :noweb yes :tangle scrarticle-settings.tex
 \usepackage{datetime}
 \usepackage{ifdraft}
 
@@ -2913,13 +2922,13 @@ numbers=noenddot,
 
 * myMacros
 
-#+BEGIN_SRC latex :noweb yes :tangle template-files/myMacros.tex
+#+BEGIN_SRC latex :noweb yes :tangle myMacros.tex
 <<myMacros.tex>>
 #+END_SRC
 
 #+NAME: myMacros-input
 #+BEGIN_SRC latex :noweb yes :tangle no
-\input{template-files/myMacros}
+\input{myMacros}
 #+END_SRC
 
 #+NAME: myMacros.tex
@@ -3037,14 +3046,14 @@ numbers=noenddot,
 ** Text
 
 #+NAME: abschlussarbeit-examples
-#+BEGIN_SRC latex :noweb yes :tangle template-files/abschlussarbeit-examples.tex
+#+BEGIN_SRC latex :noweb yes :tangle abschlussarbeit-examples.tex
 
 <<book-examples>>
 
 #+END_SRC
 
 #+NAME: hausarbeit-examples
-#+BEGIN_SRC latex :noweb yes :tangle template-files/hausarbeit-examples.tex
+#+BEGIN_SRC latex :noweb yes :tangle hausarbeit-examples.tex
 
 <<article-examples>>
 
@@ -3066,14 +3075,14 @@ Insbesondere versichere ich, dass ich alle wörtlichen und sinngemäßen Überna
 #+END_SRC
 
 #+NAME: abstract-examples
-#+BEGIN_SRC latex :noweb yes :tangle template-files/abstract-examples.tex
+#+BEGIN_SRC latex :noweb yes :tangle abstract-examples.tex
 
 <<example-citations>>
 
 #+END_SRC
 
 #+NAME: article-examples
-#+BEGIN_SRC latex :noweb yes :tangle template-files/article-examples.tex
+#+BEGIN_SRC latex :noweb yes :tangle article-examples.tex
 
 \section{Information about this template}
 
@@ -3109,7 +3118,7 @@ Insbesondere versichere ich, dass ich alle wörtlichen und sinngemäßen Überna
 #+END_SRC
 
 #+NAME: book-examples
-#+BEGIN_SRC latex :noweb yes :tangle template-files/book-examples.tex
+#+BEGIN_SRC latex :noweb yes :tangle book-examples.tex
 
 \chapter{Information about this template}
 
@@ -3146,7 +3155,7 @@ Insbesondere versichere ich, dass ich alle wörtlichen und sinngemäßen Überna
 ** Beamer
 
 #+NAME: beamer-examples
-#+BEGIN_SRC latex :noweb yes :tangle template-files/beamer-examples.tex
+#+BEGIN_SRC latex :noweb yes :tangle beamer-examples.tex
 \begin{frame}
   \frametitle{About the template}
   
@@ -3272,7 +3281,7 @@ A TUCO derivation:\newline
   \begin{columns}
     \column{.55\textwidth}
     First column
-		\pgfimage[width=\textwidth]{template-files/graphics/HHU-logo}
+		\pgfimage[width=\textwidth]{graphics/HHU-logo}
     \column{.45\textwidth}
 		Second column
     \begin{enumerate}
@@ -3516,7 +3525,7 @@ $\Rightarrow$ \url{http://en.wikibooks.org/wiki/LaTeX/Mathematics}
 ** Poster
 
 #+NAME: poster-examples
-#+BEGIN_SRC latex :noweb yes :tangle template-files/poster-examples.tex
+#+BEGIN_SRC latex :noweb yes :tangle poster-examples.tex
 <<example-poster-notes>>
 #+END_SRC
 
@@ -3537,10 +3546,10 @@ $\Rightarrow$ \url{http://en.wikibooks.org/wiki/LaTeX/Mathematics}
 	,varwidth=\maxdimen
 	]{standalone}
 
-\input{template-files/pdflatex_setup.tex}
-\input{template-files/tikz_setup.tex}
-\input{template-files/forest_setup.tex}
-\input{template-files/avm_setup.tex}
+\input{pdflatex_setup.tex}
+\input{tikz_setup.tex}
+\input{forest_setup.tex}
+\input{avm_setup.tex}
 
 \begin{document}
 
@@ -3624,7 +3633,7 @@ cell 21 & cell 22 & cell 23 \\
 
 * Makefile
 
-** Beamer Makefile
+** COMMENT Beamer Makefile
 
 #+NAME: beamer-makefile
 #+BEGIN_SRC makefile :noweb yes :tangle templates/beamer-template/Makefile
@@ -3665,7 +3674,7 @@ release_beamer:
 	rm -fr temp
 #+END_SRC
 
-** Poster Makefile
+** COMMENT Poster Makefile
 
 #+NAME: poster-makefile
 #+BEGIN_SRC makefile :noweb yes :tangle templates/poster-template/Makefile
@@ -3706,7 +3715,7 @@ release_poster:
 	rm -fr temp
 #+END_SRC
 
-** Teaching Makefile
+** COMMENT Teaching Makefile
 
 #+NAME: teaching-makefile
 #+BEGIN_SRC makefile :noweb yes :tangle templates/teaching-template/Makefile
@@ -3769,7 +3778,7 @@ release_all: release_abschlussarbeit release_hausarbeit
 test_all: test_abschlussarbeit test_hausarbeit
 #+END_SRC
 
-** Text Makefile
+** COMMENT Text Makefile
 
 #+NAME: text-makefile
 #+BEGIN_SRC makefile :noweb yes :tangle templates/text-template/Makefile
@@ -3884,7 +3893,7 @@ test_all: test_abstract test_article test_book
 ** JLM Makefile
 
 #+NAME: jlm-makefile
-#+BEGIN_SRC makefile :noweb yes :tangle templates/jlm-template/Makefile
+#+BEGIN_SRC makefile :noweb yes :tangle jlm-template/Makefile
 SHELL := /bin/bash
 
 JLM_FILES =  myMacros.tex \
@@ -3909,7 +3918,7 @@ release_jlm:
 ** Langscibook Makefile
 
 #+NAME: langscibook-makefile
-#+BEGIN_SRC makefile :noweb yes :tangle templates/langscibook-template/Makefile
+#+BEGIN_SRC makefile :noweb yes :tangle langscibook-template/Makefile
 SHELL := /bin/bash
 
 LANGSCI_FILES =  myMacros.tex \
@@ -3949,7 +3958,7 @@ release_langscibook:
 
 #+END_SRC
 
-** Standalone Makefile
+** COMMENT Standalone Makefile
 
 #+NAME: standalone-makefile
 #+BEGIN_SRC makefile :noweb yes :tangle templates/standalone-template/Makefile
@@ -4000,12 +4009,12 @@ $pdflatex = 'pdflatex -shell-escape %O %S';
 #+END_SRC
 
 #+NAME: jlm-latexmk
-#+BEGIN_SRC shell :noweb yes :tangle templates/jlm-template/latexmkrc 
+#+BEGIN_SRC shell :noweb yes :tangle jlm-template/latexmkrc 
 $pdflatex = 'xelatex %O %S';
 #+END_SRC
 
 #+NAME: langscibook-latexmk
-#+BEGIN_SRC shell :noweb yes :tangle templates/langscibook-template/latexmkrc 
+#+BEGIN_SRC shell :noweb yes :tangle langscibook-template/latexmkrc 
 $pdflatex = 'xelatex %O %S';
 #+END_SRC
 
