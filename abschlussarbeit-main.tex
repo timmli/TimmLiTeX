@@ -8,14 +8,10 @@
 % SETTINGS
 %%%%%%%%%%%%%%%%%%%%%%%% 
 
-\newcommand{\settingsPath}[1]{#1}
-\newcommand{\graphicsPath}{}
-\newcommand{\packagesPath}{}
-
 \usepackage{datetime}
 
-\input{\settingsPath{text-settings}}
-  
+\input{text-settings}
+
 \AtBeginDocument{
   \selectlanguage{german} % which language is available depends on how babel is loaded
 }
@@ -24,7 +20,7 @@
 % Macros
 %%%%%%%%%%%%%% 
 
-\input{{\settingsPath{myMacros}}   % the content of myMacros.tex goes here
+\input{myMacros}   % the content of myMacros.tex goes here
 
 %%%%%%%%%%%%% 
 % Title
@@ -57,7 +53,7 @@
 \tableofcontents
 \mainmatter 
 
-\input{template-files/abschlussarbeit-examples}
+\input{abschlussarbeit-examples}
 
 \chapter{Blindtext}
 
