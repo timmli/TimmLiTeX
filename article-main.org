@@ -9,9 +9,11 @@
 #+OPTIONS: H:5 num:t toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t ':t
 #+OPTIONS: TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
 #+LATEX_CLASS: tl-article 
-#+LATEX_CLASS_OPTIONS: [11pt,draft,twoside]
+#+LATEX_CLASS_OPTIONS: [11pt,twoside]
 #+LATEX_COMPILER: pdflatex
 #+LATEX_HEADER: \input{scrarticle-settings}
+#+LATEX_HEADER: % \boolfalse{draftmode}           % Deactivate draftmode
+#+LATEX_HEADER: \booltrue{draftmode}            % Activate draftmode
 #+LATEX_HEADER: \input{text-settings}
 #+LATEX_HEADER: \input{myMacros}
 # Just mention the link to the references file [[addbibresource:references.bib]] in order to make it available to org-ref but not override the default bibliography which is helpful when looking for references which are not yet included in the local bibliography. 

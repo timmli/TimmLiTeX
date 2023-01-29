@@ -1,5 +1,8 @@
 \usepackage{datetime}
-\usepackage{ifdraft}
+% \usepackage{ifdraft}            % Better avoid the draft option
+
+\newbool{draftmode}
+\booltrue{draftmode}
 
 \newcommand{\newlineTitle}{\\}
 
@@ -7,7 +10,8 @@
 \ohead{\headmark}
 \chead{}
 \ihead{}
-\ifdraft{\ifoot[]{Draft of \today, \currenttime\ -- comments are welcome!}}{}
+%\ifdraft{\ifoot[]{Draft of \today, \currenttime\ -- comments are welcome!}}{}
+\ifbool{draftmode}{\ifoot[]{Draft of \today, \currenttime\ -- comments are welcome!}}{}
 \cfoot{}
 \ofoot[\pagemark]{\pagemark}
 \pagestyle{scrheadings}
@@ -39,7 +43,8 @@
 \renewcommand{\maketitle}{
   \thispagestyle{plain}
   {\raggedright
-    \ifdraft{{\large\color{gray} (Draft of \today, \currenttime)\par}}{}%
+    % \ifdraft{{\large\color{gray} (Draft of \today, \currenttime)\par}}{}%
+    \ifbool{draftmode}{{\large\color{gray} (Draft of \today, \currenttime)\par}}{}%
     {\LARGE\sffamily%
       \ifx\@subject\empty\else{\textsc{(\@subject)\\[1ex]}}\fi%
       \textbf{\@title}\\[1ex]\par}

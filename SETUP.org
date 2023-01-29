@@ -1887,13 +1887,15 @@ Some templates require it to have the tikz settings in a separate sty-file.
 
 #+NAME: article-options
 #+BEGIN_SRC latex
-11pt,draft,twoside
+11pt,twoside
 #+END_SRC
 
 
 #+NAME: article-settings
 #+BEGIN_SRC latex
 <<scrarticle-settings-input>>
+% \boolfalse{draftmode}           % Deactivate draftmode
+\booltrue{draftmode}            % Activate draftmode
 <<text-settings-input>>
 #+END_SRC
 
@@ -2732,7 +2734,10 @@ numbers=noenddot,
 #+NAME: scrarticle-settings
 #+BEGIN_SRC latex :noweb yes :tangle scrarticle-settings.tex
 \usepackage{datetime}
-\usepackage{ifdraft}
+% \usepackage{ifdraft}            % Better avoid the draft option
+
+\newbool{draftmode}
+\booltrue{draftmode}
 
 \newcommand{\newlineTitle}{\\}
 
@@ -2740,7 +2745,8 @@ numbers=noenddot,
 \ohead{\headmark}
 \chead{}
 \ihead{}
-\ifdraft{\ifoot[]{Draft of \today, \currenttime\ -- comments are welcome!}}{}
+%\ifdraft{\ifoot[]{Draft of \today, \currenttime\ -- comments are welcome!}}{}
+\ifbool{draftmode}{\ifoot[]{Draft of \today, \currenttime\ -- comments are welcome!}}{}
 \cfoot{}
 \ofoot[\pagemark]{\pagemark}
 \pagestyle{scrheadings}
@@ -2772,7 +2778,8 @@ numbers=noenddot,
 \renewcommand{\maketitle}{
   \thispagestyle{plain}
   {\raggedright
-    \ifdraft{{\large\color{gray} (Draft of \today, \currenttime)\par}}{}%
+    % \ifdraft{{\large\color{gray} (Draft of \today, \currenttime)\par}}{}%
+    \ifbool{draftmode}{{\large\color{gray} (Draft of \today, \currenttime)\par}}{}%
     {\LARGE\sffamily%
       \ifx\@subject\empty\else{\textsc{(\@subject)\\[1ex]}}\fi%
       \textbf{\@title}\\[1ex]\par}
