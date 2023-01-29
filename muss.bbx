@@ -1,8 +1,8 @@
 % File:    muss.bbx
 % Author:  Timm Lichte (http://timm-lichte.de)
-% Date:    2022-09-07T15:00:20+02:00
-% Version: 0.1 (tested with BibLaTeX v3.17)
-% License: 
+% Date:    2023-01-06T09:54:05+01:00
+% Version: 0.1.1 (tested with BibLaTeX v3.17)
+% License: LPPL Version 1.3c
 %
 % ----------------------------------
 % MUSS: Minimal Unified Style Sheet
@@ -38,7 +38,7 @@
 %
 % List of currently supported entry fields (depending on the entry type):
 % author, booksubtitle, booktitle, doi, edition, editor, institution, journal, note, number, pages,
-% publisher, school, subtitle, title, type, url, volume, year
+% publisher, school, subtitle, title, type, url, urldate, volume, year
 %
 % Yes, there is no address field; this is a deliberate decision.
 %
@@ -52,6 +52,7 @@
   dateabbrev=false,             % do not abbreviate dates
   useprefix=true,               % use name prefix (von, van, of, da, de, della, etc)
   labeldateparts,               % provides special fields
+  maxbibnames=99,               % show all authors
 }
 
 % MUSS is derived from authoryear.bbx, which extends standard.bbx.
@@ -86,6 +87,7 @@
 \renewcommand*{\finalnamedelim}{\addspace\&\addspace} % Use ampersand in name lists
 \renewcommand*{\finallistdelim}{\addspace\&\addspace} % Use ampersand in name lists
 % \renewcommand*{\finentrypunct}{} % Remove period from end of entry.
+% \renewcommand*{\finentrypunct}{\addperiod} % Entry should always end with a period.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%% 
@@ -102,7 +104,7 @@
 \DeclareFieldFormat[book,collection,thesis]{title}{\mkbibemph{#1}}
 
 % Put square brackets around note.
-\DeclareFieldFormat{note}{\mkbibbrackets{#1\isdot}}
+\DeclareFieldFormat{note}{\mkbibbrackets{#1}}
 
 % The booktitles are printed with italics.
 \DeclareFieldFormat{booktitle}{\mkbibemph{#1}}
@@ -114,7 +116,7 @@
   {\nolinkurl{#1}}}%
 
 \DeclareFieldFormat{url}{%
-  \mkbibacro{URL}\addcolon\space%
+  % \mkbibacro{URL}\addcolon\space%
   \url{#1}}%
 
 %%%%%%%%%%%%%%%%%%%%%%%% 
@@ -267,6 +269,12 @@
   {}
 }
 
+% muss:finentry is introduced to have better control.
+% BibLaTeX's finentry does not always work as expected, e.g. with \fullcite.  
+\newbibmacro*{muss:finentry}{%
+  \addperiod%
+}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%% 
 % Entry drivers
@@ -291,7 +299,7 @@
   \newunit%
   \usebibmacro{muss:doi+url+publisher}%
   \newunit%
-  \usebibmacro{finentry}%
+  \usebibmacro{muss:finentry}%
   \usebibmacro{muss:note}%
 }
 
@@ -309,19 +317,19 @@
 \DeclareBibliographyAlias{collection}{object} % TODO: editors
 
 \DeclareBibliographyAlias{phdthesis}{thesis}
-\DeclareBibliographyAlias{techreport}{book}
+\DeclareBibliographyAlias{report}{book} % also influences techreport
 \DeclareBibliographyAlias{manual}{book}
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%% 
 % Constraints
 %%%%%%%%%%%%%%%%%%%%%%%% 
 
-% https://tex.stackexchange.com/a/283671/61499
+% \DeclareDatamodelConstraints
+% Checked with: biber --validate_datamodel file
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%% 
 % Archive
 %%%%%%%%%%%%%%%%%%%%%%%%
 
