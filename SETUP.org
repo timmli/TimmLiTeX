@@ -2569,13 +2569,15 @@ numbers=noenddot,
 %%%%%%%%%%%%%%%%%%%%%%%%%
 
 \usepackage[bookmarks=true,bookmarksopen=true,%
-  hyperindex=true,%
-  breaklinks=true,
-  draft=false,plainpages=false,
-  pdfauthor={},%
+  hyperindex=true,% Makes the page numbers of index entries into hyper-links.
+  breaklinks=true,% Allow links to break over lines.
+  draft=false,% All hypertext options are turned off.
+  plainpages=false,% When true, forces page anchors to be named by the Arabic form of the page number.
+  pdfauthor={},% Hide author name.
   pdfkeywords={},%
+  colorlinks=false,% Do not color the text of links and anchors.
+  pdfborder={0 0 1},% The style of box around links.
   ]{hyperref}
-\hypersetup{colorlinks=false, pdfborder={0 0 0}}
 
 \IfLanguageName{english}{
   \renewcommand{\chapterautorefname}{Chapter}%
