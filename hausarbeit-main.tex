@@ -3,6 +3,13 @@
   twoside,
   ]{scrartcl}
 
+\RequirePackage{etoolbox}
+\newbool{draftmode}
+\booltrue{draftmode}
+
+% Uncomment the following line for deactivating draftmode
+%\boolfalse{draftmode}           % Deactivate draftmode
+
 %%%%%%%%%%%%%%%%%%%%%%%% 
 % SETTINGS
 %%%%%%%%%%%%%%%%%%%%%%%% 
@@ -31,10 +38,11 @@
   Datum der Fassung: \today, \currenttime
 }
 
-% comment for final version
-\usepackage{draftwatermark}
-\SetWatermarkScale{1}
-\AtBeginDocument{\SetWatermarkText{DRAFT}}
+\ifbool{draftmode}{
+  \usepackage[firstpageonly=true]{draftwatermark}
+  \SetWatermarkScale{1}
+  \AtBeginDocument{\SetWatermarkText{DRAFT}}
+}{}
 
 %%%%%%%%%%%%%%%%%%%%%% 
 % Document start

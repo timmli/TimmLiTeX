@@ -2,9 +2,21 @@
 11pt,twoside
 ]{scrartcl}
 
+\RequirePackage{etoolbox}
+\newbool{draftmode}
+\booltrue{draftmode}
+
+% Uncomment the following line for deactivating draftmode
+%\boolfalse{draftmode}           % Deactivate draftmode
+
+\ifbool{draftmode}{
+  \usepackage[firstpageonly=true]{draftwatermark}
+  \SetWatermarkScale{1}
+  \AtBeginDocument{\SetWatermarkText{DRAFT}}
+}{}
+
 \input{scrarticle-settings}
-% \boolfalse{draftmode}           % Deactivate draftmode
-\booltrue{draftmode}            % Activate draftmode
+
 \input{text-settings}
 
 %%%%%%%%%%%%%%

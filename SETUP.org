@@ -687,6 +687,13 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
   twoside,
   ]{scrartcl}
 
+\RequirePackage{etoolbox}
+\newbool{draftmode}
+\booltrue{draftmode}
+
+% Uncomment the following line for deactivating draftmode
+%\boolfalse{draftmode}           % Deactivate draftmode
+
 %%%%%%%%%%%%%%%%%%%%%%%% 
 % SETTINGS
 %%%%%%%%%%%%%%%%%%%%%%%% 
@@ -715,10 +722,11 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
   Datum der Fassung: \today, \currenttime
 }
 
-% comment for final version
-\usepackage{draftwatermark}
-\SetWatermarkScale{1}
-\AtBeginDocument{\SetWatermarkText{DRAFT}}
+\ifbool{draftmode}{
+  \usepackage[firstpageonly=true]{draftwatermark}
+  \SetWatermarkScale{1}
+  \AtBeginDocument{\SetWatermarkText{DRAFT}}
+}{}
 
 %%%%%%%%%%%%%%%%%%%%%% 
 % Document start
@@ -1893,9 +1901,21 @@ Some templates require it to have the tikz settings in a separate sty-file.
 
 #+NAME: article-settings
 #+BEGIN_SRC latex
+\RequirePackage{etoolbox}
+\newbool{draftmode}
+\booltrue{draftmode}
+
+% Uncomment the following line for deactivating draftmode
+%\boolfalse{draftmode}           % Deactivate draftmode
+
+\ifbool{draftmode}{
+  \usepackage[firstpageonly=true]{draftwatermark}
+  \SetWatermarkScale{1}
+  \AtBeginDocument{\SetWatermarkText{DRAFT}}
+}{}
+
 <<scrarticle-settings-input>>
-% \boolfalse{draftmode}           % Deactivate draftmode
-\booltrue{draftmode}            % Activate draftmode
+
 <<text-settings-input>>
 #+END_SRC
 
@@ -2737,9 +2757,6 @@ numbers=noenddot,
 #+BEGIN_SRC latex :noweb yes :tangle scrarticle-settings.tex
 \usepackage{datetime}
 % \usepackage{ifdraft}            % Better avoid the draft option
-
-\newbool{draftmode}
-\booltrue{draftmode}
 
 \newcommand{\newlineTitle}{\\}
 
