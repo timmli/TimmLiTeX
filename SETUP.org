@@ -5,16 +5,16 @@
 * Table of contents :TOC_2_gh:
 - [[#installation-with-emacs][Installation with Emacs]]
 - [[#document-templates][Document templates]]
+      - [[#abschlussarbeit-template][Abschlussarbeit template]]
       - [[#abstract-template][Abstract template]]
       - [[#article-template][Article template]]
       - [[#beamer-template][Beamer template]]
       - [[#book-template][Book template]]
-      - [[#langsci-template][LangSci template]]
-      - [[#jlm-template][JLM template]]
-      - [[#abschlussarbeit-template][Abschlussarbeit template]]
       - [[#hausarbeit-template][Hausarbeit template]]
       - [[#poster-template][Poster template]]
       - [[#standalone-template][Standalone template]]
+      - [[#langsci-template][LangSci template]]
+      - [[#jlm-template][JLM template]]
 - [[#beamer-themes][Beamer themes]]
       - [[#theme-settings][Theme settings]]
       - [[#tuebingen][Tuebingen]]
@@ -36,15 +36,14 @@
       - [[#biblatex][BibLaTeX]]
       - [[#hyperrefs][Hyperrefs]]
       - [[#listings][Listings]]
-      - [[#natbibbibtex][natbib/BibTeX]]
       - [[#pdflatex][PDFLaTeX]]
       - [[#scrarticle][scrarticle]]
       - [[#textpos][textpos]]
       - [[#tabular][tabular]]
       - [[#tikz][tikz]]
-- [[#mymacros][myMacros]]
+      - [[#natbibbibtex][natbib/BibTeX]]
+- [[#tlmacros][TLmacros]]
 - [[#examples][Examples]]
-      - [[#teaching][Teaching]]
       - [[#text][Text]]
       - [[#beamer][Beamer]]
       - [[#readme][Readme]]
@@ -58,13 +57,13 @@
       - [[#tables][Tables]]
       - [[#trees][Trees]]
 - [[#makefile][Makefile]]
+      - [[#root-makefile][Root Makefile]]
       - [[#beamer-makefile][Beamer Makefile]]
-      - [[#poster-makefile][Poster Makefile]]
-      - [[#teaching-makefile][Teaching Makefile]]
+      - [[#abschlussarbeit-makefile][Abschlussarbeit Makefile]]
+      - [[#hausarbeit-makefile][Hausarbeit Makefile]]
       - [[#text-makefile][Text Makefile]]
       - [[#jlm-makefile][JLM Makefile]]
       - [[#langscibook-makefile][Langscibook Makefile]]
-      - [[#standalone-makefile][Standalone Makefile]]
 - [[#latexmk][latexmk]]
 - [[#local-variables][Local variables]]
 
@@ -113,7 +112,7 @@ In order to compile these templates, press =C-c C-v t= , or evaluate the followi
 % Macros
 %%%%%%%%%%%%%% 
 
-<<tlMacros-input>>   % the content of tlMacros.tex goes here
+<<TLmacros-input>>   % the content of TLmacros.tex goes here
 
 %%%%%%%%%%%%% 
 % Title
@@ -192,7 +191,7 @@ In order to compile these templates, press =C-c C-v t= , or evaluate the followi
 ,#+LATEX_CLASS_OPTIONS: [<<abstract-options>>]
 ,#+LATEX_COMPILER: pdflatex
 ,#+LATEX_HEADER: <<abstract-settings>>
-,#+LATEX_HEADER: <<tlMacros-input>>>
+,#+LATEX_HEADER: <<TLmacros-input>>>
 # Just mention the link to the references file [[addbibresource:references.bib]] in order to make it available to org-ref but not override the default bibliography which is helpful when looking for references which are not yet included in the local bibliography. 
 :end:
 
@@ -242,7 +241,7 @@ Remember to first add the class to the set of known classes (in =init.el=).
 % HEADER
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-<<tlMacros-input>>
+<<TLmacros-input>>
 
 <<abstract-body>>
 #+END_SRC
@@ -298,7 +297,7 @@ Remember to first add the class to the set of known classes (in =init.el=).
 ,#+LATEX_CLASS_OPTIONS: [<<article-options>>]
 ,#+LATEX_COMPILER: pdflatex
 ,#+LATEX_HEADER: <<article-settings>>
-,#+LATEX_HEADER: <<tlMacros-input>>
+,#+LATEX_HEADER: <<TLmacros-input>>
 # Just mention the link to the references file [[addbibresource:references.bib]] in order to make it available to org-ref but not override the default bibliography which is helpful when looking for references which are not yet included in the local bibliography. 
 :end:
 
@@ -353,7 +352,7 @@ Remember to first add the class to the set of known classes (in =init.el=).
 %   Macros   % 
 %%%%%%%%%%%%%%
 
-<<tlMacros-input>>
+<<TLmacros-input>>
 
 <<article-body>>
 #+END_SRC
@@ -426,7 +425,7 @@ This is an abstract: \lipsum[1]
 ,#+LATEX_CLASS_OPTIONS: <<beamer-options-org>> 
 ,#+LATEX_COMPILER: pdflatex
 ,#+LATEX_HEADER: <<beamer-settings>>
-,#+LATEX_HEADER: <<tlMacros-input>>
+,#+LATEX_HEADER: <<TLmacros-input>>
 ,#+LATEX_HEADER: \usetheme{Lustnau}
 ,#+LATEX_HEADER: \input{beamerlogosTuebingen}
 ,#+LANGUAGE:  en
@@ -530,7 +529,7 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 % CUSTOM MACROS        %
 %%%%%%%%%%%%%%%%%%%%%%%% 
 
-<<tlMacros-input>>
+<<TLmacros-input>>
 \definecolor{myblue}{rgb}{0,0,0.70}
 \definecolor{myred}{rgb}{0.8,0,0}
 \definecolor{mydarkgreen}{rgb}{0,0.55,0}
@@ -621,7 +620,7 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 %   Macros   % 
 %%%%%%%%%%%%%%
 
-<<tlMacros-input>>   % the content of tlMacros.tex goes here
+<<TLmacros-input>>   % the content of TLmacros.tex goes here
 
 <<book-body>>
 #+END_SRC
@@ -705,7 +704,7 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
   \selectlanguage{german} % which language is available depends on how babel is loaded
 }
 
-<<tlMacros-input>>   % the content of tlMacros.tex goes here
+<<TLmacros-input>>   % the content of TLmacros.tex goes here
 
 %%%%%%%%%%%%% 
 % Title
@@ -783,7 +782,7 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 
 \input{poster-settings}
 
-<<tlMacros-input>>
+<<TLmacros-input>>
 
 \definecolor{mygray}{gray}{0.9}
 \definecolor{HHUblue}{HTML}{006AB3}
@@ -938,7 +937,7 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 % \usepackage[inference]{semantic} % for CCG 
 % \usepackage{packages/ccg}
 
-% \input{tlMacros}
+% \input{TLmacros}
 
 \begin{document}
 
@@ -978,7 +977,7 @@ https://langsci-press.org/
 ,#+LATEX_HEADER: \usepackage{amsmath}
 ,#+LATEX_HEADER: \usepackage{booktabs}
 ,#+LATEX_HEADER: \usepackage{packages/tikz-settings} % tikz, forest, etc.
-,#+LATEX_HEADER: %\input{tlMacros}
+,#+LATEX_HEADER: %\input{TLmacros}
 # Just mention the link to the references file [[addbibresource:references.bib]] in order to make it available to org-ref but not override the default bibliography which is helpful when looking for references which are not yet included in the local bibliography. 
 :end: 
 # Eventually appears after \begin{document}.
@@ -1083,7 +1082,7 @@ http://jlm.ipipan.waw.pl/index.php/JLM
 ,#+LATEX_HEADER: \usepackage{graphicx}
 ,#+LATEX_HEADER: \usepackage{linguex,packages/avm}
 ,#+LATEX_HEADER: \usepackage{packages/tikz-settings} % tikz, forest, etc.
-,#+LATEX_HEADER: \input{tlMacros}
+,#+LATEX_HEADER: \input{TLmacros}
 :end: 
 
 # Eventually appears after \begin{document}.
@@ -2946,18 +2945,18 @@ numbers=noenddot,
 \let\cite=\citet 	% in order to prevent inconsistencies between \cite and \citet
 #+END_SRC
 
-* tlMacros
+* TLmacros
 
-#+BEGIN_SRC latex :noweb yes :tangle tlMacros.tex
-<<tlMacros.tex>>
+#+BEGIN_SRC latex :noweb yes :tangle TLmacros.tex
+<<TLmacros.tex>>
 #+END_SRC
 
-#+NAME: tlMacros-input
+#+NAME: TLmacros-input
 #+BEGIN_SRC latex :noweb yes :tangle no
-\input{tlMacros}
+\input{TLmacros}
 #+END_SRC
 
-#+NAME: tlMacros.tex
+#+NAME: TLmacros.tex
 #+BEGIN_SRC latex :noweb yes
 %%%%%%%%%%%%%%%%%%%%%% 
 % TODONOTES          % 
@@ -3688,7 +3687,7 @@ SHELL := /bin/bash
 #+NAME: beamer-makefile
 #+BEGIN_SRC makefile :noweb yes 
 BEAMER_TEST_DIR = test_beamer
-BEAMER_FILES =  tlMacros.tex \
+BEAMER_FILES =  TLmacros.tex \
 	$(wildcard beamer*) \
 	$(wildcard packages/*.sty) \
 	$(wildcard graphics/*.pdf) \
@@ -3718,7 +3717,7 @@ release_beamer:
 #+BEGIN_SRC makefile :noweb yes :tangle templates/poster-template/Makefile
 SHELL := /bin/bash
 
-POSTER_FILES =  tlMacros.tex \
+POSTER_FILES =  TLmacros.tex \
 	poster-style.tex \
 	poster-settings.tex \
 	graphics/sfb-logo-quer.pdf \
@@ -3758,7 +3757,7 @@ release_poster:
 #+NAME: abschlussarbeit-makefile
 #+BEGIN_SRC makefile :noweb yes
 ABSCHLUSSARBEIT_TEST_DIR = test_abschlussarbeit
-ABSCHLUSSARBEIT_FILES =  tlMacros.tex \
+ABSCHLUSSARBEIT_FILES =  TLmacros.tex \
 	text-settings.tex \
   muss.bbx \
   muss.cbx \
@@ -3787,7 +3786,7 @@ release_abschlussarbeit:
 #+NAME: hausarbeit-makefile
 #+BEGIN_SRC makefile :noweb yes
 HAUSARBEIT_TEST_DIR = test_hausarbeit
-HAUSARBEIT_FILES =  tlMacros.tex \
+HAUSARBEIT_FILES =  TLmacros.tex \
 	text-settings.tex \
 	scrarticle-settings.tex \
   muss.bbx \
@@ -3817,7 +3816,7 @@ release_hausarbeit:
 #+NAME: text-makefile
 #+BEGIN_SRC makefile :noweb yes
 ABSTRACT_TEST_DIR = test_abstract
-ABSTRACT_FILES =  tlMacros.tex \
+ABSTRACT_FILES =  TLmacros.tex \
 	text-settings.tex \
 	$(wildcard packages/*.sty) \
 	abstract-main.tex \
@@ -3844,7 +3843,7 @@ release_abstract:
 #-------------------------------------------------------------------------------
 
 ARTICLE_TEST_DIR = test_article
-ARTICLE_FILES =  tlMacros.tex \
+ARTICLE_FILES =  TLmacros.tex \
 	text-settings.tex \
 	scrarticle-settings.tex \
 	$(wildcard packages/*.sty) \
@@ -3872,7 +3871,7 @@ release_article:
 #-------------------------------------------------------------------------------
 
 BOOK_TEST_DIR = test_book
-BOOK_FILES =  tlMacros.tex \
+BOOK_FILES =  TLmacros.tex \
 	text-settings.tex \
 	$(wildcard packages/*.sty) \
 	book-main.tex  \
@@ -3904,7 +3903,7 @@ release_book:
 #+BEGIN_SRC makefile :noweb yes :tangle jlm-template/Makefile
 SHELL := /bin/bash
 
-JLM_FILES =  tlMacros.tex \
+JLM_FILES =  TLmacros.tex \
 	references.bib \
 	jlm-article-template.org \
 	latexmkrc \
@@ -3929,7 +3928,7 @@ release_jlm:
 #+BEGIN_SRC makefile :noweb yes :tangle langscibook-template/Makefile
 SHELL := /bin/bash
 
-LANGSCI_FILES =  tlMacros.tex \
+LANGSCI_FILES =  TLmacros.tex \
 	references.bib \
 	langsci-paper-template.org \
 	latexmkrc \
@@ -3972,7 +3971,7 @@ release_langscibook:
 #+BEGIN_SRC makefile :noweb yes :tangle templates/standalone-template/Makefile
 SHELL := /bin/bash
 
-STANDALONE_FILES =  tlMacros.tex \
+STANDALONE_FILES =  TLmacros.tex \
 	$(wildcard packages/*.sty) 
 
 test_standalone:
