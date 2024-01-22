@@ -3,7 +3,7 @@ SHELL := /bin/bash
 #-------------------------------------------------------------------------------
 
 ABSCHLUSSARBEIT_TEST_DIR = test_abschlussarbeit
-ABSCHLUSSARBEIT_FILES =  myMacros.tex \
+ABSCHLUSSARBEIT_FILES =  TLmacros.tex \
 	text-settings.tex \
   muss.bbx \
   muss.cbx \
@@ -29,7 +29,7 @@ release_abschlussarbeit:
 #-------------------------------------------------------------------------------
 
 BEAMER_TEST_DIR = test_beamer
-BEAMER_FILES =  myMacros.tex \
+BEAMER_FILES =  TLmacros.tex \
 	$(wildcard beamer*) \
 	$(wildcard packages/*.sty) \
 	$(wildcard graphics/*.pdf) \
@@ -55,7 +55,7 @@ release_beamer:
 #-------------------------------------------------------------------------------
 
 HAUSARBEIT_TEST_DIR = test_hausarbeit
-HAUSARBEIT_FILES =  myMacros.tex \
+HAUSARBEIT_FILES =  TLmacros.tex \
 	text-settings.tex \
 	scrarticle-settings.tex \
   muss.bbx \
@@ -82,7 +82,7 @@ release_hausarbeit:
 #-------------------------------------------------------------------------------
 
 ABSTRACT_TEST_DIR = test_abstract
-ABSTRACT_FILES =  myMacros.tex \
+ABSTRACT_FILES =  TLmacros.tex \
 	text-settings.tex \
 	$(wildcard packages/*.sty) \
 	abstract-main.tex \
@@ -109,7 +109,7 @@ release_abstract:
 #-------------------------------------------------------------------------------
 
 ARTICLE_TEST_DIR = test_article
-ARTICLE_FILES =  myMacros.tex \
+ARTICLE_FILES =  TLmacros.tex \
 	text-settings.tex \
 	scrarticle-settings.tex \
 	$(wildcard packages/*.sty) \
@@ -137,7 +137,7 @@ release_article:
 #-------------------------------------------------------------------------------
 
 BOOK_TEST_DIR = test_book
-BOOK_FILES =  myMacros.tex \
+BOOK_FILES =  TLmacros.tex \
 	text-settings.tex \
 	$(wildcard packages/*.sty) \
 	book-main.tex  \

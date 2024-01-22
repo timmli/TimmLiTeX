@@ -28,7 +28,7 @@
 #+LATEX_HEADER: }
 #+LATEX_HEADER: \makeatother
 #+LATEX_HEADER: 
-#+LATEX_HEADER: \input{myMacros}>
+#+LATEX_HEADER: % \input{TLmacros}>
 # Just mention the link to the references file [[addbibresource:references.bib]] in order to make it available to org-ref but not override the default bibliography which is helpful when looking for references which are not yet included in the local bibliography. 
 :end:
 

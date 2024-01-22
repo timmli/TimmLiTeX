@@ -112,7 +112,7 @@ In order to compile these templates, press =C-c C-v t= , or evaluate the followi
 % Macros
 %%%%%%%%%%%%%% 
 
-<<TLmacros-input>>   % the content of TLmacros.tex goes here
+% <<TLmacros-input>>   % the content of TLmacros.tex goes here
 
 %%%%%%%%%%%%% 
 % Title
@@ -191,7 +191,7 @@ In order to compile these templates, press =C-c C-v t= , or evaluate the followi
 ,#+LATEX_CLASS_OPTIONS: [<<abstract-options>>]
 ,#+LATEX_COMPILER: pdflatex
 ,#+LATEX_HEADER: <<abstract-settings>>
-,#+LATEX_HEADER: <<TLmacros-input>>>
+,#+LATEX_HEADER: % <<TLmacros-input>>>
 # Just mention the link to the references file [[addbibresource:references.bib]] in order to make it available to org-ref but not override the default bibliography which is helpful when looking for references which are not yet included in the local bibliography. 
 :end:
 
@@ -241,7 +241,7 @@ Remember to first add the class to the set of known classes (in =init.el=).
 % HEADER
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-<<TLmacros-input>>
+% <<TLmacros-input>>
 
 <<abstract-body>>
 #+END_SRC
@@ -297,7 +297,7 @@ Remember to first add the class to the set of known classes (in =init.el=).
 ,#+LATEX_CLASS_OPTIONS: [<<article-options>>]
 ,#+LATEX_COMPILER: pdflatex
 ,#+LATEX_HEADER: <<article-settings>>
-,#+LATEX_HEADER: <<TLmacros-input>>
+,#+LATEX_HEADER: % <<TLmacros-input>>
 # Just mention the link to the references file [[addbibresource:references.bib]] in order to make it available to org-ref but not override the default bibliography which is helpful when looking for references which are not yet included in the local bibliography. 
 :end:
 
@@ -352,7 +352,7 @@ Remember to first add the class to the set of known classes (in =init.el=).
 %   Macros   % 
 %%%%%%%%%%%%%%
 
-<<TLmacros-input>>
+% <<TLmacros-input>>
 
 <<article-body>>
 #+END_SRC
@@ -425,7 +425,7 @@ This is an abstract: \lipsum[1]
 ,#+LATEX_CLASS_OPTIONS: <<beamer-options-org>> 
 ,#+LATEX_COMPILER: pdflatex
 ,#+LATEX_HEADER: <<beamer-settings>>
-,#+LATEX_HEADER: <<TLmacros-input>>
+,#+LATEX_HEADER: % <<TLmacros-input>>
 ,#+LATEX_HEADER: \usetheme{Lustnau}
 ,#+LATEX_HEADER: \input{beamerlogosTuebingen}
 ,#+LANGUAGE:  en
@@ -529,7 +529,7 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 % CUSTOM MACROS        %
 %%%%%%%%%%%%%%%%%%%%%%%% 
 
-<<TLmacros-input>>
+% <<TLmacros-input>>
 \definecolor{myblue}{rgb}{0,0,0.70}
 \definecolor{myred}{rgb}{0.8,0,0}
 \definecolor{mydarkgreen}{rgb}{0,0.55,0}
@@ -620,7 +620,7 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 %   Macros   % 
 %%%%%%%%%%%%%%
 
-<<TLmacros-input>>   % the content of TLmacros.tex goes here
+% <<TLmacros-input>>   % the content of TLmacros.tex goes here
 
 <<book-body>>
 #+END_SRC
@@ -704,7 +704,7 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
   \selectlanguage{german} % which language is available depends on how babel is loaded
 }
 
-<<TLmacros-input>>   % the content of TLmacros.tex goes here
+% <<TLmacros-input>>   % the content of TLmacros.tex goes here
 
 %%%%%%%%%%%%% 
 % Title
@@ -782,7 +782,7 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 
 \input{poster-settings}
 
-<<TLmacros-input>>
+% <<TLmacros-input>>
 
 \definecolor{mygray}{gray}{0.9}
 \definecolor{HHUblue}{HTML}{006AB3}
@@ -2947,6 +2947,8 @@ numbers=noenddot,
 
 * TLmacros
 
+Collection of private macros on which the templates do not depend.
+
 #+BEGIN_SRC latex :noweb yes :tangle TLmacros.tex
 <<TLmacros.tex>>
 #+END_SRC
@@ -3442,16 +3444,13 @@ References are stored in \texttt{references.bib}.
 
 #+NAME: example-references.bib
 #+BEGIN_SRC latex
-
-@article{Bech:63,
+@Article{Bech:63,
   author = {Bech, Gunnar},
   title = {Grammatische {G}esetze im {W}iderspruch},
   year = {1963},
   volume = {12},
   pages = {291--299},
-  journal = {Lingua},
-  owner = {tl},
-  timestamp = {2008.09.08},
+  journal = {Lingua}
 }
 
 @InProceedings{EckartDeCastilho:etal:16,
@@ -3460,20 +3459,16 @@ References are stored in \texttt{references.bib}.
   booktitle = {Proceedings of the Workshop on Language Technology Resources and Tools for Digital Humanities ({LT4DH})},
   year      = {2016},
   pages     = {76--84},
-  address   = {Osaka, Japan},
-  owner     = {timm},
-  timestamp = {2017-08-16},
+  address   = {Osaka, Japan}
 }
 
-@book{Mueller:02,
+@Book{Mueller:02,
   author = {M\"uller, Stefan},
-  title = {Complex Predicates. Verbal Complexes, Resultative Constructions, and Particle Verbs in {German}},
+  title = {Complex Predicates: {Verbal} Complexes, Resultative Constructions, and Particle Verbs in {German}},
   year = {2002},
   series = {Studies in Constraint-Based Lexicalism},
   publisher = {CSLI Publications},
-  address = {Stanford},
-  owner = {tl},
-  timestamp = {2010.07.30},
+  address = {Stanford}
 }
 
 #+END_SRC
