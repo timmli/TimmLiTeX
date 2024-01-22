@@ -2406,9 +2406,9 @@ numbers=noenddot,
 
 #+NAME: biblatex-settings
 #+BEGIN_SRC latex
-%%%%%%%%%%%%%%%%%%%%%%%%
-%   BIBLATEX SETTINGS  % 
-%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%% 
+% BIBLATEX SETTINGS  % 
+%%%%%%%%%%%%%%%%%%%%%%%% 
 
 \newcommand{\mycitestyle}{muss}
 \newcommand{\mybibstyle}{muss}
@@ -2444,119 +2444,119 @@ numbers=noenddot,
 \@ifclassloaded{beamer}{  
   \DeclareFieldFormat{labelnumberwidth}{[#1]}
   \defbibenvironment{bibliography}  % from numeric.bbx
-      {\list
-        {\printtext[labelnumberwidth]{%
-          \printfield{prefixnumber}%
-          \printfield{labelnumber}}}
-        {\setlength{\labelwidth}{\labelnumberwidth}%
-            \setlength{\leftmargin}{\labelwidth}%
-            \setlength{\labelsep}{1em}%
-            \addtolength{\leftmargin}{1em}%
-            \setlength{\itemsep}{\bibitemsep}%
-            \setlength{\parsep}{\bibparsep}}%
-            \renewcommand*{\makelabel}[1]{\hss##1}}
-      {\endlist}
-      {\item}
-    % \DeclareCiteCommand{\supercite}[\mkbibsuperscript]{
-    %   \iffieldundef{prenote}
-    %     {}
-  %     {\BibliographyWarning{Ignoring prenote argument}}%
-  %   \iffieldundef{postnote}
-  %     {}
-  %     {\BibliographyWarning{Ignoring postnote argument}}}
-    %   {\usebibmacro{citeindex}%
-  %      \color{gray}\bibopenbracket\usebibmacro{cite}\bibclosebracket}
-    %   {\supercitedelim}
-    %   {}
-    \DeclareCiteCommand{\supercite}[\mkbibsuperscript]
-      {\color{gray} % added color
-      \usebibmacro{cite:init}%
-      \let\multicitedelim=\supercitedelim
-      \iffieldundef{prenote}
-        {}
-        {\BibliographyWarning{Ignoring prenote argument}}%
-      \iffieldundef{postnote}
-        {}
-        {\BibliographyWarning{Ignoring postnote argument}}%
-      \bibopenbracket}%
-      {\usebibmacro{citeindex}%
-       \usebibmacro{cite:comp}}
-      {}
-      {\usebibmacro{cite:dump}\bibclosebracket}
+  {\list
+    {\printtext[labelnumberwidth]{%
+        \printfield{prefixnumber}%
+        \printfield{labelnumber}}}
+    {\setlength{\labelwidth}{\labelnumberwidth}%
+      \setlength{\leftmargin}{\labelwidth}%
+      \setlength{\labelsep}{1em}%
+      \addtolength{\leftmargin}{1em}%
+      \setlength{\itemsep}{\bibitemsep}%
+      \setlength{\parsep}{\bibparsep}}%
+    \renewcommand*{\makelabel}[1]{\hss##1}}
+  {\endlist}
+  {\item}
+  % \DeclareCiteCommand{\supercite}[\mkbibsuperscript]{
+  % \iffieldundef{prenote}
+  % {}
+  % {\BibliographyWarning{Ignoring prenote argument}}%
+  % \iffieldundef{postnote}
+  % {}
+  % {\BibliographyWarning{Ignoring postnote argument}}}
+  % {\usebibmacro{citeindex}%
+  % \color{gray}\bibopenbracket\usebibmacro{cite}\bibclosebracket}
+  % {\supercitedelim}
+  % {}
+  \DeclareCiteCommand{\supercite}[\mkbibsuperscript]
+  {\color{gray} % added color
+    \usebibmacro{cite:init}%
+    \let\multicitedelim=\supercitedelim
+    \iffieldundef{prenote}
+    {}
+    {\BibliographyWarning{Ignoring prenote argument}}%
+    \iffieldundef{postnote}
+    {}
+    {\BibliographyWarning{Ignoring postnote argument}}%
+    \bibopenbracket}%
+  {\usebibmacro{citeindex}%
+    \usebibmacro{cite:comp}}
+  {}
+  {\usebibmacro{cite:dump}\bibclosebracket}
 
   \DeclareCiteCommand{\citeauthor}  % from sp-authoryear-comp.cbx; to add hyperref link  
-    {\boolfalse{citetracker}%
-     \boolfalse{pagetracker}%
-     \usebibmacro{prenote}}
-    {\ifciteindex
-       {\indexnames{labelname}}
-       {}%
-     \printtext[bibhyperref]{\printnames{labelname}}}
-    {\multicitedelim}
-    {\usebibmacro{postnote}}
+  {\boolfalse{citetracker}%
+    \boolfalse{pagetracker}%
+    \usebibmacro{prenote}}
+  {\ifciteindex
+    {\indexnames{labelname}}
+    {}%
+    \printtext[bibhyperref]{\printnames{labelname}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
 
   \DeclareCiteCommand{\citeyear}  % from sp-authoryear-comp.cbx; to add hyperref link  
-    {\boolfalse{citetracker}%
-     \boolfalse{pagetracker}%
-     \usebibmacro{prenote}}
-    {\printfield[bibhyperref]{year}}
-    {\multicitedelim}
-    {\usebibmacro{postnote}}
+  {\boolfalse{citetracker}%
+    \boolfalse{pagetracker}%
+    \usebibmacro{prenote}}
+  {\printfield[bibhyperref]{year}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
 }{}
 \makeatother
 
 %% tikzposter settings
 \makeatletter
 \@ifclassloaded{tikzposter}{  
-\DeclareFieldFormat{labelnumberwidth}{#1}
-\defbibenvironment{bibliography}
-{\footnotesize\noindent}
-{\unspace}
-{}
-\renewbibmacro*{begentry}{%
-\textbf{\color{HHUblue}%
-\printtext[labelnumberwidth]{%
-[\printfield{prefixnumber}%
-\printfield{labelnumber}]}%
-\space
-%\setunit{\addspace}
-}}
-\renewcommand*{\finentrypunct}{\addperiod\space}
+  \DeclareFieldFormat{labelnumberwidth}{#1}
+  \defbibenvironment{bibliography}
+  {\footnotesize\noindent}
+  {\unspace}
+  {}
+  \renewbibmacro*{begentry}{%
+    \textbf{\color{HHUblue}%
+      \printtext[labelnumberwidth]{%
+        [\printfield{prefixnumber}%
+          \printfield{labelnumber}]}%
+      \space
+      % \setunit{\addspace}
+    }}
+  \renewcommand*{\finentrypunct}{\addperiod\space}
 
-\DeclareCiteCommand{\supercite}[\mkbibsuperscript]
-{\color{gray} % added color
-\usebibmacro{cite:init}%
-\let\multicitedelim=\supercitedelim
-\iffieldundef{prenote}
-{}
-{\BibliographyWarning{Ignoring prenote argument}}%
-\iffieldundef{postnote}
-{}
-{\BibliographyWarning{Ignoring postnote argument}}%
-\bibopenbracket}%
-{\usebibmacro{citeindex}%
-\usebibmacro{cite:comp}}
-{}
-{\usebibmacro{cite:dump}\bibclosebracket}
+  \DeclareCiteCommand{\supercite}[\mkbibsuperscript]
+  {\color{gray} % added color
+    \usebibmacro{cite:init}%
+    \let\multicitedelim=\supercitedelim
+    \iffieldundef{prenote}
+    {}
+    {\BibliographyWarning{Ignoring prenote argument}}%
+    \iffieldundef{postnote}
+    {}
+    {\BibliographyWarning{Ignoring postnote argument}}%
+    \bibopenbracket}%
+  {\usebibmacro{citeindex}%
+    \usebibmacro{cite:comp}}
+  {}
+  {\usebibmacro{cite:dump}\bibclosebracket}
 
-\DeclareCiteCommand{\citeauthor}  % from sp-authoryear-comp.cbx; to add hyperref link  
-{\boolfalse{citetracker}%
-\boolfalse{pagetracker}%
-\usebibmacro{prenote}}
-{\ifciteindex
-{\indexnames{labelname}}
-{}%
-\printtext[bibhyperref]{\printnames{labelname}}}
-{\multicitedelim}
-{\usebibmacro{postnote}}
+  \DeclareCiteCommand{\citeauthor}  % from sp-authoryear-comp.cbx; to add hyperref link  
+  {\boolfalse{citetracker}%
+    \boolfalse{pagetracker}%
+    \usebibmacro{prenote}}
+  {\ifciteindex
+    {\indexnames{labelname}}
+    {}%
+    \printtext[bibhyperref]{\printnames{labelname}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
 
-\DeclareCiteCommand{\citeyear}  % from sp-authoryear-comp.cbx; to add hyperref link  
-{\boolfalse{citetracker}%
-\boolfalse{pagetracker}%
-\usebibmacro{prenote}}
-{\printfield[bibhyperref]{year}}
-{\multicitedelim}
-{\usebibmacro{postnote}}
+  \DeclareCiteCommand{\citeyear}  % from sp-authoryear-comp.cbx; to add hyperref link  
+  {\boolfalse{citetracker}%
+    \boolfalse{pagetracker}%
+    \usebibmacro{prenote}}
+  {\printfield[bibhyperref]{year}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
 }{}
 \makeatother
 
@@ -2565,17 +2565,17 @@ numbers=noenddot,
 
 \newcommand{\insertBib}{
   \printbibliography[
-    %notkeyword=this
+    % notkeyword=this
     ] 
 }
 
-% Compat definitions to make available BibTeX macros in BibLaTeX 
-\let\citealt=\cite
-\let\cite=\textcite
-\let\citep=\parencite
-\let\citet=\cite
-\newcommand{\citeauthoryear}[1]{\citeauthor{#1} (\citeyear{#1})}
-\newcommand{\citealtauthoryear}[1]{\citeauthor{#1} \citeyear{#1}}
+% % Compat definitions to make available BibTeX macros in BibLaTeX 
+% \let\citealt=\cite
+% \let\cite=\textcite
+% \let\citep=\parencite
+% \let\citet=\cite
+% \newcommand{\citeauthoryear}[1]{\citeauthor{#1} (\citeyear{#1})}
+% \newcommand{\citealtauthoryear}[1]{\citeauthor{#1} \citeyear{#1}}
 
 #+END_SRC
 
@@ -2991,31 +2991,32 @@ Collection of private macros on which the templates do not depend.
 \newcommand{\anvar}{\rule{0.4em}{0.4pt}\,}
 \newcommand{\trace}[0]{\raisebox{1pt}{\underline{$~~~$}}}
 
-% Taken from https://tex.stackexchange.com/a/60253/61499
-\makeatletter
-\newcommand*\myrel@kern[1]{\kern#1\dimexpr\macc@kerna}
-\def\widebar#1{% use \def to optionally overwrite \widebar 
-  \begingroup
-  \def\mathaccent##1##2{%
-    \myrel@kern{0.8}%
-    \overline{\myrel@kern{-0.8}\macc@nucleus\myrel@kern{0.2}}%
-    \myrel@kern{-0.2}%
-  }%
-  \macc@depth\@ne
-  \let\math@bgroup\@empty \let\math@egroup\macc@set@skewchar
-  \mathsurround\z@ \frozen@everymath{\mathgroup\macc@group\relax}%
-  \macc@set@skewchar\relax
-  \let\mathaccentV\macc@nested@a
-  \macc@nested@a\relax111{#1}%
-  \endgroup
-}
-\makeatother
+% % Taken from https://tex.stackexchange.com/a/60253/61499
+% \makeatletter
+% \newcommand*\myrel@kern[1]{\kern#1\dimexpr\macc@kerna}
+% \def\widebar#1{% use \def to optionally overwrite \widebar 
+%   \begingroup
+%   \def\mathaccent##1##2{%
+%     \myrel@kern{0.8}%
+%     \overline{\myrel@kern{-0.8}\macc@nucleus\myrel@kern{0.2}}%
+%     \myrel@kern{-0.2}%
+%   }%
+%   \macc@depth\@ne
+%   \let\math@bgroup\@empty \let\math@egroup\macc@set@skewchar
+%   \mathsurround\z@ \frozen@everymath{\mathgroup\macc@group\relax}%
+%   \macc@set@skewchar\relax
+%   \let\mathaccentV\macc@nested@a
+%   \macc@nested@a\relax111{#1}%
+%   \endgroup
+% }
+% \makeatother
 
 %% Dingbats, i.e. symbolic, decorative glyphs
 \RequirePackage{pifont}
 \newcommand{\cmark}{\ding{51}}  % checkmark
 \newcommand{\xmark}{\ding{55}}  % xmark
 
+%% Instead of \operatorname{argmax}
 \DeclareMathOperator*{\argmax}{argmax}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
@@ -3200,11 +3201,7 @@ This is how \term{terminology} can be introduced with \verb|\term|.
 <<example-beamer-blocks>>
 <<example-beamer-overlays>>
 <<example-beamer-columns>>
-
-\begin{frame}
-\frametitle{Citation}
-<<example-citations>>
-\end{frame}
+<<example-beamer-citations>>
 
 \begin{frame}
 \frametitle{Linguistic examples}
@@ -3297,6 +3294,37 @@ A TUCO derivation:\newline
     Body of an alertblock
   \end{alertblock}
   
+\end{frame}
+#+END_SRC
+
+#+NAME: example-beamer-citations
+#+BEGIN_SRC latex
+\begin{frame}[fragile]
+  \frametitle{Citations}
+
+% The following is a alist of available cite commands. See \url{https://ctan.space-pro.be/tex-archive/macros/latex/contrib/biblatex/doc/biblatex.pdf#subsection.3.9} for a more detailed description.
+
+\begin{itemize}
+% \item \verb|\nocite| \nocite{Bech:63}
+\item \verb|\fullcite[<prenote>][<postnote>]{Nallapati:etal:16}| \newline  \fullcite[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb|\textcite[<prenote>][<postnote>]{Nallapati:etal:16}| \newline \textcite[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb|\parencite[<prenote>][<postnote>]{Nallapati:etal:16}| \newline \parencite[<prenote>][<postnote>]{Nallapati:etal:16}
+% \item \verb|\parencite*[<prenote>][<postnote>]{Nallapati:etal:16}| \newline \parencite*[<prenote>][<postnote>]{Nallapati:etal:16}
+% \item \verb|\smartcite[<prenote>][<postnote>]{Nallapati:etal:16}| \newline \smartcite[<prenote>][<postnote>]{Nallapati:etal:16}
+% \item \verb|\footcite[<prenote>][<postnote>]{Nallapati:etal:16}| \newline \footcite[<prenote>][<postnote>]{Nallapati:etal:16}
+% \item \verb|\footfullcite[<prenote>][<postnote>]{Nallapati:etal:16}| \newline  \footfullcite[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb|\supercite[<prenote>][<postnote>]{Nallapati:etal:16}| \newline \supercite[<prenote>][<postnote>]{Nallapati:etal:16}
+% \item \verb|\footcitetext[<prenote>][<postnote>]{Nallapati:etal:16}| \newline \footcitetext[<prenote>][<postnote>]{Nallapati:etal:16}
+% \item \verb|\autocite[<prenote>][<postnote>]{Nallapati:etal:16}| \newline  \autocite[<prenote>][<postnote>]{Nallapati:etal:16}
+% \item \verb|\cite[<prenote>][<postnote>]{Nallapati:etal:16}| \newline  \cite[<prenote>][<postnote>]{Nallapati:etal:16}
+% \item \verb|\cite*[<prenote>][<postnote>]{Nallapati:etal:16}| \newline  \cite*[<prenote>][<postnote>]{Nallapati:etal:16}
+% \item \verb|\citeauthor[<prenote>][<postnote>]{Nallapati:etal:16}| \newline \citeauthor[<prenote>][<postnote>]{Nallapati:etal:16}
+% \item \verb|\citeauthor*[<prenote>][<postnote>]{Nallapati:etal:16}| \newline \citeauthor*[<prenote>][<postnote>]{Nallapati:etal:16}
+% \item \verb|\citeurl[<prenote>][<postnote>]{Nallapati:etal:16}| \newline \citeurl[<prenote>][<postnote>]{Nallapati:etal:16}
+% \item \verb|\citetitle[<prenote>][<postnote>]{Nallapati:etal:16}| \newline \citetitle[<prenote>][<postnote>]{Nallapati:etal:16}
+% \item \verb|\citeyear[<prenote>][<postnote>]{Nallapati:etal:16}| \newline \citeyear[<prenote>][<postnote>]{Nallapati:etal:16}
+\end{itemize} 
+
 \end{frame}
 #+END_SRC
 
@@ -3424,16 +3452,32 @@ More \LaTeX{} templates on \url{https://github.com/timmli/latex-templates}.
 \noindent $\Rightarrow$ \url{http://nlp.stanford.edu/manning/tex/avm-doc.pdf}
 #+END_SRC
 
-** TODO Citations
-:LOGBOOK:
-- State "TODO"       from              [2022-09-15 Thu 00:09]
-:END:
-
-- [ ] Add cite commands to examples
+** Citations
 
 #+NAME: example-citations
 #+BEGIN_SRC latex
-Example for invoking citations: \cite{Bech:63}, \citet[291]{Bech:63}, \citep{Bech:63}, \citealt{Bech:63}
+The following is a alist of available cite commands. See \url{https://ctan.space-pro.be/tex-archive/macros/latex/contrib/biblatex/doc/biblatex.pdf#subsection.3.9} for a more detailed description.
+
+\begin{itemize}
+\item \verb=\nocite= \nocite{Bech:63}
+\item \verb=\fullcite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline  \fullcite[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\textcite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \textcite[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\parencite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \parencite[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\parencite*[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \parencite*[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\smartcite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \smartcite[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\footcite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \footcite[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\footfullcite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline  \footfullcite[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\supercite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \supercite[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\footcitetext[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \footcitetext[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\autocite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline  \autocite[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\cite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline  \cite[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\cite*[<prenote>][<postnote>]{Nallapati:etal:16}= \newline  \cite*[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\citeauthor[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \citeauthor[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\citeauthor*[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \citeauthor*[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\citeurl[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \citeurl[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\citetitle[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \citetitle[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\citeyear[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \citeyear[<prenote>][<postnote>]{Nallapati:etal:16}
+\end{itemize} 
 
 References are stored in \texttt{references.bib}.
 #+END_SRC
@@ -3471,8 +3515,18 @@ References are stored in \texttt{references.bib}.
   address = {Stanford}
 }
 
-#+END_SRC
+@InProceedings{Nallapati:etal:16,
+  author = {Nallapati, Ramesh and Zhou, Bowen and dos Santos, Cicero and  Çağlar Gulçehre and Xiang, Bing},
+  title = {Abstractive Text Summarization using Sequence-to-sequence {RNN}s and Beyond},
+  pages = {280--290},
+  booktitle = {Proceedings of The 20th {SIGNLL} Conference on Computational Natural Language Learning},
+  year = {2016},
+  address = {Berlin, Germany},
+  url = {https://www.aclweb.org/anthology/K16-1028},
+  doi = {10.18653/v1/K16-1028},
+}
 
+#+END_SRC
 
 ** Linguistics
 
@@ -3483,7 +3537,7 @@ References are stored in \texttt{references.bib}.
 \exg. [Noch am Boden liegend$_i$], sei [auf ihn$_i$] eingetreten worden.\\
 still on.the floor lying be on him PART.kicked got\\
 `While he was still on the floor he was kicked.'\\
-(Cf. (422) in \citealt{Mueller:02})
+(Cf. (422) in \cite{Mueller:02})
 
 \noindent $\Rightarrow$ \url{http://texdoc.net/texmf-dist/doc/latex/linguex/linguex-doc.pdf} \\
 Note the Leipzig glossing rules: \url{http://www.eva.mpg.de/lingua/resources/glossing-rules.php}
@@ -3675,7 +3729,6 @@ SHELL := /bin/bash
 
 <<text-makefile>>
 #+END_SRC
-
 
 ** Beamer Makefile
 
