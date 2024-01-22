@@ -29,31 +29,32 @@
 \newcommand{\anvar}{\rule{0.4em}{0.4pt}\,}
 \newcommand{\trace}[0]{\raisebox{1pt}{\underline{$~~~$}}}
 
-% Taken from https://tex.stackexchange.com/a/60253/61499
-\makeatletter
-\newcommand*\myrel@kern[1]{\kern#1\dimexpr\macc@kerna}
-\def\widebar#1{% use \def to optionally overwrite \widebar 
-  \begingroup
-  \def\mathaccent##1##2{%
-    \myrel@kern{0.8}%
-    \overline{\myrel@kern{-0.8}\macc@nucleus\myrel@kern{0.2}}%
-    \myrel@kern{-0.2}%
-  }%
-  \macc@depth\@ne
-  \let\math@bgroup\@empty \let\math@egroup\macc@set@skewchar
-  \mathsurround\z@ \frozen@everymath{\mathgroup\macc@group\relax}%
-  \macc@set@skewchar\relax
-  \let\mathaccentV\macc@nested@a
-  \macc@nested@a\relax111{#1}%
-  \endgroup
-}
-\makeatother
+% % Taken from https://tex.stackexchange.com/a/60253/61499
+% \makeatletter
+% \newcommand*\myrel@kern[1]{\kern#1\dimexpr\macc@kerna}
+% \def\widebar#1{% use \def to optionally overwrite \widebar 
+%   \begingroup
+%   \def\mathaccent##1##2{%
+%     \myrel@kern{0.8}%
+%     \overline{\myrel@kern{-0.8}\macc@nucleus\myrel@kern{0.2}}%
+%     \myrel@kern{-0.2}%
+%   }%
+%   \macc@depth\@ne
+%   \let\math@bgroup\@empty \let\math@egroup\macc@set@skewchar
+%   \mathsurround\z@ \frozen@everymath{\mathgroup\macc@group\relax}%
+%   \macc@set@skewchar\relax
+%   \let\mathaccentV\macc@nested@a
+%   \macc@nested@a\relax111{#1}%
+%   \endgroup
+% }
+% \makeatother
 
 %% Dingbats, i.e. symbolic, decorative glyphs
 \RequirePackage{pifont}
 \newcommand{\cmark}{\ding{51}}  % checkmark
 \newcommand{\xmark}{\ding{55}}  % xmark
 
+%% Instead of \operatorname{argmax}
 \DeclareMathOperator*{\argmax}{argmax}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
