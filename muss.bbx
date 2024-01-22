@@ -1,12 +1,12 @@
 % File:    muss.bbx
 % Author:  Timm Lichte (http://timm-lichte.de)
-% Date:    2023-01-06T09:54:05+01:00
-% Version: 0.1.1 (tested with BibLaTeX v3.17)
+% Date:    2023-09-08T09:04:24+0200
+% Version: 0.4 (tested with BibLaTeX v3.19)
 % License: LPPL Version 1.3c
 %
-% ----------------------------------
-% MUSS: Minimal Unified Style Sheet
-% ----------------------------------
+% ----------------------------------------------------------------
+% MUSS: Minimal Unified Style Sheet for Computational Linguistics
+% ----------------------------------------------------------------
 %
 % MUSS is a style sheet for BibLaTeX that seeks minimality in different ways:
 %
@@ -22,7 +22,7 @@
 %
 % - Unified Style Sheet (USS), a set of general style rules for references
 %   (see https://www.linguisticsociety.org/resource/unified-style-sheet)
-% - langsci-unified.bbx, an BibLaTeX implementation of the USS that is part of the
+% - langsci-unified.bbx, a BibLaTeX implementation of the USS that is part of the
 %   langscibook class (see https://github.com/langsci/langscibook),
 %   and therefore also biblatex-unified.bbx, on which langsci-unified.bbx is based
 %   (see https://github.com/semprag/biblatex-sp-unified)
@@ -37,8 +37,8 @@
 % techreport, thesis
 %
 % List of currently supported entry fields (depending on the entry type):
-% author, booksubtitle, booktitle, doi, edition, editor, institution, journal, note, number, pages,
-% publisher, school, subtitle, title, type, url, urldate, volume, year
+% author, booktitle, doi, edition, editor, institution, journal, note, number, pages,
+% publisher, school, title, type, url, urldate, volume, year
 %
 % Yes, there is no address field; this is a deliberate decision.
 %
@@ -56,6 +56,7 @@
 }
 
 % MUSS is derived from authoryear.bbx, which extends standard.bbx.
+% Note that by default also the definitions in biblatex.def are used.
 \RequireBibliographyStyle{authoryear}
 
 % Set options defined in authoryear.
@@ -72,9 +73,15 @@
 % Special strings
 %%%%%%%%%%%%%%%%%%%%%%%% 
 
+\NewBibliographyString{thesisat}
+\NewBibliographyString{reportat}
+
 \DefineBibliographyStrings{english}{%
   edition          = {edn\adddot},
-  phdthesis        = {Doctoral dissertation},
+  phdthesis        = {doctoral dissertation}, % default string used when type is undefined
+  techreport       = {technical report},      % default string used when type is undefined
+  thesisat         = {at},
+  reportat         = {at},
 }
 
 
@@ -83,7 +90,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%% 
 
 \renewcommand*{\intitlepunct}{\addspace} % Remove colon from "In:".
-\renewcommand*{\subtitlepunct}{\addcolon\space} % Separate title and subtitle with a colon
 \renewcommand*{\finalnamedelim}{\addspace\&\addspace} % Use ampersand in name lists
 \renewcommand*{\finallistdelim}{\addspace\&\addspace} % Use ampersand in name lists
 % \renewcommand*{\finentrypunct}{} % Remove period from end of entry.
@@ -98,10 +104,10 @@
 \DeclareFieldFormat{pages}{#1}
 
 % No quotes around titles (drivers have to be specified)
-\DeclareFieldFormat[article,inbook,incollection,inproceedings,patent,thesis,unpublished]{title}{#1}
+\DeclareFieldFormat[article,inbook,incollection,inproceedings,patent,thesis,report,unpublished]{title}{#1}
 
-% The titles of books and theses are printed with italics.
-\DeclareFieldFormat[book,collection,thesis]{title}{\mkbibemph{#1}}
+% The titles of books, reports and theses are printed with italics.
+\DeclareFieldFormat[book,collection,report,thesis]{title}{\mkbibemph{#1}}
 
 % Put square brackets around note.
 \DeclareFieldFormat{note}{\mkbibbrackets{#1}}
@@ -134,22 +140,16 @@
   }                               
   {\global\undef\bbx@lasthash
     \usebibmacro{labeltitle}%
-  }     
+  }%
 }
 
 \newbibmacro*{muss:booktitle}{%
-  \ifboolexpr{
-    test {\iffieldundef{booktitle}}
-    and
-    test {\iffieldundef{booksubtitle}}
-  }
+  \iffieldundef{booktitle}
   {}
   {\printtext[booktitle]{%
-      \printfield[titlecase]{booktitle}%
-      \setunit{\subtitlepunct}%
-      \printfield[titlecase]{booksubtitle}}%
+      \printfield[titlecase]{booktitle}}%
   }%
-  \printfield{booktitleaddon}}
+}
 
 \newbibmacro*{muss:byeditor+others}{%
   \ifnameundef{editor}
@@ -176,14 +176,21 @@
 }
 
 \newbibmacro*{muss:doi+url+publisher}{%
+  \ifboolexpr{
+    test {\ifentrytype{book}}
+    or
+    test {\ifentrytype{collection}}
+    or
+    test {\ifentrytype{incollection}}
+  }
+  {\printlist{publisher}\newunit}
+  {}%
   \iffieldundef{doi}
   {\iffieldundef{url}
-    {\ifentrytype{article}
-      {}
-      {\printlist{publisher}}}
+    {}
     {\usebibmacro{url+urldate}}}
-  {\printfield{doi}}
-}%
+  {\printfield{doi}}%
+}
 
 \newbibmacro*{muss:journal+volume+number+eid}{%
   \usebibmacro{journal}%
@@ -211,7 +218,7 @@
   {}
   \ifentrytype{inproceedings}
   {\usebibmacro{in:}%
-    \usebibmacro{muss:booktitle}
+    \usebibmacro{muss:booktitle}%
     \setunit{\addcomma\space}%
     \usebibmacro{muss:pages}}% 
   {}
@@ -220,7 +227,7 @@
     \ifnameundef{editor}
     {\setunit{\addspace}}
     {\usebibmacro{muss:byeditor+others}
-      \setunit{\addcomma\space}}
+      \setunit{\addcomma\space}}%
     \usebibmacro{muss:booktitle}%
     \setunit{\addcomma\space}%
     \printfield{edition}%
@@ -231,42 +238,49 @@
     test {\ifentrytype{book}}
     or
     test {\ifentrytype{collection}}
+    or
+    test {\ifentrytype{incollection}}
   }
   {\printfield{edition}}
-  {}
+  {}%
 }
 
-\newbibmacro*{muss:thesistype+institution}{%
-  \printfield{type} at \printlist{institution}%
+\newbibmacro*{muss:type+institution}{%
+  \ifentrytype{report}
+  {\printfield{type}\addspace\printfield{number}\addspace\bibstring{thesisat}\addspace\printlist{institution}}
+  {}%
+  \ifentrytype{thesis}
+  {\printfield{type}\addspace\bibstring{thesisat}\addspace\printlist{institution}}
+  {}%
 }
 
 \newbibmacro*{muss:title}{%
-  \ifboolexpr{
-    test {\iffieldundef{title}}
-    and
-    test {\iffieldundef{subtitle}}
-  }
+  \iffieldundef{title}
   {}
   {\printtext[title]{%
-      \printfield[titlecase]{title}%
-      \setunit{\subtitlepunct}%
-      \printfield[titlecase]{subtitle}}%
+      \printfield[titlecase]{title}}%
   }
-  \printfield{titleaddon}}
+}
 
 \newbibmacro*{muss:typeof}{%
-  \ifentrytype{thesis}
-  {\printtext[parens]{\usebibmacro{muss:thesistype+institution}}}
+  \ifboolexpr{%
+    test {\ifentrytype{report}}
+    or
+    test {\ifentrytype{thesis}}
+  }
+  {\printtext[parens]{\usebibmacro{muss:type+institution}}}
   {}
   \ifboolexpr{%
     test {\ifentrytype{book}}
     or
     test {\ifentrytype{collection}}
+    or
+    test {\ifentrytype{incollection}}
   }
   {\iffieldundef{series}
     {}
     {\printtext[parens]{\usebibmacro{series+number}}}}
-  {}
+  {}%
 }
 
 % muss:finentry is introduced to have better control.
@@ -286,8 +300,8 @@
   \usebibmacro{begentry}%
   \ifentrytype{collection}
   {\usebibmacro{muss:editor+others}}
-  {\usebibmacro{muss:author}}
-  \newunit
+  {\usebibmacro{muss:author}}%
+  \newunit%
   \usebibmacro{muss:date+extradate}%
   \setunit{\printdelim{nametitledelim}}%
   \newblock%
@@ -309,15 +323,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%% 
 
 \DeclareBibliographyAlias{article}{object}
-\DeclareBibliographyAlias{inproceedings}{object}
-\DeclareBibliographyAlias{incollection}{object}
-\DeclareBibliographyAlias{thesis}{object}
 \DeclareBibliographyAlias{book}{object}
-\DeclareBibliographyAlias{online}{object}
 \DeclareBibliographyAlias{collection}{object} % TODO: editors
+\DeclareBibliographyAlias{incollection}{object}
+\DeclareBibliographyAlias{inproceedings}{object}
+\DeclareBibliographyAlias{online}{object}
+\DeclareBibliographyAlias{report}{object}
+\DeclareBibliographyAlias{thesis}{object}
 
 \DeclareBibliographyAlias{phdthesis}{thesis}
-\DeclareBibliographyAlias{report}{book} % also influences techreport
+\DeclareBibliographyAlias{techreport}{report}
 \DeclareBibliographyAlias{manual}{book}
 
 
