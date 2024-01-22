@@ -449,7 +449,7 @@ This is an abstract: \lipsum[1]
 \definecolor{myred}{rgb}{0.8,0,0}
 \definecolor{mydarkgreen}{rgb}{0,0.55,0}
 
-\renewcommand{\bsp}[1]{{\usebeamercolor[bg!90]{block title example}\itshape\bfseries #1}}
+\newcommand{\bsp}[1]{{\usebeamercolor[bg!90]{block title example}\itshape\bfseries #1}}
 \newcommand{\term}[1]{{\usebeamercolor[fg!100]{math text displayed}\scshape\bfseries #1}} 
 \newcommand{\bspcolor}[1]{{\usebeamercolor[bg!90]{block title example}\bfseries #1}}
 
@@ -534,7 +534,7 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 \definecolor{myred}{rgb}{0.8,0,0}
 \definecolor{mydarkgreen}{rgb}{0,0.55,0}
 
-\renewcommand{\bsp}[1]{{\usebeamercolor[bg!90]{block title example}\itshape\bfseries #1}}
+\newcommand{\bsp}[1]{{\usebeamercolor[bg!90]{block title example}\itshape\bfseries #1}}
 \newcommand{\term}[1]{{\usebeamercolor[fg!100]{math text displayed}\scshape\bfseries #1}} 
 \newcommand{\bspcolor}[1]{{\usebeamercolor[bg!90]{block title example}\bfseries #1}}
 
@@ -2972,7 +2972,7 @@ Collection of private macros on which the templates do not depend.
 % SYMBOLS            % 
 %%%%%%%%%%%%%%%%%%%%%% 
 
-\newcommand{\bsp}[1]{\textit{#1}}
+% \newcommand{\bsp}[1]{\textit{#1}} % Probably defines elsewhere
 \newcommand{\am}{\parallel}
 \newcommand{\unify}{\sqcup}
 \newcommand{\word}{\overline}
