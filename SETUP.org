@@ -664,7 +664,6 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 %  Document end   % 
 %%%%%%%%%%%%%%%%%%% 
 
-
 \insertBib
 
 \end{document}
@@ -683,6 +682,7 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 #+BEGIN_SRC latex :noweb yes :tangle hausarbeit-main.tex
 \documentclass[
   11pt,
+  bibliography=totoc,
   twoside,
   ]{scrartcl}
 
