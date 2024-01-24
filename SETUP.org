@@ -339,7 +339,6 @@ Remember to first add the class to the set of known classes (in =init.el=).
 # end:
 #+END_SRC
 
-
 #+NAME: article-template-tex
 #+BEGIN_SRC latex :noweb yes :tangle article-main.tex
 \documentclass[
@@ -915,7 +914,7 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 
 <<pdflatex-settings>>
 
-<<tikz-settings>>
+<<tikz-settings-input>>
 
 <<forest-settings>>
 
@@ -1841,7 +1840,7 @@ Some templates require it to have the tikz settings in a separate sty-file.
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{tikz-settings}
 
-<<tikz-settings>>
+<<tikz-settings-input>>
 
 <<forest-settings>>
 
@@ -1949,7 +1948,7 @@ aspectratio=169,
 \usepackage{etex} 
 \usepackage{graphics}
 
-<<tikz-settings>>
+<<tikz-settings-input>>
 
 <<forest-settings>>
 
@@ -2019,7 +2018,7 @@ numbers=noenddot,
 %% Trees and graphics
 \usepackage{graphics}
 
-<<tikz-settings>>
+<<tikz-settings-input>>
 
 <<forest-settings>>
 
@@ -2197,6 +2196,10 @@ numbers=noenddot,
 
 ** Forest
 
+https://ctan.org/pkg/forest
+
+Drawing tree-shaped graphs with TikZ.
+
 #+NAME: forest-settings
 #+BEGIN_SRC latex :noweb yes
 %%%%%%%%%%%%%%%%%%%%%%% 
@@ -2356,9 +2359,19 @@ numbers=noenddot,
       }}{}}
 }
 
+
+#+END_SRC
+
+#+NAME: forest-settings-file
+#+BEGIN_SRC latex :noweb yes :tangle packages/forest-settings.tex
+<<forest-settings>>
 #+END_SRC
 
 ** AVM
+
+https://ctan.org/pkg/langsci-avm
+
+Typesetting feature structures in the form of attribute-value matrices. 
 
 #+NAME: langsci-avm-settings
 #+BEGIN_SRC latex
@@ -2371,6 +2384,12 @@ numbers=noenddot,
 
 #+END_SRC
 
+#+NAME: langsci-avm-settings-file
+#+BEGIN_SRC latex :noweb yes :tangle packages/langsci-avm-settings.tex
+<<langsci-avm-settings>>
+#+END_SRC
+
+The following are settings for a legacy AVM package.
 
 #+NAME: avm-settings
 #+BEGIN_SRC latex
@@ -2395,6 +2414,8 @@ numbers=noenddot,
     \end{avm}
     \hspace{-0.5em}
 }
+
+
 #+END_SRC
 
 ** TODO BibLaTeX
@@ -2402,6 +2423,11 @@ numbers=noenddot,
 - State "TODO"       from              [2017-08-18 Fr 08:15]
 :END:
 
+https://ctan.org/pkg/biblatex
+
+Citation management and formatting of bibliographies.
+
+Issues
 - [ ] add =\abstractTrue=
 
 #+NAME: biblatex-settings
@@ -2439,6 +2465,28 @@ numbers=noenddot,
 \renewcommand{\compcitedelim}{\multicitedelim}%
 \DeclareFieldFormat{postnote}{#1}%
 
+%% The bibliography file is specified like this
+\addbibresource[datatype=bibtex]{references.bib}
+
+\newcommand{\insertBib}{
+  \printbibliography[
+    % notkeyword=this
+    ] 
+}
+
+% % Compat definitions to make available BibTeX macros in BibLaTeX 
+% \let\citealt=\cite
+% \let\cite=\textcite
+% \let\citep=\parencite
+% \let\citet=\cite
+% \newcommand{\citeauthoryear}[1]{\citeauthor{#1} (\citeyear{#1})}
+% \newcommand{\citealtauthoryear}[1]{\citeauthor{#1} \citeyear{#1}}
+
+
+#+END_SRC
+
+#+NAME: biblatex-beamer-settings
+#+BEGIN_SRC latex
 %% beamer settings
 \makeatletter
 \@ifclassloaded{beamer}{  
@@ -2505,6 +2553,15 @@ numbers=noenddot,
 }{}
 \makeatother
 
+#+END_SRC
+
+#+NAME: biblatex-beamer-settings-file
+#+BEGIN_SRC latex :noweb yes :tangle packages/biblatex-beamer-settings.tex
+<<biblatex-beamer-settings>>
+#+END_SRC
+
+#+NAME: biblatex-tikzposter-settings
+#+BEGIN_SRC latex
 %% tikzposter settings
 \makeatletter
 \@ifclassloaded{tikzposter}{  
@@ -2560,26 +2617,18 @@ numbers=noenddot,
 }{}
 \makeatother
 
-%% The bibliography file is specified like this
-\addbibresource[datatype=bibtex]{references.bib}
+#+END_SRC
 
-\newcommand{\insertBib}{
-  \printbibliography[
-    % notkeyword=this
-    ] 
-}
-
-% % Compat definitions to make available BibTeX macros in BibLaTeX 
-% \let\citealt=\cite
-% \let\cite=\textcite
-% \let\citep=\parencite
-% \let\citet=\cite
-% \newcommand{\citeauthoryear}[1]{\citeauthor{#1} (\citeyear{#1})}
-% \newcommand{\citealtauthoryear}[1]{\citeauthor{#1} \citeyear{#1}}
-
+#+NAME: biblatex-tikzposter-settings-file
+#+BEGIN_SRC latex :noweb yes :tangle packages/biblatex-tikzposter-settings.tex
+<<biblatex-tikzposter-settings>>
 #+END_SRC
 
 ** Hyperrefs
+
+https://ctan.org/pkg/hyperref
+
+Handling cross-references and hyperlinks.
 
 #+NAME: hyperrefs-settings
 #+BEGIN_SRC latex
@@ -2611,6 +2660,10 @@ numbers=noenddot,
 
 ** Listings
 
+https://ctan.org/pkg/listings
+
+Typeset program code.
+
 #+NAME: listings-settings
 #+BEGIN_SRC latex
 %%%%%%%%%%%%%%%%%%%%%%%% 
@@ -2622,6 +2675,21 @@ numbers=noenddot,
 \lstset{basicstyle=\ttfamily,tabsize=2,breaklines=true}
 \usepackage{color}
 \definecolor{lightgray}{gray}{0.7}
+
+%% Add syntax highlighting for specific programming languages
+% \input{packages/listings-xmg-settings.tex} 
+
+
+#+END_SRC
+
+#+NAME: listings-settings-file
+#+BEGIN_SRC latex :noweb yes :tangle packages/listings-settings.tex
+<<listings-settings>>
+#+END_SRC
+
+#+NAME: listings-xmg-settings
+#+BEGIN_SRC latex
+% Syntax highlighting for XMG: https://xmg.phil.hhu.de/
 
 \lstnewenvironment{xmg}{%
   \lstset{language=,
@@ -2644,6 +2712,23 @@ numbers=noenddot,
   morekeywords={node,type,feature,iface,include,class,import,export,declare,syn,sem,value, use, with, dims,frame,morph,lemma,morpho,fam,entry}
 }
 
+\newcommand{\ixmg}{%
+  \lstinline[language=,keepspaces,%
+    literate={->}{{{\textbf{->}}}}1 {\{}{{{\textbf{\{}}}}1 {\}}{{{\textbf{\}}}}}1 {\;}{{{\textbf{;}}}}1 {|}{{{\textbf{|}}}}1 {=}{{{\textbf{=}}}}1 {[}{{{\textbf{[}}}}1 {]}{{{\textbf{]}}}}1 {<}{{{\textbf{<}}}}1 {>}{{{\textbf{>}}}}1 {!}{{{\textbf{!}}}}1 {?}{{{\textbf{?}}}}1 {*=}{{{\textbf{*=}}}}1,%
+    morekeywords={node,type,feature,include,class,import,export,declare,syn,sem,frame,morph,value, use, with, dims}
+    ]}
+
+#+END_SRC
+
+#+NAME: listings-xmg-settings-file
+#+BEGIN_SRC latex :noweb yes :tangle packages/listings-xmg-settings.tex
+<<listings-xmg-settings>>
+#+END_SRC
+
+#+NAME: listings-duelme-settings
+#+BEGIN_SRC latex
+% Syntax highlighting for DuELME: https://duelme.clarin.inl.nl/
+
 \lstnewenvironment{duelme}{%
   \lstset{language=,
     numbers=left,numbersep=8pt,numberstyle=\color{lightgray},
@@ -2653,6 +2738,17 @@ numbers=noenddot,
     framerule=0.5mm,rulecolor=\color{lightgray},%
     escapeinside={|\%}{\%|},%
     commentstyle=\color{lightgray},     morekeywords={PATERN,NAME,POS,PATTERN,MAPPING,EXAMPLE,MWE,SENTENCE,DESCRIPTION,COMMENT,LISTA,LISTB,SUBJECT,OBJECT,MODIFIER,RPRON,CONJUGATION,POLARITY,EXPRESSION,CL}}}{}
+
+#+END_SRC
+
+#+NAME: listings-duelme-settings-file
+#+BEGIN_SRC latex :noweb yes :tangle packages/listings-duelme-settings.tex
+<<listings-duelme-settings>>
+#+END_SRC
+
+#+NAME: listings-patr-settings
+#+BEGIN_SRC latex
+% Syntax highlighting for PATR: https://en.wikipedia.org/wiki/PATR-II
 
 \lstnewenvironment{patr-listing}{%
   \lstset{language=,
@@ -2666,44 +2762,18 @@ numbers=noenddot,
     literate={:}{{{\textbf{:}}}}1 {\{}{{{\textbf{\{}}}}1 {\}}{{{\textbf{\}}}}}1 {=}{{{\textbf{=}}}}1 {[}{{{\textbf{[}}}}1 {]}{{{\textbf{]}}}}1 {<}{{{\textbf{<}}}}1 {>}{{{\textbf{>}}}}1 {!}{{{\textbf{!}}}}1, 
     morekeywords={Define,as,Word}}}{}
 
+#+END_SRC
 
-\newcommand{\ixmg}{%
-  \lstinline[language=,keepspaces,%
-    literate={->}{{{\textbf{->}}}}1 {\{}{{{\textbf{\{}}}}1 {\}}{{{\textbf{\}}}}}1 {\;}{{{\textbf{;}}}}1 {|}{{{\textbf{|}}}}1 {=}{{{\textbf{=}}}}1 {[}{{{\textbf{[}}}}1 {]}{{{\textbf{]}}}}1 {<}{{{\textbf{<}}}}1 {>}{{{\textbf{>}}}}1 {!}{{{\textbf{!}}}}1 {?}{{{\textbf{?}}}}1 {*=}{{{\textbf{*=}}}}1,%
-    morekeywords={node,type,feature,include,class,import,export,declare,syn,sem,frame,morph,value, use, with, dims}
-    ]}
-
-% \lstset{
-% basicstyle=\small\ttfamily,       
-%   % stepnumber=1,
-% tabsize=2,
-% breaklines=true,
-% linewidth=\textwidth,
-% escapeinside={<ESC>}{</ESC>},
-%   % prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\rhookswarrow}},
-%   % postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\rcurvearrowse\space}}
-% }           
-
-%   \lstnewenvironment{xmg}{%
-%   \lstset{
-%   language=,
-%   frame=l,
-%   basicstyle=\normalsize\ttfamily,%
-%   xleftmargin=0.6cm,framexleftmargin=0.3cm,%
-%   framerule=0.5mm,rulecolor=\color{lightgray},%
-%   escapeinside={<ESC>}{</ESC>},%
-%   commentstyle=\color{lightgray},
-%   literate={->}{{{\textbf{->}}}}1 {\{}{{{\textbf{\{}}}}1 {\}}{{{\textbf{\}}}}}1 {\;}{{{\textbf{;}}}}1 {|}{{{\textbf{|}}}}1 {=}{{{\textbf{=}}}}1 {[}{{{\textbf{[}}}}1 {]}{{{\textbf{]}}}}1 {<}{{{\textbf{<}}}}1 {>}{{{\textbf{>}}}}1 {!}{{{\textbf{!}}}}1 {?}{{{\textbf{?}}}}1 {*=}{{{\textbf{*=}}}}1,% 
-%   morekeywords={node,type,feature,include,class,import,export,declare,syn,sem,value, use, with, dims,frame,morph}}}{}
-
-%   \newcommand{\ixmg}{%
-%   \lstinline[language=,keepspaces,%
-%   literate={->}{{{\textbf{->}}}}1 {\{}{{{\textbf{\{}}}}1 {\}}{{{\textbf{\}}}}}1 {\;}{{{\textbf{;}}}}1 {|}{{{\textbf{|}}}}1 {=}{{{\textbf{=}}}}1 {[}{{{\textbf{[}}}}1 {]}{{{\textbf{]}}}}1 {<}{{{\textbf{<}}}}1 {>}{{{\textbf{>}}}}1 {!}{{{\textbf{!}}}}1 {?}{{{\textbf{?}}}}1 {*=}{{{\textbf{*=}}}}1,%
-%   morekeywords={node,type,feature,include,class,import,export,declare,syn,sem,value, use, with, dims,frame,morph}
-%   ]}
+#+NAME: listings-patr-settings-file
+#+BEGIN_SRC latex :noweb yes :tangle packages/listings-patr-settings.tex
+<<listings-patr-settings>>
 #+END_SRC
 
 ** PDFLaTeX
+
+https://www.tug.org/applications/pdftex/
+
+Basic settings for when PDFLaTeX is used.
 
 #+NAME: pdflatex-settings
 #+BEGIN_SRC latex
@@ -2745,15 +2815,18 @@ numbers=noenddot,
 \usepackage{iflang}                % for language specific settings
 #+END_SRC
 
-** scrarticle
+** Scrarticle
 
-#+NAME: scrarticle-settings-input
-#+BEGIN_SRC latex :noweb yes :tangle no
-\input{scrarticle-settings}
-#+END_SRC
+https://www.ctan.org/pkg/scrartcl
 
-#+NAME: scrarticle-settings
+Change the layout of scrarticle from [[https://www.ctan.org/pkg/koma-script][koma-script]]. This is more flexible than using the regular article class.
+
+#+NAME: scrarticle-settings-file
 #+BEGIN_SRC latex :noweb yes :tangle scrarticle-settings.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%  SCRARTICLE SETTINGS   % 
+%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
 \usepackage{datetime}
 % \usepackage{ifdraft}            % Better avoid the draft option
 
@@ -2819,9 +2892,19 @@ numbers=noenddot,
 
 \makeatother
 
+
 #+END_SRC
 
-** textpos
+#+NAME: scrarticle-settings-input
+#+BEGIN_SRC latex :noweb yes :tangle no
+\input{scrarticle-settings}
+#+END_SRC
+
+** Textpos
+
+https://ctan.math.washington.edu/tex-archive/macros/latex/contrib/textpos/textpos.pdf
+
+Absolute positioning of textblocks on a page.
 
 #+NAME: textpos-settings
 #+BEGIN_SRC latex
@@ -2829,11 +2912,14 @@ numbers=noenddot,
 %   TEXTPOS SETTINGS    % 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 
-\usepackage{calc}
-\usepackage[absolute,overlay]{textpos}
+\usepackage{calc} % Enables the use of calc expressions: 0pt+1cm
+\usepackage[
+  absolute, % Absolute positioning
+  overlay   % Positioned textblocks will overlay any other parts of the text.  
+]{textpos}
+
 \setlength{\TPHorizModule}{1em}
 \setlength{\TPVertModule}{1ex}
-
 \newlength{\textposOriginH}
 \newlength{\textposOriginV}
 \setlength{\textposOriginH}{10mm}
@@ -2846,14 +2932,46 @@ numbers=noenddot,
   \end{textblock}
 }
 
+
 #+END_SRC
 
-** TODO tabular
+** Todonotes
 
-- [ ] needs to be tested
+https://tug.ctan.org/macros/latex/contrib/todonotes/todonotes.pdf
+
+Add todo notes to your documents.
+
+#+NAME: todonotes-settings
+#+BEGIN_SRC latex
+%%%%%%%%%%%%%%%%%%%%%% 
+% TODONOTES          % 
+%%%%%%%%%%%%%%%%%%%%%% 
+
+\usepackage{soul}   % for text highlighting
+\usepackage[textsize=scriptsize,textwidth=2.5cm]{todonotes}
+\newcommand{\todoregion}[2]{\hl{#1}\todo{#2}}    
+
+
+#+END_SRC
+
+#+NAME: todonotes-settings-file
+#+BEGIN_SRC latex :noweb yes :tangle packages/todonotes-settings.tex
+<<todonotes-settings>>
+#+END_SRC
+
+** TODO Tabular
+
+Additional settings for tabular environments.
+
+Issues:
+- [ ] Adjustbox needs to be tested.
 
 #+NAME: tabular-settings
 #+BEGIN_SRC latex 
+%%%%%%%%%%%%%%%%%%%%%%%% 
+%  TABULAR SETTINGS    % 
+%%%%%%%%%%%%%%%%%%%%%%%% 
+
 %% Rotate content of tabular cell: \rot{content}
 \usepackage{adjustbox}
 \newcolumntype{R}[2]{%
@@ -2862,12 +2980,24 @@ numbers=noenddot,
   <{\egroup}%
 }
 \newcommand*\rot{\multicolumn{1}{R{45}{1em}}}% no optional argument here, please!
+
+
 #+END_SRC
 
-** tikz
+** TODO TikZ
+:LOGBOOK:
+- State "TODO"       from              [2024-01-24 Wed 09:07]
+:END:
 
-#+NAME: tikz-settings
-#+BEGIN_SRC latex
+https://ctan.org/pkg/pgf
+
+Comprehensive tool for typesetting graphics and diagrams.
+
+Issues:
+- [ ] Make settings more modular
+
+#+NAME: tikz-settings-file
+#+BEGIN_SRC latex :noweb yes :tangle packages/tikz-settings.tex
 %%%%%%%%%%%%%%%%%%%%%%
 %   TIKZ SETTINGS    % 
 %%%%%%%%%%%%%%%%%%%%%%
@@ -2928,7 +3058,17 @@ numbers=noenddot,
 \newcommand\tikztreeset[1]{\matrix [matrix of nodes,left delimiter=\{,right delimiter=\}](set){#1};}
 #+END_SRC
 
+#+NAME: tikz-settings-input
+#+BEGIN_SRC latex :noweb yes :tangle no
+\input{packages/tikz-settings}
+#+END_SRC
+
+
 ** natbib/BibTeX
+
+https://www.ctan.org/pkg/bibtex
+
+This package is superseded by [[BibLaTeX]].
 
 #+NAME: natbib_bibtex-settings
 #+BEGIN_SRC latex

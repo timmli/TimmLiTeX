@@ -38,64 +38,7 @@
 \usepackage{etex} 
 \usepackage{graphics}
 
-%%%%%%%%%%%%%%%%%%%%%%
-%   TIKZ SETTINGS    % 
-%%%%%%%%%%%%%%%%%%%%%%
-
-\usepackage{tikz}
-\usepackage{tikz-dependency}
-
-\tikzset{every tree node/.style={align=center,anchor=north}}	% to allow linebreaks
-\usetikzlibrary{calc} % for positioning arrows with ($(t.center)-(1,0)$)
-\usetikzlibrary{shapes,decorations}
-\usetikzlibrary{backgrounds,fit}
-\usetikzlibrary{arrows}
-\usetikzlibrary{matrix}
-\usetikzlibrary{positioning}
-\usetikzlibrary{automata}
-\usetikzlibrary{tikzmark}
-\usetikzlibrary{decorations.pathreplacing} % needed for braces in unify children
-
-% Define box and box title style (see http://www.texample.net/tikz/examples/boxes-with-text-and-math/)
-\tikzstyle{mybox} = [draw=gray, very thick,
-    rectangle, rounded corners, inner sep=10pt, inner ysep=17pt,yshift=3pt]
-\tikzstyle{fancytitle} =[draw=gray, very thick, fill=white,
-    rectangle, rounded corners, inner sep=5pt, inner ysep=5pt]
-\tikzstyle{mydouble} = [double distance=1pt]
-    
-\tikzset{
-  %% Define standard arrow tip
-  >=stealth',
-  %% Define style for boxes
-  box/.style={
-    rectangle,
-    rounded corners,
-    draw=black, very thick,
-    text width=10em,
-    minimum height=2em,
-    text centered},
-  %% Define arrow style
-  arrow/.style={
-    ->,
-    thick,
-    shorten <=2pt,
-    shorten >=2pt,},
-  %% Beamer overlays (https://tex.stackexchange.com/a/253384/61499)
-  invisible/.style={opacity=0,text opacity=0},
-  visible/.style={alt=#1{}{invisible}},
-  alt/.code args={<#1>#2#3}{%
-    \alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}}},
-  transparent/.style={opacity=0.1,text opacity=0.1},
-  opaque/.style={alt=#1{}{transparent}},
-  alerted/.style={color=alerted text.fg},
-  alert/.style={alt=#1{alerted}{}},
-}
-
-\newcommand\centertikz[1]{\tikz[baseline=(current bounding box.center)]{#1}}
-\newcommand\tikzcenter{baseline=(current bounding box.center)}
-\newcommand\tikztop{baseline=(current bounding box.north)}
-
-\newcommand\tikztreeset[1]{\matrix [matrix of nodes,left delimiter=\{,right delimiter=\}](set){#1};}
+\input{packages/tikz-settings}
 
 %%%%%%%%%%%%%%%%%%%%%%% 
 %   FOREST SETTINGS   % 
@@ -255,6 +198,7 @@
 }
 
 
+
 \usepackage{url}
 \usepackage{amsmath,amssymb,amsfonts,marvosym}
 \usepackage{ulem}			% to cross out text
@@ -285,84 +229,10 @@
 \usepackage{color}
 \definecolor{lightgray}{gray}{0.7}
 
-\lstnewenvironment{xmg}{%
-  \lstset{language=,
-    numbers=left,numbersep=8pt,numberstyle=\color{lightgray},
-    % frame=l,
-    basicstyle=\small\ttfamily,%
-    xleftmargin=0.7cm,framexleftmargin=12pt,%
-    framerule=0.5mm,rulecolor=\color{lightgray},%
-    escapeinside={|\%}{\%|},%
-    commentstyle=\color{lightgray},
-    literate={->}{{{\textbf{->}}}}1 {<-}{{{\textbf{<-}}}}1 {\{}{{{\textbf{\{}}}}1 {\}}{{{\textbf{\}}}}}1 {\;}{{{\textbf{;}}}}1 {|}{{{\textbf{|}}}}1 {=}{{{\textbf{=}}}}1 {[}{{{\textbf{[}}}}1 {]}{{{\textbf{]}}}}1 {<}{{{\textbf{<}}}}1 {>}{{{\textbf{>}}}}1 {!}{{{\textbf{!}}}}1 {?}{{{\textbf{?}}}}1 {*=}{{{\textbf{*=}}}}1,% 
-    morekeywords={node,type,feature,iface,include,class,import,export,declare,syn,sem,value, use, with, dims,frame,morph,lemma,morpho,fam,entry}
-  }}{}
-
-\lstdefinestyle{xmg}{
-  % keywordstyle = \color{HHUblue}\bfseries,
-  % stringstyle=\color{red}\ttfamily,
-  commentstyle=\color{lightgray},
-  literate={->}{{{\textbf{->}}}}1 {<-}{{{\textbf{<-}}}}1 {\{}{{{\textbf{\{}}}}1 {\}}{{{\textbf{\}}}}}1 {\;}{{{\textbf{;}}}}1 {|}{{{\textbf{|}}}}1 {=}{{{\textbf{=}}}}1 {[}{{{\textbf{[}}}}1 {]}{{{\textbf{]}}}}1 {<}{{{\textbf{<}}}}1 {>}{{{\textbf{>}}}}1 {!}{{{\textbf{!}}}}1 {?}{{{\textbf{?}}}}1 {*=}{{{\textbf{*=}}}}1  {'c}{{\'c}}1,% 
-  morekeywords={node,type,feature,iface,include,class,import,export,declare,syn,sem,value, use, with, dims,frame,morph,lemma,morpho,fam,entry}
-}
-
-\lstnewenvironment{duelme}{%
-  \lstset{language=,
-    numbers=left,numbersep=8pt,numberstyle=\color{lightgray},
-    % frame=l,
-    basicstyle=\small\ttfamily,%
-    xleftmargin=0.7cm,framexleftmargin=12pt,%
-    framerule=0.5mm,rulecolor=\color{lightgray},%
-    escapeinside={|\%}{\%|},%
-    commentstyle=\color{lightgray},     morekeywords={PATERN,NAME,POS,PATTERN,MAPPING,EXAMPLE,MWE,SENTENCE,DESCRIPTION,COMMENT,LISTA,LISTB,SUBJECT,OBJECT,MODIFIER,RPRON,CONJUGATION,POLARITY,EXPRESSION,CL}}}{}
-
-\lstnewenvironment{patr-listing}{%
-  \lstset{language=,
-    numbers=left,numbersep=8pt,numberstyle=\color{lightgray},
-    % frame=l,
-    basicstyle=\small\ttfamily,%
-    xleftmargin=0.7cm,framexleftmargin=12pt,%
-    framerule=0.5mm,rulecolor=\color{lightgray},%
-    escapeinside={|\%}{\%|},%
-    commentstyle=\color{lightgray},
-    literate={:}{{{\textbf{:}}}}1 {\{}{{{\textbf{\{}}}}1 {\}}{{{\textbf{\}}}}}1 {=}{{{\textbf{=}}}}1 {[}{{{\textbf{[}}}}1 {]}{{{\textbf{]}}}}1 {<}{{{\textbf{<}}}}1 {>}{{{\textbf{>}}}}1 {!}{{{\textbf{!}}}}1, 
-    morekeywords={Define,as,Word}}}{}
+%% Add syntax highlighting for specific programming languages
+% \input{packages/listings-xmg-settings.tex} 
 
 
-\newcommand{\ixmg}{%
-  \lstinline[language=,keepspaces,%
-    literate={->}{{{\textbf{->}}}}1 {\{}{{{\textbf{\{}}}}1 {\}}{{{\textbf{\}}}}}1 {\;}{{{\textbf{;}}}}1 {|}{{{\textbf{|}}}}1 {=}{{{\textbf{=}}}}1 {[}{{{\textbf{[}}}}1 {]}{{{\textbf{]}}}}1 {<}{{{\textbf{<}}}}1 {>}{{{\textbf{>}}}}1 {!}{{{\textbf{!}}}}1 {?}{{{\textbf{?}}}}1 {*=}{{{\textbf{*=}}}}1,%
-    morekeywords={node,type,feature,include,class,import,export,declare,syn,sem,frame,morph,value, use, with, dims}
-    ]}
-
-% \lstset{
-% basicstyle=\small\ttfamily,       
-%   % stepnumber=1,
-% tabsize=2,
-% breaklines=true,
-% linewidth=\textwidth,
-% escapeinside={<ESC>}{</ESC>},
-%   % prebreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\rhookswarrow}},
-%   % postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\rcurvearrowse\space}}
-% }           
-
-%   \lstnewenvironment{xmg}{%
-%   \lstset{
-%   language=,
-%   frame=l,
-%   basicstyle=\normalsize\ttfamily,%
-%   xleftmargin=0.6cm,framexleftmargin=0.3cm,%
-%   framerule=0.5mm,rulecolor=\color{lightgray},%
-%   escapeinside={<ESC>}{</ESC>},%
-%   commentstyle=\color{lightgray},
-%   literate={->}{{{\textbf{->}}}}1 {\{}{{{\textbf{\{}}}}1 {\}}{{{\textbf{\}}}}}1 {\;}{{{\textbf{;}}}}1 {|}{{{\textbf{|}}}}1 {=}{{{\textbf{=}}}}1 {[}{{{\textbf{[}}}}1 {]}{{{\textbf{]}}}}1 {<}{{{\textbf{<}}}}1 {>}{{{\textbf{>}}}}1 {!}{{{\textbf{!}}}}1 {?}{{{\textbf{?}}}}1 {*=}{{{\textbf{*=}}}}1,% 
-%   morekeywords={node,type,feature,include,class,import,export,declare,syn,sem,value, use, with, dims,frame,morph}}}{}
-
-%   \newcommand{\ixmg}{%
-%   \lstinline[language=,keepspaces,%
-%   literate={->}{{{\textbf{->}}}}1 {\{}{{{\textbf{\{}}}}1 {\}}{{{\textbf{\}}}}}1 {\;}{{{\textbf{;}}}}1 {|}{{{\textbf{|}}}}1 {=}{{{\textbf{=}}}}1 {[}{{{\textbf{[}}}}1 {]}{{{\textbf{]}}}}1 {<}{{{\textbf{<}}}}1 {>}{{{\textbf{>}}}}1 {!}{{{\textbf{!}}}}1 {?}{{{\textbf{?}}}}1 {*=}{{{\textbf{*=}}}}1,%
-%   morekeywords={node,type,feature,include,class,import,export,declare,syn,sem,value, use, with, dims,frame,morph}
-%   ]}
 
 %% Bibliography
 
@@ -399,127 +269,6 @@
 \renewcommand{\compcitedelim}{\multicitedelim}%
 \DeclareFieldFormat{postnote}{#1}%
 
-%% beamer settings
-\makeatletter
-\@ifclassloaded{beamer}{  
-  \DeclareFieldFormat{labelnumberwidth}{[#1]}
-  \defbibenvironment{bibliography}  % from numeric.bbx
-  {\list
-    {\printtext[labelnumberwidth]{%
-        \printfield{prefixnumber}%
-        \printfield{labelnumber}}}
-    {\setlength{\labelwidth}{\labelnumberwidth}%
-      \setlength{\leftmargin}{\labelwidth}%
-      \setlength{\labelsep}{1em}%
-      \addtolength{\leftmargin}{1em}%
-      \setlength{\itemsep}{\bibitemsep}%
-      \setlength{\parsep}{\bibparsep}}%
-    \renewcommand*{\makelabel}[1]{\hss##1}}
-  {\endlist}
-  {\item}
-  % \DeclareCiteCommand{\supercite}[\mkbibsuperscript]{
-  % \iffieldundef{prenote}
-  % {}
-  % {\BibliographyWarning{Ignoring prenote argument}}%
-  % \iffieldundef{postnote}
-  % {}
-  % {\BibliographyWarning{Ignoring postnote argument}}}
-  % {\usebibmacro{citeindex}%
-  % \color{gray}\bibopenbracket\usebibmacro{cite}\bibclosebracket}
-  % {\supercitedelim}
-  % {}
-  \DeclareCiteCommand{\supercite}[\mkbibsuperscript]
-  {\color{gray} % added color
-    \usebibmacro{cite:init}%
-    \let\multicitedelim=\supercitedelim
-    \iffieldundef{prenote}
-    {}
-    {\BibliographyWarning{Ignoring prenote argument}}%
-    \iffieldundef{postnote}
-    {}
-    {\BibliographyWarning{Ignoring postnote argument}}%
-    \bibopenbracket}%
-  {\usebibmacro{citeindex}%
-    \usebibmacro{cite:comp}}
-  {}
-  {\usebibmacro{cite:dump}\bibclosebracket}
-
-  \DeclareCiteCommand{\citeauthor}  % from sp-authoryear-comp.cbx; to add hyperref link  
-  {\boolfalse{citetracker}%
-    \boolfalse{pagetracker}%
-    \usebibmacro{prenote}}
-  {\ifciteindex
-    {\indexnames{labelname}}
-    {}%
-    \printtext[bibhyperref]{\printnames{labelname}}}
-  {\multicitedelim}
-  {\usebibmacro{postnote}}
-
-  \DeclareCiteCommand{\citeyear}  % from sp-authoryear-comp.cbx; to add hyperref link  
-  {\boolfalse{citetracker}%
-    \boolfalse{pagetracker}%
-    \usebibmacro{prenote}}
-  {\printfield[bibhyperref]{year}}
-  {\multicitedelim}
-  {\usebibmacro{postnote}}
-}{}
-\makeatother
-
-%% tikzposter settings
-\makeatletter
-\@ifclassloaded{tikzposter}{  
-  \DeclareFieldFormat{labelnumberwidth}{#1}
-  \defbibenvironment{bibliography}
-  {\footnotesize\noindent}
-  {\unspace}
-  {}
-  \renewbibmacro*{begentry}{%
-    \textbf{\color{HHUblue}%
-      \printtext[labelnumberwidth]{%
-        [\printfield{prefixnumber}%
-          \printfield{labelnumber}]}%
-      \space
-      % \setunit{\addspace}
-    }}
-  \renewcommand*{\finentrypunct}{\addperiod\space}
-
-  \DeclareCiteCommand{\supercite}[\mkbibsuperscript]
-  {\color{gray} % added color
-    \usebibmacro{cite:init}%
-    \let\multicitedelim=\supercitedelim
-    \iffieldundef{prenote}
-    {}
-    {\BibliographyWarning{Ignoring prenote argument}}%
-    \iffieldundef{postnote}
-    {}
-    {\BibliographyWarning{Ignoring postnote argument}}%
-    \bibopenbracket}%
-  {\usebibmacro{citeindex}%
-    \usebibmacro{cite:comp}}
-  {}
-  {\usebibmacro{cite:dump}\bibclosebracket}
-
-  \DeclareCiteCommand{\citeauthor}  % from sp-authoryear-comp.cbx; to add hyperref link  
-  {\boolfalse{citetracker}%
-    \boolfalse{pagetracker}%
-    \usebibmacro{prenote}}
-  {\ifciteindex
-    {\indexnames{labelname}}
-    {}%
-    \printtext[bibhyperref]{\printnames{labelname}}}
-  {\multicitedelim}
-  {\usebibmacro{postnote}}
-
-  \DeclareCiteCommand{\citeyear}  % from sp-authoryear-comp.cbx; to add hyperref link  
-  {\boolfalse{citetracker}%
-    \boolfalse{pagetracker}%
-    \usebibmacro{prenote}}
-  {\printfield[bibhyperref]{year}}
-  {\multicitedelim}
-  {\usebibmacro{postnote}}
-}{}
-\makeatother
-
 %% The bibliography file is specified like this
 \addbibresource[datatype=bibtex]{references.bib}
 
@@ -538,6 +287,7 @@
 % \newcommand{\citealtauthoryear}[1]{\citeauthor{#1} \citeyear{#1}}
 
 
+
 %% BibTeX 
 % \input{settings/natbib_bibtex_setup.tex} 
 % \PassOptionsToPackage{round}{natbib}
@@ -547,11 +297,14 @@
 %   TEXTPOS SETTINGS    % 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 
-\usepackage{calc}
-\usepackage[absolute,overlay]{textpos}
+\usepackage{calc} % Enables the use of calc expressions: 0pt+1cm
+\usepackage[
+  absolute, % Absolute positioning
+  overlay   % Positioned textblocks will overlay any other parts of the text.  
+]{textpos}
+
 \setlength{\TPHorizModule}{1em}
 \setlength{\TPVertModule}{1ex}
-
 \newlength{\textposOriginH}
 \newlength{\textposOriginV}
 \setlength{\textposOriginH}{10mm}

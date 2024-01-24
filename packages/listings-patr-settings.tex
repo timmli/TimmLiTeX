@@ -1,0 +1,13 @@
+% Syntax highlighting for PATR: https://en.wikipedia.org/wiki/PATR-II
+
+\lstnewenvironment{patr-listing}{%
+  \lstset{language=,
+    numbers=left,numbersep=8pt,numberstyle=\color{lightgray},
+    % frame=l,
+    basicstyle=\small\ttfamily,%
+    xleftmargin=0.7cm,framexleftmargin=12pt,%
+    framerule=0.5mm,rulecolor=\color{lightgray},%
+    escapeinside={|\%}{\%|},%
+    commentstyle=\color{lightgray},
+    literate={:}{{{\textbf{:}}}}1 {\{}{{{\textbf{\{}}}}1 {\}}{{{\textbf{\}}}}}1 {=}{{{\textbf{=}}}}1 {[}{{{\textbf{[}}}}1 {]}{{{\textbf{]}}}}1 {<}{{{\textbf{<}}}}1 {>}{{{\textbf{>}}}}1 {!}{{{\textbf{!}}}}1, 
+    morekeywords={Define,as,Word}}}{}
