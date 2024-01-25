@@ -705,6 +705,7 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 
 % <<TLmacros-input>>   % the content of TLmacros.tex goes here
 
+
 %%%%%%%%%%%%% 
 % Title
 %%%%%%%%%%%%% 
@@ -915,8 +916,7 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 <<pdflatex-settings>>
 
 <<tikz-settings-input>>
-
-<<forest-settings>>
+<<forest-settings-input>>
 
 %% Symbols
 \usepackage{latexsym,amsmath,amssymb,wasysym}
@@ -929,9 +929,8 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 %% Linguistics
 \usepackage{tipa}	% for phonetic symbols; has to appear before fontspec
 \usepackage{linguex}
-\renewcommand{\firstrefdash}{}
-
-<<langsci-avm-settings>>
+  \renewcommand{\firstrefdash}{}
+<<langsci-avm-settings-input>>
 
 % \usepackage[inference]{semantic} % for CCG 
 % \usepackage{packages/ccg}
@@ -1841,8 +1840,7 @@ Some templates require it to have the tikz settings in a separate sty-file.
 \ProvidesPackage{tikz-settings}
 
 <<tikz-settings-input>>
-
-<<forest-settings>>
+<<forest-settings-input>>
 
 \endinput
 #+END_SRC
@@ -1947,10 +1945,8 @@ aspectratio=169,
 
 \usepackage{etex} 
 \usepackage{graphics}
-
 <<tikz-settings-input>>
-
-<<forest-settings>>
+<<forest-settings-input>>
 
 \usepackage{url}
 \usepackage{amsmath,amssymb,amsfonts,marvosym}
@@ -2017,10 +2013,8 @@ numbers=noenddot,
 
 %% Trees and graphics
 \usepackage{graphics}
-
 <<tikz-settings-input>>
-
-<<forest-settings>>
+<<forest-settings-input>>
 
 % \usepackage{arydshln} 		    % for dashed horizontal lines in tables (incompatible with avm)
 \usepackage{multirow}           % similar to \multicolumn
@@ -2036,15 +2030,13 @@ numbers=noenddot,
 %% Linguistics
 \usepackage{tipa}	% for phonetic symbols; has to appear before fontspec
 \usepackage{linguex}
-\renewcommand{\firstrefdash}{}
-
-<<langsci-avm-settings>>
-
+  \renewcommand{\firstrefdash}{}
+<<langsci-avm-settings-input>>
 % \usepackage[inference]{semantic} % for CCG 
 % \usepackage{packages/ccg}
 
-<<biblatex-settings>> 
 
+<<biblatex-settings>> 
 <<hyperrefs-settings>>
 
 %% for blindtext
@@ -2089,7 +2081,7 @@ numbers=noenddot,
 
 <<listings-settings>>
 
-<<forest-settings>>
+<<forest-settings-input>>
 
 #+END_SRC
 
@@ -2200,8 +2192,8 @@ https://ctan.org/pkg/forest
 
 Drawing tree-shaped graphs with TikZ.
 
-#+NAME: forest-settings
-#+BEGIN_SRC latex :noweb yes
+#+NAME: forest-settings-file
+#+BEGIN_SRC latex :noweb yes :tangle packages/forest-settings.tex
 %%%%%%%%%%%%%%%%%%%%%%% 
 %   FOREST SETTINGS   % 
 %%%%%%%%%%%%%%%%%%%%%%% 
@@ -2362,9 +2354,9 @@ Drawing tree-shaped graphs with TikZ.
 
 #+END_SRC
 
-#+NAME: forest-settings-file
-#+BEGIN_SRC latex :noweb yes :tangle packages/forest-settings.tex
-<<forest-settings>>
+#+NAME: forest-settings-input
+#+BEGIN_SRC latex
+\input{packages/forest-settings}
 #+END_SRC
 
 ** AVM
@@ -2373,8 +2365,8 @@ https://ctan.org/pkg/langsci-avm
 
 Typesetting feature structures in the form of attribute-value matrices. 
 
-#+NAME: langsci-avm-settings
-#+BEGIN_SRC latex
+#+NAME: langsci-avm-settings-file
+#+BEGIN_SRC latex :noweb yes :tangle packages/langsci-avm-settings.tex
 %%%%%%%%%%%%%%%%%%%%%%
 %   AVM SETTINGS     % 
 %%%%%%%%%%%%%%%%%%%%%%
@@ -2384,9 +2376,9 @@ Typesetting feature structures in the form of attribute-value matrices.
 
 #+END_SRC
 
-#+NAME: langsci-avm-settings-file
-#+BEGIN_SRC latex :noweb yes :tangle packages/langsci-avm-settings.tex
-<<langsci-avm-settings>>
+#+NAME: langsci-avm-settings-input
+#+BEGIN_SRC latex
+\input{packages/langsci-avm-settings}
 #+END_SRC
 
 The following are settings for a legacy AVM package.
@@ -2656,6 +2648,8 @@ Handling cross-references and hyperlinks.
   \renewcommand{\subsubsectionautorefname}{Section}%
   \renewcommand{\Hfootnoteautorefname}{Footnote}%
 }{}
+
+
 #+END_SRC
 
 ** Listings
