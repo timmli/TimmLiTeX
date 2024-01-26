@@ -1,3 +1,5 @@
+% Do not change this file!
+
 %%%%%%%%%%%%%%%%%%%%%%%%
 %   PDFLATEX SETTINGS  % 
 %%%%%%%%%%%%%%%%%%%%%%%%
@@ -35,11 +37,14 @@
 \usepackage[german,english]{babel} % the last language in the options is loaded; the other one can be chosen with \selectlanguage
 \usepackage{iflang}                % for language specific settings
 
-%% Trees and graphics
-\usepackage{graphics}
-\input{packages/tikz-settings}
-\input{packages/forest-settings}
+%%%%%%%%%%%%%%%%%%%%%%%%
+%   MISCELLANEOUS      % 
+%%%%%%%%%%%%%%%%%%%%%%%%
 
+%% Graphics
+\usepackage{graphics}
+
+%% Tables
 % \usepackage{arydshln} 		    % for dashed horizontal lines in tables (incompatible with avm)
 \usepackage{multirow}           % similar to \multicolumn
 
@@ -47,18 +52,13 @@
 \usepackage{latexsym,amsmath,amssymb,wasysym}
 \usepackage{marvosym}           % for thunderbolt symbol
 \usepackage{ulem}               % to cross out text
-\normalem
+  \normalem
 \usepackage{url}
-\urlstyle{tt}                   % tt,rm,sf,same
-
-%% Linguistics
+  \urlstyle{tt}                   % tt,rm,sf,same
 \usepackage{tipa}	% for phonetic symbols; has to appear before fontspec
-\usepackage{linguex}
-  \renewcommand{\firstrefdash}{}
-\input{packages/langsci-avm-settings}
-% \usepackage[inference]{semantic} % for CCG 
-% \usepackage{packages/ccg}
 
+%% Blindtext
+\usepackage{lipsum}
 
 %%%%%%%%%%%%%%%%%%%%%%%% 
 % BIBLATEX SETTINGS  % 
@@ -135,8 +135,3 @@
   \renewcommand{\subsubsectionautorefname}{Section}%
   \renewcommand{\Hfootnoteautorefname}{Footnote}%
 }{}
-
-
-
-%% for blindtext
-\usepackage{lipsum}

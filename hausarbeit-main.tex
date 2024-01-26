@@ -4,25 +4,38 @@
   twoside,
   ]{scrartcl}
 
+\input{scrarticle-settings}
+\input{basic-text-settings}
+
 \RequirePackage{etoolbox}
 \newbool{draftmode}
 \booltrue{draftmode}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%% 
+% OPTIONAL PACKAGES & SETTINGS
+%%%%%%%%%%%%%%%%%%%%%%%% 
+
 % Uncomment the following line for deactivating draftmode
 %\boolfalse{draftmode}           % Deactivate draftmode
 
-%%%%%%%%%%%%%%%%%%%%%%%% 
-% SETTINGS
-%%%%%%%%%%%%%%%%%%%%%%%% 
-
-\input{scrarticle-settings.tex}
-\input{text-settings}
-
+%% Language
 \AtBeginDocument{
   \selectlanguage{german} % which language is available depends on how babel is loaded
 }
 
 % \input{TLmacros}   % the content of TLmacros.tex goes here
+
+%% Graphics
+\input{packages/tikz-settings}
+\input{packages/forest-settings}
+
+%% Linguistics
+\usepackage{linguex}
+  \renewcommand{\firstrefdash}{}
+\input{packages/langsci-avm-settings}
+% \usepackage[inference]{semantic} % for CCG 
+% \usepackage{packages/ccg}
 
 
 %%%%%%%%%%%%% 

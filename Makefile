@@ -4,7 +4,7 @@ SHELL := /bin/bash
 
 ABSCHLUSSARBEIT_TEST_DIR = test_abschlussarbeit
 ABSCHLUSSARBEIT_FILES =  TLmacros.tex \
-	text-settings.tex \
+	basic-text-settings.tex \
   muss.bbx \
   muss.cbx \
 	$(wildcard packages/*.sty) \
@@ -55,13 +55,10 @@ release_beamer:
 #-------------------------------------------------------------------------------
 
 HAUSARBEIT_TEST_DIR = test_hausarbeit
-HAUSARBEIT_FILES =  TLmacros.tex \
-	text-settings.tex \
-	scrarticle-settings.tex \
+HAUSARBEIT_FILES =  $(shell ./extract_input_files.sh "hausarbeit-main.tex")  \
   muss.bbx \
   muss.cbx \
 	$(wildcard packages/*.sty) \
-	hausarbeit-examples.tex  \
 	references.bib \
   hausarbeit-main.tex
 
@@ -83,7 +80,7 @@ release_hausarbeit:
 
 ABSTRACT_TEST_DIR = test_abstract
 ABSTRACT_FILES =  TLmacros.tex \
-	text-settings.tex \
+	basic-text-settings.tex \
 	$(wildcard packages/*.sty) \
 	abstract-main.tex \
 	abstract-examples.tex \
@@ -110,7 +107,7 @@ release_abstract:
 
 ARTICLE_TEST_DIR = test_article
 ARTICLE_FILES =  TLmacros.tex \
-	text-settings.tex \
+	basic-text-settings.tex \
 	scrarticle-settings.tex \
 	$(wildcard packages/*.sty) \
 	article-main.tex \
@@ -138,7 +135,7 @@ release_article:
 
 BOOK_TEST_DIR = test_book
 BOOK_FILES =  TLmacros.tex \
-	text-settings.tex \
+	basic-text-settings.tex \
 	$(wildcard packages/*.sty) \
 	book-main.tex  \
 	book-examples.tex  \

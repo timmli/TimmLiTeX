@@ -11,7 +11,7 @@
 #+LATEX_CLASS: tl-abstract 
 #+LATEX_CLASS_OPTIONS: [12pt,a4paper]
 #+LATEX_COMPILER: pdflatex
-#+LATEX_HEADER: \input{text-settings}
+#+LATEX_HEADER: \input{basic-text-settings}
 #+LATEX_HEADER: 
 #+LATEX_HEADER: \usepackage[left=25mm, right=25mm, top=25mm, bottom=25mm, noheadfoot]{geometry}
 #+LATEX_HEADER: \pagenumbering{gobble}

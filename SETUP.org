@@ -102,7 +102,7 @@ In order to compile these templates, press =C-c C-v t= , or evaluate the followi
 
 \usepackage{datetime}
 
-\input{text-settings}
+\input{basic-text-settings}
 
 \AtBeginDocument{
   \selectlanguage{german} % which language is available depends on how babel is loaded
@@ -685,25 +685,29 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
   twoside,
   ]{scrartcl}
 
+<<scrarticle-settings-input>>
+<<basic-text-settings-input>>
+
 \RequirePackage{etoolbox}
 \newbool{draftmode}
 \booltrue{draftmode}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%% 
+% OPTIONAL PACKAGES & SETTINGS
+%%%%%%%%%%%%%%%%%%%%%%%% 
+
 % Uncomment the following line for deactivating draftmode
 %\boolfalse{draftmode}           % Deactivate draftmode
 
-%%%%%%%%%%%%%%%%%%%%%%%% 
-% SETTINGS
-%%%%%%%%%%%%%%%%%%%%%%%% 
-
-\input{scrarticle-settings.tex}
-\input{text-settings}
-
+%% Language
 \AtBeginDocument{
   \selectlanguage{german} % which language is available depends on how babel is loaded
 }
 
 % <<TLmacros-input>>   % the content of TLmacros.tex goes here
+
+<<optional-packages>>
 
 
 %%%%%%%%%%%%% 
@@ -1868,7 +1872,7 @@ Some templates require it to have the tikz settings in a separate sty-file.
 
 #+NAME: abstract-settings
 #+BEGIN_SRC latex
-<<text-settings-input>>
+<<basic-text-settings-input>>
 
 \usepackage[left=25mm, right=25mm, top=25mm, bottom=25mm, noheadfoot]{geometry}
 \pagenumbering{gobble}
@@ -1912,7 +1916,7 @@ Some templates require it to have the tikz settings in a separate sty-file.
 
 <<scrarticle-settings-input>>
 
-<<text-settings-input>>
+<<basic-text-settings-input>>
 #+END_SRC
 
 ** Beamer settings
@@ -1997,25 +2001,46 @@ numbers=noenddot,
 #+BEGIN_SRC latex
 \usepackage{datetime}
 
-<<text-settings-input>>
+<<basic-text-settings-input>>
 #+END_SRC
 
-** Text settings
+** Optional packages
 
-#+NAME: text-settings-input
-#+BEGIN_SRC latex :noweb yes :tangle no
-\input{text-settings}
-#+END_SRC
-
-#+NAME: text-settings
-#+BEGIN_SRC latex :noweb yes :tangle text-settings.tex
-<<pdflatex-settings>>
-
-%% Trees and graphics
-\usepackage{graphics}
+#+NAME: optional-packages
+#+BEGIN_SRC latex :noweb yes
+%% Graphics
 <<tikz-settings-input>>
 <<forest-settings-input>>
 
+%% Linguistics
+\usepackage{linguex}
+  \renewcommand{\firstrefdash}{}
+<<langsci-avm-settings-input>>
+% \usepackage[inference]{semantic} % for CCG 
+% \usepackage{packages/ccg}
+#+END_SRC
+
+** Basic text settings
+
+#+NAME: basic-text-settings-input
+#+BEGIN_SRC latex :noweb yes :tangle no
+\input{basic-text-settings}
+#+END_SRC
+
+#+NAME: basic-text-settings
+#+BEGIN_SRC latex :noweb yes :tangle basic-text-settings.tex
+% Do not change this file!
+
+<<pdflatex-settings>>
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%   MISCELLANEOUS      % 
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Graphics
+\usepackage{graphics}
+
+%% Tables
 % \usepackage{arydshln} 		    % for dashed horizontal lines in tables (incompatible with avm)
 \usepackage{multirow}           % similar to \multicolumn
 
@@ -2023,25 +2048,16 @@ numbers=noenddot,
 \usepackage{latexsym,amsmath,amssymb,wasysym}
 \usepackage{marvosym}           % for thunderbolt symbol
 \usepackage{ulem}               % to cross out text
-\normalem
+  \normalem
 \usepackage{url}
-\urlstyle{tt}                   % tt,rm,sf,same
-
-%% Linguistics
+  \urlstyle{tt}                   % tt,rm,sf,same
 \usepackage{tipa}	% for phonetic symbols; has to appear before fontspec
-\usepackage{linguex}
-  \renewcommand{\firstrefdash}{}
-<<langsci-avm-settings-input>>
-% \usepackage[inference]{semantic} % for CCG 
-% \usepackage{packages/ccg}
 
+%% Blindtext
+\usepackage{lipsum}
 
 <<biblatex-settings>> 
 <<hyperrefs-settings>>
-
-%% for blindtext
-\usepackage{lipsum}
-
 #+END_SRC
 
 ** Poster settings
@@ -2359,6 +2375,45 @@ Drawing tree-shaped graphs with TikZ.
 \input{packages/forest-settings}
 #+END_SRC
 
+#+NAME: forest-example
+#+BEGIN_SRC latex
+% \Forest{
+%   [S [NP] 
+%     [VP [V  [\textit{eats}] ]
+%       [NP] ]]
+% }
+
+%% This example may cause problems together with TeX Live 2016
+% \Forest{
+%   [,phantom
+%     [S,--> [NP,--> [D [the]]]]
+%     [S,--> [NP,--> [A [absent]]]]
+%     [S, [NP [N [student]]]]
+%     ]
+% } 
+
+\Forest{
+  [,phantom
+    [S,name=root,red subtree
+      [AUX [\textit{does}] ]
+      [S
+        [NP]
+        [VP,name=vp[V [\textit{say}]] [S*,name=foot]]]]
+    [S,Xs=5cm,Ys=2cm
+      [NP]
+      [S,name=s
+        [NP [$\varepsilon$] ]
+        [VP 
+          [VP [V [\textit{walks}]]] 
+          [PP]]]]
+    ]
+  \draw[->,gray,thick,dashed,bend right=10](root)to(s);
+  \draw[->,gray,thick,dashed,bend right=10](foot)to(s);
+}
+
+\noindent $\Rightarrow$ \url{http://mirrors.ctan.org/graphics/pgf/contrib/forest/forest-doc.pdf}
+#+END_SRC
+
 ** AVM
 
 https://ctan.org/pkg/langsci-avm
@@ -2379,6 +2434,19 @@ Typesetting feature structures in the form of attribute-value matrices.
 #+NAME: langsci-avm-settings-input
 #+BEGIN_SRC latex
 \input{packages/langsci-avm-settings}
+#+END_SRC
+
+#+NAME: langsci-avm-example
+#+BEGIN_SRC latex
+\avm{
+  \0 [ \type{eating} \\
+    actor & \1 \\ 
+    theme & \2 ]
+}
+
+\medskip
+
+\noindent $\Rightarrow$ \url{https://github.com/langsci/langsci-avm/blob/master/langsci-avm.pdf}
 #+END_SRC
 
 The following are settings for a legacy AVM package.
@@ -2616,6 +2684,80 @@ Issues
 <<biblatex-tikzposter-settings>>
 #+END_SRC
 
+#+NAME: biblatex-citation-example
+#+BEGIN_SRC latex
+The following is a alist of available cite commands. See \url{https://ctan.space-pro.be/tex-archive/macros/latex/contrib/biblatex/doc/biblatex.pdf#subsection.3.9} for a more detailed description.
+
+\begin{itemize}
+\item \verb=\nocite= \nocite{Bech:63}
+\item \verb=\fullcite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline  \fullcite[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\textcite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \textcite[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\parencite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \parencite[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\parencite*[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \parencite*[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\smartcite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \smartcite[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\footcite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \footcite[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\footfullcite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline  \footfullcite[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\supercite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \supercite[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\footcitetext[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \footcitetext[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\autocite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline  \autocite[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\cite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline  \cite[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\cite*[<prenote>][<postnote>]{Nallapati:etal:16}= \newline  \cite*[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\citeauthor[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \citeauthor[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\citeauthor*[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \citeauthor*[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\citeurl[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \citeurl[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\citetitle[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \citetitle[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\citeyear[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \citeyear[<prenote>][<postnote>]{Nallapati:etal:16}
+\end{itemize} 
+
+References are stored in \texttt{references.bib}.
+#+END_SRC
+
+#+BEGIN_SRC latex :noweb yes :tangle references.bib
+<<biblatex-references-example>>
+#+END_SRC
+
+#+NAME: biblatex-references-example
+#+BEGIN_SRC latex
+@Article{Bech:63,
+  author = {Bech, Gunnar},
+  title = {Grammatische {G}esetze im {W}iderspruch},
+  year = {1963},
+  volume = {12},
+  pages = {291--299},
+  journal = {Lingua}
+}
+
+@InProceedings{EckartDeCastilho:etal:16,
+  author    = {Eckart de Castilho, Richard and M\'{u}jdricza-Maydt, \'{E}va and Yimam, Seid Muhie and Hartmann, Silvana and Gurevych, Iryna and Frank, Anette and Biemann, Chris},
+  title     = {A Web-based Tool for the Integrated Annotation of Semantic and Syntactic Structures},
+  booktitle = {Proceedings of the Workshop on Language Technology Resources and Tools for Digital Humanities ({LT4DH})},
+  year      = {2016},
+  pages     = {76--84},
+  address   = {Osaka, Japan}
+}
+
+@Book{Mueller:02,
+  author = {M\"uller, Stefan},
+  title = {Complex Predicates: {Verbal} Complexes, Resultative Constructions, and Particle Verbs in {German}},
+  year = {2002},
+  series = {Studies in Constraint-Based Lexicalism},
+  publisher = {CSLI Publications},
+  address = {Stanford}
+}
+
+@InProceedings{Nallapati:etal:16,
+  author = {Nallapati, Ramesh and Zhou, Bowen and dos Santos, Cicero and  Çağlar Gulçehre and Xiang, Bing},
+  title = {Abstractive Text Summarization using Sequence-to-sequence {RNN}s and Beyond},
+  pages = {280--290},
+  booktitle = {Proceedings of The 20th {SIGNLL} Conference on Computational Natural Language Learning},
+  year = {2016},
+  address = {Berlin, Germany},
+  url = {https://www.aclweb.org/anthology/K16-1028},
+  doi = {10.18653/v1/K16-1028},
+}
+
+#+END_SRC
+
 ** Hyperrefs
 
 https://ctan.org/pkg/hyperref
@@ -2650,6 +2792,36 @@ Handling cross-references and hyperlinks.
 }{}
 
 
+#+END_SRC
+
+** IPA
+
+https://ctan.org/pkg/tipa
+
+#+NAME: ipa-example
+#+BEGIN_SRC latex
+\ex. \textipa{[""Ekspl@"neIS@n]}
+
+$\Rightarrow$ \url{http://en.wikibooks.org/wiki/LaTeX/Linguistics#IPA_characters}
+#+END_SRC
+
+** Linguex
+
+https://ctan.org/pkg/linguex
+
+Typeset linguistic examples.
+
+#+NAME: linguex-example
+#+BEGIN_SRC latex
+\ex. This is a simple example.
+
+\exg. [Noch am Boden liegend$_i$], sei [auf ihn$_i$] eingetreten worden.\\
+still on.the floor lying be on him PART.kicked got\\
+`While he was still on the floor he was kicked.'\\
+(Cf. (422) in \cite{Mueller:02})
+
+\noindent $\Rightarrow$ \url{http://texdoc.net/texmf-dist/doc/latex/linguex/linguex-doc.pdf} \\
+Note the Leipzig glossing rules: \url{http://www.eva.mpg.de/lingua/resources/glossing-rules.php}
 #+END_SRC
 
 ** Listings
@@ -2978,6 +3150,17 @@ Issues:
 
 #+END_SRC
 
+#+NAME: tabular-example
+#+BEGIN_SRC latex
+\begin{tabular}{c|c|c}
+\hline
+cell 11 & cell 12 & cell 13 \\
+\hline
+cell 21 & cell 22 & cell 23 \\
+\hline
+\end{tabular}
+#+END_SRC
+
 ** TODO TikZ
 :LOGBOOK:
 - State "TODO"       from              [2024-01-24 Wed 09:07]
@@ -3056,7 +3239,6 @@ Issues:
 #+BEGIN_SRC latex :noweb yes :tangle no
 \input{packages/tikz-settings}
 #+END_SRC
-
 
 ** natbib/BibTeX
 
@@ -3239,7 +3421,7 @@ Insbesondere versichere ich, dass ich alle wörtlichen und sinngemäßen Überna
 #+NAME: abstract-examples
 #+BEGIN_SRC latex :noweb yes :tangle abstract-examples.tex
 
-<<example-citations>>
+<<biblatex-citation-example>>
 
 #+END_SRC
 
@@ -3254,27 +3436,27 @@ Insbesondere versichere ich, dass ich alle wörtlichen und sinngemäßen Überna
 
 \subsection{Citation}
 
-<<example-citations>>
+<<biblatex-citation-example>>
 
 \subsection{AVM}
 
-<<example-langsci-avms>>
+<<langsci-avm-example>>
 
 \subsection{Linguistic examples}
 
-<<example-linguistic-examples>>
+<<linguistic-example>>
 
-\subsection{Formulae}
+\subsection{Math formulae}
 
-<<example-formulae>>
+<<math-example>>
 
 \subsection{Tables}
 
-<<example-tables>>
+<<tabular-example>>
 
 \subsection{Trees}
 
-<<example-trees>>
+<<forest-example>>
 
 
 #+END_SRC
@@ -3290,27 +3472,27 @@ Insbesondere versichere ich, dass ich alle wörtlichen und sinngemäßen Überna
 
 \section{Citation}
 
-<<example-citations>>
+<<biblatex-citation-example>>
 
 \section{AVM}
 
-<<example-langsci-avms>>
+<<langsci-avm-example>>
 
 \section{Linguistic examples}
 
-<<example-linguistic-examples>>
+<<linguistic-example>>
 
-\section{Formulae}
+\section{Math formulae}
 
-<<example-formulae>>
+<<math-example>>
 
 \section{Tables}
 
-<<example-tables>>
+<<tabular-example>>
 
 \section{Trees}
 
-<<example-trees>>
+<<forest-example>>
 
 #+END_SRC
 
@@ -3331,20 +3513,20 @@ This is an \bsp{inline example} included with \verb|\bsp|.
 This is how \term{terminology} can be introduced with \verb|\term|.
 \end{frame}
 
-<<example-beamer-frames>>
-<<example-beamer-blocks>>
-<<example-beamer-overlays>>
-<<example-beamer-columns>>
-<<example-beamer-citations>>
+<<beamer-frames-example>>
+<<beamer-blocks-example>>
+<<beamer-overlays-example>>
+<<beamer-columns-example>>
+<<beamer-citations-example>>
 
 \begin{frame}
 \frametitle{Linguistic examples}
-<<example-linguistic-examples>>
+<<linguistic-example>>
 \end{frame}
 
 \begin{frame}
 \frametitle{Trees}
-<<example-trees>>
+<<forest-example>>
 \end{frame}
 
 \begin{frame}
@@ -3392,7 +3574,7 @@ A TUCO derivation:\newline
 
 \begin{frame}
 \frametitle{AVM}
-<<example-langsci-avms>>
+<<langsci-avm-example>>
 \end{frame}
 
 % \begin{frame}
@@ -3401,17 +3583,17 @@ A TUCO derivation:\newline
 % \end{frame}
 
 \begin{frame}
-\frametitle{Formulae}
-<<example-formulae>>
+\frametitle{Math formulae}
+<<math-example>>
 \end{frame}
 
 \begin{frame}
 \frametitle{Tables}
-<<example-tables>>
+<<tabular-example>>
 \end{frame}
 #+END_SRC
 
-#+NAME: example-beamer-blocks
+#+NAME: beamer-blocks-example
 #+BEGIN_SRC latex
 \begin{frame}
   \frametitle{Blocks}
@@ -3431,7 +3613,7 @@ A TUCO derivation:\newline
 \end{frame}
 #+END_SRC
 
-#+NAME: example-beamer-citations
+#+NAME: beamer-citations-example
 #+BEGIN_SRC latex
 \begin{frame}[fragile]
   \frametitle{Citations}
@@ -3462,7 +3644,7 @@ A TUCO derivation:\newline
 \end{frame}
 #+END_SRC
 
-#+NAME: example-beamer-columns
+#+NAME: beamer-columns-example
 #+BEGIN_SRC latex
 \begin{frame}
   \frametitle{Columns}
@@ -3482,7 +3664,7 @@ A TUCO derivation:\newline
 \end{frame}
 #+END_SRC
 
-#+NAME: example-beamer-frames
+#+NAME: beamer-frames-example
 #+BEGIN_SRC latex
 \begin{frame}[label=frameoptions]
 \frametitle{The frame environment}
@@ -3514,7 +3696,7 @@ A TUCO derivation:\newline
 \end{frame}
 #+END_SRC
 
-#+NAME: example-beamer-overlays
+#+NAME: beamer-overlays-example
 #+BEGIN_SRC latex
 \begin{frame}
   \frametitle{Overlays}
@@ -3557,136 +3739,19 @@ A TUCO derivation:\newline
 More \LaTeX{} templates on \url{https://github.com/timmli/latex-templates}.
 #+END_SRC
 
-** AVM
-
-#+NAME: example-langsci-avms
-#+BEGIN_SRC latex
-\avm{
-  \0 [ \type{eating} \\
-    actor & \1 \\ 
-    theme & \2 ]
-}
-
-\medskip
-
-\noindent $\Rightarrow$ \url{https://github.com/langsci/langsci-avm/blob/master/langsci-avm.pdf}
-#+END_SRC
-
-
-#+NAME: example-avms
-#+BEGIN_SRC latex
-\begin{avm}
-  \@0\[\asort{eating}
-    actor & \@1 \\ 
-    theme & \@2 \]
-\end{avm}
-
-\medskip
-
-\noindent $\Rightarrow$ \url{http://nlp.stanford.edu/manning/tex/avm-doc.pdf}
-#+END_SRC
-
-** Citations
-
-#+NAME: example-citations
-#+BEGIN_SRC latex
-The following is a alist of available cite commands. See \url{https://ctan.space-pro.be/tex-archive/macros/latex/contrib/biblatex/doc/biblatex.pdf#subsection.3.9} for a more detailed description.
-
-\begin{itemize}
-\item \verb=\nocite= \nocite{Bech:63}
-\item \verb=\fullcite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline  \fullcite[<prenote>][<postnote>]{Nallapati:etal:16}
-\item \verb=\textcite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \textcite[<prenote>][<postnote>]{Nallapati:etal:16}
-\item \verb=\parencite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \parencite[<prenote>][<postnote>]{Nallapati:etal:16}
-\item \verb=\parencite*[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \parencite*[<prenote>][<postnote>]{Nallapati:etal:16}
-\item \verb=\smartcite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \smartcite[<prenote>][<postnote>]{Nallapati:etal:16}
-\item \verb=\footcite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \footcite[<prenote>][<postnote>]{Nallapati:etal:16}
-\item \verb=\footfullcite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline  \footfullcite[<prenote>][<postnote>]{Nallapati:etal:16}
-\item \verb=\supercite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \supercite[<prenote>][<postnote>]{Nallapati:etal:16}
-\item \verb=\footcitetext[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \footcitetext[<prenote>][<postnote>]{Nallapati:etal:16}
-\item \verb=\autocite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline  \autocite[<prenote>][<postnote>]{Nallapati:etal:16}
-\item \verb=\cite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline  \cite[<prenote>][<postnote>]{Nallapati:etal:16}
-\item \verb=\cite*[<prenote>][<postnote>]{Nallapati:etal:16}= \newline  \cite*[<prenote>][<postnote>]{Nallapati:etal:16}
-\item \verb=\citeauthor[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \citeauthor[<prenote>][<postnote>]{Nallapati:etal:16}
-\item \verb=\citeauthor*[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \citeauthor*[<prenote>][<postnote>]{Nallapati:etal:16}
-\item \verb=\citeurl[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \citeurl[<prenote>][<postnote>]{Nallapati:etal:16}
-\item \verb=\citetitle[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \citetitle[<prenote>][<postnote>]{Nallapati:etal:16}
-\item \verb=\citeyear[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \citeyear[<prenote>][<postnote>]{Nallapati:etal:16}
-\end{itemize} 
-
-References are stored in \texttt{references.bib}.
-#+END_SRC
-
-#+BEGIN_SRC latex :noweb yes :tangle references.bib
-<<example-references.bib>>
-#+END_SRC
-
-#+NAME: example-references.bib
-#+BEGIN_SRC latex
-@Article{Bech:63,
-  author = {Bech, Gunnar},
-  title = {Grammatische {G}esetze im {W}iderspruch},
-  year = {1963},
-  volume = {12},
-  pages = {291--299},
-  journal = {Lingua}
-}
-
-@InProceedings{EckartDeCastilho:etal:16,
-  author    = {Eckart de Castilho, Richard and M\'{u}jdricza-Maydt, \'{E}va and Yimam, Seid Muhie and Hartmann, Silvana and Gurevych, Iryna and Frank, Anette and Biemann, Chris},
-  title     = {A Web-based Tool for the Integrated Annotation of Semantic and Syntactic Structures},
-  booktitle = {Proceedings of the Workshop on Language Technology Resources and Tools for Digital Humanities ({LT4DH})},
-  year      = {2016},
-  pages     = {76--84},
-  address   = {Osaka, Japan}
-}
-
-@Book{Mueller:02,
-  author = {M\"uller, Stefan},
-  title = {Complex Predicates: {Verbal} Complexes, Resultative Constructions, and Particle Verbs in {German}},
-  year = {2002},
-  series = {Studies in Constraint-Based Lexicalism},
-  publisher = {CSLI Publications},
-  address = {Stanford}
-}
-
-@InProceedings{Nallapati:etal:16,
-  author = {Nallapati, Ramesh and Zhou, Bowen and dos Santos, Cicero and  Çağlar Gulçehre and Xiang, Bing},
-  title = {Abstractive Text Summarization using Sequence-to-sequence {RNN}s and Beyond},
-  pages = {280--290},
-  booktitle = {Proceedings of The 20th {SIGNLL} Conference on Computational Natural Language Learning},
-  year = {2016},
-  address = {Berlin, Germany},
-  url = {https://www.aclweb.org/anthology/K16-1028},
-  doi = {10.18653/v1/K16-1028},
-}
-
-#+END_SRC
 
 ** Linguistics
 
-#+NAME: example-linguistic-examples
+#+NAME: linguistic-example
 #+BEGIN_SRC latex
-\ex. This is a simple example.
+<<linguex-example>>
 
-\exg. [Noch am Boden liegend$_i$], sei [auf ihn$_i$] eingetreten worden.\\
-still on.the floor lying be on him PART.kicked got\\
-`While he was still on the floor he was kicked.'\\
-(Cf. (422) in \cite{Mueller:02})
-
-\noindent $\Rightarrow$ \url{http://texdoc.net/texmf-dist/doc/latex/linguex/linguex-doc.pdf} \\
-Note the Leipzig glossing rules: \url{http://www.eva.mpg.de/lingua/resources/glossing-rules.php}
+<<ipa-example>>
 #+END_SRC
 
-#+NAME: example-ipa
-#+BEGIN_SRC latex
-\ex. \textipa{[""Ekspl@"neIS@n]}
+** Math formulae
 
-$\Rightarrow$ \url{http://en.wikibooks.org/wiki/LaTeX/Linguistics#IPA_characters}
-#+END_SRC
-
-** Formulae
-
-#+NAME: example-formulae
+#+NAME: math-example
 #+BEGIN_SRC latex
 Formulae in texts: $a^2 + b^2 = c^2$
 
@@ -3719,7 +3784,7 @@ $\Rightarrow$ \url{http://en.wikibooks.org/wiki/LaTeX/Mathematics}
 
 \section{IPA symbols}
 
-<<example-ipa>>
+<<ipa-example>>
 
 \section{Formulae}
 
@@ -3783,19 +3848,6 @@ $\Rightarrow$ \url{http://en.wikibooks.org/wiki/LaTeX/Mathematics}
 \end{forest}
 
 \end{document}
-#+END_SRC
-
-** Tables
-
-#+NAME: example-tables
-#+BEGIN_SRC latex
-\begin{tabular}{c|c|c}
-\hline
-cell 11 & cell 12 & cell 13 \\
-\hline
-cell 21 & cell 22 & cell 23 \\
-\hline
-\end{tabular}
 #+END_SRC
 
 ** Trees
@@ -3940,7 +3992,7 @@ release_poster:
 #+BEGIN_SRC makefile :noweb yes
 ABSCHLUSSARBEIT_TEST_DIR = test_abschlussarbeit
 ABSCHLUSSARBEIT_FILES =  TLmacros.tex \
-	text-settings.tex \
+	basic-text-settings.tex \
   muss.bbx \
   muss.cbx \
 	$(wildcard packages/*.sty) \
@@ -3968,13 +4020,10 @@ release_abschlussarbeit:
 #+NAME: hausarbeit-makefile
 #+BEGIN_SRC makefile :noweb yes
 HAUSARBEIT_TEST_DIR = test_hausarbeit
-HAUSARBEIT_FILES =  TLmacros.tex \
-	text-settings.tex \
-	scrarticle-settings.tex \
+HAUSARBEIT_FILES =  $(shell ./extract_input_files.sh "hausarbeit-main.tex")  \
   muss.bbx \
   muss.cbx \
 	$(wildcard packages/*.sty) \
-	hausarbeit-examples.tex  \
 	references.bib \
   hausarbeit-main.tex
 
@@ -3999,7 +4048,7 @@ release_hausarbeit:
 #+BEGIN_SRC makefile :noweb yes
 ABSTRACT_TEST_DIR = test_abstract
 ABSTRACT_FILES =  TLmacros.tex \
-	text-settings.tex \
+	basic-text-settings.tex \
 	$(wildcard packages/*.sty) \
 	abstract-main.tex \
 	abstract-examples.tex \
@@ -4026,7 +4075,7 @@ release_abstract:
 
 ARTICLE_TEST_DIR = test_article
 ARTICLE_FILES =  TLmacros.tex \
-	text-settings.tex \
+	basic-text-settings.tex \
 	scrarticle-settings.tex \
 	$(wildcard packages/*.sty) \
 	article-main.tex \
@@ -4054,7 +4103,7 @@ release_article:
 
 BOOK_TEST_DIR = test_book
 BOOK_FILES =  TLmacros.tex \
-	text-settings.tex \
+	basic-text-settings.tex \
 	$(wildcard packages/*.sty) \
 	book-main.tex  \
 	book-examples.tex  \
