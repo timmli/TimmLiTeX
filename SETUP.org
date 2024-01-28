@@ -1,6 +1,7 @@
 #+TITLE: LaTeX settings in one file
 #+AUTHOR: Timm Lichte
 #+PROPERTY: header-args :noweb yes
+#+STARTUP: hideblocks
 
 * Table of contents :TOC_2_gh:
 - [[#installation-with-emacs][Installation with Emacs]]
@@ -15,47 +16,38 @@
       - [[#standalone-template][Standalone template]]
       - [[#langsci-template][LangSci template]]
       - [[#jlm-template][JLM template]]
-- [[#beamer-themes][Beamer themes]]
-      - [[#theme-settings][Theme settings]]
-      - [[#tuebingen][Tuebingen]]
-      - [[#lustnau][Lustnau]]
-      - [[#duesseldorf][Duesseldorf]]
-      - [[#bielefeld][Bielefeld]]
-- [[#packages][Packages]]
+- [[#package-definitions][Package definitions]]
       - [[#tikz-settingssty][tikz-settings.sty]]
 - [[#bundled-settings][Bundled settings]]
-      - [[#abstract-settings][Abstract settings]]
-      - [[#article-settings][Article settings]]
-      - [[#beamer-settings][Beamer settings]]
-      - [[#book-settings][Book settings]]
-      - [[#text-settings][Text settings]]
-      - [[#poster-settings][Poster settings]]
-- [[#package-settings][Package settings]]
-      - [[#forest][Forest]]
+      - [[#optional-packages][Optional packages]]
+      - [[#basic-text-settings][Basic text settings]]
+- [[#package-settings--examples][Package settings & examples]]
       - [[#avm][AVM]]
+      - [[#beamer-themes][Beamer themes]]
       - [[#biblatex][BibLaTeX]]
+      - [[#forest][Forest]]
       - [[#hyperrefs][Hyperrefs]]
+      - [[#ipa][IPA]]
+      - [[#linguex][Linguex]]
+      - [[#linguistics][Linguistics]]
       - [[#listings][Listings]]
-      - [[#pdflatex][PDFLaTeX]]
-      - [[#scrarticle][scrarticle]]
-      - [[#textpos][textpos]]
-      - [[#tabular][tabular]]
-      - [[#tikz][tikz]]
+      - [[#math-formulae][Math formulae]]
       - [[#natbibbibtex][natbib/BibTeX]]
+      - [[#pdflatex][PDFLaTeX]]
+      - [[#scrarticle][Scrarticle]]
+      - [[#tabular][Tabular]]
+      - [[#textpos][Textpos]]
+      - [[#tikz][TikZ]]
+      - [[#todonotes][Todonotes]]
 - [[#tlmacros][TLmacros]]
 - [[#examples][Examples]]
       - [[#text][Text]]
       - [[#beamer][Beamer]]
-      - [[#readme][Readme]]
-      - [[#avm][AVM]]
-      - [[#citations][Citations]]
-      - [[#linguistics][Linguistics]]
-      - [[#formulae][Formulae]]
-      - [[#examples-for-texts][Examples for texts]]
       - [[#poster][Poster]]
-      - [[#tikz][TikZ]]
-      - [[#tables][Tables]]
-      - [[#trees][Trees]]
+      - [[#standalone--tikz][Standalone + TikZ]]
+- [[#text-snippets][Text snippets]]
+      - [[#selbständigkeitserklärung][Selbständigkeitserklärung]]
+      - [[#readme][Readme]]
 - [[#makefile][Makefile]]
       - [[#root-makefile][Root Makefile]]
       - [[#beamer-makefile][Beamer Makefile]]
@@ -279,6 +271,32 @@ Remember to first add the class to the set of known classes (in =init.el=).
 \end{document}
 #+END_SRC
 
+#+NAME: abstract-options
+#+BEGIN_SRC latex
+12pt,a4paper
+#+END_SRC
+
+#+NAME: abstract-settings
+#+BEGIN_SRC latex
+<<basic-text-settings-input>>
+
+\usepackage[left=25mm, right=25mm, top=25mm, bottom=25mm, noheadfoot]{geometry}
+\pagenumbering{gobble}
+\PassOptionsToPackage{maxbibnames=1,maxcitenames=1,firstinits=true}{biblatex}
+\defbibenvironment{bibliography}{\noindent}{\unspace}{\xspace$\bullet$\xspace}
+\makeatletter
+\renewcommand\maketitle{
+  ~\vspace{-1.1cm}\newline
+  {\raggedright
+    \renewcommand{\baselinestretch}{1.2}\selectfont
+  {\bfseries\large\@title}\\[2ex]
+  {\large\@author}\\[2ex]
+  }
+}
+\makeatother
+
+#+END_SRC
+
 ** Article template
 
 #+NAME: article-template-org
@@ -399,6 +417,31 @@ This is an abstract: \lipsum[1]
 %%% mode: latex
 %%% TeX-master: t
 %%% End:
+#+END_SRC
+
+#+NAME: article-options
+#+BEGIN_SRC latex
+11pt,twoside
+#+END_SRC
+
+#+NAME: article-settings
+#+BEGIN_SRC latex
+\RequirePackage{etoolbox}
+\newbool{draftmode}
+\booltrue{draftmode}
+
+% Uncomment the following line for deactivating draftmode
+%\boolfalse{draftmode}           % Deactivate draftmode
+
+\ifbool{draftmode}{
+  \usepackage[firstpageonly=true]{draftwatermark}
+  \SetWatermarkScale{1}
+  \AtBeginDocument{\SetWatermarkText{DRAFT}}
+}{}
+
+<<scrarticle-settings-input>>
+
+<<basic-text-settings-input>>
 #+END_SRC
 
 ** Beamer template
@@ -605,6 +648,72 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 %%% End:
 #+END_SRC
 
+#+NAME: beamer-options
+#+BEGIN_SRC latex
+10pt, % 8pt, 9pt, 10pt, 11pt, 12pt, 14pt, 17pt, 20pt
+% serif,
+% table, % for table coloring
+% draft,
+% ngerman,
+% handout,	% remove overlays
+compress,
+xcolor={table,dvipsnames},
+aspectratio=169,
+#+END_SRC
+
+#+NAME: beamer-options-org
+#+BEGIN_SRC latex
+[compress,xcolor={table,dvipsnames},10pt,aspectratio=43] 
+#+END_SRC
+
+#+NAME: beamer-settings
+#+BEGIN_SRC latex
+\input{beamer-settings.tex}
+#+END_SRC
+
+#+BEGIN_SRC latex :noweb yes :tangle beamer-settings.tex
+<<pdflatex-settings>>
+
+\usepackage{etex} 
+\usepackage{graphics}
+<<tikz-settings-input>>
+<<forest-settings-input>>
+
+\usepackage{url}
+\usepackage{amsmath,amssymb,amsfonts,marvosym}
+\usepackage{ulem}			% to cross out text
+\normalem
+
+\usepackage{ragged2e}
+\let\raggedright=\RaggedRight
+
+% \usepackage{tipa}
+\usepackage{linguex}   % must be loaded below \usepackage[T1]{fontenc}
+\AtBeginDocument{
+  \setlength{\Exlabelsep}{0em}		% for linguex examples
+  \setlength{\SubExleftmargin}{1,5em}	% for linguex examples
+  \renewcommand\eachwordone{\sffamily}	% for glossing with linguex
+  \renewcommand\eachwordtwo{\sffamily}	% for glossing with linguex
+  % \setlength{\Extopsep}{1ex}   % vertical margin in linguex examples
+}
+
+\usepackage{packages/langsci-avm}
+
+<<listings-settings>>
+
+%% Bibliography
+
+<<biblatex-settings>>
+
+%% BibTeX 
+% \input{settings/natbib_bibtex_setup.tex} 
+% \PassOptionsToPackage{round}{natbib}
+% \renewcommand{\newblock}{}    % to make natbib compatible with beamer
+
+<<textpos-settings>>
+
+#+END_SRC
+
 ** Book template
 
 #+NAME: book-template-tex
@@ -673,6 +782,21 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 %%% End:
 
 
+#+END_SRC
+
+#+NAME: book-options
+#+BEGIN_SRC latex
+11pt,
+bibliography=totoc,
+numbers=noenddot,
+% draft
+#+END_SRC
+
+#+NAME: book-settings
+#+BEGIN_SRC latex
+\usepackage{datetime}
+
+<<basic-text-settings-input>>
 #+END_SRC
 
 ** Hausarbeit template
@@ -905,6 +1029,144 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 %%% mode: latex
 %%% TeX-master: t
 %%% End:
+#+END_SRC
+
+#+NAME: poster-settings
+#+BEGIN_SRC latex :noweb yes :tangle poster-settings.tex
+%%%%%%%%%%%%%%%%%%%%%%
+%   FONT             % 
+%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+%\usepackage{ucs}
+\usepackage[utf8]{inputenc}
+%\usepackage[utf8x]{inputenc} 
+%\usepackage{helvet}
+%\usepackage{avant}
+\usepackage{DejaVuSans}
+\usepackage[scaled=0.9]{beramono}  % for monospaced font
+\renewcommand*{\familydefault}{\sfdefault}
+
+<<biblatex-settings>>
+
+%%%%%%%%%%%%%%%%%%%%%%
+%   MISC             % 
+%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{xcolor,enumitem}
+\usepackage{linguex,packages/langsci-avm} 
+\usepackage{amsmath,amssymb,amsfonts,marvosym}
+\usepackage{ulem}			% to cross out text
+\normalem
+
+\usepackage{multicol}
+\usepackage{colortbl}
+\usepackage{booktabs}
+
+<<listings-settings>>
+
+<<forest-settings-input>>
+
+#+END_SRC
+
+#+NAME: poster-style
+#+BEGIN_SRC latex :noweb yes :tangle poster-style.tex
+%\usetheme{Basic}	% Default, Rays, Basic, Simple, Envelope, Wave, Board, Autumn, and Desert
+
+\usetitlestyle[
+	width=750mm,
+	linewidth=2pt,
+	titletoblockverticalspace=0mm
+	]{Filled}	% Default, Basic, Envelope, Wave, VerticalShading, Filled, Empty.
+
+%\usecolorpalette{Default}	% Default, BlueGrayOrange, GreenGrayViolet, PurpleGrayBlue, BrownBlueOrange
+
+%\usecolorstyle{Germany}	% Default, Australia, Britain, Sweden, Spain, Russia, Denmark, Germany
+
+\usebackgroundstyle{Empty}  % Default, Rays, VerticalGradation, BottomVerticalGradation, Empty 
+
+\useblockstyle[roundedcorners=5,linewidth=2pt]{Default} % Default, Basic, Minimal, Envelope, Corner, Slide, TornOut
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \settitle{
+% 	\@titlegraphic \\[\TP@titlegraphictotitledistance] \centering
+% 	\color{titlefgcolor} {\bfseries \Huge \sc \@title \par}
+% 	\vspace*{1em}
+% 	{\huge \@author \par} \vspace*{1em} {\LARGE \@institute}
+% }
+
+% \settitle{
+% 	\centering
+% 	\color{titlefgcolor} {\bfseries \Huge \sc \@title \par}
+% 	\vspace*{2em}
+% 	{\huge \@author \par} \vspace*{1em} {\LARGE \@institute}
+
+% 	\raisebox{0cm}[0pt]{\@titlegraphic}
+% }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \definetitlestyle{sampletitle}{
+% 	width=500mm, roundedcorners=20, linewidth=2pt, innersep=5pt,
+% 	titletotopverticalspace=15mm, titletoblockverticalspace=30mm
+% }{
+% 	\begin{scope}[line width=\titlelinewidth, rounded corners=\titleroundedcorners]
+% 		\draw[color=blocktitlebgcolor, fill=titlebgcolor] (\titleposleft,\titleposbottom) rectangle (\titleposright,\titlepostop);
+% 	\end{scope}
+% }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \defineblockstyle{sampleblockstyle}{
+% 	titlewidthscale=0.9, bodywidthscale=1,titleleft,
+% 	titleoffsetx=0pt, titleoffsety=0pt, bodyoffsetx=0mm, bodyoffsety=15mm,
+% 	bodyverticalshift=10mm, roundedcorners=5, linewidth=2pt,
+% 	titleinnersep=6mm, bodyinnersep=1cm
+% }{
+% 	\draw[color=framecolor, fill=blockbodybgcolor,
+% 		rounded corners=\blockroundedcorners] (blockbody.south west)
+% 		rectangle (blockbody.north east);
+% 	\ifBlockHasTitle
+% 		\draw[color=framecolor, fill=blocktitlebgcolor,
+% 			rounded corners=\blockroundedcorners] (blocktitle.south west)
+% 			rectangle (blocktitle.north east);
+% 	\fi
+% }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \definecolorstyle{sampleColorStyle} {
+% 	\definecolor{colorOne}{named}{blue}
+% 	\definecolor{colorTwo}{named}{yellow}
+% 	\definecolor{colorThree}{named}{orange}
+% }{
+% 	% Background Colors
+% 	\colorlet{backgroundcolor}{colorOne}
+% 	\colorlet{framecolor}{black}
+% 	% Title Colors
+% 	\colorlet{titlefgcolor}{black}
+% 	\colorlet{titlebgcolor}{colorOne}
+% 	% Block Colors
+% 	\colorlet{blocktitlebgcolor}{colorThree}
+% 	\colorlet{blocktitlefgcolor}{white}
+% 	\colorlet{blockbodybgcolor}{white}
+% 	\colorlet{blockbodyfgcolor}{black}
+% 	% Innerblock Colors
+% 	\colorlet{innerblocktitlebgcolor}{white}
+% 	\colorlet{innerblocktitlefgcolor}{black}
+% 	\colorlet{innerblockbodybgcolor}{colorThree!30!white}
+% 	\colorlet{innerblockbodyfgcolor{black}
+% 	% Note colors
+% 	\colorlet{notefgcolor}{black}
+% 	\colorlet{notebgcolor}{colorTwo!50!white}
+% 	\colorlet{noteframecolor}{colorTwo}
+% }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \definebackgroundstyle{samplebackgroundstyle}{
+% 	\draw[inner sep=0pt, line width=0pt, color=red, fill=backgroundcolor!30!black]
+% 	(bottomleft) rectangle (topright);
+% }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 #+END_SRC
 
 ** Standalone template
@@ -1141,11 +1403,173 @@ Remember to first add the class jlm to the set of known classes (in =init.el=).
 # end:
 #+END_SRC
 
-* Beamer themes
+* Package definitions
+
+** tikz-settings.sty
+
+Some templates require it to have the tikz settings in a separate sty-file.
+
+#+BEGIN_SRC latex :noweb yes :tangle jlm-template/packages/tikz-settings.sty
+<<tikz-settings.sty>>
+#+END_SRC
+
+#+BEGIN_SRC latex :noweb yes :tangle langscibook-template/packages/tikz-settings.sty
+<<tikz-settings.sty>>
+#+END_SRC
+
+#+NAME: tikz-settings.sty
+#+BEGIN_SRC latex :noweb yes
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{tikz-settings}
+
+<<tikz-settings-input>>
+<<forest-settings-input>>
+
+\endinput
+#+END_SRC
+
+** COMMENT textpos-settings.sty
+
+#+NAME: textpos-settings.sty
+#+BEGIN_SRC latex :noweb yes :tangle packages/textpos-settings.sty
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{textpos-settings}
+
+<<textpos-settings>>
+
+\endinput
+#+END_SRC
+
+* Bundled settings
+
+
+** Optional packages
+
+#+NAME: optional-packages
+#+BEGIN_SRC latex :noweb yes
+%% Graphics
+<<tikz-settings-input>>
+<<forest-settings-input>>
+
+%% Linguistics
+\usepackage{linguex}
+  \renewcommand{\firstrefdash}{}
+<<langsci-avm-settings-input>>
+% \usepackage[inference]{semantic} % for CCG 
+% \usepackage{packages/ccg}
+#+END_SRC
+
+** Basic text settings
+
+#+NAME: basic-text-settings-input
+#+BEGIN_SRC latex :noweb yes :tangle no
+\input{basic-text-settings}
+#+END_SRC
+
+#+NAME: basic-text-settings
+#+BEGIN_SRC latex :noweb yes :tangle basic-text-settings.tex
+% Do not change this file!
+
+<<pdflatex-settings>>
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%   MISCELLANEOUS      % 
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Graphics
+\usepackage{graphics}
+
+%% Tables
+% \usepackage{arydshln} 		    % for dashed horizontal lines in tables (incompatible with avm)
+\usepackage{multirow}           % similar to \multicolumn
+
+%% Symbols
+\usepackage{latexsym,amsmath,amssymb,wasysym}
+\usepackage{marvosym}           % for thunderbolt symbol
+\usepackage{ulem}               % to cross out text
+  \normalem
+\usepackage{url}
+  \urlstyle{tt}                   % tt,rm,sf,same
+\usepackage{tipa}	% for phonetic symbols; has to appear before fontspec
+
+%% Blindtext
+\usepackage{lipsum}
+
+<<biblatex-settings>> 
+<<hyperrefs-settings>>
+#+END_SRC
+
+* Package settings & examples
+
+** AVM
+
+https://ctan.org/pkg/langsci-avm
+
+Typesetting feature structures in the form of attribute-value matrices. 
+
+#+NAME: langsci-avm-settings-file
+#+BEGIN_SRC latex :noweb yes :tangle packages/langsci-avm-settings.tex
+%%%%%%%%%%%%%%%%%%%%%%
+%   AVM SETTINGS     % 
+%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{packages/langsci-avm}
+
+
+#+END_SRC
+
+#+NAME: langsci-avm-settings-input
+#+BEGIN_SRC latex
+\input{packages/langsci-avm-settings}
+#+END_SRC
+
+#+NAME: langsci-avm-example
+#+BEGIN_SRC latex
+\avm{
+  \0 [ \type{eating} \\
+    actor & \1 \\ 
+    theme & \2 ]
+}
+
+\medskip
+
+\noindent $\Rightarrow$ \url{https://github.com/langsci/langsci-avm/blob/master/langsci-avm.pdf}
+#+END_SRC
+
+The following are settings for a legacy AVM package.
+
+#+NAME: avm-settings
+#+BEGIN_SRC latex
+%%%%%%%%%%%%%%%%%%%%%%
+%   AVM SETTINGS     % 
+%%%%%%%%%%%%%%%%%%%%%%
+
+\avmoptions{center,topright}  % topright determines the position of \osort
+\avmfont{\scshape}
+\avmvalfont{\normalfont}
+\avmsortfont{\normalfont\itshape}
+
+\newenvironment{topbot}{   	% more flexible than /newcommand ?
+	\avmvskip{0.2ex} 
+	\hspace{-1.5em}
+	\begin{avm}
+	\avml
+	}
+	%%%
+	{
+	\avmr
+    \end{avm}
+    \hspace{-0.5em}
+}
+
+
+#+END_SRC
+
+** Beamer themes
 
 Local Beamer themes are executed relative to the directory of the master file. Therefore, in order to avoid the use of specific relative paths in the code of the themes, they must later be put in the same directory as the master file.
 
-** Theme settings
+*** Theme settings
 
 #+NAME: beamer-theme-settings
 #+BEGIN_SRC latex :noweb yes
@@ -1160,7 +1584,7 @@ Local Beamer themes are executed relative to the directory of the master file. T
 % \input{beamerlogosDuesseldorf.tex}
 #+END_SRC
 
-** Tuebingen
+*** Tuebingen
 
 #+NAME: beamerthemeTuebingen.sty
 #+BEGIN_SRC latex :noweb yes :tangle beamerthemeTuebingen.sty
@@ -1417,7 +1841,7 @@ Local Beamer themes are executed relative to the directory of the master file. T
 \titlegraphic{{\rmfamily \lipsum}}
 #+END_SRC
 
-** Lustnau
+*** Lustnau
 
 #+NAME: beamerthemeLustnau.sty
 #+BEGIN_SRC latex :noweb yes :tangle beamerthemeLustnau.sty
@@ -1464,7 +1888,7 @@ Local Beamer themes are executed relative to the directory of the master file. T
 \mode<all>
 #+END_SRC
 
-** Duesseldorf
+*** Duesseldorf
 
 #+NAME: beamerthemeDuesseldorf.sty
 #+BEGIN_SRC latex :noweb yes :tangle beamerthemeDuesseldorf.sty
@@ -1549,7 +1973,7 @@ Local Beamer themes are executed relative to the directory of the master file. T
 }
 #+END_SRC
 
-** Bielefeld
+*** Bielefeld
 
 Template for slides in the corporate design of the [[https://www.uni-bielefeld.de/][University of Bielefeld]] (Faculty of Literature and Language). 
 
@@ -1822,660 +2246,6 @@ Template for slides in the corporate design of the [[https://www.uni-bielefeld.d
 
 \RequirePackage{lipsum}
 \titlegraphic{{\rmfamily \lipsum}}
-#+END_SRC
-
-* Packages
-
-** tikz-settings.sty
-
-Some templates require it to have the tikz settings in a separate sty-file.
-
-#+BEGIN_SRC latex :noweb yes :tangle jlm-template/packages/tikz-settings.sty
-<<tikz-settings.sty>>
-#+END_SRC
-
-#+BEGIN_SRC latex :noweb yes :tangle langscibook-template/packages/tikz-settings.sty
-<<tikz-settings.sty>>
-#+END_SRC
-
-#+NAME: tikz-settings.sty
-#+BEGIN_SRC latex :noweb yes
-\NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{tikz-settings}
-
-<<tikz-settings-input>>
-<<forest-settings-input>>
-
-\endinput
-#+END_SRC
-
-** COMMENT textpos-settings.sty
-
-#+NAME: textpos-settings.sty
-#+BEGIN_SRC latex :noweb yes :tangle packages/textpos-settings.sty
-\NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{textpos-settings}
-
-<<textpos-settings>>
-
-\endinput
-#+END_SRC
-
-* Bundled settings
-
-** Abstract settings
-
-#+NAME: abstract-options
-#+BEGIN_SRC latex
-12pt,a4paper
-#+END_SRC
-
-#+NAME: abstract-settings
-#+BEGIN_SRC latex
-<<basic-text-settings-input>>
-
-\usepackage[left=25mm, right=25mm, top=25mm, bottom=25mm, noheadfoot]{geometry}
-\pagenumbering{gobble}
-\PassOptionsToPackage{maxbibnames=1,maxcitenames=1,firstinits=true}{biblatex}
-\defbibenvironment{bibliography}{\noindent}{\unspace}{\xspace$\bullet$\xspace}
-\makeatletter
-\renewcommand\maketitle{
-  ~\vspace{-1.1cm}\newline
-  {\raggedright
-    \renewcommand{\baselinestretch}{1.2}\selectfont
-  {\bfseries\large\@title}\\[2ex]
-  {\large\@author}\\[2ex]
-  }
-}
-\makeatother
-
-#+END_SRC
-
-** Article settings
-
-#+NAME: article-options
-#+BEGIN_SRC latex
-11pt,twoside
-#+END_SRC
-
-
-#+NAME: article-settings
-#+BEGIN_SRC latex
-\RequirePackage{etoolbox}
-\newbool{draftmode}
-\booltrue{draftmode}
-
-% Uncomment the following line for deactivating draftmode
-%\boolfalse{draftmode}           % Deactivate draftmode
-
-\ifbool{draftmode}{
-  \usepackage[firstpageonly=true]{draftwatermark}
-  \SetWatermarkScale{1}
-  \AtBeginDocument{\SetWatermarkText{DRAFT}}
-}{}
-
-<<scrarticle-settings-input>>
-
-<<basic-text-settings-input>>
-#+END_SRC
-
-** Beamer settings
-
-#+NAME: beamer-options
-#+BEGIN_SRC latex
-10pt, % 8pt, 9pt, 10pt, 11pt, 12pt, 14pt, 17pt, 20pt
-% serif,
-% table, % for table coloring
-% draft,
-% ngerman,
-% handout,	% remove overlays
-compress,
-xcolor={table,dvipsnames},
-aspectratio=169,
-#+END_SRC
-
-#+NAME: beamer-options-org
-#+BEGIN_SRC latex
-[compress,xcolor={table,dvipsnames},10pt,aspectratio=43] 
-#+END_SRC
-
-#+NAME: beamer-settings
-#+BEGIN_SRC latex
-\input{beamer-settings.tex}
-#+END_SRC
-
-#+BEGIN_SRC latex :noweb yes :tangle beamer-settings.tex
-<<pdflatex-settings>>
-
-\usepackage{etex} 
-\usepackage{graphics}
-<<tikz-settings-input>>
-<<forest-settings-input>>
-
-\usepackage{url}
-\usepackage{amsmath,amssymb,amsfonts,marvosym}
-\usepackage{ulem}			% to cross out text
-\normalem
-
-\usepackage{ragged2e}
-\let\raggedright=\RaggedRight
-
-% \usepackage{tipa}
-\usepackage{linguex}   % must be loaded below \usepackage[T1]{fontenc}
-\AtBeginDocument{
-  \setlength{\Exlabelsep}{0em}		% for linguex examples
-  \setlength{\SubExleftmargin}{1,5em}	% for linguex examples
-  \renewcommand\eachwordone{\sffamily}	% for glossing with linguex
-  \renewcommand\eachwordtwo{\sffamily}	% for glossing with linguex
-  % \setlength{\Extopsep}{1ex}   % vertical margin in linguex examples
-}
-
-\usepackage{packages/langsci-avm}
-
-<<listings-settings>>
-
-%% Bibliography
-
-<<biblatex-settings>>
-
-%% BibTeX 
-% \input{settings/natbib_bibtex_setup.tex} 
-% \PassOptionsToPackage{round}{natbib}
-% \renewcommand{\newblock}{}    % to make natbib compatible with beamer
-
-<<textpos-settings>>
-
-#+END_SRC
-
-** Book settings
-
-#+NAME: book-options
-#+BEGIN_SRC latex
-11pt,
-bibliography=totoc,
-numbers=noenddot,
-% draft
-#+END_SRC
-
-#+NAME: book-settings
-#+BEGIN_SRC latex
-\usepackage{datetime}
-
-<<basic-text-settings-input>>
-#+END_SRC
-
-** Optional packages
-
-#+NAME: optional-packages
-#+BEGIN_SRC latex :noweb yes
-%% Graphics
-<<tikz-settings-input>>
-<<forest-settings-input>>
-
-%% Linguistics
-\usepackage{linguex}
-  \renewcommand{\firstrefdash}{}
-<<langsci-avm-settings-input>>
-% \usepackage[inference]{semantic} % for CCG 
-% \usepackage{packages/ccg}
-#+END_SRC
-
-** Basic text settings
-
-#+NAME: basic-text-settings-input
-#+BEGIN_SRC latex :noweb yes :tangle no
-\input{basic-text-settings}
-#+END_SRC
-
-#+NAME: basic-text-settings
-#+BEGIN_SRC latex :noweb yes :tangle basic-text-settings.tex
-% Do not change this file!
-
-<<pdflatex-settings>>
-
-%%%%%%%%%%%%%%%%%%%%%%%%
-%   MISCELLANEOUS      % 
-%%%%%%%%%%%%%%%%%%%%%%%%
-
-%% Graphics
-\usepackage{graphics}
-
-%% Tables
-% \usepackage{arydshln} 		    % for dashed horizontal lines in tables (incompatible with avm)
-\usepackage{multirow}           % similar to \multicolumn
-
-%% Symbols
-\usepackage{latexsym,amsmath,amssymb,wasysym}
-\usepackage{marvosym}           % for thunderbolt symbol
-\usepackage{ulem}               % to cross out text
-  \normalem
-\usepackage{url}
-  \urlstyle{tt}                   % tt,rm,sf,same
-\usepackage{tipa}	% for phonetic symbols; has to appear before fontspec
-
-%% Blindtext
-\usepackage{lipsum}
-
-<<biblatex-settings>> 
-<<hyperrefs-settings>>
-#+END_SRC
-
-** Poster settings
-
-#+NAME: poster-settings
-#+BEGIN_SRC latex :noweb yes :tangle poster-settings.tex
-%%%%%%%%%%%%%%%%%%%%%%
-%   FONT             % 
-%%%%%%%%%%%%%%%%%%%%%%
-
-\usepackage[english]{babel}
-\usepackage[T1]{fontenc}
-%\usepackage{ucs}
-\usepackage[utf8]{inputenc}
-%\usepackage[utf8x]{inputenc} 
-%\usepackage{helvet}
-%\usepackage{avant}
-\usepackage{DejaVuSans}
-\usepackage[scaled=0.9]{beramono}  % for monospaced font
-\renewcommand*{\familydefault}{\sfdefault}
-
-<<biblatex-settings>>
-
-%%%%%%%%%%%%%%%%%%%%%%
-%   MISC             % 
-%%%%%%%%%%%%%%%%%%%%%%
-
-\usepackage{xcolor,enumitem}
-\usepackage{linguex,packages/langsci-avm} 
-\usepackage{amsmath,amssymb,amsfonts,marvosym}
-\usepackage{ulem}			% to cross out text
-\normalem
-
-\usepackage{multicol}
-\usepackage{colortbl}
-\usepackage{booktabs}
-
-<<listings-settings>>
-
-<<forest-settings-input>>
-
-#+END_SRC
-
-#+NAME: poster-style
-#+BEGIN_SRC latex :noweb yes :tangle poster-style.tex
-%\usetheme{Basic}	% Default, Rays, Basic, Simple, Envelope, Wave, Board, Autumn, and Desert
-
-\usetitlestyle[
-	width=750mm,
-	linewidth=2pt,
-	titletoblockverticalspace=0mm
-	]{Filled}	% Default, Basic, Envelope, Wave, VerticalShading, Filled, Empty.
-
-%\usecolorpalette{Default}	% Default, BlueGrayOrange, GreenGrayViolet, PurpleGrayBlue, BrownBlueOrange
-
-%\usecolorstyle{Germany}	% Default, Australia, Britain, Sweden, Spain, Russia, Denmark, Germany
-
-\usebackgroundstyle{Empty}  % Default, Rays, VerticalGradation, BottomVerticalGradation, Empty 
-
-\useblockstyle[roundedcorners=5,linewidth=2pt]{Default} % Default, Basic, Minimal, Envelope, Corner, Slide, TornOut
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \settitle{
-% 	\@titlegraphic \\[\TP@titlegraphictotitledistance] \centering
-% 	\color{titlefgcolor} {\bfseries \Huge \sc \@title \par}
-% 	\vspace*{1em}
-% 	{\huge \@author \par} \vspace*{1em} {\LARGE \@institute}
-% }
-
-% \settitle{
-% 	\centering
-% 	\color{titlefgcolor} {\bfseries \Huge \sc \@title \par}
-% 	\vspace*{2em}
-% 	{\huge \@author \par} \vspace*{1em} {\LARGE \@institute}
-
-% 	\raisebox{0cm}[0pt]{\@titlegraphic}
-% }
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \definetitlestyle{sampletitle}{
-% 	width=500mm, roundedcorners=20, linewidth=2pt, innersep=5pt,
-% 	titletotopverticalspace=15mm, titletoblockverticalspace=30mm
-% }{
-% 	\begin{scope}[line width=\titlelinewidth, rounded corners=\titleroundedcorners]
-% 		\draw[color=blocktitlebgcolor, fill=titlebgcolor] (\titleposleft,\titleposbottom) rectangle (\titleposright,\titlepostop);
-% 	\end{scope}
-% }
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \defineblockstyle{sampleblockstyle}{
-% 	titlewidthscale=0.9, bodywidthscale=1,titleleft,
-% 	titleoffsetx=0pt, titleoffsety=0pt, bodyoffsetx=0mm, bodyoffsety=15mm,
-% 	bodyverticalshift=10mm, roundedcorners=5, linewidth=2pt,
-% 	titleinnersep=6mm, bodyinnersep=1cm
-% }{
-% 	\draw[color=framecolor, fill=blockbodybgcolor,
-% 		rounded corners=\blockroundedcorners] (blockbody.south west)
-% 		rectangle (blockbody.north east);
-% 	\ifBlockHasTitle
-% 		\draw[color=framecolor, fill=blocktitlebgcolor,
-% 			rounded corners=\blockroundedcorners] (blocktitle.south west)
-% 			rectangle (blocktitle.north east);
-% 	\fi
-% }
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \definecolorstyle{sampleColorStyle} {
-% 	\definecolor{colorOne}{named}{blue}
-% 	\definecolor{colorTwo}{named}{yellow}
-% 	\definecolor{colorThree}{named}{orange}
-% }{
-% 	% Background Colors
-% 	\colorlet{backgroundcolor}{colorOne}
-% 	\colorlet{framecolor}{black}
-% 	% Title Colors
-% 	\colorlet{titlefgcolor}{black}
-% 	\colorlet{titlebgcolor}{colorOne}
-% 	% Block Colors
-% 	\colorlet{blocktitlebgcolor}{colorThree}
-% 	\colorlet{blocktitlefgcolor}{white}
-% 	\colorlet{blockbodybgcolor}{white}
-% 	\colorlet{blockbodyfgcolor}{black}
-% 	% Innerblock Colors
-% 	\colorlet{innerblocktitlebgcolor}{white}
-% 	\colorlet{innerblocktitlefgcolor}{black}
-% 	\colorlet{innerblockbodybgcolor}{colorThree!30!white}
-% 	\colorlet{innerblockbodyfgcolor{black}
-% 	% Note colors
-% 	\colorlet{notefgcolor}{black}
-% 	\colorlet{notebgcolor}{colorTwo!50!white}
-% 	\colorlet{noteframecolor}{colorTwo}
-% }
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \definebackgroundstyle{samplebackgroundstyle}{
-% 	\draw[inner sep=0pt, line width=0pt, color=red, fill=backgroundcolor!30!black]
-% 	(bottomleft) rectangle (topright);
-% }
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-#+END_SRC
-
-* Package settings
-
-** Forest
-
-https://ctan.org/pkg/forest
-
-Drawing tree-shaped graphs with TikZ.
-
-#+NAME: forest-settings-file
-#+BEGIN_SRC latex :noweb yes :tangle packages/forest-settings.tex
-%%%%%%%%%%%%%%%%%%%%%%% 
-%   FOREST SETTINGS   % 
-%%%%%%%%%%%%%%%%%%%%%%% 
-
-\usepackage{forest}
-
-\makeatletter
-
-\@ifpackagelater{forest}{2016/01/01}
-{\useforestlibrary{linguistics}%
- \useforestlibrary{edges}}
-{}
-
-\@ifpackagelater{forest}{2016/01/01}
-{\newcommand{\forestPreamble}{default preamble}} % version >=2 of forest
-{\newcommand{\forestPreamble}{.style}} % version <=1 of forest
-
-\makeatother
-
-\forestset{
-  \forestPreamble ={
-    % .style={ % version <=1 of forest
-    % default preamble={ % version >=2 of forest    
-		for tree={
-			parent anchor=south, 
-			child anchor=north,
-			% align=center,			% bad: adds space below label
-			fit=rectangle,
-			base=top,				% vertical orientation of nodes
-			% inner sep=3,			% necesssary?
-			begin draw/.code={\begin{tikzpicture}[baseline=(current bounding box.center)]},
-    }},
-  htree/.style={for tree={grow'=east,parent anchor=east,child anchor=west,anchor=base west}},
-  sn edges/.style={for tree={parent anchor=south, child anchor=north}},
-  red subtree/.style={for tree={text=red},for descendants={edge=red}},
-  black subtree/.style={for tree={text=black},for descendants={edge=black}},
-  blue subtree/.style={for tree={text=blue},for descendants={edge=blue}},
-  green subtree/.style={for tree={text=green},for descendants={edge=green}},
-  gray subtree/.style={for tree={text=gray},for descendants={edge=gray}},
-  color subtree/.style={for tree={text=#1},for descendants={edge={draw=#1}}},
-  subtree color/.style={for tree={text=#1},for descendants={edge={draw=#1}}},
-  vcenter/.style={begin draw/.code={\begin{tikzpicture}[baseline=(current bounding box.center)]}},
-  empty nodes/.style={	% from the forest manual
-    for tree={
-      % calign=fixed edge angles,
-      yshift=1ex},
-    delay={where content={}{shape=coordinate,for parent={for children={anchor=north}}}{}}},
-  derivation tree/.style={.style={
-      for tree={parent anchor={},child anchor={},font=\ttfamily}}},
-  derivation/.style={for children={fit=tight}},
-  description/.style={
-    for tree={parent anchor={},child anchor={},edge=->}},
-  dt label/.style 2 args={
-    edge label={node[midway,font=\ttfamily\scriptsize, #1]{#2}},},
-  %% for drawing STUG sequences
-  %% conn, <-- and --> are take from https://tex.stackexchange.com/a/414444/61499
-  conn/.style n args=2{
-    tikz+={\draw [dashed] (#1) -- (#2);}},
-  -->/.style={ % draw horizontal line to predecessor
-    before drawing tree={
-      temptoksa=,
-      tempcounta/.option=level,
-      if nodewalk valid={n}{conn={}{!n}}{
-        for nodewalk={
-          while nodewalk valid={u}{
-            tempcountb/.option=n,
-            u,
-            if={> OR>{n children}{tempcountb} }{
-              tempcountc/.register=tempcountb,
-              tempcountc'+=1,
-              n/.register=tempcountc,
-              while nodewalk valid={1}{
-                1,
-                if={ > OR= {level}{tempcounta} }{
-                  temptoksa/.option=name,
-                  break=1
-                }{}
-              }
-            }{}
-          }
-        }{},
-        if temptoksa={}{}{conn/.process={_R {}{temptoksa}}}
-      },
-    },
-  },
-  <--/.style={ % draw horizontal line to successor
-    before drawing tree={
-      temptoksa=,
-      tempcounta/.option=level,
-      if nodewalk valid={p}{conn={}{!p}}{
-        for nodewalk={
-          while nodewalk valid={u}{
-            u,
-            if n=1{}{
-              p,
-              while nodewalk valid={last}{
-                last,
-                if={ > OR= {level}{tempcounta} }{
-                  temptoksa/.option=name,
-                  break=1
-                }{}
-              }
-            },
-          }
-        }{},
-        if temptoksa={}{}{conn/.process={_R {}{temptoksa}}}
-      },
-    },
-  },
-  t/.style={calign with current}, % trunk 
-  lex/.style={                    % terminal nodes with lexical material
-    no edge,
-    for parent={l sep=0ex},
-    yshift=3ex,
-    draw=gray,
-    content={\textit{##1}}},
-  c/.style args={#1}{            % visual link with argument
-    % edge label={node[xshift={0.8em},scale=0.8,fill=white,draw,inner sep=.10ex,circle]{#1}}
-    % tikz={\node[yshift={1.5ex},scale=0.8,fill=white,draw,inner sep=.10ex,circle, right=-0.5em of .east]  {1};}
-    label={[yshift={0.5ex},scale=.8,circle, draw, fill=white, inner sep=.1ex, label distance=-.65em, anchor=west]north east:#1}},
-  Xs/.style={for tree={xshift=#1}},
-  Ys/.style={for tree={yshift=#1}},
-  %% Beamer overlays (https://tex.stackexchange.com/a/253384/61499)
-  invisible/.style={%
-    for tree={%
-      /tikz/invisible={#1},
-      edge={/tikz/invisible={#1}}}},
-  visible/.style={%
-    for tree={%
-      /tikz/visible={#1},
-      edge={/tikz/visible={#1}}}},
-  visible ancestors/.style={%
-    edge={/tikz/visible={#1}},
-    for ancestors={%
-      /tikz/visible={#1},
-      edge={/tikz/visible={#1}}}},
-  opaque/.style={%
-    for tree={%
-      /tikz/opaque={#1},
-      edge={/tikz/opaque={#1}}}},
-  alert/.style={%
-    for tree={%
-      /tikz/alert={#1},
-      edge={/tikz/alert={#1}}}},
-  only/.code args={<#1>}{% https://tex.stackexchange.com/a/417110/61499
-    \alt<#1>{}{\pgfkeysalso{before typesetting nodes={remove}}}},
-  unify children/.style={
-    if nodewalk valid={1}{
-      l sep=5pt,
-      for children={l=0mm},
-      for nodewalk={1}{
-        for siblings={no edge},
-        edge={decorate, decoration={brace, amplitude=5pt}},
-        edge path'={(!u1.west |- .north) -- (!ul.east |- .north)}
-      }}{}}
-}
-
-
-#+END_SRC
-
-#+NAME: forest-settings-input
-#+BEGIN_SRC latex
-\input{packages/forest-settings}
-#+END_SRC
-
-#+NAME: forest-example
-#+BEGIN_SRC latex
-% \Forest{
-%   [S [NP] 
-%     [VP [V  [\textit{eats}] ]
-%       [NP] ]]
-% }
-
-%% This example may cause problems together with TeX Live 2016
-% \Forest{
-%   [,phantom
-%     [S,--> [NP,--> [D [the]]]]
-%     [S,--> [NP,--> [A [absent]]]]
-%     [S, [NP [N [student]]]]
-%     ]
-% } 
-
-\Forest{
-  [,phantom
-    [S,name=root,red subtree
-      [AUX [\textit{does}] ]
-      [S
-        [NP]
-        [VP,name=vp[V [\textit{say}]] [S*,name=foot]]]]
-    [S,Xs=5cm,Ys=2cm
-      [NP]
-      [S,name=s
-        [NP [$\varepsilon$] ]
-        [VP 
-          [VP [V [\textit{walks}]]] 
-          [PP]]]]
-    ]
-  \draw[->,gray,thick,dashed,bend right=10](root)to(s);
-  \draw[->,gray,thick,dashed,bend right=10](foot)to(s);
-}
-
-\noindent $\Rightarrow$ \url{http://mirrors.ctan.org/graphics/pgf/contrib/forest/forest-doc.pdf}
-#+END_SRC
-
-** AVM
-
-https://ctan.org/pkg/langsci-avm
-
-Typesetting feature structures in the form of attribute-value matrices. 
-
-#+NAME: langsci-avm-settings-file
-#+BEGIN_SRC latex :noweb yes :tangle packages/langsci-avm-settings.tex
-%%%%%%%%%%%%%%%%%%%%%%
-%   AVM SETTINGS     % 
-%%%%%%%%%%%%%%%%%%%%%%
-
-\usepackage{packages/langsci-avm}
-
-
-#+END_SRC
-
-#+NAME: langsci-avm-settings-input
-#+BEGIN_SRC latex
-\input{packages/langsci-avm-settings}
-#+END_SRC
-
-#+NAME: langsci-avm-example
-#+BEGIN_SRC latex
-\avm{
-  \0 [ \type{eating} \\
-    actor & \1 \\ 
-    theme & \2 ]
-}
-
-\medskip
-
-\noindent $\Rightarrow$ \url{https://github.com/langsci/langsci-avm/blob/master/langsci-avm.pdf}
-#+END_SRC
-
-The following are settings for a legacy AVM package.
-
-#+NAME: avm-settings
-#+BEGIN_SRC latex
-%%%%%%%%%%%%%%%%%%%%%%
-%   AVM SETTINGS     % 
-%%%%%%%%%%%%%%%%%%%%%%
-
-\avmoptions{center,topright}  % topright determines the position of \osort
-\avmfont{\scshape}
-\avmvalfont{\normalfont}
-\avmsortfont{\normalfont\itshape}
-
-\newenvironment{topbot}{   	% more flexible than /newcommand ?
-	\avmvskip{0.2ex} 
-	\hspace{-1.5em}
-	\begin{avm}
-	\avml
-	}
-	%%%
-	{
-	\avmr
-    \end{avm}
-    \hspace{-0.5em}
-}
-
-
 #+END_SRC
 
 ** TODO BibLaTeX
@@ -2758,6 +2528,218 @@ References are stored in \texttt{references.bib}.
 
 #+END_SRC
 
+** Forest
+
+https://ctan.org/pkg/forest
+
+Drawing tree-shaped graphs with TikZ.
+
+#+NAME: forest-settings-file
+#+BEGIN_SRC latex :noweb yes :tangle packages/forest-settings.tex
+%%%%%%%%%%%%%%%%%%%%%%% 
+%   FOREST SETTINGS   % 
+%%%%%%%%%%%%%%%%%%%%%%% 
+
+\usepackage{forest}
+
+\makeatletter
+
+\@ifpackagelater{forest}{2016/01/01}
+{\useforestlibrary{linguistics}%
+ \useforestlibrary{edges}}
+{}
+
+\@ifpackagelater{forest}{2016/01/01}
+{\newcommand{\forestPreamble}{default preamble}} % version >=2 of forest
+{\newcommand{\forestPreamble}{.style}} % version <=1 of forest
+
+\makeatother
+
+\forestset{
+  \forestPreamble ={
+    % .style={ % version <=1 of forest
+    % default preamble={ % version >=2 of forest    
+		for tree={
+			parent anchor=south, 
+			child anchor=north,
+			% align=center,			% bad: adds space below label
+			fit=rectangle,
+			base=top,				% vertical orientation of nodes
+			% inner sep=3,			% necesssary?
+			begin draw/.code={\begin{tikzpicture}[baseline=(current bounding box.center)]},
+    }},
+  htree/.style={for tree={grow'=east,parent anchor=east,child anchor=west,anchor=base west}},
+  sn edges/.style={for tree={parent anchor=south, child anchor=north}},
+  red subtree/.style={for tree={text=red},for descendants={edge=red}},
+  black subtree/.style={for tree={text=black},for descendants={edge=black}},
+  blue subtree/.style={for tree={text=blue},for descendants={edge=blue}},
+  green subtree/.style={for tree={text=green},for descendants={edge=green}},
+  gray subtree/.style={for tree={text=gray},for descendants={edge=gray}},
+  color subtree/.style={for tree={text=#1},for descendants={edge={draw=#1}}},
+  subtree color/.style={for tree={text=#1},for descendants={edge={draw=#1}}},
+  vcenter/.style={begin draw/.code={\begin{tikzpicture}[baseline=(current bounding box.center)]}},
+  empty nodes/.style={	% from the forest manual
+    for tree={
+      % calign=fixed edge angles,
+      yshift=1ex},
+    delay={where content={}{shape=coordinate,for parent={for children={anchor=north}}}{}}},
+  derivation tree/.style={.style={
+      for tree={parent anchor={},child anchor={},font=\ttfamily}}},
+  derivation/.style={for children={fit=tight}},
+  description/.style={
+    for tree={parent anchor={},child anchor={},edge=->}},
+  dt label/.style 2 args={
+    edge label={node[midway,font=\ttfamily\scriptsize, #1]{#2}},},
+  %% for drawing STUG sequences
+  %% conn, <-- and --> are take from https://tex.stackexchange.com/a/414444/61499
+  conn/.style n args=2{
+    tikz+={\draw [dashed] (#1) -- (#2);}},
+  -->/.style={ % draw horizontal line to predecessor
+    before drawing tree={
+      temptoksa=,
+      tempcounta/.option=level,
+      if nodewalk valid={n}{conn={}{!n}}{
+        for nodewalk={
+          while nodewalk valid={u}{
+            tempcountb/.option=n,
+            u,
+            if={> OR>{n children}{tempcountb} }{
+              tempcountc/.register=tempcountb,
+              tempcountc'+=1,
+              n/.register=tempcountc,
+              while nodewalk valid={1}{
+                1,
+                if={ > OR= {level}{tempcounta} }{
+                  temptoksa/.option=name,
+                  break=1
+                }{}
+              }
+            }{}
+          }
+        }{},
+        if temptoksa={}{}{conn/.process={_R {}{temptoksa}}}
+      },
+    },
+  },
+  <--/.style={ % draw horizontal line to successor
+    before drawing tree={
+      temptoksa=,
+      tempcounta/.option=level,
+      if nodewalk valid={p}{conn={}{!p}}{
+        for nodewalk={
+          while nodewalk valid={u}{
+            u,
+            if n=1{}{
+              p,
+              while nodewalk valid={last}{
+                last,
+                if={ > OR= {level}{tempcounta} }{
+                  temptoksa/.option=name,
+                  break=1
+                }{}
+              }
+            },
+          }
+        }{},
+        if temptoksa={}{}{conn/.process={_R {}{temptoksa}}}
+      },
+    },
+  },
+  t/.style={calign with current}, % trunk 
+  lex/.style={                    % terminal nodes with lexical material
+    no edge,
+    for parent={l sep=0ex},
+    yshift=3ex,
+    draw=gray,
+    content={\textit{##1}}},
+  c/.style args={#1}{            % visual link with argument
+    % edge label={node[xshift={0.8em},scale=0.8,fill=white,draw,inner sep=.10ex,circle]{#1}}
+    % tikz={\node[yshift={1.5ex},scale=0.8,fill=white,draw,inner sep=.10ex,circle, right=-0.5em of .east]  {1};}
+    label={[yshift={0.5ex},scale=.8,circle, draw, fill=white, inner sep=.1ex, label distance=-.65em, anchor=west]north east:#1}},
+  Xs/.style={for tree={xshift=#1}},
+  Ys/.style={for tree={yshift=#1}},
+  %% Beamer overlays (https://tex.stackexchange.com/a/253384/61499)
+  invisible/.style={%
+    for tree={%
+      /tikz/invisible={#1},
+      edge={/tikz/invisible={#1}}}},
+  visible/.style={%
+    for tree={%
+      /tikz/visible={#1},
+      edge={/tikz/visible={#1}}}},
+  visible ancestors/.style={%
+    edge={/tikz/visible={#1}},
+    for ancestors={%
+      /tikz/visible={#1},
+      edge={/tikz/visible={#1}}}},
+  opaque/.style={%
+    for tree={%
+      /tikz/opaque={#1},
+      edge={/tikz/opaque={#1}}}},
+  alert/.style={%
+    for tree={%
+      /tikz/alert={#1},
+      edge={/tikz/alert={#1}}}},
+  only/.code args={<#1>}{% https://tex.stackexchange.com/a/417110/61499
+    \alt<#1>{}{\pgfkeysalso{before typesetting nodes={remove}}}},
+  unify children/.style={
+    if nodewalk valid={1}{
+      l sep=5pt,
+      for children={l=0mm},
+      for nodewalk={1}{
+        for siblings={no edge},
+        edge={decorate, decoration={brace, amplitude=5pt}},
+        edge path'={(!u1.west |- .north) -- (!ul.east |- .north)}
+      }}{}}
+}
+
+
+#+END_SRC
+
+#+NAME: forest-settings-input
+#+BEGIN_SRC latex
+\input{packages/forest-settings}
+#+END_SRC
+
+#+NAME: forest-example
+#+BEGIN_SRC latex
+% \Forest{
+%   [S [NP] 
+%     [VP [V  [\textit{eats}] ]
+%       [NP] ]]
+% }
+
+%% This example may cause problems together with TeX Live 2016
+% \Forest{
+%   [,phantom
+%     [S,--> [NP,--> [D [the]]]]
+%     [S,--> [NP,--> [A [absent]]]]
+%     [S, [NP [N [student]]]]
+%     ]
+% } 
+
+\Forest{
+  [,phantom
+    [S,name=root,red subtree
+      [AUX [\textit{does}] ]
+      [S
+        [NP]
+        [VP,name=vp[V [\textit{say}]] [S*,name=foot]]]]
+    [S,Xs=5cm,Ys=2cm
+      [NP]
+      [S,name=s
+        [NP [$\varepsilon$] ]
+        [VP 
+          [VP [V [\textit{walks}]]] 
+          [PP]]]]
+    ]
+  \draw[->,gray,thick,dashed,bend right=10](root)to(s);
+  \draw[->,gray,thick,dashed,bend right=10](foot)to(s);
+}
+
+\noindent $\Rightarrow$ \url{http://mirrors.ctan.org/graphics/pgf/contrib/forest/forest-doc.pdf}
+#+END_SRC
+
 ** Hyperrefs
 
 https://ctan.org/pkg/hyperref
@@ -2822,6 +2804,15 @@ still on.the floor lying be on him PART.kicked got\\
 
 \noindent $\Rightarrow$ \url{http://texdoc.net/texmf-dist/doc/latex/linguex/linguex-doc.pdf} \\
 Note the Leipzig glossing rules: \url{http://www.eva.mpg.de/lingua/resources/glossing-rules.php}
+#+END_SRC
+
+** Linguistics
+
+#+NAME: linguistic-example
+#+BEGIN_SRC latex
+<<linguex-example>>
+
+<<ipa-example>>
 #+END_SRC
 
 ** Listings
@@ -2935,6 +2926,39 @@ Typeset program code.
 <<listings-patr-settings>>
 #+END_SRC
 
+** Math formulae
+
+#+NAME: math-example
+#+BEGIN_SRC latex
+Formulae in texts: $a^2 + b^2 = c^2$
+
+\noindent Formulae in equation environment:
+\begin{equation}
+a^2 + b^2 = c^2
+\end{equation}
+$\Rightarrow$ \url{http://en.wikibooks.org/wiki/LaTeX/Mathematics}
+#+END_SRC
+
+** natbib/BibTeX
+
+https://www.ctan.org/pkg/bibtex
+
+This package is superseded by [[BibLaTeX]].
+
+#+NAME: natbib_bibtex-settings
+#+BEGIN_SRC latex
+\usepackage{natbib}
+\setlength{\bibsep}{0mm}
+%\setcitestyle{notesep={: }} 
+\bibpunct[: ]{(}{)}{;}{a}{}{;}
+\bibliographystyle{bst/unified}
+
+\newcommand{\insertBib}{
+	\bibliography{references}
+}
+
+\let\cite=\citet 	% in order to prevent inconsistencies between \cite and \citet
+#+END_SRC
 ** PDFLaTeX
 
 https://www.tug.org/applications/pdftex/
@@ -3066,65 +3090,6 @@ Change the layout of scrarticle from [[https://www.ctan.org/pkg/koma-script][kom
 \input{scrarticle-settings}
 #+END_SRC
 
-** Textpos
-
-https://ctan.math.washington.edu/tex-archive/macros/latex/contrib/textpos/textpos.pdf
-
-Absolute positioning of textblocks on a page.
-
-#+NAME: textpos-settings
-#+BEGIN_SRC latex
-%%%%%%%%%%%%%%%%%%%%%%%%%
-%   TEXTPOS SETTINGS    % 
-%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\usepackage{calc} % Enables the use of calc expressions: 0pt+1cm
-\usepackage[
-  absolute, % Absolute positioning
-  overlay   % Positioned textblocks will overlay any other parts of the text.  
-]{textpos}
-
-\setlength{\TPHorizModule}{1em}
-\setlength{\TPVertModule}{1ex}
-\newlength{\textposOriginH}
-\newlength{\textposOriginV}
-\setlength{\textposOriginH}{10mm}
-\setlength{\textposOriginV}{10mm}
-\textblockorigin{\textposOriginH}{\textposOriginV}
-
-\newcommand{\freeblock}[2]{
-  \begin{textblock}{0.1}(#1)
-  #2
-  \end{textblock}
-}
-
-
-#+END_SRC
-
-** Todonotes
-
-https://tug.ctan.org/macros/latex/contrib/todonotes/todonotes.pdf
-
-Add todo notes to your documents.
-
-#+NAME: todonotes-settings
-#+BEGIN_SRC latex
-%%%%%%%%%%%%%%%%%%%%%% 
-% TODONOTES          % 
-%%%%%%%%%%%%%%%%%%%%%% 
-
-\usepackage{soul}   % for text highlighting
-\usepackage[textsize=scriptsize,textwidth=2.5cm]{todonotes}
-\newcommand{\todoregion}[2]{\hl{#1}\todo{#2}}    
-
-
-#+END_SRC
-
-#+NAME: todonotes-settings-file
-#+BEGIN_SRC latex :noweb yes :tangle packages/todonotes-settings.tex
-<<todonotes-settings>>
-#+END_SRC
-
 ** TODO Tabular
 
 Additional settings for tabular environments.
@@ -3159,6 +3124,41 @@ cell 11 & cell 12 & cell 13 \\
 cell 21 & cell 22 & cell 23 \\
 \hline
 \end{tabular}
+#+END_SRC
+
+** Textpos
+
+https://ctan.math.washington.edu/tex-archive/macros/latex/contrib/textpos/textpos.pdf
+
+Absolute positioning of textblocks on a page.
+
+#+NAME: textpos-settings
+#+BEGIN_SRC latex
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%   TEXTPOS SETTINGS    % 
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{calc} % Enables the use of calc expressions: 0pt+1cm
+\usepackage[
+  absolute, % Absolute positioning
+  overlay   % Positioned textblocks will overlay any other parts of the text.  
+]{textpos}
+
+\setlength{\TPHorizModule}{1em}
+\setlength{\TPVertModule}{1ex}
+\newlength{\textposOriginH}
+\newlength{\textposOriginV}
+\setlength{\textposOriginH}{10mm}
+\setlength{\textposOriginV}{10mm}
+\textblockorigin{\textposOriginH}{\textposOriginV}
+
+\newcommand{\freeblock}[2]{
+  \begin{textblock}{0.1}(#1)
+  #2
+  \end{textblock}
+}
+
+
 #+END_SRC
 
 ** TODO TikZ
@@ -3240,26 +3240,30 @@ Issues:
 \input{packages/tikz-settings}
 #+END_SRC
 
-** natbib/BibTeX
+** Todonotes
 
-https://www.ctan.org/pkg/bibtex
+https://tug.ctan.org/macros/latex/contrib/todonotes/todonotes.pdf
 
-This package is superseded by [[BibLaTeX]].
+Add todo notes to your documents.
 
-#+NAME: natbib_bibtex-settings
+#+NAME: todonotes-settings
 #+BEGIN_SRC latex
-\usepackage{natbib}
-\setlength{\bibsep}{0mm}
-%\setcitestyle{notesep={: }} 
-\bibpunct[: ]{(}{)}{;}{a}{}{;}
-\bibliographystyle{bst/unified}
+%%%%%%%%%%%%%%%%%%%%%% 
+% TODONOTES          % 
+%%%%%%%%%%%%%%%%%%%%%% 
 
-\newcommand{\insertBib}{
-	\bibliography{references}
-}
+\usepackage{soul}   % for text highlighting
+\usepackage[textsize=scriptsize,textwidth=2.5cm]{todonotes}
+\newcommand{\todoregion}[2]{\hl{#1}\todo{#2}}    
 
-\let\cite=\citet 	% in order to prevent inconsistencies between \cite and \citet
+
 #+END_SRC
+
+#+NAME: todonotes-settings-file
+#+BEGIN_SRC latex :noweb yes :tangle packages/todonotes-settings.tex
+<<todonotes-settings>>
+#+END_SRC
+
 
 * TLmacros
 
@@ -3396,28 +3400,6 @@ Collection of private macros on which the templates do not depend.
 
 #+END_SRC
 
-#+NAME: hausarbeit-examples
-#+BEGIN_SRC latex :noweb yes :tangle hausarbeit-examples.tex
-
-<<article-examples>>
-
-#+END_SRC
-
-#+NAME: selbständigkeitserklärung
-#+BEGIN_SRC latex
-Hiermit erkläre ich, dass ich die vorliegende Arbeit selbstständig verfasst und keine anderen Hilfsmittel als die angegebenen verwendet habe.
-
-Insbesondere versichere ich, dass ich alle wörtlichen und sinngemäßen Übernahmen aus anderen Werken als solche kenntlich gemacht habe.
-
-\vspace{10ex}
-
-\noindent
-\begin{tabular}{lcl}
-  \rule{6cm}{1pt} & \hspace{1cm} & \rule{6cm}{1pt} \\
-  Ort/Datum & & Unterschrift
-\end{tabular}
-#+END_SRC
-
 #+NAME: abstract-examples
 #+BEGIN_SRC latex :noweb yes :tangle abstract-examples.tex
 
@@ -3493,6 +3475,13 @@ Insbesondere versichere ich, dass ich alle wörtlichen und sinngemäßen Überna
 \section{Trees}
 
 <<forest-example>>
+
+#+END_SRC
+
+#+NAME: hausarbeit-examples
+#+BEGIN_SRC latex :noweb yes :tangle hausarbeit-examples.tex
+
+<<article-examples>>
 
 #+END_SRC
 
@@ -3732,69 +3721,6 @@ A TUCO derivation:\newline
 \end{frame}
 #+END_SRC
 
-** Readme
-
-#+NAME: readme
-#+BEGIN_SRC latex
-More \LaTeX{} templates on \url{https://github.com/timmli/latex-templates}.
-#+END_SRC
-
-
-** Linguistics
-
-#+NAME: linguistic-example
-#+BEGIN_SRC latex
-<<linguex-example>>
-
-<<ipa-example>>
-#+END_SRC
-
-** Math formulae
-
-#+NAME: math-example
-#+BEGIN_SRC latex
-Formulae in texts: $a^2 + b^2 = c^2$
-
-\noindent Formulae in equation environment:
-\begin{equation}
-a^2 + b^2 = c^2
-\end{equation}
-$\Rightarrow$ \url{http://en.wikibooks.org/wiki/LaTeX/Mathematics}
-#+END_SRC
-
-** Examples for texts
-
-#+NAME: text-examples
-#+BEGIN_SRC latex
-\section{Citation}
-
-<<example-citations>>
-
-\section{Linguistic examples}
-
-<<example-linguistic-examples>>
-
-\section{Trees}
-
-<<example-trees>>
-
-\section{AVM}
-
-<<example-avms>>
-
-\section{IPA symbols}
-
-<<ipa-example>>
-
-\section{Formulae}
-
-<<examples-formula>>
-
-\section{Tables}
-
-<<examples-tables>>
-#+END_SRC
-
 ** Poster
 
 #+NAME: poster-examples
@@ -3809,7 +3735,7 @@ $\Rightarrow$ \url{http://en.wikibooks.org/wiki/LaTeX/Mathematics}
 \note[targetoffsetx=-10cm, targetoffsety=1cm, angle=-10, connection=true]{Connected note}
 #+END_SRC
 
-** TikZ
+** Standalone + TikZ
 
 #+NAME: example-standalone-tikz
 #+BEGIN_SRC latex
@@ -3850,45 +3776,30 @@ $\Rightarrow$ \url{http://en.wikibooks.org/wiki/LaTeX/Mathematics}
 \end{document}
 #+END_SRC
 
-** Trees
+* Text snippets
 
-#+NAME: example-trees
+** Selbständigkeitserklärung
+
+#+NAME: selbständigkeitserklärung
 #+BEGIN_SRC latex
-% \Forest{
-%   [S [NP] 
-%     [VP [V  [\textit{eats}] ]
-%       [NP] ]]
-% }
+Hiermit erkläre ich, dass ich die vorliegende Arbeit selbstständig verfasst und keine anderen Hilfsmittel als die angegebenen verwendet habe.
 
-%% This example may cause problems together with TeX Live 2016
-% \Forest{
-%   [,phantom
-%     [S,--> [NP,--> [D [the]]]]
-%     [S,--> [NP,--> [A [absent]]]]
-%     [S, [NP [N [student]]]]
-%     ]
-% } 
+Insbesondere versichere ich, dass ich alle wörtlichen und sinngemäßen Übernahmen aus anderen Werken als solche kenntlich gemacht habe.
 
-\Forest{
-  [,phantom
-    [S,name=root,red subtree
-      [AUX [\textit{does}] ]
-      [S
-        [NP]
-        [VP,name=vp[V [\textit{say}]] [S*,name=foot]]]]
-    [S,Xs=5cm,Ys=2cm
-      [NP]
-      [S,name=s
-        [NP [$\varepsilon$] ]
-        [VP 
-          [VP [V [\textit{walks}]]] 
-          [PP]]]]
-    ]
-  \draw[->,gray,thick,dashed,bend right=10](root)to(s);
-  \draw[->,gray,thick,dashed,bend right=10](foot)to(s);
-}
+\vspace{10ex}
 
-\noindent $\Rightarrow$ \url{http://mirrors.ctan.org/graphics/pgf/contrib/forest/forest-doc.pdf}
+\noindent
+\begin{tabular}{lcl}
+  \rule{6cm}{1pt} & \hspace{1cm} & \rule{6cm}{1pt} \\
+  Ort/Datum & & Unterschrift
+\end{tabular}
+#+END_SRC
+
+** Readme
+
+#+NAME: readme
+#+BEGIN_SRC latex
+More \LaTeX{} templates on \url{https://github.com/timmli/latex-templates}.
 #+END_SRC
 
 * Makefile
