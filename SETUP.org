@@ -16,8 +16,6 @@
       - [[#standalone-template][Standalone template]]
       - [[#langsci-template][LangSci template]]
       - [[#jlm-template][JLM template]]
-- [[#package-definitions][Package definitions]]
-      - [[#tikz-settingssty][tikz-settings.sty]]
 - [[#bundled-settings][Bundled settings]]
       - [[#optional-packages][Optional packages]]
       - [[#basic-text-settings][Basic text settings]]
@@ -39,12 +37,9 @@
       - [[#textpos][Textpos]]
       - [[#tikz][TikZ]]
       - [[#todonotes][Todonotes]]
+- [[#package-definitions][Package definitions]]
+      - [[#tikz-settingssty][tikz-settings.sty]]
 - [[#tlmacros][TLmacros]]
-- [[#examples][Examples]]
-      - [[#text][Text]]
-      - [[#beamer][Beamer]]
-      - [[#poster][Poster]]
-      - [[#standalone--tikz][Standalone + TikZ]]
 - [[#text-snippets][Text snippets]]
       - [[#selbständigkeitserklärung][Selbständigkeitserklärung]]
       - [[#readme][Readme]]
@@ -163,6 +158,13 @@ In order to compile these templates, press =C-c C-v t= , or evaluate the followi
 %%% mode: latex
 %%% TeX-master: t
 %%% End:
+#+END_SRC
+
+#+NAME: abschlussarbeit-examples
+#+BEGIN_SRC latex :noweb yes :tangle abschlussarbeit-examples.tex
+
+<<book-examples>>
+
 #+END_SRC
 
 ** Abstract template
@@ -294,6 +296,13 @@ Remember to first add the class to the set of known classes (in =init.el=).
   }
 }
 \makeatother
+
+#+END_SRC
+
+#+NAME: abstract-examples
+#+BEGIN_SRC latex :noweb yes :tangle abstract-examples.tex
+
+<<biblatex-citation-example>>
 
 #+END_SRC
 
@@ -442,6 +451,42 @@ This is an abstract: \lipsum[1]
 <<scrarticle-settings-input>>
 
 <<basic-text-settings-input>>
+#+END_SRC
+
+#+NAME: article-examples
+#+BEGIN_SRC latex :noweb yes :tangle article-examples.tex
+
+\section{Information about this template}
+
+<<readme>>
+
+\section{Examples}
+
+\subsection{Citation}
+
+<<biblatex-citation-example>>
+
+\subsection{AVM}
+
+<<langsci-avm-example>>
+
+\subsection{Linguistic examples}
+
+<<linguistic-example>>
+
+\subsection{Math formulae}
+
+<<math-example>>
+
+\subsection{Tables}
+
+<<tabular-example>>
+
+\subsection{Trees}
+
+<<forest-example>>
+
+
 #+END_SRC
 
 ** Beamer template
@@ -714,6 +759,240 @@ aspectratio=169,
 
 #+END_SRC
 
+#+NAME: beamer-examples
+#+BEGIN_SRC latex :noweb yes :tangle beamer-examples.tex
+\begin{frame}
+  \frametitle{About the template}
+  
+<<readme>>
+  
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Inline highlighting}
+This is an \bsp{inline example} included with \verb|\bsp|.
+This is how \term{terminology} can be introduced with \verb|\term|.
+\end{frame}
+
+<<beamer-frames-example>>
+<<beamer-blocks-example>>
+<<beamer-overlays-example>>
+<<beamer-columns-example>>
+<<beamer-citations-example>>
+
+\begin{frame}
+\frametitle{Linguistic examples}
+<<linguistic-example>>
+\end{frame}
+
+\begin{frame}
+\frametitle{Trees}
+<<forest-example>>
+\end{frame}
+
+\begin{frame}
+\frametitle{Overlays in Forest trees}
+
+%% This example may cause problems together with TeX Live 2016
+A TUCO derivation:\newline
+
+\Forest{
+  [,phantom
+    [S,only=<+> [NP [N [I,lex]]]]
+    [S,only=<+>,--> [NP [N [I,lex]]]]
+    [S,only=<1-.> [V [wrote,lex]]]
+    [S,only=<+>
+      [NP [N [I,lex]]]
+      [V [wrote,lex]]]
+    [S,only=<+>,-->
+      [NP [N [I,lex]]]
+      [V [wrote,lex]]]
+    [S,only=<1-.> [NP [D [a,lex]]]]
+    [S,only=<+>
+      [NP [N [I,lex]]]
+      [V [wrote,lex]]
+      [NP [D [a,lex]]]]
+    [S,only=<+>,-->
+      [NP [N [I,lex]]]
+      [V [wrote,lex]]
+      [NP,--> [D [a,lex]]]]
+    [S,only=<1-.> [NP [N [novel,lex]]]]
+    [S,only=<+>
+      [NP [N [I,lex]]]
+      [V [wrote,lex]]
+      [NP
+        [D [a,lex]]
+        [N [novel,lex]]]]
+    [S,only=<+->,alert=<.>,c=0
+      [NP,c=1 [N [I,lex]]]
+      [V [wrote,lex]]
+      [NP,c=2
+        [D [a,lex]]
+        [N [novel,lex]]]] 
+    ]
+  }
+\end{frame}
+
+\begin{frame}
+\frametitle{AVM}
+<<langsci-avm-example>>
+\end{frame}
+
+% \begin{frame}
+% \frametitle{IPA symbols}
+% \input{examples/ipa.tex}
+% \end{frame}
+
+\begin{frame}
+\frametitle{Math formulae}
+<<math-example>>
+\end{frame}
+
+\begin{frame}
+\frametitle{Tables}
+<<tabular-example>>
+\end{frame}
+#+END_SRC
+
+#+NAME: beamer-blocks-example
+#+BEGIN_SRC latex
+\begin{frame}
+  \frametitle{Blocks}
+
+  \begin{block}{Title of a block}		% Titles may be left blank!
+    Body of a block
+  \end{block}
+
+  \begin{exampleblock}{Title of an exampleblock}
+    Body of an exampleblock
+  \end{exampleblock}
+
+  \begin{alertblock}{Title of an alertblock}
+    Body of an alertblock
+  \end{alertblock}
+  
+\end{frame}
+#+END_SRC
+
+#+NAME: beamer-citations-example
+#+BEGIN_SRC latex
+\begin{frame}[fragile]
+  \frametitle{Citations}
+
+% The following is a alist of available cite commands. See \url{https://ctan.space-pro.be/tex-archive/macros/latex/contrib/biblatex/doc/biblatex.pdf#subsection.3.9} for a more detailed description.
+
+\begin{itemize}
+% \item \verb|\nocite| \nocite{Bech:63}
+\item \verb|\fullcite[<prenote>][<postnote>]{Nallapati:etal:16}| \newline  \fullcite[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb|\textcite[<prenote>][<postnote>]{Nallapati:etal:16}| \newline \textcite[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb|\parencite[<prenote>][<postnote>]{Nallapati:etal:16}| \newline \parencite[<prenote>][<postnote>]{Nallapati:etal:16}
+% \item \verb|\parencite*[<prenote>][<postnote>]{Nallapati:etal:16}| \newline \parencite*[<prenote>][<postnote>]{Nallapati:etal:16}
+% \item \verb|\smartcite[<prenote>][<postnote>]{Nallapati:etal:16}| \newline \smartcite[<prenote>][<postnote>]{Nallapati:etal:16}
+% \item \verb|\footcite[<prenote>][<postnote>]{Nallapati:etal:16}| \newline \footcite[<prenote>][<postnote>]{Nallapati:etal:16}
+% \item \verb|\footfullcite[<prenote>][<postnote>]{Nallapati:etal:16}| \newline  \footfullcite[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb|\supercite[<prenote>][<postnote>]{Nallapati:etal:16}| \newline \supercite[<prenote>][<postnote>]{Nallapati:etal:16}
+% \item \verb|\footcitetext[<prenote>][<postnote>]{Nallapati:etal:16}| \newline \footcitetext[<prenote>][<postnote>]{Nallapati:etal:16}
+% \item \verb|\autocite[<prenote>][<postnote>]{Nallapati:etal:16}| \newline  \autocite[<prenote>][<postnote>]{Nallapati:etal:16}
+% \item \verb|\cite[<prenote>][<postnote>]{Nallapati:etal:16}| \newline  \cite[<prenote>][<postnote>]{Nallapati:etal:16}
+% \item \verb|\cite*[<prenote>][<postnote>]{Nallapati:etal:16}| \newline  \cite*[<prenote>][<postnote>]{Nallapati:etal:16}
+% \item \verb|\citeauthor[<prenote>][<postnote>]{Nallapati:etal:16}| \newline \citeauthor[<prenote>][<postnote>]{Nallapati:etal:16}
+% \item \verb|\citeauthor*[<prenote>][<postnote>]{Nallapati:etal:16}| \newline \citeauthor*[<prenote>][<postnote>]{Nallapati:etal:16}
+% \item \verb|\citeurl[<prenote>][<postnote>]{Nallapati:etal:16}| \newline \citeurl[<prenote>][<postnote>]{Nallapati:etal:16}
+% \item \verb|\citetitle[<prenote>][<postnote>]{Nallapati:etal:16}| \newline \citetitle[<prenote>][<postnote>]{Nallapati:etal:16}
+% \item \verb|\citeyear[<prenote>][<postnote>]{Nallapati:etal:16}| \newline \citeyear[<prenote>][<postnote>]{Nallapati:etal:16}
+\end{itemize} 
+
+\end{frame}
+#+END_SRC
+
+#+NAME: beamer-columns-example
+#+BEGIN_SRC latex
+\begin{frame}
+  \frametitle{Columns}
+
+  \begin{columns}
+    \column{.55\textwidth}
+    First column
+		\pgfimage[width=\textwidth]{graphics/HHU-logo}
+    \column{.45\textwidth}
+		Second column
+    \begin{enumerate}
+    \item bla
+    \item blupp
+    \end{enumerate}
+  \end{columns}
+
+\end{frame}
+#+END_SRC
+
+#+NAME: beamer-frames-example
+#+BEGIN_SRC latex
+\begin{frame}[label=frameoptions]
+\frametitle{The frame environment}
+
+  \hspace{-1em}{\tt $\backslash$begin\{frame\}[OVERLAY OPTION][OPTIONS]\{Title\}\{Subtitle\}}
+
+  \bigskip
+
+  {\bf OVERLAY OPTION:}
+  \begin{itemize}
+  \item {\tt <+->} 
+  \end{itemize}
+
+  \bigskip
+
+  {\bf OPTIONS:}
+  \begin{itemize}
+  \item {\tt b,c,t}: frame orientation
+  \item {\tt squeeze}: minimizes vertical margins
+  \item {\tt plain}: suppresses title, header and sidebar
+  \item {\tt label=name}: makes a frame reusable with {\tt $\backslash$againframe\{name\}} and can be used with hyperlinks.
+  \item {\tt allowframebreaks}: spread frame content over several slides 
+  \end{itemize}
+
+  \vfill 
+
+  Hyperlink: \hyperlink{frameoptions}{\beamerbutton{The frame environment}}
+
+\end{frame}
+#+END_SRC
+
+#+NAME: beamer-overlays-example
+#+BEGIN_SRC latex
+\begin{frame}
+  \frametitle{Overlays}
+  {\small 
+
+    Explicit specification of overlays:
+    \begin{itemize}
+    \item \color<2>{red}{Changing colors ...}
+    \item \alert<3>{Alert mode ...} 
+    \item \textbf<4>{Changing the font face ...}
+    \item \only<-5>{Changing existence ...} 
+    \item \visible<-6>{Changing visability ...}
+    \item \uncover<7->{Uncovering from grey ...}
+    \item \alt<8>{Specifying alternations ...}{... in one instruction}
+    \end{itemize}
+
+    \vfill
+    {\tt $\backslash$pause[<number>]} separates two overlays.
+
+    \vfill
+    Overlays in list environments:
+    \begin{itemize}
+    \item<9-> First item
+    \item<alert@10> Second item with alert
+    \item Alternatively, list environments can have an overlay option such as {\tt <+-> } or {\tt <+- alert@ +>}.
+    \end{itemize}
+
+    \vfill
+    Remember that you can declare overlays in the frame options.
+    \hyperlink{frameoptions}{\beamerbutton{The frame environment}}
+
+  }
+\end{frame}
+#+END_SRC
+
 ** Book template
 
 #+NAME: book-template-tex
@@ -797,6 +1076,41 @@ numbers=noenddot,
 \usepackage{datetime}
 
 <<basic-text-settings-input>>
+#+END_SRC
+
+#+NAME: book-examples
+#+BEGIN_SRC latex :noweb yes :tangle book-examples.tex
+
+\chapter{Information about this template}
+
+<<readme>>
+
+\chapter{Examples}
+
+\section{Citation}
+
+<<biblatex-citation-example>>
+
+\section{AVM}
+
+<<langsci-avm-example>>
+
+\section{Linguistic examples}
+
+<<linguistic-example>>
+
+\section{Math formulae}
+
+<<math-example>>
+
+\section{Tables}
+
+<<tabular-example>>
+
+\section{Trees}
+
+<<forest-example>>
+
 #+END_SRC
 
 ** Hausarbeit template
@@ -890,6 +1204,13 @@ numbers=noenddot,
 %%% mode: latex
 %%% TeX-master: t
 %%% End:
+#+END_SRC
+
+#+NAME: hausarbeit-examples
+#+BEGIN_SRC latex :noweb yes :tangle hausarbeit-examples.tex
+
+<<article-examples>>
+
 #+END_SRC
 
 ** Poster template
@@ -1169,6 +1490,18 @@ numbers=noenddot,
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 #+END_SRC
 
+#+NAME: poster-examples
+#+BEGIN_SRC latex :noweb yes :tangle poster-examples.tex
+<<poster-notes-example>>
+#+END_SRC
+
+#+NAME: poster-notes-example
+#+BEGIN_SRC latex
+\note{Note with default behavior}
+\note[targetoffsetx=12cm, targetoffsety=-1cm, angle=20, rotate=25]{Note \\ offset and rotated}
+\note[targetoffsetx=-10cm, targetoffsety=1cm, angle=-10, connection=true]{Connected note}
+#+END_SRC
+
 ** Standalone template
 
 #+NAME: standalone-template
@@ -1212,6 +1545,45 @@ numbers=noenddot,
       [V  [\textit{eats}] ]
       [NP] ]]
 }
+
+\end{document}
+#+END_SRC
+
+#+NAME: standalone-tikz-example
+#+BEGIN_SRC latex
+\documentclass[
+	%pstricks=true
+	,crop=true
+	,varwidth=\maxdimen
+	]{standalone}
+
+\input{pdflatex_setup.tex}
+\input{tikz_setup.tex}
+\input{forest_setup.tex}
+\input{avm_setup.tex}
+
+\begin{document}
+
+\begin{forest}
+[,phantom,s sep=2em
+  [NP,name=peter,tier=1 [\textit{Peter}]]
+  %%%%%%%%%%%%%%%%%
+  [VP,name=easily_r,tier=1
+    [ADV [\textit{easily}]]
+    [VP*,name=easily_f]]
+  %%%%%%%%%%%%%%%%%
+  [S
+    [NP,name=rep_np1]
+    [VP,name=rep_vp,tier=1  
+      [V [\textit{repaired}]]
+      [NP,name=rep_np2,tier=2]]]
+  %%%%%%%%%%%%%%%%%
+  [NP,name=fridge,tier=2 [\textit{the fridge},triangle]]
+]
+\draw[->,dashed,thick,draw=gray, bend angle=25, bend left] (peter) to (rep_np1);
+\draw[->,dashed,thick,draw=gray, bend angle=10, bend right,shorten >=-0.6em] (easily_f) to (rep_vp.south west);
+\draw[->,dashed,thick,draw=gray, bend angle=25, bend right] (fridge) to (rep_np2);
+\end{forest}
 
 \end{document}
 #+END_SRC
@@ -1401,43 +1773,6 @@ Remember to first add the class jlm to the set of known classes (in =init.el=).
 # org-latex-prefer-user-labels: t
 # ispell-local-dictionary: "british"
 # end:
-#+END_SRC
-
-* Package definitions
-
-** tikz-settings.sty
-
-Some templates require it to have the tikz settings in a separate sty-file.
-
-#+BEGIN_SRC latex :noweb yes :tangle jlm-template/packages/tikz-settings.sty
-<<tikz-settings.sty>>
-#+END_SRC
-
-#+BEGIN_SRC latex :noweb yes :tangle langscibook-template/packages/tikz-settings.sty
-<<tikz-settings.sty>>
-#+END_SRC
-
-#+NAME: tikz-settings.sty
-#+BEGIN_SRC latex :noweb yes
-\NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{tikz-settings}
-
-<<tikz-settings-input>>
-<<forest-settings-input>>
-
-\endinput
-#+END_SRC
-
-** COMMENT textpos-settings.sty
-
-#+NAME: textpos-settings.sty
-#+BEGIN_SRC latex :noweb yes :tangle packages/textpos-settings.sty
-\NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{textpos-settings}
-
-<<textpos-settings>>
-
-\endinput
 #+END_SRC
 
 * Bundled settings
@@ -3004,7 +3339,6 @@ Basic settings for when PDFLaTeX is used.
 \usepackage[german,english]{babel} % the last language in the options is loaded; the other one can be chosen with \selectlanguage
 \usepackage{iflang}                % for language specific settings
 #+END_SRC
-
 ** Scrarticle
 
 https://www.ctan.org/pkg/scrartcl
@@ -3248,15 +3582,9 @@ Add todo notes to your documents.
 
 #+NAME: todonotes-settings
 #+BEGIN_SRC latex
-%%%%%%%%%%%%%%%%%%%%%% 
-% TODONOTES          % 
-%%%%%%%%%%%%%%%%%%%%%% 
-
-\usepackage{soul}   % for text highlighting
+\RequirePackage{soul}   % Required by todonotes
 \usepackage[textsize=scriptsize,textwidth=2.5cm]{todonotes}
 \newcommand{\todoregion}[2]{\hl{#1}\todo{#2}}    
-
-
 #+END_SRC
 
 #+NAME: todonotes-settings-file
@@ -3264,6 +3592,42 @@ Add todo notes to your documents.
 <<todonotes-settings>>
 #+END_SRC
 
+* Package definitions
+
+** tikz-settings.sty
+
+Some templates require it to have the tikz settings in a separate sty-file.
+
+#+BEGIN_SRC latex :noweb yes :tangle jlm-template/packages/tikz-settings.sty
+<<tikz-settings.sty>>
+#+END_SRC
+
+#+BEGIN_SRC latex :noweb yes :tangle langscibook-template/packages/tikz-settings.sty
+<<tikz-settings.sty>>
+#+END_SRC
+
+#+NAME: tikz-settings.sty
+#+BEGIN_SRC latex :noweb yes
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{tikz-settings}
+
+<<tikz-settings-input>>
+<<forest-settings-input>>
+
+\endinput
+#+END_SRC
+
+** COMMENT textpos-settings.sty
+
+#+NAME: textpos-settings.sty
+#+BEGIN_SRC latex :noweb yes :tangle packages/textpos-settings.sty
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{textpos-settings}
+
+<<textpos-settings>>
+
+\endinput
+#+END_SRC
 
 * TLmacros
 
@@ -3280,14 +3644,6 @@ Collection of private macros on which the templates do not depend.
 
 #+NAME: TLmacros.tex
 #+BEGIN_SRC latex :noweb yes
-%%%%%%%%%%%%%%%%%%%%%% 
-% TODONOTES          % 
-%%%%%%%%%%%%%%%%%%%%%% 
-
-\usepackage{soul}   % for text highlighting
-\usepackage[textsize=scriptsize,textwidth=2.5cm]{todonotes}
-\newcommand{\todoregion}[2]{\hl{#1}\todo{#2}}    
-
 %%%%%%%%%%%%%%%%%%%%%% 
 % SYMBOLS            % 
 %%%%%%%%%%%%%%%%%%%%%% 
@@ -3387,393 +3743,6 @@ Collection of private macros on which the templates do not depend.
 
 \newcommand{\largerpage}[1][1]{
   \enlargethispage{#1\baselineskip}}
-#+END_SRC
-
-* Examples
-
-** Text
-
-#+NAME: abschlussarbeit-examples
-#+BEGIN_SRC latex :noweb yes :tangle abschlussarbeit-examples.tex
-
-<<book-examples>>
-
-#+END_SRC
-
-#+NAME: abstract-examples
-#+BEGIN_SRC latex :noweb yes :tangle abstract-examples.tex
-
-<<biblatex-citation-example>>
-
-#+END_SRC
-
-#+NAME: article-examples
-#+BEGIN_SRC latex :noweb yes :tangle article-examples.tex
-
-\section{Information about this template}
-
-<<readme>>
-
-\section{Examples}
-
-\subsection{Citation}
-
-<<biblatex-citation-example>>
-
-\subsection{AVM}
-
-<<langsci-avm-example>>
-
-\subsection{Linguistic examples}
-
-<<linguistic-example>>
-
-\subsection{Math formulae}
-
-<<math-example>>
-
-\subsection{Tables}
-
-<<tabular-example>>
-
-\subsection{Trees}
-
-<<forest-example>>
-
-
-#+END_SRC
-
-#+NAME: book-examples
-#+BEGIN_SRC latex :noweb yes :tangle book-examples.tex
-
-\chapter{Information about this template}
-
-<<readme>>
-
-\chapter{Examples}
-
-\section{Citation}
-
-<<biblatex-citation-example>>
-
-\section{AVM}
-
-<<langsci-avm-example>>
-
-\section{Linguistic examples}
-
-<<linguistic-example>>
-
-\section{Math formulae}
-
-<<math-example>>
-
-\section{Tables}
-
-<<tabular-example>>
-
-\section{Trees}
-
-<<forest-example>>
-
-#+END_SRC
-
-#+NAME: hausarbeit-examples
-#+BEGIN_SRC latex :noweb yes :tangle hausarbeit-examples.tex
-
-<<article-examples>>
-
-#+END_SRC
-
-** Beamer
-
-#+NAME: beamer-examples
-#+BEGIN_SRC latex :noweb yes :tangle beamer-examples.tex
-\begin{frame}
-  \frametitle{About the template}
-  
-<<readme>>
-  
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Inline highlighting}
-This is an \bsp{inline example} included with \verb|\bsp|.
-This is how \term{terminology} can be introduced with \verb|\term|.
-\end{frame}
-
-<<beamer-frames-example>>
-<<beamer-blocks-example>>
-<<beamer-overlays-example>>
-<<beamer-columns-example>>
-<<beamer-citations-example>>
-
-\begin{frame}
-\frametitle{Linguistic examples}
-<<linguistic-example>>
-\end{frame}
-
-\begin{frame}
-\frametitle{Trees}
-<<forest-example>>
-\end{frame}
-
-\begin{frame}
-\frametitle{Overlays in Forest trees}
-
-%% This example may cause problems together with TeX Live 2016
-A TUCO derivation:\newline
-
-\Forest{
-  [,phantom
-    [S,only=<+> [NP [N [I,lex]]]]
-    [S,only=<+>,--> [NP [N [I,lex]]]]
-    [S,only=<1-.> [V [wrote,lex]]]
-    [S,only=<+>
-      [NP [N [I,lex]]]
-      [V [wrote,lex]]]
-    [S,only=<+>,-->
-      [NP [N [I,lex]]]
-      [V [wrote,lex]]]
-    [S,only=<1-.> [NP [D [a,lex]]]]
-    [S,only=<+>
-      [NP [N [I,lex]]]
-      [V [wrote,lex]]
-      [NP [D [a,lex]]]]
-    [S,only=<+>,-->
-      [NP [N [I,lex]]]
-      [V [wrote,lex]]
-      [NP,--> [D [a,lex]]]]
-    [S,only=<1-.> [NP [N [novel,lex]]]]
-    [S,only=<+>
-      [NP [N [I,lex]]]
-      [V [wrote,lex]]
-      [NP
-        [D [a,lex]]
-        [N [novel,lex]]]]
-    [S,only=<+->,alert=<.>,c=0
-      [NP,c=1 [N [I,lex]]]
-      [V [wrote,lex]]
-      [NP,c=2
-        [D [a,lex]]
-        [N [novel,lex]]]] 
-    ]
-  }
-\end{frame}
-
-\begin{frame}
-\frametitle{AVM}
-<<langsci-avm-example>>
-\end{frame}
-
-% \begin{frame}
-% \frametitle{IPA symbols}
-% \input{examples/ipa.tex}
-% \end{frame}
-
-\begin{frame}
-\frametitle{Math formulae}
-<<math-example>>
-\end{frame}
-
-\begin{frame}
-\frametitle{Tables}
-<<tabular-example>>
-\end{frame}
-#+END_SRC
-
-#+NAME: beamer-blocks-example
-#+BEGIN_SRC latex
-\begin{frame}
-  \frametitle{Blocks}
-
-  \begin{block}{Title of a block}		% Titles may be left blank!
-    Body of a block
-  \end{block}
-
-  \begin{exampleblock}{Title of an exampleblock}
-    Body of an exampleblock
-  \end{exampleblock}
-
-  \begin{alertblock}{Title of an alertblock}
-    Body of an alertblock
-  \end{alertblock}
-  
-\end{frame}
-#+END_SRC
-
-#+NAME: beamer-citations-example
-#+BEGIN_SRC latex
-\begin{frame}[fragile]
-  \frametitle{Citations}
-
-% The following is a alist of available cite commands. See \url{https://ctan.space-pro.be/tex-archive/macros/latex/contrib/biblatex/doc/biblatex.pdf#subsection.3.9} for a more detailed description.
-
-\begin{itemize}
-% \item \verb|\nocite| \nocite{Bech:63}
-\item \verb|\fullcite[<prenote>][<postnote>]{Nallapati:etal:16}| \newline  \fullcite[<prenote>][<postnote>]{Nallapati:etal:16}
-\item \verb|\textcite[<prenote>][<postnote>]{Nallapati:etal:16}| \newline \textcite[<prenote>][<postnote>]{Nallapati:etal:16}
-\item \verb|\parencite[<prenote>][<postnote>]{Nallapati:etal:16}| \newline \parencite[<prenote>][<postnote>]{Nallapati:etal:16}
-% \item \verb|\parencite*[<prenote>][<postnote>]{Nallapati:etal:16}| \newline \parencite*[<prenote>][<postnote>]{Nallapati:etal:16}
-% \item \verb|\smartcite[<prenote>][<postnote>]{Nallapati:etal:16}| \newline \smartcite[<prenote>][<postnote>]{Nallapati:etal:16}
-% \item \verb|\footcite[<prenote>][<postnote>]{Nallapati:etal:16}| \newline \footcite[<prenote>][<postnote>]{Nallapati:etal:16}
-% \item \verb|\footfullcite[<prenote>][<postnote>]{Nallapati:etal:16}| \newline  \footfullcite[<prenote>][<postnote>]{Nallapati:etal:16}
-\item \verb|\supercite[<prenote>][<postnote>]{Nallapati:etal:16}| \newline \supercite[<prenote>][<postnote>]{Nallapati:etal:16}
-% \item \verb|\footcitetext[<prenote>][<postnote>]{Nallapati:etal:16}| \newline \footcitetext[<prenote>][<postnote>]{Nallapati:etal:16}
-% \item \verb|\autocite[<prenote>][<postnote>]{Nallapati:etal:16}| \newline  \autocite[<prenote>][<postnote>]{Nallapati:etal:16}
-% \item \verb|\cite[<prenote>][<postnote>]{Nallapati:etal:16}| \newline  \cite[<prenote>][<postnote>]{Nallapati:etal:16}
-% \item \verb|\cite*[<prenote>][<postnote>]{Nallapati:etal:16}| \newline  \cite*[<prenote>][<postnote>]{Nallapati:etal:16}
-% \item \verb|\citeauthor[<prenote>][<postnote>]{Nallapati:etal:16}| \newline \citeauthor[<prenote>][<postnote>]{Nallapati:etal:16}
-% \item \verb|\citeauthor*[<prenote>][<postnote>]{Nallapati:etal:16}| \newline \citeauthor*[<prenote>][<postnote>]{Nallapati:etal:16}
-% \item \verb|\citeurl[<prenote>][<postnote>]{Nallapati:etal:16}| \newline \citeurl[<prenote>][<postnote>]{Nallapati:etal:16}
-% \item \verb|\citetitle[<prenote>][<postnote>]{Nallapati:etal:16}| \newline \citetitle[<prenote>][<postnote>]{Nallapati:etal:16}
-% \item \verb|\citeyear[<prenote>][<postnote>]{Nallapati:etal:16}| \newline \citeyear[<prenote>][<postnote>]{Nallapati:etal:16}
-\end{itemize} 
-
-\end{frame}
-#+END_SRC
-
-#+NAME: beamer-columns-example
-#+BEGIN_SRC latex
-\begin{frame}
-  \frametitle{Columns}
-
-  \begin{columns}
-    \column{.55\textwidth}
-    First column
-		\pgfimage[width=\textwidth]{graphics/HHU-logo}
-    \column{.45\textwidth}
-		Second column
-    \begin{enumerate}
-    \item bla
-    \item blupp
-    \end{enumerate}
-  \end{columns}
-
-\end{frame}
-#+END_SRC
-
-#+NAME: beamer-frames-example
-#+BEGIN_SRC latex
-\begin{frame}[label=frameoptions]
-\frametitle{The frame environment}
-
-  \hspace{-1em}{\tt $\backslash$begin\{frame\}[OVERLAY OPTION][OPTIONS]\{Title\}\{Subtitle\}}
-
-  \bigskip
-
-  {\bf OVERLAY OPTION:}
-  \begin{itemize}
-  \item {\tt <+->} 
-  \end{itemize}
-
-  \bigskip
-
-  {\bf OPTIONS:}
-  \begin{itemize}
-  \item {\tt b,c,t}: frame orientation
-  \item {\tt squeeze}: minimizes vertical margins
-  \item {\tt plain}: suppresses title, header and sidebar
-  \item {\tt label=name}: makes a frame reusable with {\tt $\backslash$againframe\{name\}} and can be used with hyperlinks.
-  \item {\tt allowframebreaks}: spread frame content over several slides 
-  \end{itemize}
-
-  \vfill 
-
-  Hyperlink: \hyperlink{frameoptions}{\beamerbutton{The frame environment}}
-
-\end{frame}
-#+END_SRC
-
-#+NAME: beamer-overlays-example
-#+BEGIN_SRC latex
-\begin{frame}
-  \frametitle{Overlays}
-  {\small 
-
-    Explicit specification of overlays:
-    \begin{itemize}
-    \item \color<2>{red}{Changing colors ...}
-    \item \alert<3>{Alert mode ...} 
-    \item \textbf<4>{Changing the font face ...}
-    \item \only<-5>{Changing existence ...} 
-    \item \visible<-6>{Changing visability ...}
-    \item \uncover<7->{Uncovering from grey ...}
-    \item \alt<8>{Specifying alternations ...}{... in one instruction}
-    \end{itemize}
-
-    \vfill
-    {\tt $\backslash$pause[<number>]} separates two overlays.
-
-    \vfill
-    Overlays in list environments:
-    \begin{itemize}
-    \item<9-> First item
-    \item<alert@10> Second item with alert
-    \item Alternatively, list environments can have an overlay option such as {\tt <+-> } or {\tt <+- alert@ +>}.
-    \end{itemize}
-
-    \vfill
-    Remember that you can declare overlays in the frame options.
-    \hyperlink{frameoptions}{\beamerbutton{The frame environment}}
-
-  }
-\end{frame}
-#+END_SRC
-
-** Poster
-
-#+NAME: poster-examples
-#+BEGIN_SRC latex :noweb yes :tangle poster-examples.tex
-<<example-poster-notes>>
-#+END_SRC
-
-#+NAME: example-poster-notes
-#+BEGIN_SRC latex
-\note{Note with default behavior}
-\note[targetoffsetx=12cm, targetoffsety=-1cm, angle=20, rotate=25]{Note \\ offset and rotated}
-\note[targetoffsetx=-10cm, targetoffsety=1cm, angle=-10, connection=true]{Connected note}
-#+END_SRC
-
-** Standalone + TikZ
-
-#+NAME: example-standalone-tikz
-#+BEGIN_SRC latex
-\documentclass[
-	%pstricks=true
-	,crop=true
-	,varwidth=\maxdimen
-	]{standalone}
-
-\input{pdflatex_setup.tex}
-\input{tikz_setup.tex}
-\input{forest_setup.tex}
-\input{avm_setup.tex}
-
-\begin{document}
-
-\begin{forest}
-[,phantom,s sep=2em
-  [NP,name=peter,tier=1 [\textit{Peter}]]
-  %%%%%%%%%%%%%%%%%
-  [VP,name=easily_r,tier=1
-    [ADV [\textit{easily}]]
-    [VP*,name=easily_f]]
-  %%%%%%%%%%%%%%%%%
-  [S
-    [NP,name=rep_np1]
-    [VP,name=rep_vp,tier=1  
-      [V [\textit{repaired}]]
-      [NP,name=rep_np2,tier=2]]]
-  %%%%%%%%%%%%%%%%%
-  [NP,name=fridge,tier=2 [\textit{the fridge},triangle]]
-]
-\draw[->,dashed,thick,draw=gray, bend angle=25, bend left] (peter) to (rep_np1);
-\draw[->,dashed,thick,draw=gray, bend angle=10, bend right,shorten >=-0.6em] (easily_f) to (rep_vp.south west);
-\draw[->,dashed,thick,draw=gray, bend angle=25, bend right] (fridge) to (rep_np2);
-\end{forest}
-
-\end{document}
 #+END_SRC
 
 * Text snippets
