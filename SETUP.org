@@ -83,23 +83,26 @@ In order to compile these templates, press =C-c C-v t= , or evaluate the followi
   numbers=noenddot,
   ]{scrbook}
 
-%%%%%%%%%%%%%%%%%%%%%%%% 
-% SETTINGS
-%%%%%%%%%%%%%%%%%%%%%%%% 
+\RequirePackage{etoolbox}
+\newbool{draftmode}
+\booltrue{draftmode}
 
 \usepackage{datetime}
+<<basic-text-settings-input>>
 
-\input{basic-text-settings}
 
+%%%%%%%%%%%%%%%%%%%%%%%% 
+% Optional packages & settings
+%%%%%%%%%%%%%%%%%%%%%%%% 
+
+%% Language
 \AtBeginDocument{
   \selectlanguage{german} % which language is available depends on how babel is loaded
 }
 
-%%%%%%%%%%%%%% 
-% Macros
-%%%%%%%%%%%%%% 
-
 % <<TLmacros-input>>   % the content of TLmacros.tex goes here
+<<optional-packages>>
+
 
 %%%%%%%%%%%%% 
 % Title
@@ -110,16 +113,19 @@ In order to compile these templates, press =C-c C-v t= , or evaluate the followi
 \author{{\LARGE Max Mustermann} \\
   \\
   Matrikelnummer: 123456789\\
-  Studiengang: BSc Neue Ätherwissenschaften \\
   \url{mustermann@uni-tuebingen.de}\\ 
+  Studiengang: BSc Neue Ätherwissenschaften \\
   Eberhard-Karls-Universität Tübingen\\}  
 \date{\ddmmyyyydate\today, \currenttime}
 \publishers{Betreuerteam \\ Prof. Dr. Martina Musterfrau}
 
-% comment for final version
-\usepackage{draftwatermark}
-\SetWatermarkScale{1}
-\AtBeginDocument{\SetWatermarkText{DRAFT}}
+%% Uncomment the following line for removing the watermark
+% \boolfalse{draftmode}
+\ifbool{draftmode}{
+  \usepackage{draftwatermark}
+  \SetWatermarkScale{1}
+  \AtBeginDocument{\SetWatermarkText{DRAFT}}
+}{}
 
 %%%%%%%%%%%%%%%%%%%%%% 
 % Document start
@@ -1123,16 +1129,16 @@ numbers=noenddot,
   twoside,
   ]{scrartcl}
 
-<<scrarticle-settings-input>>
-<<basic-text-settings-input>>
-
 \RequirePackage{etoolbox}
 \newbool{draftmode}
 \booltrue{draftmode}
 
+<<scrarticle-settings-input>>
+<<basic-text-settings-input>>
+
 
 %%%%%%%%%%%%%%%%%%%%%%%% 
-% OPTIONAL PACKAGES & SETTINGS
+% Optional packages & settings
 %%%%%%%%%%%%%%%%%%%%%%%% 
 
 % Uncomment the following line for deactivating draftmode
@@ -1157,12 +1163,14 @@ numbers=noenddot,
 \author{Max Mustermann}	% change name
 \affiliation{
   Matrikelnummer: 123456789\\	% change Matrikelnummer
-  Studiengang: BSc Neue Ätherwissenschaften \\ % change Studiengang
   Emailaddresse: \url{mustermann@uni-tuebingen.de}\\[1ex]	% change email address
+  Studiengang: BSc Neue Ätherwissenschaften \\ % change Studiengang
   Seminar: Seminarname, Universität Tübingen, WS 2021/2022\\ % change seminar and date
   Datum der Fassung: \today, \currenttime
 }
 
+%% Uncomment the following line for removing the watermark
+% \boolfalse{draftmode}
 \ifbool{draftmode}{
   \usepackage[firstpageonly=true]{draftwatermark}
   \SetWatermarkScale{1}
@@ -3871,12 +3879,10 @@ release_poster:
 #+NAME: abschlussarbeit-makefile
 #+BEGIN_SRC makefile :noweb yes
 ABSCHLUSSARBEIT_TEST_DIR = test_abschlussarbeit
-ABSCHLUSSARBEIT_FILES =  TLmacros.tex \
-	basic-text-settings.tex \
+ABSCHLUSSARBEIT_FILES =  $(shell ./extract_input_files.sh "abschlussarbeit-main.tex")  \
   muss.bbx \
   muss.cbx \
 	$(wildcard packages/*.sty) \
-	abschlussarbeit-examples.tex \
 	abschlussarbeit-main.tex \
 	references.bib
 

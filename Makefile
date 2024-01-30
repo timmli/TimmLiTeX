@@ -3,12 +3,10 @@ SHELL := /bin/bash
 #-------------------------------------------------------------------------------
 
 ABSCHLUSSARBEIT_TEST_DIR = test_abschlussarbeit
-ABSCHLUSSARBEIT_FILES =  TLmacros.tex \
-	basic-text-settings.tex \
+ABSCHLUSSARBEIT_FILES =  $(shell ./extract_input_files.sh "abschlussarbeit-main.tex")  \
   muss.bbx \
   muss.cbx \
 	$(wildcard packages/*.sty) \
-	abschlussarbeit-examples.tex \
 	abschlussarbeit-main.tex \
 	references.bib
 

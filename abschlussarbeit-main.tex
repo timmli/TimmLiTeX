@@ -4,23 +4,35 @@
   numbers=noenddot,
   ]{scrbook}
 
-%%%%%%%%%%%%%%%%%%%%%%%% 
-% SETTINGS
-%%%%%%%%%%%%%%%%%%%%%%%% 
+\RequirePackage{etoolbox}
+\newbool{draftmode}
+\booltrue{draftmode}
 
 \usepackage{datetime}
-
 \input{basic-text-settings}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%% 
+% Optional packages & settings
+%%%%%%%%%%%%%%%%%%%%%%%% 
+
+%% Language
 \AtBeginDocument{
   \selectlanguage{german} % which language is available depends on how babel is loaded
 }
 
-%%%%%%%%%%%%%% 
-% Macros
-%%%%%%%%%%%%%% 
-
 % \input{TLmacros}   % the content of TLmacros.tex goes here
+%% Graphics
+\input{packages/tikz-settings}
+\input{packages/forest-settings}
+
+%% Linguistics
+\usepackage{linguex}
+  \renewcommand{\firstrefdash}{}
+\input{packages/langsci-avm-settings}
+% \usepackage[inference]{semantic} % for CCG 
+% \usepackage{packages/ccg}
+
 
 %%%%%%%%%%%%% 
 % Title
@@ -31,16 +43,19 @@
 \author{{\LARGE Max Mustermann} \\
   \\
   Matrikelnummer: 123456789\\
-  Studiengang: BSc Neue Ätherwissenschaften \\
   \url{mustermann@uni-tuebingen.de}\\ 
+  Studiengang: BSc Neue Ätherwissenschaften \\
   Eberhard-Karls-Universität Tübingen\\}  
 \date{\ddmmyyyydate\today, \currenttime}
 \publishers{Betreuerteam \\ Prof. Dr. Martina Musterfrau}
 
-% comment for final version
-\usepackage{draftwatermark}
-\SetWatermarkScale{1}
-\AtBeginDocument{\SetWatermarkText{DRAFT}}
+%% Uncomment the following line for removing the watermark
+% \boolfalse{draftmode}
+\ifbool{draftmode}{
+  \usepackage{draftwatermark}
+  \SetWatermarkScale{1}
+  \AtBeginDocument{\SetWatermarkText{DRAFT}}
+}{}
 
 %%%%%%%%%%%%%%%%%%%%%% 
 % Document start

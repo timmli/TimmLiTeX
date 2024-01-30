@@ -4,16 +4,16 @@
   twoside,
   ]{scrartcl}
 
-\input{scrarticle-settings}
-\input{basic-text-settings}
-
 \RequirePackage{etoolbox}
 \newbool{draftmode}
 \booltrue{draftmode}
 
+\input{scrarticle-settings}
+\input{basic-text-settings}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%% 
-% OPTIONAL PACKAGES & SETTINGS
+% Optional packages & settings
 %%%%%%%%%%%%%%%%%%%%%%%% 
 
 % Uncomment the following line for deactivating draftmode
@@ -47,12 +47,14 @@
 \author{Max Mustermann}	% change name
 \affiliation{
   Matrikelnummer: 123456789\\	% change Matrikelnummer
-  Studiengang: BSc Neue Ätherwissenschaften \\ % change Studiengang
   Emailaddresse: \url{mustermann@uni-tuebingen.de}\\[1ex]	% change email address
+  Studiengang: BSc Neue Ätherwissenschaften \\ % change Studiengang
   Seminar: Seminarname, Universität Tübingen, WS 2021/2022\\ % change seminar and date
   Datum der Fassung: \today, \currenttime
 }
 
+%% Uncomment the following line for removing the watermark
+% \boolfalse{draftmode}
 \ifbool{draftmode}{
   \usepackage[firstpageonly=true]{draftwatermark}
   \SetWatermarkScale{1}
