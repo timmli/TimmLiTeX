@@ -26,6 +26,56 @@ release_abschlussarbeit:
 
 #-------------------------------------------------------------------------------
 
+ABSTRACT_TEST_DIR = test_abstract
+ABSTRACT_FILES =  $(shell ./extract_input_files.sh "abstract-main.tex")  \
+  muss.bbx \
+  muss.cbx \
+	$(wildcard packages/*.sty) \
+	abstract-main.tex \
+	abstract-main.org \
+	references.bib
+
+test_abstract:
+	rm -fr $(ABSTRACT_TEST_DIR)
+	mkdir $(ABSTRACT_TEST_DIR)
+	cp -r --parents $(ABSTRACT_FILES) $(ABSTRACT_TEST_DIR)
+	cd $(ABSTRACT_TEST_DIR); \
+			latexmk -pdf abstract-main.tex
+
+release_abstract:
+	rm -fr temp
+	mkdir temp
+	cp -r --parents $(ABSTRACT_FILES) temp
+	cd temp; zip -r abstract-template.zip *; mv abstract-template.zip ..
+	rm -fr temp
+	
+#-------------------------------------------------------------------------------
+
+ARTICLE_TEST_DIR = test_article
+ARTICLE_FILES =  $(shell ./extract_input_files.sh "article-main.tex")  \
+  muss.bbx \
+  muss.cbx \
+	$(wildcard packages/*.sty) \
+	article-main.tex \
+	article-main.org \
+	references.bib
+
+test_article:
+	rm -fr $(ARTICLE_TEST_DIR)
+	mkdir $(ARTICLE_TEST_DIR)
+	cp -r --parents $(ARTICLE_FILES) $(ARTICLE_TEST_DIR)
+	cd $(ARTICLE_TEST_DIR); \
+			latexmk -pdf article-main.tex
+
+release_article:
+	rm -fr temp
+	mkdir temp
+	cp -r --parents $(ARTICLE_FILES) temp
+	cd temp; zip -r article-template.zip *; mv article-template.zip ..
+	rm -fr temp
+
+#-------------------------------------------------------------------------------
+
 BEAMER_TEST_DIR = test_beamer
 BEAMER_FILES =  TLmacros.tex \
 	$(wildcard beamer*) \
@@ -75,59 +125,6 @@ release_hausarbeit:
 	rm -fr temp
 
 #-------------------------------------------------------------------------------
-
-ABSTRACT_TEST_DIR = test_abstract
-ABSTRACT_FILES =  TLmacros.tex \
-	basic-text-settings.tex \
-	$(wildcard packages/*.sty) \
-	abstract-main.tex \
-	abstract-examples.tex \
-  references.bib \
-	latexmkrc \
-  muss.bbx \
-  muss.cbx
-
-test_abstract:
-	rm -fr $(ABSTRACT_TEST_DIR)
-	mkdir $(ABSTRACT_TEST_DIR)
-	cp -r --parents $(ABSTRACT_FILES) $(ABSTRACT_TEST_DIR)
-	cd $(ABSTRACT_TEST_DIR); \
-			latexmk -pdf abstract-main.tex
-
-release_abstract:
-	rm -fr temp
-	mkdir temp
-	cp -r --parents $(ABSTRACT_FILES) temp
-	cd temp; zip -r abstract-template.zip *; mv abstract-template.zip ..
-	rm -fr temp
-
-#-------------------------------------------------------------------------------
-
-ARTICLE_TEST_DIR = test_article
-ARTICLE_FILES =  TLmacros.tex \
-	basic-text-settings.tex \
-	scrarticle-settings.tex \
-	$(wildcard packages/*.sty) \
-	article-main.tex \
-	article-examples.tex \
-  references.bib \
-	latexmkrc \
-  muss.bbx \
-  muss.cbx
-
-test_article:
-	rm -fr $(ARTICLE_TEST_DIR)
-	mkdir $(ARTICLE_TEST_DIR)
-	cp -r --parents $(ARTICLE_FILES) $(ARTICLE_TEST_DIR)
-	cd $(ARTICLE_TEST_DIR); \
-			latexmk -pdf article-main.tex
-
-release_article:
-	rm -fr temp
-	mkdir temp
-	cp -r --parents $(ARTICLE_FILES) temp
-	cd temp; zip -r article-template.zip *; mv article-template.zip ..
-	rm -fr temp
 
 #-------------------------------------------------------------------------------
 

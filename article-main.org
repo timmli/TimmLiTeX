@@ -25,8 +25,35 @@
 #+LATEX_HEADER: }{}
 #+LATEX_HEADER: 
 #+LATEX_HEADER: \input{scrarticle-settings}
-#+LATEX_HEADER: 
 #+LATEX_HEADER: \input{basic-text-settings}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: 
+#+LATEX_HEADER: %%%%%%%%%%%%%%%%%%%%%%%% 
+#+LATEX_HEADER: % Optional packages & settings
+#+LATEX_HEADER: %%%%%%%%%%%%%%%%%%%%%%%% 
+#+LATEX_HEADER: 
+#+LATEX_HEADER: %% Uncomment the following line for deactivating draftmode
+#+LATEX_HEADER: % \boolfalse{draftmode}           % Deactivate draftmode
+#+LATEX_HEADER: 
+#+LATEX_HEADER: %% Language
+#+LATEX_HEADER: \AtBeginDocument{
+#+LATEX_HEADER:   \selectlanguage{german} % which language is available depends on how babel is loaded
+#+LATEX_HEADER: }
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % \input{TLmacros}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: %% Graphics
+#+LATEX_HEADER: \input{packages/tikz-settings}
+#+LATEX_HEADER: \input{packages/forest-settings}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: %% Linguistics
+#+LATEX_HEADER: \usepackage{linguex}
+#+LATEX_HEADER:   \renewcommand{\firstrefdash}{}
+#+LATEX_HEADER: \input{packages/langsci-avm-settings}
+#+LATEX_HEADER: % \usepackage[inference]{semantic} % for CCG 
+#+LATEX_HEADER: % \usepackage{packages/ccg}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: 
 #+LATEX_HEADER: % \input{TLmacros}
 # Just mention the link to the references file [[addbibresource:references.bib]] in order to make it available to org-ref but not override the default bibliography which is helpful when looking for references which are not yet included in the local bibliography. 
 :end:

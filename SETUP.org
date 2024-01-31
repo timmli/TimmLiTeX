@@ -380,13 +380,50 @@ Remember to first add the class to the set of known classes (in =init.el=).
 
 <<article-settings>>
 
-%%%%%%%%%%%%%%
-%   Macros   % 
-%%%%%%%%%%%%%%
+<<article-body>>
+#+END_SRC
+
+#+NAME: article-options
+#+BEGIN_SRC latex
+11pt,twoside
+#+END_SRC
+
+#+NAME: article-settings
+#+BEGIN_SRC latex
+\RequirePackage{etoolbox}
+\newbool{draftmode}
+\booltrue{draftmode}
+
+% Uncomment the following line for deactivating draftmode
+%\boolfalse{draftmode}           % Deactivate draftmode
+
+\ifbool{draftmode}{
+  \usepackage[firstpageonly=true]{draftwatermark}
+  \SetWatermarkScale{1}
+  \AtBeginDocument{\SetWatermarkText{DRAFT}}
+}{}
+
+<<scrarticle-settings-input>>
+<<basic-text-settings-input>>
+
+
+%%%%%%%%%%%%%%%%%%%%%%%% 
+% Optional packages & settings
+%%%%%%%%%%%%%%%%%%%%%%%% 
+
+%% Uncomment the following line for deactivating draftmode
+% \boolfalse{draftmode}           % Deactivate draftmode
+
+%% Language
+\AtBeginDocument{
+  \selectlanguage{german} % which language is available depends on how babel is loaded
+}
 
 % <<TLmacros-input>>
 
-<<article-body>>
+<<optional-packages>>
+
+
 #+END_SRC
 
 #+NAME: article-body
@@ -432,31 +469,6 @@ This is an abstract: \lipsum[1]
 %%% mode: latex
 %%% TeX-master: t
 %%% End:
-#+END_SRC
-
-#+NAME: article-options
-#+BEGIN_SRC latex
-11pt,twoside
-#+END_SRC
-
-#+NAME: article-settings
-#+BEGIN_SRC latex
-\RequirePackage{etoolbox}
-\newbool{draftmode}
-\booltrue{draftmode}
-
-% Uncomment the following line for deactivating draftmode
-%\boolfalse{draftmode}           % Deactivate draftmode
-
-\ifbool{draftmode}{
-  \usepackage[firstpageonly=true]{draftwatermark}
-  \SetWatermarkScale{1}
-  \AtBeginDocument{\SetWatermarkText{DRAFT}}
-}{}
-
-<<scrarticle-settings-input>>
-
-<<basic-text-settings-input>>
 #+END_SRC
 
 #+NAME: article-examples
@@ -1141,8 +1153,8 @@ numbers=noenddot,
 % Optional packages & settings
 %%%%%%%%%%%%%%%%%%%%%%%% 
 
-% Uncomment the following line for deactivating draftmode
-%\boolfalse{draftmode}           % Deactivate draftmode
+%% Uncomment the following line for deactivating draftmode
+% \boolfalse{draftmode}           % Deactivate draftmode
 
 %% Language
 \AtBeginDocument{
@@ -3836,6 +3848,34 @@ release_abstract:
 	rm -fr temp
 #+END_SRC
 
+** Article Makefile
+
+#+NAME: article-makefile
+#+BEGIN_SRC makefile :noweb yes
+ARTICLE_TEST_DIR = test_article
+ARTICLE_FILES =  $(shell ./extract_input_files.sh "article-main.tex")  \
+  muss.bbx \
+  muss.cbx \
+	$(wildcard packages/*.sty) \
+	article-main.tex \
+	article-main.org \
+	references.bib
+
+test_article:
+	rm -fr $(ARTICLE_TEST_DIR)
+	mkdir $(ARTICLE_TEST_DIR)
+	cp -r --parents $(ARTICLE_FILES) $(ARTICLE_TEST_DIR)
+	cd $(ARTICLE_TEST_DIR); \
+			latexmk -pdf article-main.tex
+
+release_article:
+	rm -fr temp
+	mkdir temp
+	cp -r --parents $(ARTICLE_FILES) temp
+	cd temp; zip -r article-template.zip *; mv article-template.zip ..
+	rm -fr temp
+#+END_SRC
+
 ** Beamer Makefile
 
 #+NAME: beamer-makefile
@@ -4013,6 +4053,14 @@ SHELL := /bin/bash
 
 #-------------------------------------------------------------------------------
 
+<<abstract-makefile>>
+	
+#-------------------------------------------------------------------------------
+
+<<article-makefile>>
+
+#-------------------------------------------------------------------------------
+
 <<beamer-makefile>>
 
 #-------------------------------------------------------------------------------
@@ -4058,59 +4106,6 @@ release_standalone:
 
 #+NAME: text-makefile
 #+BEGIN_SRC makefile :noweb yes
-ABSTRACT_TEST_DIR = test_abstract
-ABSTRACT_FILES =  TLmacros.tex \
-	basic-text-settings.tex \
-	$(wildcard packages/*.sty) \
-	abstract-main.tex \
-	abstract-examples.tex \
-  references.bib \
-	latexmkrc \
-  muss.bbx \
-  muss.cbx
-
-test_abstract:
-	rm -fr $(ABSTRACT_TEST_DIR)
-	mkdir $(ABSTRACT_TEST_DIR)
-	cp -r --parents $(ABSTRACT_FILES) $(ABSTRACT_TEST_DIR)
-	cd $(ABSTRACT_TEST_DIR); \
-			latexmk -pdf abstract-main.tex
-
-release_abstract:
-	rm -fr temp
-	mkdir temp
-	cp -r --parents $(ABSTRACT_FILES) temp
-	cd temp; zip -r abstract-template.zip *; mv abstract-template.zip ..
-	rm -fr temp
-
-#-------------------------------------------------------------------------------
-
-ARTICLE_TEST_DIR = test_article
-ARTICLE_FILES =  TLmacros.tex \
-	basic-text-settings.tex \
-	scrarticle-settings.tex \
-	$(wildcard packages/*.sty) \
-	article-main.tex \
-	article-examples.tex \
-  references.bib \
-	latexmkrc \
-  muss.bbx \
-  muss.cbx
-
-test_article:
-	rm -fr $(ARTICLE_TEST_DIR)
-	mkdir $(ARTICLE_TEST_DIR)
-	cp -r --parents $(ARTICLE_FILES) $(ARTICLE_TEST_DIR)
-	cd $(ARTICLE_TEST_DIR); \
-			latexmk -pdf article-main.tex
-
-release_article:
-	rm -fr temp
-	mkdir temp
-	cp -r --parents $(ARTICLE_FILES) temp
-	cd temp; zip -r article-template.zip *; mv article-template.zip ..
-	rm -fr temp
-
 #-------------------------------------------------------------------------------
 
 BOOK_TEST_DIR = test_book
