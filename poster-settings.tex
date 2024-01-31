@@ -41,21 +41,18 @@
   % labelnumber,  % for numeric bibliography in beamer
   % toc=bib    % make bibliography appear in toc, incompatible with beamer
   ]{biblatex}
-\renewcommand{\postnotedelim}{: }%
-\renewcommand{\multicitedelim}{\addsemicolon\space}%
-\renewcommand{\compcitedelim}{\multicitedelim}%
-\DeclareFieldFormat{postnote}{#1}%
 
 %% The bibliography file is specified like this
 \addbibresource[datatype=bibtex]{references.bib}
 
+%% Command for inserting bibliography here 
 \newcommand{\insertBib}{
   \printbibliography[
     % notkeyword=this
     ] 
 }
 
-% % Compat definitions to make available BibTeX macros in BibLaTeX 
+%% Compat definitions to make available BibTeX macros in BibLaTeX 
 % \let\citealt=\cite
 % \let\cite=\textcite
 % \let\citep=\parencite
@@ -79,19 +76,17 @@
 \usepackage{colortbl}
 \usepackage{booktabs}
 
-%%%%%%%%%%%%%%%%%%%%%%%% 
-%  LISTINGS SETTINGS   % 
-%%%%%%%%%%%%%%%%%%%%%%%% 
+%% Listings settings
+%%--------------------
 
 \usepackage{listings}
-
 \lstset{basicstyle=\ttfamily,tabsize=2,breaklines=true}
-\usepackage{color}
+\RequirePackage{color}
 \definecolor{lightgray}{gray}{0.7}
 
 %% Add syntax highlighting for specific programming languages
 % \input{packages/listings-xmg-settings.tex} 
 
-
+%%--------------------
 
 \input{packages/forest-settings}

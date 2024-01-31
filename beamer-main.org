@@ -16,7 +16,211 @@
 #+LATEX_CLASS: beamer
 #+LATEX_CLASS_OPTIONS: [compress,xcolor={table,dvipsnames},10pt,aspectratio=43]  
 #+LATEX_COMPILER: pdflatex
-#+LATEX_HEADER: \input{beamer-settings.tex}
+#+LATEX_HEADER: %%%%%%%%%%%%%%%%%%%%%%%%
+#+LATEX_HEADER: %   PDFLATEX SETTINGS  % 
+#+LATEX_HEADER: %%%%%%%%%%%%%%%%%%%%%%%%
+#+LATEX_HEADER: 
+#+LATEX_HEADER: %%   Font & Encoding
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % \usepackage{libertine} % libertine tends to cause problems, e.g. when using tipa
+#+LATEX_HEADER: % \usepackage[libertine]{newtxmath}
+#+LATEX_HEADER: \usepackage{times}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: \makeatletter
+#+LATEX_HEADER: 
+#+LATEX_HEADER: \@ifclassloaded{beamer}{
+#+LATEX_HEADER:   \usepackage{libertine} % libertine tends to cause problems, e.g. when using tipa
+#+LATEX_HEADER:   \usepackage[libertine]{newtxmath}}{}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: \@ifclassloaded{tikzposter}{
+#+LATEX_HEADER:   \usepackage{DejaVuSans} 
+#+LATEX_HEADER:   \renewcommand*{\familydefault}{\sfdefault}}{}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: \makeatother
+#+LATEX_HEADER: 
+#+LATEX_HEADER: \usepackage[scaled=0.8]{beramono}  % for monospaced font
+#+LATEX_HEADER: \usepackage{microtype}		% micro-typographic aspects of the fonts
+#+LATEX_HEADER: \usepackage[T1]{fontenc}	% special fonts, e.g. for German umlaute
+#+LATEX_HEADER: 
+#+LATEX_HEADER: %% compatible with BibLaTeX
+#+LATEX_HEADER: \usepackage[utf8]{inputenc}
+#+LATEX_HEADER: %% incompabtible with BibLaTeX
+#+LATEX_HEADER: % \usepackage{ucs}
+#+LATEX_HEADER: % \usepackage[utf8x]{inputenc}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: %% Language
+#+LATEX_HEADER: %\usepackage{german} % is this useful anymore?
+#+LATEX_HEADER: \usepackage[german,english]{babel} % the last language in the options is loaded; the other one can be chosen with \selectlanguage
+#+LATEX_HEADER: \usepackage{iflang}                % for language specific settings
+#+LATEX_HEADER: 
+#+LATEX_HEADER: %%%%%%%%%%%%%%%%%%%%%%%%
+#+LATEX_HEADER: %   MISCELLANEOUS      % 
+#+LATEX_HEADER: %%%%%%%%%%%%%%%%%%%%%%%%
+#+LATEX_HEADER: 
+#+LATEX_HEADER: %% Graphics
+#+LATEX_HEADER: \usepackage{graphics}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: %% Tables
+#+LATEX_HEADER: % \usepackage{arydshln} 		    % for dashed horizontal lines in tables (incompatible with avm)
+#+LATEX_HEADER: \usepackage{multirow}           % similar to \multicolumn
+#+LATEX_HEADER: 
+#+LATEX_HEADER: %% Symbols
+#+LATEX_HEADER: \usepackage{latexsym,amsmath,amssymb,wasysym}
+#+LATEX_HEADER: \usepackage{marvosym}           % for thunderbolt symbol
+#+LATEX_HEADER: \usepackage{ulem}               % to cross out text
+#+LATEX_HEADER:   \normalem
+#+LATEX_HEADER: \usepackage{url}
+#+LATEX_HEADER:   \urlstyle{tt}                   % tt,rm,sf,same
+#+LATEX_HEADER: \usepackage{tipa}	% for phonetic symbols; has to appear before fontspec
+#+LATEX_HEADER: 
+#+LATEX_HEADER: %% Blindtext
+#+LATEX_HEADER: \usepackage{lipsum}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: %% Set ragged text
+#+LATEX_HEADER: \usepackage{ragged2e}
+#+LATEX_HEADER: \let\raggedright=\RaggedRight
+#+LATEX_HEADER: 
+#+LATEX_HEADER: %%%%%%%%%%%%%%%%%%%%%%%% 
+#+LATEX_HEADER: % BIBLATEX SETTINGS  % 
+#+LATEX_HEADER: %%%%%%%%%%%%%%%%%%%%%%%% 
+#+LATEX_HEADER: 
+#+LATEX_HEADER: \newcommand{\mycitestyle}{muss}
+#+LATEX_HEADER: \newcommand{\mybibstyle}{muss}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: \makeatletter
+#+LATEX_HEADER: \@ifclassloaded{beamer}{\renewcommand{\mycitestyle}{numeric-comp}}{}
+#+LATEX_HEADER: \@ifclassloaded{tikzposter}{\renewcommand{\mycitestyle}{numeric-comp}}{}
+#+LATEX_HEADER: \makeatother
+#+LATEX_HEADER: 
+#+LATEX_HEADER: \usepackage[
+#+LATEX_HEADER:   bibstyle=\mybibstyle,
+#+LATEX_HEADER:   citestyle=\mycitestyle,
+#+LATEX_HEADER:   %% The remaining options are set in muss.bbx.
+#+LATEX_HEADER:   % natbib=true,
+#+LATEX_HEADER:   % refsection=chapter,
+#+LATEX_HEADER:   % maxbibnames=99,
+#+LATEX_HEADER:   % isbn=false,
+#+LATEX_HEADER:   % doi=false,
+#+LATEX_HEADER:   % eprint=false,
+#+LATEX_HEADER:   % backend=biber,
+#+LATEX_HEADER:   % sorting=ydnt,  % sort in descending chronological order
+#+LATEX_HEADER:   % indexing=cite,
+#+LATEX_HEADER:   % labelnumber,  % for numeric bibliography in beamer
+#+LATEX_HEADER:   % toc=bib    % make bibliography appear in toc, incompatible with beamer
+#+LATEX_HEADER:   ]{biblatex}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: %% The bibliography file is specified like this
+#+LATEX_HEADER: \addbibresource[datatype=bibtex]{references.bib}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: %% Command for inserting bibliography here 
+#+LATEX_HEADER: \newcommand{\insertBib}{
+#+LATEX_HEADER:   \printbibliography[
+#+LATEX_HEADER:     % notkeyword=this
+#+LATEX_HEADER:     ] 
+#+LATEX_HEADER: }
+#+LATEX_HEADER: 
+#+LATEX_HEADER: %% Compat definitions to make available BibTeX macros in BibLaTeX 
+#+LATEX_HEADER: % \let\citealt=\cite
+#+LATEX_HEADER: % \let\cite=\textcite
+#+LATEX_HEADER: % \let\citep=\parencite
+#+LATEX_HEADER: % \let\citet=\cite
+#+LATEX_HEADER: % \newcommand{\citeauthoryear}[1]{\citeauthor{#1} (\citeyear{#1})}
+#+LATEX_HEADER: % \newcommand{\citealtauthoryear}[1]{\citeauthor{#1} \citeyear{#1}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: 
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % Beamer settings
+#+LATEX_HEADER: %-----------------
+#+LATEX_HEADER: \makeatletter
+#+LATEX_HEADER: \@ifclassloaded{beamer}{
+#+LATEX_HEADER: 
+#+LATEX_HEADER:   \ExecuteBibliographyOptions{labelnumber}
+#+LATEX_HEADER:   
+#+LATEX_HEADER:   %% Print squared brackets around reference number
+#+LATEX_HEADER:   %\DeclareFieldFormat{labelnumberwidth}{\mkbibbrackets{#1}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER:   %% Print ": " before postnote (numeric-comp uses comma) 
+#+LATEX_HEADER:   \renewcommand*{\postnotedelim}{\addcolon\space} 
+#+LATEX_HEADER:   
+#+LATEX_HEADER:   %% Taken from numeric.bbx
+#+LATEX_HEADER:   \defbibenvironment{bibliography}  
+#+LATEX_HEADER:   {\list
+#+LATEX_HEADER:     {\printtext[labelnumberwidth]{%
+#+LATEX_HEADER:         % \printfield{prefixnumber}%
+#+LATEX_HEADER:         \printfield{labelnumber}}}
+#+LATEX_HEADER:     {\setlength{\labelwidth}{\labelnumberwidth}%
+#+LATEX_HEADER:       \setlength{\leftmargin}{\labelwidth}%
+#+LATEX_HEADER:       \setlength{\labelsep}{1em}%
+#+LATEX_HEADER:       \addtolength{\leftmargin}{1em}%
+#+LATEX_HEADER:       \setlength{\itemsep}{\bibitemsep}%
+#+LATEX_HEADER:       \setlength{\parsep}{\bibparsep}}%
+#+LATEX_HEADER:     \renewcommand*{\makelabel}[1]{\hss##1}}
+#+LATEX_HEADER:   {\endlist}
+#+LATEX_HEADER:   {\item}
+#+LATEX_HEADER: 
+#+LATEX_HEADER:   %% Taken from MUSS v0.4
+#+LATEX_HEADER:   \DeclareCiteCommand{\fullcite}
+#+LATEX_HEADER:   {\defcounter{maxnames}{\blx@maxbibnames}% show all names
+#+LATEX_HEADER:     \usebibmacro{prenote}}
+#+LATEX_HEADER:   {\usedriver
+#+LATEX_HEADER:     {\DeclareNameAlias{sortname}{default}}
+#+LATEX_HEADER:     {\thefield{entrytype}}}
+#+LATEX_HEADER:   {\multicitedelim}
+#+LATEX_HEADER:   {\usebibmacro{postnote}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER:   %% Taken from numberic-comp.cbx with additions ...
+#+LATEX_HEADER:   \DeclareCiteCommand{\supercite}[\mkbibsuperscript]
+#+LATEX_HEADER:   {\color{gray}% added color
+#+LATEX_HEADER:     \usebibmacro{cite:init}%
+#+LATEX_HEADER:     \let\multicitedelim=\supercitedelim
+#+LATEX_HEADER:     \let\multicitesubentrydelim=\supercitesubentrydelim
+#+LATEX_HEADER:     \let\multiciterangedelim=\superciterangedelim
+#+LATEX_HEADER:     \let\multicitesubentryrangedelim=\supercitesubentryrangedelim
+#+LATEX_HEADER:     \iffieldundef{prenote}
+#+LATEX_HEADER:     {}
+#+LATEX_HEADER:     {\BibliographyWarning{Ignoring prenote argument}}%
+#+LATEX_HEADER:     \iffieldundef{postnote}
+#+LATEX_HEADER:     {}
+#+LATEX_HEADER:     {\BibliographyWarning{Ignoring postnote argument}}%
+#+LATEX_HEADER:     \bibopenbracket% added bracket
+#+LATEX_HEADER:   }
+#+LATEX_HEADER:   {\usebibmacro{citeindex}%
+#+LATEX_HEADER:     \usebibmacro{cite:comp}}
+#+LATEX_HEADER:   {}
+#+LATEX_HEADER:   {\usebibmacro{cite:dump}%
+#+LATEX_HEADER:     \bibclosebracket% added bracket
+#+LATEX_HEADER:   }
+#+LATEX_HEADER:   
+#+LATEX_HEADER: }{}
+#+LATEX_HEADER: \makeatother\makeatother
+#+LATEX_HEADER: 
+#+LATEX_HEADER: %%%%%%%%%%%%%%%%%%%%%%%%%
+#+LATEX_HEADER: %   TEXTPOS SETTINGS    % 
+#+LATEX_HEADER: %%%%%%%%%%%%%%%%%%%%%%%%%
+#+LATEX_HEADER: 
+#+LATEX_HEADER: \usepackage{calc} % Enables the use of calc expressions: 0pt+1cm
+#+LATEX_HEADER: \usepackage[
+#+LATEX_HEADER:   absolute, % Absolute positioning
+#+LATEX_HEADER:   overlay   % Positioned textblocks will overlay any other parts of the text.  
+#+LATEX_HEADER: ]{textpos}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: \setlength{\TPHorizModule}{1em}
+#+LATEX_HEADER: \setlength{\TPVertModule}{1ex}
+#+LATEX_HEADER: \newlength{\textposOriginH}
+#+LATEX_HEADER: \newlength{\textposOriginV}
+#+LATEX_HEADER: \setlength{\textposOriginH}{10mm}
+#+LATEX_HEADER: \setlength{\textposOriginV}{10mm}
+#+LATEX_HEADER: \textblockorigin{\textposOriginH}{\textposOriginV}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: \newcommand{\freeblock}[2]{
+#+LATEX_HEADER:   \begin{textblock}{0.1}(#1)
+#+LATEX_HEADER:   #2
+#+LATEX_HEADER:   \end{textblock}
+#+LATEX_HEADER: }
+#+LATEX_HEADER: 
+#+LATEX_HEADER: 
+#+LATEX_HEADER: 
+#+LATEX_HEADER: 
 #+LATEX_HEADER: % \input{TLmacros}
 #+LATEX_HEADER: \usetheme{Lustnau}
 #+LATEX_HEADER: \input{beamerlogosTuebingen}

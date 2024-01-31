@@ -77,7 +77,7 @@ release_article:
 #-------------------------------------------------------------------------------
 
 BEAMER_TEST_DIR = test_beamer
-BEAMER_FILES =  TLmacros.tex \
+BEAMER_FILES =  $(shell ./extract_input_files.sh "beamer-main.tex")  \
 	$(wildcard beamer*) \
 	$(wildcard packages/*.sty) \
 	$(wildcard graphics/*.pdf) \

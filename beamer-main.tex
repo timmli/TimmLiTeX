@@ -12,7 +12,11 @@
   aspectratio=169,
   ]{beamer}
 
-\input{beamer-settings.tex}
+\input{beamer-settings}
+
+%%%%%%%%%%%%%%%%%%%%%%%% 
+% Themes
+%%%%%%%%%%%%%%%%%%%%%%%% 
 
 \usetheme{Lustnau}  
 % \usetheme{Tuebingen}
@@ -25,8 +29,42 @@
 % \input{beamerlogosDuesseldorf.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%% 
-% CUSTOM MACROS        %
+% Optional packages & settings
 %%%%%%%%%%%%%%%%%%%%%%%% 
+
+%% Graphics
+\input{packages/tikz-settings}
+\input{packages/forest-settings}
+
+%% Linguistics
+\usepackage{linguex}
+  \renewcommand{\firstrefdash}{}
+\input{packages/langsci-avm-settings}
+% \usepackage[inference]{semantic} % for CCG 
+% \usepackage{packages/ccg}
+
+%% Specific linguex settings for beamer
+\RequirePackage{linguex}   % must be loaded below \usepackage[T1]{fontenc}
+\AtBeginDocument{
+  \setlength{\Exlabelsep}{0em}		% for linguex examples
+  \setlength{\SubExleftmargin}{1,5em}	% for linguex examples
+  \renewcommand\eachwordone{\sffamily}	% for glossing with linguex
+  \renewcommand\eachwordtwo{\sffamily}	% for glossing with linguex
+  % \setlength{\Extopsep}{1ex}   % vertical margin in linguex examples
+}
+
+%% Listings settings
+%%--------------------
+
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily,tabsize=2,breaklines=true}
+\RequirePackage{color}
+\definecolor{lightgray}{gray}{0.7}
+
+%% Add syntax highlighting for specific programming languages
+% \input{packages/listings-xmg-settings.tex} 
+
+%%--------------------
 
 % \input{TLmacros}
 \definecolor{myblue}{rgb}{0,0,0.70}
