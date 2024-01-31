@@ -6,14 +6,44 @@ numbers=noenddot,
 ]{scrbook}
 
 \usepackage{datetime}
+\RequirePackage{etoolbox}
+\newbool{draftmode}
+\booltrue{draftmode}
 
 \input{basic-text-settings}
 
-%%%%%%%%%%%%%%
-%   Macros   % 
-%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%% 
+% Optional packages & settings
+%%%%%%%%%%%%%%%%%%%%%%%% 
+
+%% Uncomment the following line for deactivating draftmode
+% \boolfalse{draftmode}           % Deactivate draftmode
+\ifbool{draftmode}{
+  \usepackage[firstpageonly=true]{draftwatermark}
+  \SetWatermarkScale{1}
+  \AtBeginDocument{\SetWatermarkText{DRAFT}}
+}{}
+
+%% Language
+\AtBeginDocument{
+  \selectlanguage{german} % which language is available depends on how babel is loaded
+}
 
 % \input{TLmacros}   % the content of TLmacros.tex goes here
+
+%% Graphics
+\input{packages/tikz-settings}
+\input{packages/forest-settings}
+
+%% Linguistics
+\usepackage{linguex}
+  \renewcommand{\firstrefdash}{}
+\input{packages/langsci-avm-settings}
+% \usepackage[inference]{semantic} % for CCG 
+% \usepackage{packages/ccg}
+
+
 
 %%%%%%%%%%%%%
 %   Title   % 

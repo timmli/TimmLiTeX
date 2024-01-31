@@ -394,15 +394,6 @@ Remember to first add the class to the set of known classes (in =init.el=).
 \newbool{draftmode}
 \booltrue{draftmode}
 
-% Uncomment the following line for deactivating draftmode
-%\boolfalse{draftmode}           % Deactivate draftmode
-
-\ifbool{draftmode}{
-  \usepackage[firstpageonly=true]{draftwatermark}
-  \SetWatermarkScale{1}
-  \AtBeginDocument{\SetWatermarkText{DRAFT}}
-}{}
-
 <<scrarticle-settings-input>>
 <<basic-text-settings-input>>
 
@@ -413,6 +404,11 @@ Remember to first add the class to the set of known classes (in =init.el=).
 
 %% Uncomment the following line for deactivating draftmode
 % \boolfalse{draftmode}           % Deactivate draftmode
+\ifbool{draftmode}{
+  \usepackage[firstpageonly=true]{draftwatermark}
+  \SetWatermarkScale{1}
+  \AtBeginDocument{\SetWatermarkText{DRAFT}}
+}{}
 
 %% Language
 \AtBeginDocument{
@@ -1021,13 +1017,49 @@ A TUCO derivation:\newline
 
 <<book-settings>>
 
-%%%%%%%%%%%%%%
-%   Macros   % 
-%%%%%%%%%%%%%%
+<<book-body>>
+#+END_SRC
+
+#+NAME: book-options
+#+BEGIN_SRC latex
+11pt,
+bibliography=totoc,
+numbers=noenddot,
+% draft
+#+END_SRC
+
+#+NAME: book-settings
+#+BEGIN_SRC latex
+\usepackage{datetime}
+\RequirePackage{etoolbox}
+\newbool{draftmode}
+\booltrue{draftmode}
+
+<<basic-text-settings-input>>
+
+
+%%%%%%%%%%%%%%%%%%%%%%%% 
+% Optional packages & settings
+%%%%%%%%%%%%%%%%%%%%%%%% 
+
+%% Uncomment the following line for deactivating draftmode
+% \boolfalse{draftmode}           % Deactivate draftmode
+\ifbool{draftmode}{
+  \usepackage[firstpageonly=true]{draftwatermark}
+  \SetWatermarkScale{1}
+  \AtBeginDocument{\SetWatermarkText{DRAFT}}
+}{}
+
+%% Language
+\AtBeginDocument{
+  \selectlanguage{german} % which language is available depends on how babel is loaded
+}
 
 % <<TLmacros-input>>   % the content of TLmacros.tex goes here
 
-<<book-body>>
+<<optional-packages>>
+
+
 #+END_SRC
 
 #+NAME: book-body
@@ -1079,21 +1111,6 @@ A TUCO derivation:\newline
 %%% End:
 
 
-#+END_SRC
-
-#+NAME: book-options
-#+BEGIN_SRC latex
-11pt,
-bibliography=totoc,
-numbers=noenddot,
-% draft
-#+END_SRC
-
-#+NAME: book-settings
-#+BEGIN_SRC latex
-\usepackage{datetime}
-
-<<basic-text-settings-input>>
 #+END_SRC
 
 #+NAME: book-examples
@@ -3876,6 +3893,33 @@ release_article:
 	rm -fr temp
 #+END_SRC
 
+** Book Makefile
+
+#+NAME: book-makefile
+#+BEGIN_SRC makefile :noweb yes
+BOOK_TEST_DIR = test_book
+BOOK_FILES =  $(shell ./extract_input_files.sh "book-main.tex")  \
+  muss.bbx \
+  muss.cbx \
+	$(wildcard packages/*.sty) \
+	book-main.tex \
+	references.bib
+
+test_book:
+	rm -fr $(BOOK_TEST_DIR)
+	mkdir $(BOOK_TEST_DIR)
+	cp -r --parents $(BOOK_FILES) $(BOOK_TEST_DIR)
+	cd $(BOOK_TEST_DIR); \
+			latexmk -pdf book-main.tex
+
+release_book:
+	rm -fr temp
+	mkdir temp
+	cp -r --parents $(BOOK_FILES) temp
+	cd temp; zip -r book-template.zip *; mv book-template.zip ..
+	rm -fr temp
+#+END_SRC
+
 ** Beamer Makefile
 
 #+NAME: beamer-makefile
@@ -4065,11 +4109,13 @@ SHELL := /bin/bash
 
 #-------------------------------------------------------------------------------
 
-<<hausarbeit-makefile>>
+<<book-makefile>>
 
 #-------------------------------------------------------------------------------
 
-<<text-makefile>>
+<<hausarbeit-makefile>>
+
+#-------------------------------------------------------------------------------
 #+END_SRC
 
 ** COMMENT Standalone Makefile
@@ -4102,40 +4148,6 @@ release_standalone:
 	rm -fr temp
 
 #+END_SRC
-** Text Makefile
-
-#+NAME: text-makefile
-#+BEGIN_SRC makefile :noweb yes
-#-------------------------------------------------------------------------------
-
-BOOK_TEST_DIR = test_book
-BOOK_FILES =  TLmacros.tex \
-	basic-text-settings.tex \
-	$(wildcard packages/*.sty) \
-	book-main.tex  \
-	book-examples.tex  \
-  references.bib \
-	latexmkrc \
-  muss.bbx \
-  muss.cbx
-
-test_book:
-	rm -fr $(BOOK_TEST_DIR)
-	mkdir $(BOOK_TEST_DIR)
-	cp -r --parents $(BOOK_FILES) $(BOOK_TEST_DIR)
-	cd $(BOOK_TEST_DIR); \
-			latexmk -pdf book-main.tex
-
-release_book:
-	rm -fr temp
-	mkdir temp
-	cp -r --parents $(BOOK_FILES) temp
-	cd temp; zip -r book-template.zip *; mv book-template.zip ..
-	rm -fr temp
-
-#+END_SRC
-
-
 * latexmk
 
 #+BEGIN_SRC shell :noweb yes :tangle latexmkrc   

@@ -102,6 +102,30 @@ release_beamer:
 
 #-------------------------------------------------------------------------------
 
+BOOK_TEST_DIR = test_book
+BOOK_FILES =  $(shell ./extract_input_files.sh "book-main.tex")  \
+  muss.bbx \
+  muss.cbx \
+	$(wildcard packages/*.sty) \
+	book-main.tex \
+	references.bib
+
+test_book:
+	rm -fr $(BOOK_TEST_DIR)
+	mkdir $(BOOK_TEST_DIR)
+	cp -r --parents $(BOOK_FILES) $(BOOK_TEST_DIR)
+	cd $(BOOK_TEST_DIR); \
+			latexmk -pdf book-main.tex
+
+release_book:
+	rm -fr temp
+	mkdir temp
+	cp -r --parents $(BOOK_FILES) temp
+	cd temp; zip -r book-template.zip *; mv book-template.zip ..
+	rm -fr temp
+
+#-------------------------------------------------------------------------------
+
 HAUSARBEIT_TEST_DIR = test_hausarbeit
 HAUSARBEIT_FILES =  $(shell ./extract_input_files.sh "hausarbeit-main.tex")  \
   muss.bbx \
@@ -125,30 +149,3 @@ release_hausarbeit:
 	rm -fr temp
 
 #-------------------------------------------------------------------------------
-
-#-------------------------------------------------------------------------------
-
-BOOK_TEST_DIR = test_book
-BOOK_FILES =  TLmacros.tex \
-	basic-text-settings.tex \
-	$(wildcard packages/*.sty) \
-	book-main.tex  \
-	book-examples.tex  \
-  references.bib \
-	latexmkrc \
-  muss.bbx \
-  muss.cbx
-
-test_book:
-	rm -fr $(BOOK_TEST_DIR)
-	mkdir $(BOOK_TEST_DIR)
-	cp -r --parents $(BOOK_FILES) $(BOOK_TEST_DIR)
-	cd $(BOOK_TEST_DIR); \
-			latexmk -pdf book-main.tex
-
-release_book:
-	rm -fr temp
-	mkdir temp
-	cp -r --parents $(BOOK_FILES) temp
-	cd temp; zip -r book-template.zip *; mv book-template.zip ..
-	rm -fr temp

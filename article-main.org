@@ -15,15 +15,6 @@
 #+LATEX_HEADER: \newbool{draftmode}
 #+LATEX_HEADER: \booltrue{draftmode}
 #+LATEX_HEADER: 
-#+LATEX_HEADER: % Uncomment the following line for deactivating draftmode
-#+LATEX_HEADER: %\boolfalse{draftmode}           % Deactivate draftmode
-#+LATEX_HEADER: 
-#+LATEX_HEADER: \ifbool{draftmode}{
-#+LATEX_HEADER:   \usepackage[firstpageonly=true]{draftwatermark}
-#+LATEX_HEADER:   \SetWatermarkScale{1}
-#+LATEX_HEADER:   \AtBeginDocument{\SetWatermarkText{DRAFT}}
-#+LATEX_HEADER: }{}
-#+LATEX_HEADER: 
 #+LATEX_HEADER: \input{scrarticle-settings}
 #+LATEX_HEADER: \input{basic-text-settings}
 #+LATEX_HEADER: 
@@ -34,6 +25,11 @@
 #+LATEX_HEADER: 
 #+LATEX_HEADER: %% Uncomment the following line for deactivating draftmode
 #+LATEX_HEADER: % \boolfalse{draftmode}           % Deactivate draftmode
+#+LATEX_HEADER: \ifbool{draftmode}{
+#+LATEX_HEADER:   \usepackage[firstpageonly=true]{draftwatermark}
+#+LATEX_HEADER:   \SetWatermarkScale{1}
+#+LATEX_HEADER:   \AtBeginDocument{\SetWatermarkText{DRAFT}}
+#+LATEX_HEADER: }{}
 #+LATEX_HEADER: 
 #+LATEX_HEADER: %% Language
 #+LATEX_HEADER: \AtBeginDocument{
