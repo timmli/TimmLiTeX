@@ -238,45 +238,12 @@ Remember to first add the class to the set of known classes (in =init.el=).
 <<abstract-settings>>
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% HEADER
+% Header
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % <<TLmacros-input>>
 
 <<abstract-body>>
-#+END_SRC
-
-#+NAME: abstract-body
-#+BEGIN_SRC latex :noweb yes
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% HEADER
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\author{Max Mustermann (Affiliation)}
-\title{Title}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% BODY
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{document}
-
-\maketitle
-
-% TODO
-
-\paragraph{Citation example}
-
-<<example-citations>>
-
-\paragraph{Blindtext} \lipsum
-
-\paragraph{References}
-{\tiny
-\printbibliography[heading=none]
-}
-
-\end{document}
 #+END_SRC
 
 #+NAME: abstract-options
@@ -291,6 +258,7 @@ Remember to first add the class to the set of known classes (in =init.el=).
 \usepackage[left=25mm, right=25mm, top=25mm, bottom=25mm, noheadfoot]{geometry}
 \pagenumbering{gobble}
 \PassOptionsToPackage{maxbibnames=1,maxcitenames=1,firstinits=true}{biblatex}
+\RequirePackage{xspace}
 \defbibenvironment{bibliography}{\noindent}{\unspace}{\xspace$\bullet$\xspace}
 \makeatletter
 \renewcommand\maketitle{
@@ -305,8 +273,40 @@ Remember to first add the class to the set of known classes (in =init.el=).
 
 #+END_SRC
 
+#+NAME: abstract-body
+#+BEGIN_SRC latex :noweb yes
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Header
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\author{Max Mustermann (Affiliation)}
+\title{Title}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Body
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\maketitle
+
+<<abstract-examples>>
+
+\paragraph{References}
+{\tiny
+\printbibliography[heading=none]
+}
+
+\end{document}
+#+END_SRC
+
 #+NAME: abstract-examples
 #+BEGIN_SRC latex :noweb yes :tangle abstract-examples.tex
+\paragraph{Blindtext} 
+
+\lipsum
+
+\paragraph{Citation example}
 
 <<biblatex-citation-example>>
 
@@ -3781,27 +3781,59 @@ More \LaTeX{} templates on \url{https://github.com/timmli/latex-templates}.
 
 * Makefile
 
-** Root Makefile
+** Abschlussarbeit Makefile
 
-#+NAME: root-makefile
-#+BEGIN_SRC makefile :noweb yes :tangle Makefile
-SHELL := /bin/bash
+#+NAME: abschlussarbeit-makefile
+#+BEGIN_SRC makefile :noweb yes
+ABSCHLUSSARBEIT_TEST_DIR = test_abschlussarbeit
+ABSCHLUSSARBEIT_FILES =  $(shell ./extract_input_files.sh "abschlussarbeit-main.tex")  \
+  muss.bbx \
+  muss.cbx \
+	$(wildcard packages/*.sty) \
+	abschlussarbeit-main.tex \
+	references.bib
 
-#-------------------------------------------------------------------------------
+test_abschlussarbeit:
+	rm -fr $(ABSCHLUSSARBEIT_TEST_DIR)
+	mkdir $(ABSCHLUSSARBEIT_TEST_DIR)
+	cp -r --parents $(ABSCHLUSSARBEIT_FILES) $(ABSCHLUSSARBEIT_TEST_DIR)
+	cd $(ABSCHLUSSARBEIT_TEST_DIR); \
+			latexmk -pdf abschlussarbeit-main.tex
 
-<<abschlussarbeit-makefile>>
+release_abschlussarbeit:
+	rm -fr temp
+	mkdir temp
+	cp -r --parents $(ABSCHLUSSARBEIT_FILES) temp
+	cd temp; zip -r abschlussarbeit-template.zip *; mv abschlussarbeit-template.zip ..
+	rm -fr temp
+#+END_SRC
 
-#-------------------------------------------------------------------------------
+** Abstract Makefile
 
-<<beamer-makefile>>
+#+NAME: abstract-makefile
+#+BEGIN_SRC makefile :noweb yes
+ABSTRACT_TEST_DIR = test_abstract
+ABSTRACT_FILES =  $(shell ./extract_input_files.sh "abstract-main.tex")  \
+  muss.bbx \
+  muss.cbx \
+	$(wildcard packages/*.sty) \
+	abstract-main.tex \
+	abstract-main.org \
+	references.bib
 
-#-------------------------------------------------------------------------------
+test_abstract:
+	rm -fr $(ABSTRACT_TEST_DIR)
+	mkdir $(ABSTRACT_TEST_DIR)
+	cp -r --parents $(ABSTRACT_FILES) $(ABSTRACT_TEST_DIR)
+	cd $(ABSTRACT_TEST_DIR); \
+			latexmk -pdf abstract-main.tex
 
-<<hausarbeit-makefile>>
-
-#-------------------------------------------------------------------------------
-
-<<text-makefile>>
+release_abstract:
+	rm -fr temp
+	mkdir temp
+	cp -r --parents $(ABSTRACT_FILES) temp
+	cd temp; zip -r abstract-template.zip *; mv abstract-template.zip ..
+	rm -fr temp
 #+END_SRC
 
 ** Beamer Makefile
@@ -3831,6 +3863,101 @@ release_beamer:
 	cp -r --parents $(BEAMER_FILES) temp
 	cd temp; zip -r beamer-template.zip *; mv beamer-template.zip ..
 	rm -fr temp
+#+END_SRC
+
+** Hausarbeit Makefile
+
+#+NAME: hausarbeit-makefile
+#+BEGIN_SRC makefile :noweb yes
+HAUSARBEIT_TEST_DIR = test_hausarbeit
+HAUSARBEIT_FILES =  $(shell ./extract_input_files.sh "hausarbeit-main.tex")  \
+  muss.bbx \
+  muss.cbx \
+	$(wildcard packages/*.sty) \
+	references.bib \
+  hausarbeit-main.tex
+
+test_hausarbeit:
+	rm -fr $(HAUSARBEIT_TEST_DIR)
+	mkdir $(HAUSARBEIT_TEST_DIR)
+	cp -r --parents $(HAUSARBEIT_FILES) $(HAUSARBEIT_TEST_DIR)
+	cd $(HAUSARBEIT_TEST_DIR); \
+			latexmk -pdf hausarbeit-main.tex
+
+release_hausarbeit:
+	rm -fr temp
+	mkdir temp
+	cp -r --parents $(HAUSARBEIT_FILES) temp
+	cd temp; zip -r hausarbeit-template.zip *; mv hausarbeit-template.zip ..
+	rm -fr temp
+#+END_SRC
+
+** JLM Makefile
+
+#+NAME: jlm-makefile
+#+BEGIN_SRC makefile :noweb yes :tangle jlm-template/Makefile
+SHELL := /bin/bash
+
+JLM_FILES =  TLmacros.tex \
+	references.bib \
+	jlm-article-template.org \
+	latexmkrc \
+	jlm.bst jlm.cls \
+	cc-by.pdf \
+	$(wildcard packages/*.sty) \
+	fonts/* \
+	doc/*
+
+release_jlm:
+	rm -fr temp
+	mkdir temp
+	cp -r --parents $(JLM_FILES) temp
+	cd temp; zip -r jlm-template.zip *; mv jlm-template.zip ..
+	rm -fr temp
+
+#+END_SRC
+
+** Langscibook Makefile
+
+#+NAME: langscibook-makefile
+#+BEGIN_SRC makefile :noweb yes :tangle langscibook-template/Makefile
+SHELL := /bin/bash
+
+LANGSCI_FILES =  TLmacros.tex \
+	references.bib \
+	langsci-paper-template.org \
+	latexmkrc \
+	$(wildcard packages/*.sty) \
+	langscibook/*.sty \
+	langscibook/*.cls \
+	langscibook/seriesinfo \
+	langscibook/unchanged \
+  langsci-fonts/fonts/Arimo* \
+  langsci-fonts/fonts/Libertinus* \
+  langsci-fonts/fonts/DejaVu* \
+  langsci-fonts/fonts/XITSMath* \
+  fontspec.tex \
+
+test_langsci:
+	rm -fr test
+	mkdir test
+	cp -r --parents $(LANGSCI_FILES) test/
+	mv test/langscibook/* test
+	rm -fr test/langscibook
+	mv test/langsci-fonts/* test
+	rm -fr test/langsci-fonts
+
+release_langscibook:
+	rm -fr temp
+	mkdir temp
+	cp -r --parents $(LANGSCI_FILES) temp
+	mv temp/langscibook/* temp
+	rm -fr temp/langscibook
+	mv temp/langsci-fonts/* temp
+	rm -fr temp/langsci-fonts
+	cd temp; zip -r langscibook-template.zip *; mv langscibook-template.zip ..
+	rm -fr temp
+
 #+END_SRC
 
 ** COMMENT Poster Makefile
@@ -3874,60 +4001,59 @@ release_poster:
 	rm -fr temp
 #+END_SRC
 
-** Abschlussarbeit Makefile
+** Root Makefile
 
-#+NAME: abschlussarbeit-makefile
-#+BEGIN_SRC makefile :noweb yes
-ABSCHLUSSARBEIT_TEST_DIR = test_abschlussarbeit
-ABSCHLUSSARBEIT_FILES =  $(shell ./extract_input_files.sh "abschlussarbeit-main.tex")  \
-  muss.bbx \
-  muss.cbx \
-	$(wildcard packages/*.sty) \
-	abschlussarbeit-main.tex \
-	references.bib
+#+NAME: root-makefile
+#+BEGIN_SRC makefile :noweb yes :tangle Makefile
+SHELL := /bin/bash
 
-test_abschlussarbeit:
-	rm -fr $(ABSCHLUSSARBEIT_TEST_DIR)
-	mkdir $(ABSCHLUSSARBEIT_TEST_DIR)
-	cp -r --parents $(ABSCHLUSSARBEIT_FILES) $(ABSCHLUSSARBEIT_TEST_DIR)
-	cd $(ABSCHLUSSARBEIT_TEST_DIR); \
-			latexmk -pdf abschlussarbeit-main.tex
+#-------------------------------------------------------------------------------
 
-release_abschlussarbeit:
-	rm -fr temp
-	mkdir temp
-	cp -r --parents $(ABSCHLUSSARBEIT_FILES) temp
-	cd temp; zip -r abschlussarbeit-template.zip *; mv abschlussarbeit-template.zip ..
-	rm -fr temp
+<<abschlussarbeit-makefile>>
+
+#-------------------------------------------------------------------------------
+
+<<beamer-makefile>>
+
+#-------------------------------------------------------------------------------
+
+<<hausarbeit-makefile>>
+
+#-------------------------------------------------------------------------------
+
+<<text-makefile>>
 #+END_SRC
 
-** Hausarbeit Makefile
+** COMMENT Standalone Makefile
 
-#+NAME: hausarbeit-makefile
-#+BEGIN_SRC makefile :noweb yes
-HAUSARBEIT_TEST_DIR = test_hausarbeit
-HAUSARBEIT_FILES =  $(shell ./extract_input_files.sh "hausarbeit-main.tex")  \
-  muss.bbx \
-  muss.cbx \
-	$(wildcard packages/*.sty) \
-	references.bib \
-  hausarbeit-main.tex
+#+NAME: standalone-makefile
+#+BEGIN_SRC makefile :noweb yes :tangle templates/standalone-template/Makefile
+SHELL := /bin/bash
 
-test_hausarbeit:
-	rm -fr $(HAUSARBEIT_TEST_DIR)
-	mkdir $(HAUSARBEIT_TEST_DIR)
-	cp -r --parents $(HAUSARBEIT_FILES) $(HAUSARBEIT_TEST_DIR)
-	cd $(HAUSARBEIT_TEST_DIR); \
-			latexmk -pdf hausarbeit-main.tex
+STANDALONE_FILES =  TLmacros.tex \
+	$(wildcard packages/*.sty) 
 
-release_hausarbeit:
+test_standalone:
+	rm -fr test
+	mkdir test
+	cd test; mkdir standalone-template
+	cp -r --parents $(STANDALONE_FILES) test/standalone-template
+	cp standalone-template.tex \
+		test
+	cd test; \
+			latexmk -pdf standalone-template.tex
+
+release_standalone:
 	rm -fr temp
 	mkdir temp
-	cp -r --parents $(HAUSARBEIT_FILES) temp
-	cd temp; zip -r hausarbeit-template.zip *; mv hausarbeit-template.zip ..
+	cd temp; mkdir standalone-template
+	cp -r --parents $(STANDALONE_FILES) temp/standalone-template
+	cp standalone-template.tex \
+		temp
+	cd temp; zip -r standalone-template.zip *; mv standalone-template.zip ..
 	rm -fr temp
-#+END_SRC
 
+#+END_SRC
 ** Text Makefile
 
 #+NAME: text-makefile
@@ -4014,104 +4140,6 @@ release_book:
 
 #+END_SRC
 
-** JLM Makefile
-
-#+NAME: jlm-makefile
-#+BEGIN_SRC makefile :noweb yes :tangle jlm-template/Makefile
-SHELL := /bin/bash
-
-JLM_FILES =  TLmacros.tex \
-	references.bib \
-	jlm-article-template.org \
-	latexmkrc \
-	jlm.bst jlm.cls \
-	cc-by.pdf \
-	$(wildcard packages/*.sty) \
-	fonts/* \
-	doc/*
-
-release_jlm:
-	rm -fr temp
-	mkdir temp
-	cp -r --parents $(JLM_FILES) temp
-	cd temp; zip -r jlm-template.zip *; mv jlm-template.zip ..
-	rm -fr temp
-
-#+END_SRC
-
-** Langscibook Makefile
-
-#+NAME: langscibook-makefile
-#+BEGIN_SRC makefile :noweb yes :tangle langscibook-template/Makefile
-SHELL := /bin/bash
-
-LANGSCI_FILES =  TLmacros.tex \
-	references.bib \
-	langsci-paper-template.org \
-	latexmkrc \
-	$(wildcard packages/*.sty) \
-	langscibook/*.sty \
-	langscibook/*.cls \
-	langscibook/seriesinfo \
-	langscibook/unchanged \
-  langsci-fonts/fonts/Arimo* \
-  langsci-fonts/fonts/Libertinus* \
-  langsci-fonts/fonts/DejaVu* \
-  langsci-fonts/fonts/XITSMath* \
-  fontspec.tex \
-
-test_langsci:
-	rm -fr test
-	mkdir test
-	cp -r --parents $(LANGSCI_FILES) test/
-	mv test/langscibook/* test
-	rm -fr test/langscibook
-	mv test/langsci-fonts/* test
-	rm -fr test/langsci-fonts
-
-release_langscibook:
-	rm -fr temp
-	mkdir temp
-	cp -r --parents $(LANGSCI_FILES) temp
-	mv temp/langscibook/* temp
-	rm -fr temp/langscibook
-	mv temp/langsci-fonts/* temp
-	rm -fr temp/langsci-fonts
-	cd temp; zip -r langscibook-template.zip *; mv langscibook-template.zip ..
-	rm -fr temp
-
-#+END_SRC
-
-** COMMENT Standalone Makefile
-
-#+NAME: standalone-makefile
-#+BEGIN_SRC makefile :noweb yes :tangle templates/standalone-template/Makefile
-SHELL := /bin/bash
-
-STANDALONE_FILES =  TLmacros.tex \
-	$(wildcard packages/*.sty) 
-
-test_standalone:
-	rm -fr test
-	mkdir test
-	cd test; mkdir standalone-template
-	cp -r --parents $(STANDALONE_FILES) test/standalone-template
-	cp standalone-template.tex \
-		test
-	cd test; \
-			latexmk -pdf standalone-template.tex
-
-release_standalone:
-	rm -fr temp
-	mkdir temp
-	cd temp; mkdir standalone-template
-	cp -r --parents $(STANDALONE_FILES) temp/standalone-template
-	cp standalone-template.tex \
-		temp
-	cd temp; zip -r standalone-template.zip *; mv standalone-template.zip ..
-	rm -fr temp
-
-#+END_SRC
 
 * latexmk
 

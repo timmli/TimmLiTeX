@@ -7,6 +7,7 @@
 \usepackage[left=25mm, right=25mm, top=25mm, bottom=25mm, noheadfoot]{geometry}
 \pagenumbering{gobble}
 \PassOptionsToPackage{maxbibnames=1,maxcitenames=1,firstinits=true}{biblatex}
+\RequirePackage{xspace}
 \defbibenvironment{bibliography}{\noindent}{\unspace}{\xspace$\bullet$\xspace}
 \makeatletter
 \renewcommand\maketitle{
@@ -21,33 +22,57 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% HEADER
+% Header
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % \input{TLmacros}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% HEADER
+% Header
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \author{Max Mustermann (Affiliation)}
 \title{Title}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% BODY
+% Body
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
 
 \maketitle
 
-% TODO
+\paragraph{Blindtext} 
+
+\lipsum
 
 \paragraph{Citation example}
 
+The following is a alist of available cite commands. See \url{https://ctan.space-pro.be/tex-archive/macros/latex/contrib/biblatex/doc/biblatex.pdf#subsection.3.9} for a more detailed description.
 
+\begin{itemize}
+\item \verb=\nocite= \nocite{Bech:63}
+\item \verb=\fullcite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline  \fullcite[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\textcite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \textcite[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\parencite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \parencite[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\parencite*[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \parencite*[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\smartcite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \smartcite[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\footcite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \footcite[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\footfullcite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline  \footfullcite[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\supercite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \supercite[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\footcitetext[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \footcitetext[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\autocite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline  \autocite[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\cite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline  \cite[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\cite*[<prenote>][<postnote>]{Nallapati:etal:16}= \newline  \cite*[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\citeauthor[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \citeauthor[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\citeauthor*[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \citeauthor*[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\citeurl[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \citeurl[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\citetitle[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \citetitle[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\citeyear[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \citeyear[<prenote>][<postnote>]{Nallapati:etal:16}
+\end{itemize} 
 
-\paragraph{Blindtext} \lipsum
+References are stored in \texttt{references.bib}.
+
 
 \paragraph{References}
 {\tiny

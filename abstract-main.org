@@ -16,6 +16,7 @@
 #+LATEX_HEADER: \usepackage[left=25mm, right=25mm, top=25mm, bottom=25mm, noheadfoot]{geometry}
 #+LATEX_HEADER: \pagenumbering{gobble}
 #+LATEX_HEADER: \PassOptionsToPackage{maxbibnames=1,maxcitenames=1,firstinits=true}{biblatex}
+#+LATEX_HEADER: \RequirePackage{xspace}
 #+LATEX_HEADER: \defbibenvironment{bibliography}{\noindent}{\unspace}{\xspace$\bullet$\xspace}
 #+LATEX_HEADER: \makeatletter
 #+LATEX_HEADER: \renewcommand\maketitle{
