@@ -1265,7 +1265,10 @@ numbers=noenddot,
 
 #+END_SRC
 
-** Poster template
+** TODO Poster template
+:LOGBOOK:
+- State "TODO"       from              [2024-02-01 Thu 23:22]
+:END:
 
 https://ctan.org/pkg/tikzposter
 
