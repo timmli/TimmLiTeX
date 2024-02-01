@@ -134,30 +134,12 @@
 #+LATEX_HEADER: \makeatletter
 #+LATEX_HEADER: \@ifclassloaded{beamer}{
 #+LATEX_HEADER: 
-#+LATEX_HEADER:   \ExecuteBibliographyOptions{labelnumber}
-#+LATEX_HEADER:   
-#+LATEX_HEADER:   %% Print squared brackets around reference number
-#+LATEX_HEADER:   %\DeclareFieldFormat{labelnumberwidth}{\mkbibbrackets{#1}}
-#+LATEX_HEADER: 
 #+LATEX_HEADER:   %% Print ": " before postnote (numeric-comp uses comma) 
 #+LATEX_HEADER:   \renewcommand*{\postnotedelim}{\addcolon\space} 
-#+LATEX_HEADER:   
-#+LATEX_HEADER:   %% Taken from numeric.bbx
-#+LATEX_HEADER:   \defbibenvironment{bibliography}  
-#+LATEX_HEADER:   {\list
-#+LATEX_HEADER:     {\printtext[labelnumberwidth]{%
-#+LATEX_HEADER:         % \printfield{prefixnumber}%
-#+LATEX_HEADER:         \printfield{labelnumber}}}
-#+LATEX_HEADER:     {\setlength{\labelwidth}{\labelnumberwidth}%
-#+LATEX_HEADER:       \setlength{\leftmargin}{\labelwidth}%
-#+LATEX_HEADER:       \setlength{\labelsep}{1em}%
-#+LATEX_HEADER:       \addtolength{\leftmargin}{1em}%
-#+LATEX_HEADER:       \setlength{\itemsep}{\bibitemsep}%
-#+LATEX_HEADER:       \setlength{\parsep}{\bibparsep}}%
-#+LATEX_HEADER:     \renewcommand*{\makelabel}[1]{\hss##1}}
-#+LATEX_HEADER:   {\endlist}
-#+LATEX_HEADER:   {\item}
 #+LATEX_HEADER: 
+#+LATEX_HEADER:   %% Replace icons with numbers in bibliography
+#+LATEX_HEADER:   \setbeamertemplate{bibliography item}{[\thefield{labelnumber}]}
+#+LATEX_HEADER:   
 #+LATEX_HEADER:   %% Taken from MUSS v0.4
 #+LATEX_HEADER:   \DeclareCiteCommand{\fullcite}
 #+LATEX_HEADER:   {\defcounter{maxnames}{\blx@maxbibnames}% show all names
