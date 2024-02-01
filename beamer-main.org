@@ -139,6 +139,26 @@
 #+LATEX_HEADER: 
 #+LATEX_HEADER:   %% Replace icons with numbers in bibliography
 #+LATEX_HEADER:   \setbeamertemplate{bibliography item}{[\thefield{labelnumber}]}
+#+LATEX_HEADER: 
+#+LATEX_HEADER:   %% New command \footshortcite
+#+LATEX_HEADER:   \DeclareCiteCommand{\footshortcite}[\mkbibfootnote]
+#+LATEX_HEADER:   {\usebibmacro{prenote}%
+#+LATEX_HEADER:     \printnames[only-last-name]{author}%
+#+LATEX_HEADER:     \setunit{\adddot\space}%
+#+LATEX_HEADER:     \printfield{year}%
+#+LATEX_HEADER:     \setunit{\adddot\space}%
+#+LATEX_HEADER:     \printfield{title}}
+#+LATEX_HEADER:   {}
+#+LATEX_HEADER:   {\multicitedelim}
+#+LATEX_HEADER:   {\renewcommand*{\postnotedelim}{\adddot\space}%
+#+LATEX_HEADER:     \usebibmacro{postnote}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER:   \DeclareNameFormat{only-last-name}{%
+#+LATEX_HEADER:     \printtext{\namepartfamily}%
+#+LATEX_HEADER:     \ifgiveninits
+#+LATEX_HEADER:     {\addcomma\addspace\namepartgiveni}
+#+LATEX_HEADER:     {}%
+#+LATEX_HEADER:     \usebibmacro{name:andothers}}
 #+LATEX_HEADER:   
 #+LATEX_HEADER:   %% Taken from MUSS v0.4
 #+LATEX_HEADER:   \DeclareCiteCommand{\fullcite}

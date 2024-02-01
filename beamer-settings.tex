@@ -121,6 +121,26 @@
 
   %% Replace icons with numbers in bibliography
   \setbeamertemplate{bibliography item}{[\thefield{labelnumber}]}
+
+  %% New command \footshortcite
+  \DeclareCiteCommand{\footshortcite}[\mkbibfootnote]
+  {\usebibmacro{prenote}%
+    \printnames[only-last-name]{author}%
+    \setunit{\adddot\space}%
+    \printfield{year}%
+    \setunit{\adddot\space}%
+    \printfield{title}}
+  {}
+  {\multicitedelim}
+  {\renewcommand*{\postnotedelim}{\adddot\space}%
+    \usebibmacro{postnote}}
+
+  \DeclareNameFormat{only-last-name}{%
+    \printtext{\namepartfamily}%
+    \ifgiveninits
+    {\addcomma\addspace\namepartgiveni}
+    {}%
+    \usebibmacro{name:andothers}}
   
   %% Taken from MUSS v0.4
   \DeclareCiteCommand{\fullcite}

@@ -915,12 +915,13 @@ A TUCO derivation:\newline
 \begin{itemize}
 % \item \verb|\nocite| \nocite{Bech:63}
 \item \verb|\fullcite[<prenote>][<postnote>]{Nallapati:etal:16}| \newline  \fullcite[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb|\footshortcite[<prenote>][<postnote>]{Nallapati:etal:16}| \newline  \footshortcite[<prenote>][<postnote>]{Nallapati:etal:16}
 \item \verb|\textcite[<prenote>][<postnote>]{Nallapati:etal:16}| \newline \textcite[<prenote>][<postnote>]{Nallapati:etal:16}
 \item \verb|\parencite[<prenote>][<postnote>]{Nallapati:etal:16}| \newline \parencite[<prenote>][<postnote>]{Nallapati:etal:16}
 % \item \verb|\parencite*[<prenote>][<postnote>]{Nallapati:etal:16}| \newline \parencite*[<prenote>][<postnote>]{Nallapati:etal:16}
 % \item \verb|\smartcite[<prenote>][<postnote>]{Nallapati:etal:16}| \newline \smartcite[<prenote>][<postnote>]{Nallapati:etal:16}
 % \item \verb|\footcite[<prenote>][<postnote>]{Nallapati:etal:16}| \newline \footcite[<prenote>][<postnote>]{Nallapati:etal:16}
-\item \verb|\footfullcite[<prenote>][<postnote>]{Nallapati:etal:16}| \newline  \footfullcite[<prenote>][<postnote>]{Nallapati:etal:16}
+% \item \verb|\footfullcite[<prenote>][<postnote>]{Nallapati:etal:16}| \newline  \footfullcite[<prenote>][<postnote>]{Nallapati:etal:16}
 \item \verb|\supercite[<prenote>][<postnote>]{Nallapati:etal:16}| \newline \supercite[<prenote>][<postnote>]{Nallapati:etal:16}
 % \item \verb|\footcitetext[<prenote>][<postnote>]{Nallapati:etal:16}| \newline \footcitetext[<prenote>][<postnote>]{Nallapati:etal:16}
 % \item \verb|\autocite[<prenote>][<postnote>]{Nallapati:etal:16}| \newline  \autocite[<prenote>][<postnote>]{Nallapati:etal:16}
@@ -2075,13 +2076,13 @@ Local Beamer themes are executed relative to the directory of the master file. T
 
 \setbeamertemplate{section in toc}[square]
 
-\setbeamertemplate{bibliography item}{[\printfield{labelnumber}]}  % insert label from bib(la)tex 
+%% Bibliography settings: Change them in the BibLaTeX settings! 
+% \setbeamertemplate{bibliography item}{[\printfield{labelnumber}]}  % insert label from bib(la)tex 
 % \setbeamertemplate{bibliography item}{\insertbiblabel}  % insert label from bib(la)tex (Does not work when using authoryear.)
-
-\setbeamerfont{bibliography entry author}{size=\tiny}%
-\setbeamerfont{bibliography entry title}{size=\tiny}
-\setbeamerfont{bibliography entry journal}{size=\tiny}
-\setbeamerfont{bibliography entry note}{size=\tiny}
+% \setbeamerfont{bibliography entry author}{size=\tiny}%
+% \setbeamerfont{bibliography entry title}{size=\tiny}
+% \setbeamerfont{bibliography entry journal}{size=\tiny}
+% \setbeamerfont{bibliography entry note}{size=\tiny}
 
 %% Title page
 
@@ -2712,6 +2713,26 @@ Issues
 
   %% Replace icons with numbers in bibliography
   \setbeamertemplate{bibliography item}{[\thefield{labelnumber}]}
+
+  %% New command \footshortcite
+  \DeclareCiteCommand{\footshortcite}[\mkbibfootnote]
+  {\usebibmacro{prenote}%
+    \printnames[only-last-name]{author}%
+    \setunit{\adddot\space}%
+    \printfield{year}%
+    \setunit{\adddot\space}%
+    \printfield{title}}
+  {}
+  {\multicitedelim}
+  {\renewcommand*{\postnotedelim}{\adddot\space}%
+    \usebibmacro{postnote}}
+
+  \DeclareNameFormat{only-last-name}{%
+    \printtext{\namepartfamily}%
+    \ifgiveninits
+    {\addcomma\addspace\namepartgiveni}
+    {}%
+    \usebibmacro{name:andothers}}
   
   %% Taken from MUSS v0.4
   \DeclareCiteCommand{\fullcite}
