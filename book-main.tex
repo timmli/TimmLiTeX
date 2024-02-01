@@ -32,6 +32,9 @@ numbers=noenddot,
 
 % \input{TLmacros}   % the content of TLmacros.tex goes here
 
+%% Tables
+\usepackage{booktabs}           % Nicer tables
+
 %% Graphics
 \input{packages/tikz-settings}
 \input{packages/forest-settings}
@@ -42,6 +45,15 @@ numbers=noenddot,
 \input{packages/langsci-avm-settings}
 % \usepackage[inference]{semantic} % for CCG 
 % \usepackage{packages/ccg}
+
+%% Listings settings
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily,tabsize=2,breaklines=true}
+\RequirePackage{color}
+\definecolor{lightgray}{gray}{0.7}
+%% Add syntax highlighting for specific programming languages
+% \input{packages/listings-xmg-settings.tex} 
+
 
 
 

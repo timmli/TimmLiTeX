@@ -127,8 +127,6 @@
 #+LATEX_HEADER: % \newcommand{\citeauthoryear}[1]{\citeauthor{#1} (\citeyear{#1})}
 #+LATEX_HEADER: % \newcommand{\citealtauthoryear}[1]{\citeauthor{#1} \citeyear{#1}}
 #+LATEX_HEADER: 
-#+LATEX_HEADER: 
-#+LATEX_HEADER: 
 #+LATEX_HEADER: % Beamer settings
 #+LATEX_HEADER: %-----------------
 #+LATEX_HEADER: \makeatletter
@@ -195,6 +193,64 @@
 #+LATEX_HEADER:   
 #+LATEX_HEADER: }{}
 #+LATEX_HEADER: \makeatother\makeatother
+#+LATEX_HEADER: % Tikzposter settings
+#+LATEX_HEADER: %-----------------
+#+LATEX_HEADER: \makeatletter
+#+LATEX_HEADER: \@ifclassloaded{tikzposter}{  
+#+LATEX_HEADER: 
+#+LATEX_HEADER:   \DeclareFieldFormat{labelnumberwidth}{#1}
+#+LATEX_HEADER:   \defbibenvironment{bibliography}
+#+LATEX_HEADER:   {\footnotesize\noindent}
+#+LATEX_HEADER:   {\unspace}
+#+LATEX_HEADER:   {}
+#+LATEX_HEADER:   \renewbibmacro*{begentry}{%
+#+LATEX_HEADER:     \textbf{\color{HHUblue}%
+#+LATEX_HEADER:       \printtext[labelnumberwidth]{%
+#+LATEX_HEADER:         [\printfield{prefixnumber}%
+#+LATEX_HEADER:           \printfield{labelnumber}]}%
+#+LATEX_HEADER:       \space
+#+LATEX_HEADER:       % \setunit{\addspace}
+#+LATEX_HEADER:     }}
+#+LATEX_HEADER:   \renewcommand*{\finentrypunct}{\addperiod\space}
+#+LATEX_HEADER: 
+#+LATEX_HEADER:   \DeclareCiteCommand{\supercite}[\mkbibsuperscript]
+#+LATEX_HEADER:   {\color{gray} % added color
+#+LATEX_HEADER:     \usebibmacro{cite:init}%
+#+LATEX_HEADER:     \let\multicitedelim=\supercitedelim
+#+LATEX_HEADER:     \iffieldundef{prenote}
+#+LATEX_HEADER:     {}
+#+LATEX_HEADER:     {\BibliographyWarning{Ignoring prenote argument}}%
+#+LATEX_HEADER:     \iffieldundef{postnote}
+#+LATEX_HEADER:     {}
+#+LATEX_HEADER:     {\BibliographyWarning{Ignoring postnote argument}}%
+#+LATEX_HEADER:     \bibopenbracket}%
+#+LATEX_HEADER:   {\usebibmacro{citeindex}%
+#+LATEX_HEADER:     \usebibmacro{cite:comp}}
+#+LATEX_HEADER:   {}
+#+LATEX_HEADER:   {\usebibmacro{cite:dump}\bibclosebracket}
+#+LATEX_HEADER: 
+#+LATEX_HEADER:   \DeclareCiteCommand{\citeauthor}  % from sp-authoryear-comp.cbx; to add hyperref link  
+#+LATEX_HEADER:   {\boolfalse{citetracker}%
+#+LATEX_HEADER:     \boolfalse{pagetracker}%
+#+LATEX_HEADER:     \usebibmacro{prenote}}
+#+LATEX_HEADER:   {\ifciteindex
+#+LATEX_HEADER:     {\indexnames{labelname}}
+#+LATEX_HEADER:     {}%
+#+LATEX_HEADER:     \printtext[bibhyperref]{\printnames{labelname}}}
+#+LATEX_HEADER:   {\multicitedelim}
+#+LATEX_HEADER:   {\usebibmacro{postnote}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER:   \DeclareCiteCommand{\citeyear}  % from sp-authoryear-comp.cbx; to add hyperref link  
+#+LATEX_HEADER:   {\boolfalse{citetracker}%
+#+LATEX_HEADER:     \boolfalse{pagetracker}%
+#+LATEX_HEADER:     \usebibmacro{prenote}}
+#+LATEX_HEADER:   {\printfield[bibhyperref]{year}}
+#+LATEX_HEADER:   {\multicitedelim}
+#+LATEX_HEADER:   {\usebibmacro{postnote}}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: }{}
+#+LATEX_HEADER: \makeatother
+#+LATEX_HEADER: 
 #+LATEX_HEADER: 
 #+LATEX_HEADER: %%%%%%%%%%%%%%%%%%%%%%%%%
 #+LATEX_HEADER: %   TEXTPOS SETTINGS    % 

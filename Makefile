@@ -149,3 +149,29 @@ release_hausarbeit:
 	rm -fr temp
 
 #-------------------------------------------------------------------------------
+
+POSTER_TEST_DIR = test_poster
+POSTER_FILES =  $(shell ./extract_input_files.sh "poster-main.tex")  \
+	poster-main.tex \
+	graphics/sfb-logo-quer.pdf \
+	graphics/hhu-logo-hres.pdf \
+	$(wildcard packages/*.sty) \
+  muss.bbx \
+	muss.cbx
+
+
+test_poster:
+	rm -fr $(POSTER_TEST_DIR)
+	mkdir $(POSTER_TEST_DIR)
+	cp -r --parents $(POSTER_FILES) $(POSTER_TEST_DIR)
+	cd $(POSTER_TEST_DIR); \
+			latexmk -pdf poster-main.tex
+
+release_poster:
+	rm -fr temp
+	mkdir temp
+	cp -r --parents $(POSTER_FILES) temp
+	cd temp; zip -r poster-template.zip *; mv poster-template.zip ..
+	rm -fr temp
+
+#-------------------------------------------------------------------------------

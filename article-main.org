@@ -38,6 +38,9 @@
 #+LATEX_HEADER: 
 #+LATEX_HEADER: % \input{TLmacros}
 #+LATEX_HEADER: 
+#+LATEX_HEADER: %% Tables
+#+LATEX_HEADER: \usepackage{booktabs}           % Nicer tables
+#+LATEX_HEADER: 
 #+LATEX_HEADER: %% Graphics
 #+LATEX_HEADER: \input{packages/tikz-settings}
 #+LATEX_HEADER: \input{packages/forest-settings}
@@ -48,6 +51,15 @@
 #+LATEX_HEADER: \input{packages/langsci-avm-settings}
 #+LATEX_HEADER: % \usepackage[inference]{semantic} % for CCG 
 #+LATEX_HEADER: % \usepackage{packages/ccg}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: %% Listings settings
+#+LATEX_HEADER: \usepackage{listings}
+#+LATEX_HEADER: \lstset{basicstyle=\ttfamily,tabsize=2,breaklines=true}
+#+LATEX_HEADER: \RequirePackage{color}
+#+LATEX_HEADER: \definecolor{lightgray}{gray}{0.7}
+#+LATEX_HEADER: %% Add syntax highlighting for specific programming languages
+#+LATEX_HEADER: % \input{packages/listings-xmg-settings.tex} 
+#+LATEX_HEADER: 
 #+LATEX_HEADER: 
 #+LATEX_HEADER: 
 #+LATEX_HEADER: % \input{TLmacros}

@@ -46,7 +46,8 @@
 
 %% Tables
 % \usepackage{arydshln} 		    % for dashed horizontal lines in tables (incompatible with avm)
-\usepackage{multirow}           % similar to \multicolumn
+
+\usepackage{colortbl}
 
 %% Symbols
 \usepackage{latexsym,amsmath,amssymb,wasysym}
@@ -106,6 +107,130 @@
 % \let\citet=\cite
 % \newcommand{\citeauthoryear}[1]{\citeauthor{#1} (\citeyear{#1})}
 % \newcommand{\citealtauthoryear}[1]{\citeauthor{#1} \citeyear{#1}}
+
+% Beamer settings
+%-----------------
+\makeatletter
+\@ifclassloaded{beamer}{
+
+  %% Print ": " before postnote (numeric-comp uses comma) 
+  \renewcommand*{\postnotedelim}{\addcolon\space} 
+
+  %% Replace icons with numbers in bibliography
+  \setbeamertemplate{bibliography item}{[\thefield{labelnumber}]}
+
+  %% New command \footshortcite
+  \DeclareCiteCommand{\footshortcite}[\mkbibfootnote]
+  {\usebibmacro{prenote}%
+    \printnames[only-last-name]{author}%
+    \setunit{\adddot\space}%
+    \printfield{year}%
+    \setunit{\adddot\space}%
+    \printfield{title}}
+  {}
+  {\multicitedelim}
+  {\renewcommand*{\postnotedelim}{\adddot\space}%
+    \usebibmacro{postnote}}
+
+  \DeclareNameFormat{only-last-name}{%
+    \printtext{\namepartfamily}%
+    \ifgiveninits
+    {\addcomma\addspace\namepartgiveni}
+    {}%
+    \usebibmacro{name:andothers}}
+  
+  %% Taken from MUSS v0.4
+  \DeclareCiteCommand{\fullcite}
+  {\defcounter{maxnames}{\blx@maxbibnames}% show all names
+    \usebibmacro{prenote}}
+  {\usedriver
+    {\DeclareNameAlias{sortname}{default}}
+    {\thefield{entrytype}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+  %% Taken from numberic-comp.cbx with additions ...
+  \DeclareCiteCommand{\supercite}[\mkbibsuperscript]
+  {\color{gray}% added color
+    \usebibmacro{cite:init}%
+    \let\multicitedelim=\supercitedelim
+    \let\multicitesubentrydelim=\supercitesubentrydelim
+    \let\multiciterangedelim=\superciterangedelim
+    \let\multicitesubentryrangedelim=\supercitesubentryrangedelim
+    \iffieldundef{prenote}
+    {}
+    {\BibliographyWarning{Ignoring prenote argument}}%
+    \iffieldundef{postnote}
+    {}
+    {\BibliographyWarning{Ignoring postnote argument}}%
+    \bibopenbracket% added bracket
+  }
+  {\usebibmacro{citeindex}%
+    \usebibmacro{cite:comp}}
+  {}
+  {\usebibmacro{cite:dump}%
+    \bibclosebracket% added bracket
+  }
+  
+}{}
+\makeatother\makeatother
+% Tikzposter settings
+%-----------------
+\makeatletter
+\@ifclassloaded{tikzposter}{  
+
+  \DeclareFieldFormat{labelnumberwidth}{#1}
+  \defbibenvironment{bibliography}
+  {\footnotesize\noindent}
+  {\unspace}
+  {}
+  \renewbibmacro*{begentry}{%
+    \textbf{\color{HHUblue}%
+      \printtext[labelnumberwidth]{%
+        [\printfield{prefixnumber}%
+          \printfield{labelnumber}]}%
+      \space
+      % \setunit{\addspace}
+    }}
+  \renewcommand*{\finentrypunct}{\addperiod\space}
+
+  \DeclareCiteCommand{\supercite}[\mkbibsuperscript]
+  {\color{gray} % added color
+    \usebibmacro{cite:init}%
+    \let\multicitedelim=\supercitedelim
+    \iffieldundef{prenote}
+    {}
+    {\BibliographyWarning{Ignoring prenote argument}}%
+    \iffieldundef{postnote}
+    {}
+    {\BibliographyWarning{Ignoring postnote argument}}%
+    \bibopenbracket}%
+  {\usebibmacro{citeindex}%
+    \usebibmacro{cite:comp}}
+  {}
+  {\usebibmacro{cite:dump}\bibclosebracket}
+
+  \DeclareCiteCommand{\citeauthor}  % from sp-authoryear-comp.cbx; to add hyperref link  
+  {\boolfalse{citetracker}%
+    \boolfalse{pagetracker}%
+    \usebibmacro{prenote}}
+  {\ifciteindex
+    {\indexnames{labelname}}
+    {}%
+    \printtext[bibhyperref]{\printnames{labelname}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+  \DeclareCiteCommand{\citeyear}  % from sp-authoryear-comp.cbx; to add hyperref link  
+  {\boolfalse{citetracker}%
+    \boolfalse{pagetracker}%
+    \usebibmacro{prenote}}
+  {\printfield[bibhyperref]{year}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+}{}
+\makeatother
 
  
 %%%%%%%%%%%%%%%%%%%%%%%%%

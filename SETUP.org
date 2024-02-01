@@ -782,9 +782,6 @@ aspectratio=169,
 \let\raggedright=\RaggedRight
 
 <<biblatex-settings>>
-
-<<biblatex-beamer-settings>>
-
 <<textpos-settings>>
 
 
@@ -1270,6 +1267,13 @@ numbers=noenddot,
 
 ** Poster template
 
+https://ctan.org/pkg/tikzposter
+
+Using [[TikZ]] for generating posters.
+
+Issues:
+- [ ] ! Package pgf Error: Sorry, the requested layer 'backgroundlayer' is not part o f the layer list. Please verify that you provided \pgfsetlayers and that 'backg roundlayer' is part of this list.
+
 #+NAME: poster-template
 #+BEGIN_SRC latex :noweb yes :tangle poster-main.tex
 \documentclass[
@@ -1284,9 +1288,15 @@ numbers=noenddot,
   dvipsnames,
 	]{tikzposter} 
 
-\input{poster-settings}
+<<basic-text-settings-input>>
+
+%%%%%%%%%%%%%%%%%%%%%%%% 
+% Optional packages & settings
+%%%%%%%%%%%%%%%%%%%%%%%% 
 
 % <<TLmacros-input>>
+
+<<optional-packages>>
 
 \definecolor{mygray}{gray}{0.9}
 \definecolor{HHUblue}{HTML}{006AB3}
@@ -1405,45 +1415,6 @@ numbers=noenddot,
 %%% mode: latex
 %%% TeX-master: t
 %%% End:
-#+END_SRC
-
-#+NAME: poster-settings
-#+BEGIN_SRC latex :noweb yes :tangle poster-settings.tex
-%%%%%%%%%%%%%%%%%%%%%%
-%   FONT             % 
-%%%%%%%%%%%%%%%%%%%%%%
-
-\usepackage[english]{babel}
-\usepackage[T1]{fontenc}
-%\usepackage{ucs}
-\usepackage[utf8]{inputenc}
-%\usepackage[utf8x]{inputenc} 
-%\usepackage{helvet}
-%\usepackage{avant}
-\usepackage{DejaVuSans}
-\usepackage[scaled=0.9]{beramono}  % for monospaced font
-\renewcommand*{\familydefault}{\sfdefault}
-
-<<biblatex-settings>>
-
-%%%%%%%%%%%%%%%%%%%%%%
-%   MISC             % 
-%%%%%%%%%%%%%%%%%%%%%%
-
-\usepackage{xcolor,enumitem}
-\usepackage{linguex,packages/langsci-avm} 
-\usepackage{amsmath,amssymb,amsfonts,marvosym}
-\usepackage{ulem}			% to cross out text
-\normalem
-
-\usepackage{multicol}
-\usepackage{colortbl}
-\usepackage{booktabs}
-
-<<listings-settings>>
-
-<<forest-settings-input>>
-
 #+END_SRC
 
 #+NAME: poster-style
@@ -1836,6 +1807,9 @@ Remember to first add the class jlm to the set of known classes (in =init.el=).
 
 #+NAME: optional-packages
 #+BEGIN_SRC latex :noweb yes
+%% Tables
+<<booktabs-settings>>
+
 %% Graphics
 <<tikz-settings-input>>
 <<forest-settings-input>>
@@ -1846,6 +1820,9 @@ Remember to first add the class jlm to the set of known classes (in =init.el=).
 <<langsci-avm-settings-input>>
 % \usepackage[inference]{semantic} % for CCG 
 % \usepackage{packages/ccg}
+
+<<listings-settings>>
+
 #+END_SRC
 
 ** Basic text settings
@@ -1870,7 +1847,8 @@ Remember to first add the class jlm to the set of known classes (in =init.el=).
 
 %% Tables
 % \usepackage{arydshln} 		    % for dashed horizontal lines in tables (incompatible with avm)
-\usepackage{multirow}           % similar to \multicolumn
+<<multirow-settings>>
+<<colortbl-settings>>
 
 %% Symbols
 \usepackage{latexsym,amsmath,amssymb,wasysym}
@@ -2698,6 +2676,8 @@ Issues
 % \newcommand{\citeauthoryear}[1]{\citeauthor{#1} (\citeyear{#1})}
 % \newcommand{\citealtauthoryear}[1]{\citeauthor{#1} \citeyear{#1}}
 
+<<biblatex-beamer-settings>>
+<<biblatex-tikzposter-settings>>
 
 #+END_SRC
 
@@ -2773,9 +2753,11 @@ Issues
 
 #+NAME: biblatex-tikzposter-settings
 #+BEGIN_SRC latex
-%% tikzposter settings
+% Tikzposter settings
+%-----------------
 \makeatletter
 \@ifclassloaded{tikzposter}{  
+
   \DeclareFieldFormat{labelnumberwidth}{#1}
   \defbibenvironment{bibliography}
   {\footnotesize\noindent}
@@ -2825,14 +2807,10 @@ Issues
   {\printfield[bibhyperref]{year}}
   {\multicitedelim}
   {\usebibmacro{postnote}}
+
 }{}
 \makeatother
 
-#+END_SRC
-
-#+NAME: biblatex-tikzposter-settings-file
-#+BEGIN_SRC latex :noweb yes :tangle packages/biblatex-tikzposter-settings.tex
-<<biblatex-tikzposter-settings>>
 #+END_SRC
 
 #+NAME: biblatex-citation-example
@@ -3205,17 +3183,12 @@ Typeset program code.
 #+NAME: listings-settings
 #+BEGIN_SRC latex
 %% Listings settings
-%%--------------------
-
 \usepackage{listings}
 \lstset{basicstyle=\ttfamily,tabsize=2,breaklines=true}
 \RequirePackage{color}
 \definecolor{lightgray}{gray}{0.7}
-
 %% Add syntax highlighting for specific programming languages
 % \input{packages/listings-xmg-settings.tex} 
-
-%%--------------------
 #+END_SRC
 
 #+NAME: listings-settings-file
@@ -3502,6 +3475,65 @@ cell 11 & cell 12 & cell 13 \\
 cell 21 & cell 22 & cell 23 \\
 \hline
 \end{tabular}
+#+END_SRC
+
+*** Booktabs
+
+https://ctan.org/pkg/booktabs/
+
+Optimization of tables with two golden rules:
+1. Never, ever use vertical rules.
+2. Never use double rules.
+
+#+NAME: booktabs-settings
+#+BEGIN_SRC latex
+\usepackage{booktabs}           % Nicer tables
+#+END_SRC
+
+Example from the booktabs manual:
+
+#+NAME: booktabs-example
+#+BEGIN_SRC latex
+\begin{tabular}{@{}llr@{}} \toprule
+\multicolumn{2}{c}{Item}             \\ \cmidrule(r){1-2}
+Animal    & Description & Price (\$) \\ \midrule
+Gnat      & per gram    & 13.65      \\
+          & each        & 0.01       \\
+Gnu       & stuffed     & 92.50      \\
+Emu       & stuffed     & 33.33      \\
+Armadillo & frozen      & 8.99       \\ \bottomrule
+\end{tabular}
+#+END_SRC
+
+More space can be added with SRC_latex{\addlinespace[]}.
+
+*** Colortbl
+
+https://ctan.org/pkg/colortbl
+
+Color rows and columns of a table.
+
+#+NAME: colortbl-settings
+#+BEGIN_SRC latex
+\usepackage{colortbl}
+#+END_SRC
+
+*** Multicol
+
+https://ctan.org/pkg/multicol
+
+Merge cells horizontally over multiple columns. Analogous to =\multirow=.
+
+#+NAME: multicol-settings
+#+BEGIN_SRC latex
+\usepackage{multicol}
+#+END_SRC
+
+#+NAME: multicol-example
+#+BEGIN_SRC latex
+\begin{multicols}{3}
+Text across three columns of a table.
+\end{multicols}
 #+END_SRC
 
 ** Textpos
@@ -4051,43 +4083,31 @@ release_langscibook:
 
 #+END_SRC
 
-** COMMENT Poster Makefile
+** Poster Makefile
 
 #+NAME: poster-makefile
-#+BEGIN_SRC makefile :noweb yes :tangle templates/poster-template/Makefile
-SHELL := /bin/bash
-
-POSTER_FILES =  TLmacros.tex \
-	poster-style.tex \
-	poster-settings.tex \
+#+BEGIN_SRC makefile :noweb yes
+POSTER_TEST_DIR = test_poster
+POSTER_FILES =  $(shell ./extract_input_files.sh "poster-main.tex")  \
+	poster-main.tex \
 	graphics/sfb-logo-quer.pdf \
 	graphics/hhu-logo-hres.pdf \
 	$(wildcard packages/*.sty) \
-	poster-examples.tex  \
   muss.bbx \
 	muss.cbx
 
+
 test_poster:
-	rm -fr test
-	mkdir test
-	cd test; mkdir poster-template
-	cp -r --parents $(POSTER_FILES) test/poster-template
-	cp poster-template.tex \
-		references.bib \
-		latexmkrc \
-		test
-	cd test; \
-			latexmk -pdf poster-template.tex
+	rm -fr $(POSTER_TEST_DIR)
+	mkdir $(POSTER_TEST_DIR)
+	cp -r --parents $(POSTER_FILES) $(POSTER_TEST_DIR)
+	cd $(POSTER_TEST_DIR); \
+			latexmk -pdf poster-main.tex
 
 release_poster:
 	rm -fr temp
 	mkdir temp
-	cd temp; mkdir poster-template
-	cp -r --parents $(POSTER_FILES) temp/poster-template
-	cp poster-template.tex \
-		references.bib \
-		latexmkrc \
-		temp
+	cp -r --parents $(POSTER_FILES) temp
 	cd temp; zip -r poster-template.zip *; mv poster-template.zip ..
 	rm -fr temp
 #+END_SRC
@@ -4123,6 +4143,10 @@ SHELL := /bin/bash
 <<hausarbeit-makefile>>
 
 #-------------------------------------------------------------------------------
+
+<<poster-makefile>>
+
+#-------------------------------------------------------------------------------	
 #+END_SRC
 
 ** COMMENT Standalone Makefile

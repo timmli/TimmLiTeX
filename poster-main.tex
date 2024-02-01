@@ -10,9 +10,36 @@
   dvipsnames,
 	]{tikzposter} 
 
-\input{poster-settings}
+\input{basic-text-settings}
+
+%%%%%%%%%%%%%%%%%%%%%%%% 
+% Optional packages & settings
+%%%%%%%%%%%%%%%%%%%%%%%% 
 
 % \input{TLmacros}
+
+%% Tables
+\usepackage{booktabs}           % Nicer tables
+
+%% Graphics
+\input{packages/tikz-settings}
+\input{packages/forest-settings}
+
+%% Linguistics
+\usepackage{linguex}
+  \renewcommand{\firstrefdash}{}
+\input{packages/langsci-avm-settings}
+% \usepackage[inference]{semantic} % for CCG 
+% \usepackage{packages/ccg}
+
+%% Listings settings
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily,tabsize=2,breaklines=true}
+\RequirePackage{color}
+\definecolor{lightgray}{gray}{0.7}
+%% Add syntax highlighting for specific programming languages
+% \input{packages/listings-xmg-settings.tex} 
+
 
 \definecolor{mygray}{gray}{0.9}
 \definecolor{HHUblue}{HTML}{006AB3}
