@@ -48,7 +48,7 @@ release_abstract:
 	cp -r --parents $(ABSTRACT_FILES) temp
 	cd temp; zip -r abstract-template.zip *; mv abstract-template.zip ..
 	rm -fr temp
-	
+
 #-------------------------------------------------------------------------------
 
 ARTICLE_TEST_DIR = test_article
@@ -172,6 +172,27 @@ release_poster:
 	mkdir temp
 	cp -r --parents $(POSTER_FILES) temp
 	cd temp; zip -r poster-template.zip *; mv poster-template.zip ..
+	rm -fr temp
+
+#-------------------------------------------------------------------------------	
+
+STANDALONE_TEST_DIR = test_standalone
+STANDALONE_FILES =  $(shell ./extract_input_files.sh "standalone-main.tex")  \
+	standalone-main.tex \
+	$(wildcard packages/*.sty)
+
+test_standalone:
+	rm -fr $(STANDALONE_TEST_DIR)
+	mkdir $(STANDALONE_TEST_DIR)
+	cp -r --parents $(STANDALONE_FILES) $(STANDALONE_TEST_DIR)
+	cd $(STANDALONE_TEST_DIR); \
+			latexmk -pdf standalone-main.tex
+
+release_standalone:
+	rm -fr temp
+	mkdir temp
+	cp -r --parents $(STANDALONE_FILES) temp
+	cd temp; zip -r standalone-template.zip *; mv standalone-template.zip ..
 	rm -fr temp
 
 #-------------------------------------------------------------------------------

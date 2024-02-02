@@ -61,7 +61,6 @@
 #+LATEX_HEADER: % \input{packages/listings-xmg-settings.tex} 
 #+LATEX_HEADER: 
 #+LATEX_HEADER: 
-#+LATEX_HEADER: 
 #+LATEX_HEADER: % \input{TLmacros}
 # Just mention the link to the references file [[addbibresource:references.bib]] in order to make it available to org-ref but not override the default bibliography which is helpful when looking for references which are not yet included in the local bibliography. 
 :end:

@@ -1543,76 +1543,19 @@ Issues:
 
 <<pdflatex-settings>>
 
-<<tikz-settings-input>>
-<<forest-settings-input>>
+<<basic-symbol-settings>>
 
-%% Symbols
-\usepackage{latexsym,amsmath,amssymb,wasysym}
-\usepackage{marvosym}		% for thunderbolt symbol
-\usepackage{ulem}			% to cross out text
-\normalem
-\usepackage{url}
-\urlstyle{sf}
+%%%%%%%%%%%%%%%%%%%%%%%% 
+% Optional packages & settings
+%%%%%%%%%%%%%%%%%%%%%%%% 
 
-%% Linguistics
-\usepackage{tipa}	% for phonetic symbols; has to appear before fontspec
-\usepackage{linguex}
-  \renewcommand{\firstrefdash}{}
-<<langsci-avm-settings-input>>
+<<optional-packages>>
 
-% \usepackage[inference]{semantic} % for CCG 
-% \usepackage{packages/ccg}
-
-% \input{TLmacros}
+% <<TLmacros-input>>
 
 \begin{document}
 
-\Forest{
-  [S
-    [NP] 
-    [VP
-      [V  [\textit{eats}] ]
-      [NP] ]]
-}
-
-\end{document}
-#+END_SRC
-
-#+NAME: standalone-tikz-example
-#+BEGIN_SRC latex
-\documentclass[
-	%pstricks=true
-	,crop=true
-	,varwidth=\maxdimen
-	]{standalone}
-
-\input{pdflatex_setup.tex}
-\input{tikz_setup.tex}
-\input{forest_setup.tex}
-\input{avm_setup.tex}
-
-\begin{document}
-
-\begin{forest}
-[,phantom,s sep=2em
-  [NP,name=peter,tier=1 [\textit{Peter}]]
-  %%%%%%%%%%%%%%%%%
-  [VP,name=easily_r,tier=1
-    [ADV [\textit{easily}]]
-    [VP*,name=easily_f]]
-  %%%%%%%%%%%%%%%%%
-  [S
-    [NP,name=rep_np1]
-    [VP,name=rep_vp,tier=1  
-      [V [\textit{repaired}]]
-      [NP,name=rep_np2,tier=2]]]
-  %%%%%%%%%%%%%%%%%
-  [NP,name=fridge,tier=2 [\textit{the fridge},triangle]]
-]
-\draw[->,dashed,thick,draw=gray, bend angle=25, bend left] (peter) to (rep_np1);
-\draw[->,dashed,thick,draw=gray, bend angle=10, bend right,shorten >=-0.6em] (easily_f) to (rep_vp.south west);
-\draw[->,dashed,thick,draw=gray, bend angle=25, bend right] (fridge) to (rep_np2);
-\end{forest}
+<<forest-example-small>>
 
 \end{document}
 #+END_SRC
@@ -1825,7 +1768,6 @@ Remember to first add the class jlm to the set of known classes (in =init.el=).
 % \usepackage{packages/ccg}
 
 <<listings-settings>>
-
 #+END_SRC
 
 ** Basic text settings
@@ -1853,6 +1795,19 @@ Remember to first add the class jlm to the set of known classes (in =init.el=).
 <<multirow-settings>>
 <<colortbl-settings>>
 
+<<basic-symbol-settings>>
+
+%% Blindtext
+\usepackage{lipsum}
+
+<<biblatex-settings>> 
+<<hyperrefs-settings>>
+#+END_SRC
+
+** Basic symbol settings
+
+#+NAME: basic-symbol-settings
+#+BEGIN_SRC latex :noweb yes
 %% Symbols
 \usepackage{latexsym,amsmath,amssymb,wasysym}
 \usepackage{marvosym}           % for thunderbolt symbol
@@ -1861,12 +1816,6 @@ Remember to first add the class jlm to the set of known classes (in =init.el=).
 \usepackage{url}
   \urlstyle{tt}                   % tt,rm,sf,same
 \usepackage{tipa}	% for phonetic symbols; has to appear before fontspec
-
-%% Blindtext
-\usepackage{lipsum}
-
-<<biblatex-settings>> 
-<<hyperrefs-settings>>
 #+END_SRC
 
 * Package settings & examples
@@ -3065,21 +3014,6 @@ Drawing tree-shaped graphs with TikZ.
 
 #+NAME: forest-example
 #+BEGIN_SRC latex
-% \Forest{
-%   [S [NP] 
-%     [VP [V  [\textit{eats}] ]
-%       [NP] ]]
-% }
-
-%% This example may cause problems together with TeX Live 2016
-% \Forest{
-%   [,phantom
-%     [S,--> [NP,--> [D [the]]]]
-%     [S,--> [NP,--> [A [absent]]]]
-%     [S, [NP [N [student]]]]
-%     ]
-% } 
-
 \Forest{
   [,phantom
     [S,name=root,red subtree
@@ -3101,6 +3035,60 @@ Drawing tree-shaped graphs with TikZ.
 
 \noindent $\Rightarrow$ \url{http://mirrors.ctan.org/graphics/pgf/contrib/forest/forest-doc.pdf}
 #+END_SRC
+
+#+BEGIN_SRC latex
+% \Forest{
+%   [S [NP] 
+%     [VP [V  [\textit{eats}] ]
+%       [NP] ]]
+% }
+
+%% This example may cause problems together with TeX Live 2016
+% \Forest{
+%   [,phantom
+%     [S,--> [NP,--> [D [the]]]]
+%     [S,--> [NP,--> [A [absent]]]]
+%     [S, [NP [N [student]]]]
+%     ]
+% } 
+#+END_SRC
+
+#+NAME: forest-example-small
+#+BEGIN_SRC latex
+\Forest{
+  [S
+    [NP] 
+    [VP
+      [V  [\textit{eats}] ]
+      [NP] ]]
+}
+#+END_SRC
+
+#+NAME: forest-example-tag
+#+BEGIN_SRC latex 
+\begin{forest}
+[,phantom,s sep=2em
+  [NP,name=peter,tier=1 [\textit{Peter}]]
+  %%%%%%%%%%%%%%%%%
+  [VP,name=easily_r,tier=1
+    [ADV [\textit{easily}]]
+    [VP*,name=easily_f]]
+  %%%%%%%%%%%%%%%%%
+  [S
+    [NP,name=rep_np1]
+    [VP,name=rep_vp,tier=1  
+      [V [\textit{repaired}]]
+      [NP,name=rep_np2,tier=2]]]
+  %%%%%%%%%%%%%%%%%
+  [NP,name=fridge,tier=2 [\textit{the fridge},triangle]]
+]
+\draw[->,dashed,thick,draw=gray, bend angle=25, bend left] (peter) to (rep_np1);
+\draw[->,dashed,thick,draw=gray, bend angle=10, bend right,shorten >=-0.6em] (easily_f) to (rep_vp.south west);
+\draw[->,dashed,thick,draw=gray, bend angle=25, bend right] (fridge) to (rep_np2);
+\end{forest}
+#+END_SRC
+
+
 
 ** Hyperrefs
 
@@ -4128,7 +4116,7 @@ SHELL := /bin/bash
 #-------------------------------------------------------------------------------
 
 <<abstract-makefile>>
-	
+
 #-------------------------------------------------------------------------------
 
 <<article-makefile>>
@@ -4150,38 +4138,36 @@ SHELL := /bin/bash
 <<poster-makefile>>
 
 #-------------------------------------------------------------------------------	
+
+<<standalone-makefile>>
+
+#-------------------------------------------------------------------------------	
 #+END_SRC
 
-** COMMENT Standalone Makefile
+** Standalone Makefile
 
 #+NAME: standalone-makefile
-#+BEGIN_SRC makefile :noweb yes :tangle templates/standalone-template/Makefile
-SHELL := /bin/bash
-
-STANDALONE_FILES =  TLmacros.tex \
-	$(wildcard packages/*.sty) 
+#+BEGIN_SRC makefile :noweb yes
+STANDALONE_TEST_DIR = test_standalone
+STANDALONE_FILES =  $(shell ./extract_input_files.sh "standalone-main.tex")  \
+	standalone-main.tex \
+	$(wildcard packages/*.sty)
 
 test_standalone:
-	rm -fr test
-	mkdir test
-	cd test; mkdir standalone-template
-	cp -r --parents $(STANDALONE_FILES) test/standalone-template
-	cp standalone-template.tex \
-		test
-	cd test; \
-			latexmk -pdf standalone-template.tex
+	rm -fr $(STANDALONE_TEST_DIR)
+	mkdir $(STANDALONE_TEST_DIR)
+	cp -r --parents $(STANDALONE_FILES) $(STANDALONE_TEST_DIR)
+	cd $(STANDALONE_TEST_DIR); \
+			latexmk -pdf standalone-main.tex
 
 release_standalone:
 	rm -fr temp
 	mkdir temp
-	cd temp; mkdir standalone-template
-	cp -r --parents $(STANDALONE_FILES) temp/standalone-template
-	cp standalone-template.tex \
-		temp
+	cp -r --parents $(STANDALONE_FILES) temp
 	cd temp; zip -r standalone-template.zip *; mv standalone-template.zip ..
 	rm -fr temp
-
 #+END_SRC
+
 * latexmk
 
 #+BEGIN_SRC shell :noweb yes :tangle latexmkrc   
