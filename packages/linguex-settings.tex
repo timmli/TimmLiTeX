@@ -1,0 +1,13 @@
+\usepackage{linguex}
+\renewcommand{\firstrefdash}{}
+\makeatletter
+\@ifclassloaded{beamer}{%
+  \AtBeginDocument{
+    \setlength{\Exlabelsep}{0em}		% for linguex examples
+    \setlength{\SubExleftmargin}{1.5em}	% for linguex examples
+    \renewcommand\eachwordone{\sffamily}	% for glossing with linguex
+    \renewcommand\eachwordtwo{\sffamily}	% for glossing with linguex
+    % \setlength{\Extopsep}{1ex}   % vertical margin in linguex examples
+  }
+}{}
+\makeatother
