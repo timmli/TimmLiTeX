@@ -16,42 +16,52 @@
 #+LATEX_CLASS: beamer
 #+LATEX_CLASS_OPTIONS: [compress,xcolor={table,dvipsnames},10pt,aspectratio=43]  
 #+LATEX_COMPILER: pdflatex
+#+LATEX_HEADER: %%  PDFLATEX SETTINGS
+#+LATEX_HEADER: 
 #+LATEX_HEADER: %%%%%%%%%%%%%%%%%%%%%%%%
-#+LATEX_HEADER: %   PDFLATEX SETTINGS  % 
+#+LATEX_HEADER: %  Font & Encoding     % 
 #+LATEX_HEADER: %%%%%%%%%%%%%%%%%%%%%%%%
 #+LATEX_HEADER: 
-#+LATEX_HEADER: %%   Font & Encoding
-#+LATEX_HEADER: 
+#+LATEX_HEADER: %% Basic font
 #+LATEX_HEADER: % \usepackage{libertine} % libertine tends to cause problems, e.g. when using tipa
 #+LATEX_HEADER: % \usepackage[libertine]{newtxmath}
 #+LATEX_HEADER: \usepackage{times}
 #+LATEX_HEADER: 
+#+LATEX_HEADER: %% Basic font for specific classes
 #+LATEX_HEADER: \makeatletter
-#+LATEX_HEADER: 
 #+LATEX_HEADER: \@ifclassloaded{beamer}{
 #+LATEX_HEADER:   \usepackage{libertine} % libertine tends to cause problems, e.g. when using tipa
 #+LATEX_HEADER:   \usepackage[libertine]{newtxmath}}{}
-#+LATEX_HEADER: 
 #+LATEX_HEADER: \@ifclassloaded{tikzposter}{
 #+LATEX_HEADER:   \usepackage{DejaVuSans} 
 #+LATEX_HEADER:   \renewcommand*{\familydefault}{\sfdefault}}{}
-#+LATEX_HEADER: 
 #+LATEX_HEADER: \makeatother
 #+LATEX_HEADER: 
-#+LATEX_HEADER: \usepackage[scaled=0.8]{beramono}  % for monospaced font
-#+LATEX_HEADER: \usepackage{microtype}		% micro-typographic aspects of the fonts
-#+LATEX_HEADER: \usepackage[T1]{fontenc}	% special fonts, e.g. for German umlaute
+#+LATEX_HEADER: %% Monospaced font
+#+LATEX_HEADER: \usepackage[scaled=0.8]{beramono}
 #+LATEX_HEADER: 
-#+LATEX_HEADER: %% compatible with BibLaTeX
-#+LATEX_HEADER: \usepackage[utf8]{inputenc}
-#+LATEX_HEADER: %% incompabtible with BibLaTeX
-#+LATEX_HEADER: % \usepackage{ucs}
-#+LATEX_HEADER: % \usepackage[utf8x]{inputenc}
+#+LATEX_HEADER: %% Micro-typographic aspects of the fonts
+#+LATEX_HEADER: \usepackage{microtype}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: %% Output encoding: mapping of character codes to glyphs
+#+LATEX_HEADER: \usepackage[T1]{fontenc}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: %% Input encoding: the encoding of characters in a source file
+#+LATEX_HEADER: \usepackage[utf8]{inputenc}% compatible with BibLaTeX
+#+LATEX_HEADER: % \usepackage{ucs}\usepackage[utf8x]{inputenc}% incompabtible with BibLaTeX
+#+LATEX_HEADER: 
+#+LATEX_HEADER: %% Additional symbols
+#+LATEX_HEADER: \usepackage{latexsym,amsmath,amssymb,wasysym}
+#+LATEX_HEADER: \usepackage{marvosym}           % for thunderbolt symbol
+#+LATEX_HEADER: \usepackage{ulem}               % to cross out text
+#+LATEX_HEADER:   \normalem
+#+LATEX_HEADER: \usepackage{url}
+#+LATEX_HEADER:   \urlstyle{tt}                   % tt,rm,sf,same
+#+LATEX_HEADER: \usepackage{tipa}	% for phonetic symbols; has to appear before fontspec
 #+LATEX_HEADER: 
 #+LATEX_HEADER: %% Language
-#+LATEX_HEADER: %\usepackage{german} % is this useful anymore?
 #+LATEX_HEADER: \usepackage[german,english]{babel} % the last language in the options is loaded; the other one can be chosen with \selectlanguage
-#+LATEX_HEADER: \usepackage{iflang}                % for language specific settings
+#+LATEX_HEADER: \usepackage{iflang}                % for checking the current language name
 #+LATEX_HEADER: 
 #+LATEX_HEADER: %%%%%%%%%%%%%%%%%%%%%%%%
 #+LATEX_HEADER: %   MISCELLANEOUS      % 
@@ -62,16 +72,8 @@
 #+LATEX_HEADER: 
 #+LATEX_HEADER: %% Tables
 #+LATEX_HEADER: % \usepackage{arydshln} 		    % for dashed horizontal lines in tables (incompatible with avm)
-#+LATEX_HEADER: \usepackage{multirow}           % similar to \multicolumn
-#+LATEX_HEADER: 
-#+LATEX_HEADER: %% Symbols
-#+LATEX_HEADER: \usepackage{latexsym,amsmath,amssymb,wasysym}
-#+LATEX_HEADER: \usepackage{marvosym}           % for thunderbolt symbol
-#+LATEX_HEADER: \usepackage{ulem}               % to cross out text
-#+LATEX_HEADER:   \normalem
-#+LATEX_HEADER: \usepackage{url}
-#+LATEX_HEADER:   \urlstyle{tt}                   % tt,rm,sf,same
-#+LATEX_HEADER: \usepackage{tipa}	% for phonetic symbols; has to appear before fontspec
+#+LATEX_HEADER: \usepackage{multirow}
+#+LATEX_HEADER: \usepackage{colortbl}
 #+LATEX_HEADER: 
 #+LATEX_HEADER: %% Blindtext
 #+LATEX_HEADER: \usepackage{lipsum}
@@ -193,6 +195,7 @@
 #+LATEX_HEADER:   
 #+LATEX_HEADER: }{}
 #+LATEX_HEADER: \makeatother\makeatother
+#+LATEX_HEADER: 
 #+LATEX_HEADER: % Tikzposter settings
 #+LATEX_HEADER: %-----------------
 #+LATEX_HEADER: \makeatletter
@@ -251,7 +254,6 @@
 #+LATEX_HEADER: }{}
 #+LATEX_HEADER: \makeatother
 #+LATEX_HEADER: 
-#+LATEX_HEADER: 
 #+LATEX_HEADER: %%%%%%%%%%%%%%%%%%%%%%%%%
 #+LATEX_HEADER: %   TEXTPOS SETTINGS    % 
 #+LATEX_HEADER: %%%%%%%%%%%%%%%%%%%%%%%%%
@@ -275,8 +277,6 @@
 #+LATEX_HEADER:   #2
 #+LATEX_HEADER:   \end{textblock}
 #+LATEX_HEADER: }
-#+LATEX_HEADER: 
-#+LATEX_HEADER: 
 #+LATEX_HEADER: 
 #+LATEX_HEADER: 
 #+LATEX_HEADER: % \input{TLmacros}

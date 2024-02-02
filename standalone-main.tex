@@ -4,44 +4,41 @@
 	,varwidth=\maxdimen
 	]{standalone}
 
+%%  PDFLATEX SETTINGS
+
 %%%%%%%%%%%%%%%%%%%%%%%%
-%   PDFLATEX SETTINGS  % 
+%  Font & Encoding     % 
 %%%%%%%%%%%%%%%%%%%%%%%%
 
-%%   Font & Encoding
-
+%% Basic font
 % \usepackage{libertine} % libertine tends to cause problems, e.g. when using tipa
 % \usepackage[libertine]{newtxmath}
 \usepackage{times}
 
+%% Basic font for specific classes
 \makeatletter
-
 \@ifclassloaded{beamer}{
   \usepackage{libertine} % libertine tends to cause problems, e.g. when using tipa
   \usepackage[libertine]{newtxmath}}{}
-
 \@ifclassloaded{tikzposter}{
   \usepackage{DejaVuSans} 
   \renewcommand*{\familydefault}{\sfdefault}}{}
-
 \makeatother
 
-\usepackage[scaled=0.8]{beramono}  % for monospaced font
-\usepackage{microtype}		% micro-typographic aspects of the fonts
-\usepackage[T1]{fontenc}	% special fonts, e.g. for German umlaute
+%% Monospaced font
+\usepackage[scaled=0.8]{beramono}
 
-%% compatible with BibLaTeX
-\usepackage[utf8]{inputenc}
-%% incompabtible with BibLaTeX
-% \usepackage{ucs}
-% \usepackage[utf8x]{inputenc}
+%% Micro-typographic aspects of the fonts
+\usepackage{microtype}
 
-%% Language
-%\usepackage{german} % is this useful anymore?
-\usepackage[german,english]{babel} % the last language in the options is loaded; the other one can be chosen with \selectlanguage
-\usepackage{iflang}                % for language specific settings
+%% Output encoding: mapping of character codes to glyphs
+\usepackage[T1]{fontenc}
 
-%% Symbols
+%% Input encoding: the encoding of characters in a source file
+\usepackage[utf8]{inputenc}% compatible with BibLaTeX
+% \usepackage{ucs}\usepackage[utf8x]{inputenc}% incompabtible with BibLaTeX
+
+%% Additional symbols
 \usepackage{latexsym,amsmath,amssymb,wasysym}
 \usepackage{marvosym}           % for thunderbolt symbol
 \usepackage{ulem}               % to cross out text
@@ -49,6 +46,10 @@
 \usepackage{url}
   \urlstyle{tt}                   % tt,rm,sf,same
 \usepackage{tipa}	% for phonetic symbols; has to appear before fontspec
+
+%% Language
+\usepackage[german,english]{babel} % the last language in the options is loaded; the other one can be chosen with \selectlanguage
+\usepackage{iflang}                % for checking the current language name
 
 %%%%%%%%%%%%%%%%%%%%%%%% 
 % Optional packages & settings

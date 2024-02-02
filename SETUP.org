@@ -17,10 +17,11 @@
       - [[#langsci-template][LangSci template]]
       - [[#jlm-template][JLM template]]
 - [[#bundled-settings][Bundled settings]]
-      - [[#optional-packages][Optional packages]]
-      - [[#basic-text-settings][Basic text settings]]
+      - [[#optional-settings][Optional settings]]
+      - [[#basic-settings][Basic settings]]
 - [[#package-settings--examples][Package settings & examples]]
       - [[#avm][AVM]]
+      - [[#babel][Babel]]
       - [[#beamer-themes][Beamer themes]]
       - [[#biblatex][BibLaTeX]]
       - [[#forest][Forest]]
@@ -31,7 +32,6 @@
       - [[#listings][Listings]]
       - [[#math-formulae][Math formulae]]
       - [[#natbibbibtex][natbib/BibTeX]]
-      - [[#pdflatex][PDFLaTeX]]
       - [[#scrarticle][Scrarticle]]
       - [[#tabular][Tabular]]
       - [[#textpos][Textpos]]
@@ -44,13 +44,17 @@
       - [[#selbständigkeitserklärung][Selbständigkeitserklärung]]
       - [[#readme][Readme]]
 - [[#makefile][Makefile]]
-      - [[#root-makefile][Root Makefile]]
-      - [[#beamer-makefile][Beamer Makefile]]
       - [[#abschlussarbeit-makefile][Abschlussarbeit Makefile]]
+      - [[#abstract-makefile][Abstract Makefile]]
+      - [[#article-makefile][Article Makefile]]
+      - [[#book-makefile][Book Makefile]]
+      - [[#beamer-makefile][Beamer Makefile]]
       - [[#hausarbeit-makefile][Hausarbeit Makefile]]
-      - [[#text-makefile][Text Makefile]]
       - [[#jlm-makefile][JLM Makefile]]
       - [[#langscibook-makefile][Langscibook Makefile]]
+      - [[#poster-makefile][Poster Makefile]]
+      - [[#root-makefile][Root Makefile]]
+      - [[#standalone-makefile][Standalone Makefile]]
 - [[#latexmk][latexmk]]
 - [[#local-variables][Local variables]]
 
@@ -101,7 +105,7 @@ In order to compile these templates, press =C-c C-v t= , or evaluate the followi
 }
 
 % <<TLmacros-input>>   % the content of TLmacros.tex goes here
-<<optional-packages>>
+<<optional-settings>>
 
 
 %%%%%%%%%%%%% 
@@ -417,7 +421,7 @@ Remember to first add the class to the set of known classes (in =init.el=).
 
 % <<TLmacros-input>>
 
-<<optional-packages>>
+<<optional-settings>>
 
 
 #+END_SRC
@@ -636,7 +640,7 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 % Optional packages & settings
 %%%%%%%%%%%%%%%%%%%%%%%% 
 
-<<optional-packages>>
+<<optional-settings>>
 
 %% Specific linguex settings for beamer
 \RequirePackage{linguex}   % must be loaded below \usepackage[T1]{fontenc}
@@ -752,39 +756,17 @@ aspectratio=169,
 
 #+NAME: beamer-settings
 #+BEGIN_SRC latex :noweb yes :tangle beamer-settings.tex
-<<pdflatex-settings>>
+<<basic-pdflatex-settings>>
 
-%%%%%%%%%%%%%%%%%%%%%%%%
-%   MISCELLANEOUS      % 
-%%%%%%%%%%%%%%%%%%%%%%%%
-
-%% Graphics
-\usepackage{graphics}
-
-%% Tables
-% \usepackage{arydshln} 		    % for dashed horizontal lines in tables (incompatible with avm)
-\usepackage{multirow}           % similar to \multicolumn
-
-%% Symbols
-\usepackage{latexsym,amsmath,amssymb,wasysym}
-\usepackage{marvosym}           % for thunderbolt symbol
-\usepackage{ulem}               % to cross out text
-  \normalem
-\usepackage{url}
-  \urlstyle{tt}                   % tt,rm,sf,same
-\usepackage{tipa}	% for phonetic symbols; has to appear before fontspec
-
-%% Blindtext
-\usepackage{lipsum}
+<<basic-misc-settings>>
 
 %% Set ragged text
 \usepackage{ragged2e}
 \let\raggedright=\RaggedRight
 
 <<biblatex-settings>>
+
 <<textpos-settings>>
-
-
 #+END_SRC
 
 #+NAME: beamer-examples
@@ -1072,7 +1054,7 @@ numbers=noenddot,
 
 % <<TLmacros-input>>   % the content of TLmacros.tex goes here
 
-<<optional-packages>>
+<<optional-settings>>
 
 
 #+END_SRC
@@ -1195,7 +1177,7 @@ numbers=noenddot,
 
 % <<TLmacros-input>>   % the content of TLmacros.tex goes here
 
-<<optional-packages>>
+<<optional-settings>>
 
 
 %%%%%%%%%%%%% 
@@ -1299,7 +1281,7 @@ Issues:
 
 % <<TLmacros-input>>
 
-<<optional-packages>>
+<<optional-settings>>
 
 \definecolor{mygray}{gray}{0.9}
 \definecolor{HHUblue}{HTML}{006AB3}
@@ -1541,15 +1523,13 @@ Issues:
 	,varwidth=\maxdimen
 	]{standalone}
 
-<<pdflatex-settings>>
-
-<<basic-symbol-settings>>
+<<basic-pdflatex-settings>>
 
 %%%%%%%%%%%%%%%%%%%%%%%% 
 % Optional packages & settings
 %%%%%%%%%%%%%%%%%%%%%%%% 
 
-<<optional-packages>>
+<<optional-settings>>
 
 % <<TLmacros-input>>
 
@@ -1749,9 +1729,11 @@ Remember to first add the class jlm to the set of known classes (in =init.el=).
 
 * Bundled settings
 
-** Optional packages
+** Optional settings
 
-#+NAME: optional-packages
+Optional settings concern optional packages. 
+
+#+NAME: optional-settings
 #+BEGIN_SRC latex :noweb yes
 %% Tables
 <<booktabs-settings>>
@@ -1770,7 +1752,11 @@ Remember to first add the class jlm to the set of known classes (in =init.el=).
 <<listings-settings>>
 #+END_SRC
 
-** Basic text settings
+** Basic settings
+
+Basic settings are not optional, but always required.
+
+*** Text settings
 
 #+NAME: basic-text-settings-input
 #+BEGIN_SRC latex :noweb yes :tangle no
@@ -1781,8 +1767,89 @@ Remember to first add the class jlm to the set of known classes (in =init.el=).
 #+BEGIN_SRC latex :noweb yes :tangle basic-text-settings.tex
 % Do not change this file!
 
-<<pdflatex-settings>>
+<<basic-pdflatex-settings>>
 
+<<basic-misc-settings>>
+
+<<biblatex-settings>>
+ 
+<<hyperrefs-settings>>
+#+END_SRC
+
+*** Additional symbols
+
+#+NAME: basic-symbol-settings
+#+BEGIN_SRC latex :noweb yes
+%% Additional symbols
+\usepackage{latexsym,amsmath,amssymb,wasysym}
+\usepackage{marvosym}           % for thunderbolt symbol
+\usepackage{ulem}               % to cross out text
+  \normalem
+\usepackage{url}
+  \urlstyle{tt}                   % tt,rm,sf,same
+\usepackage{tipa}	% for phonetic symbols; has to appear before fontspec
+#+END_SRC
+
+*** Font & Encoding
+
+#+NAME: basic-fonts&encoding-pdflatex-settings
+#+BEGIN_SRC latex
+%%%%%%%%%%%%%%%%%%%%%%%%
+%  Font & Encoding     % 
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Basic font
+% \usepackage{libertine} % libertine tends to cause problems, e.g. when using tipa
+% \usepackage[libertine]{newtxmath}
+\usepackage{times}
+
+%% Basic font for specific classes
+\makeatletter
+\@ifclassloaded{beamer}{
+  \usepackage{libertine} % libertine tends to cause problems, e.g. when using tipa
+  \usepackage[libertine]{newtxmath}}{}
+\@ifclassloaded{tikzposter}{
+  \usepackage{DejaVuSans} 
+  \renewcommand*{\familydefault}{\sfdefault}}{}
+\makeatother
+
+%% Monospaced font
+\usepackage[scaled=0.8]{beramono}
+
+%% Micro-typographic aspects of the fonts
+\usepackage{microtype}
+
+%% Output encoding: mapping of character codes to glyphs
+\usepackage[T1]{fontenc}
+
+%% Input encoding: the encoding of characters in a source file
+\usepackage[utf8]{inputenc}% compatible with BibLaTeX
+% \usepackage{ucs}\usepackage[utf8x]{inputenc}% incompabtible with BibLaTeX
+
+<<basic-symbol-settings>>
+#+END_SRC
+
+*** PDFLaTeX settings
+
+https://www.tug.org/applications/pdftex/
+
+Basic settings for when PDFLaTeX is used.
+
+#+NAME: basic-pdflatex-settings
+#+BEGIN_SRC latex
+%%  PDFLATEX SETTINGS
+
+<<basic-fonts&encoding-pdflatex-settings>>
+
+%% Language
+<<babel-pdflatex-settings>>
+\usepackage{iflang}                % for checking the current language name
+#+END_SRC
+
+*** Miscellaneous settings
+
+#+NAME: basic-misc-settings
+#+BEGIN_SRC latex
 %%%%%%%%%%%%%%%%%%%%%%%%
 %   MISCELLANEOUS      % 
 %%%%%%%%%%%%%%%%%%%%%%%%
@@ -1795,27 +1862,8 @@ Remember to first add the class jlm to the set of known classes (in =init.el=).
 <<multirow-settings>>
 <<colortbl-settings>>
 
-<<basic-symbol-settings>>
-
 %% Blindtext
 \usepackage{lipsum}
-
-<<biblatex-settings>> 
-<<hyperrefs-settings>>
-#+END_SRC
-
-** Basic symbol settings
-
-#+NAME: basic-symbol-settings
-#+BEGIN_SRC latex :noweb yes
-%% Symbols
-\usepackage{latexsym,amsmath,amssymb,wasysym}
-\usepackage{marvosym}           % for thunderbolt symbol
-\usepackage{ulem}               % to cross out text
-  \normalem
-\usepackage{url}
-  \urlstyle{tt}                   % tt,rm,sf,same
-\usepackage{tipa}	% for phonetic symbols; has to appear before fontspec
 #+END_SRC
 
 * Package settings & examples
@@ -1883,6 +1931,21 @@ The following are settings for a legacy AVM package.
 
 
 #+END_SRC
+
+** Babel
+
+https://ctan.org/pkg/babel
+
+Typographical rules depending on language and culture.
+
+This package should be loaded after encoding settings.
+
+#+NAME: babel-pdflatex-settings
+#+BEGIN_SRC latex
+\usepackage[german,english]{babel} % the last language in the options is loaded; the other one can be chosen with \selectlanguage
+#+END_SRC
+
+Use SRC_latex{\selectlanguage}  for switching between languages. 
 
 ** Beamer themes
 
@@ -2629,8 +2692,8 @@ Issues
 % \newcommand{\citealtauthoryear}[1]{\citeauthor{#1} \citeyear{#1}}
 
 <<biblatex-beamer-settings>>
-<<biblatex-tikzposter-settings>>
 
+<<biblatex-tikzposter-settings>>
 #+END_SRC
 
 #+NAME: biblatex-beamer-settings
@@ -2762,7 +2825,6 @@ Issues
 
 }{}
 \makeatother
-
 #+END_SRC
 
 #+NAME: biblatex-citation-example
@@ -3088,8 +3150,6 @@ Drawing tree-shaped graphs with TikZ.
 \end{forest}
 #+END_SRC
 
-
-
 ** Hyperrefs
 
 https://ctan.org/pkg/hyperref
@@ -3129,6 +3189,8 @@ Handling cross-references and hyperlinks.
 ** IPA
 
 https://ctan.org/pkg/tipa
+
+Typesetting IPA symbols.
 
 #+NAME: ipa-example
 #+BEGIN_SRC latex
@@ -3282,6 +3344,24 @@ a^2 + b^2 = c^2
 $\Rightarrow$ \url{http://en.wikibooks.org/wiki/LaTeX/Mathematics}
 #+END_SRC
 
+** Multicol
+
+https://ctan.org/pkg/multicol
+
+Typeset text in multiple columns (up to a maximum of 10).
+
+#+NAME: multicol-settings
+#+BEGIN_SRC latex
+\usepackage{multicol}
+#+END_SRC
+
+#+NAME: multicol-example
+#+BEGIN_SRC latex
+\begin{multicols}{3}
+Text across three horizontal columns usinge \textwidth.
+\end{multicols}
+#+END_SRC
+
 ** natbib/BibTeX
 
 https://www.ctan.org/pkg/bibtex
@@ -3301,51 +3381,6 @@ This package is superseded by [[BibLaTeX]].
 }
 
 \let\cite=\citet 	% in order to prevent inconsistencies between \cite and \citet
-#+END_SRC
-** PDFLaTeX
-
-https://www.tug.org/applications/pdftex/
-
-Basic settings for when PDFLaTeX is used.
-
-#+NAME: pdflatex-settings
-#+BEGIN_SRC latex
-%%%%%%%%%%%%%%%%%%%%%%%%
-%   PDFLATEX SETTINGS  % 
-%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%   Font & Encoding
-
-% \usepackage{libertine} % libertine tends to cause problems, e.g. when using tipa
-% \usepackage[libertine]{newtxmath}
-\usepackage{times}
-
-\makeatletter
-
-\@ifclassloaded{beamer}{
-  \usepackage{libertine} % libertine tends to cause problems, e.g. when using tipa
-  \usepackage[libertine]{newtxmath}}{}
-
-\@ifclassloaded{tikzposter}{
-  \usepackage{DejaVuSans} 
-  \renewcommand*{\familydefault}{\sfdefault}}{}
-
-\makeatother
-
-\usepackage[scaled=0.8]{beramono}  % for monospaced font
-\usepackage{microtype}		% micro-typographic aspects of the fonts
-\usepackage[T1]{fontenc}	% special fonts, e.g. for German umlaute
-
-%% compatible with BibLaTeX
-\usepackage[utf8]{inputenc}
-%% incompabtible with BibLaTeX
-% \usepackage{ucs}
-% \usepackage[utf8x]{inputenc}
-
-%% Language
-%\usepackage{german} % is this useful anymore?
-\usepackage[german,english]{babel} % the last language in the options is loaded; the other one can be chosen with \selectlanguage
-\usepackage{iflang}                % for language specific settings
 #+END_SRC
 ** Scrarticle
 
@@ -3509,22 +3544,15 @@ Color rows and columns of a table.
 \usepackage{colortbl}
 #+END_SRC
 
-*** Multicol
+*** Multirow
 
-https://ctan.org/pkg/multicol
+Merge cells vertically over multiple rows. Analogous to =\multicolumns= built into LaTeX.
 
-Merge cells horizontally over multiple columns. Analogous to =\multirow=.
+https://ctan.org/pkg/multirow
 
-#+NAME: multicol-settings
+#+NAME: multirow-settings
 #+BEGIN_SRC latex
-\usepackage{multicol}
-#+END_SRC
-
-#+NAME: multicol-example
-#+BEGIN_SRC latex
-\begin{multicols}{3}
-Text across three columns of a table.
-\end{multicols}
+\usepackage{multirow}
 #+END_SRC
 
 ** Textpos
