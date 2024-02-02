@@ -1,0 +1,76 @@
+#+TITLE: Title of article
+#+LATEX_HEADER: \titlerunning{Title in header line}
+#+AUTHOR: Auhthor name
+# #+LATEX_HEADER: \author{Author1\inst{1} \and Author2\inst{2}} % or like this
+#+LATEX_HEADER: \affiliation{Affiliation of author}
+#+LATEX_HEADER: \authorrunning{}
+#+LATEX_HEADER: \keywords{grammar, ...}
+:Settings:
+#+FILETAGS: research
+#+DATE: 
+#+STARTUP: nohideblocks
+#+LANGUAGE: en
+#+OPTIONS: H:5 num:t toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t ':t
+#+OPTIONS: TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+LATEX_CLASS: jlm
+# #+LATEX_CLASS_OPTIONS: [anonymous, TeXligs]
+#+LATEX_CLASS_OPTIONS: [TeXligs] 
+#+LATEX_COMPILER: xelatex
+#+LATEX_HEADER: \usepackage{graphicx}
+#+LATEX_HEADER: \usepackage{linguex,packages/avm}
+#+LATEX_HEADER: \usepackage{packages/tikz-settings} % tikz, forest, etc.
+#+LATEX_HEADER: \input{TLmacros}
+:end: 
+
+# Eventually appears after \begin{document}.
+#+BEGIN_EXPORT latex
+% \addto\extrasenglish{%
+  \renewcommand{\chapterautorefname}{Chapter}%
+  \renewcommand{\figureautorefname}{Figure}%
+  \renewcommand{\tableautorefname}{Table}%
+  \renewcommand{\sectionautorefname}{Section}%
+  \renewcommand{\subsectionautorefname}{Section}%
+  \renewcommand{\subsubsectionautorefname}{Section}%
+  \renewcommand{\Hfootnoteautorefname}{Footnote}%
+% }
+#+END_EXPORT
+
+#+BEGIN_abstract
+Put abstract here.
+#+END_abstract
+
+* Introduction
+
+* List of references :ignore:
+
+#+BEGIN_EXPORT latex
+\bibliographystyle{jlm}
+\bibliography{references}
+#+END_EXPORT
+
+* COMMENT org-mode settings
+
+** Installation of =jlm=
+
+Remember to first add the class jlm to the set of known classes (in =init.el=).
+
+#+BEGIN_SRC emacs-lisp :exports none
+(add-to-list 'org-latex-classes
+						 '("jlm" 
+							 "\\documentclass{jlm}
+				    		[NO-DEFAULT-PACKAGES]" 
+							 ("\\section{%s}" . "\\section*{%s}") 
+							 ("\\subsection{%s}" . "\\subsection*{%s}") 
+							 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+							 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+							 ))
+#+END_SRC
+
+** Local Variables
+
+# Local variables:
+# coding: utf-8
+# org-latex-with-hyperref: nil
+# org-latex-prefer-user-labels: t
+# ispell-local-dictionary: "british"
+# end:
