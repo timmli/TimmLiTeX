@@ -17,8 +17,8 @@
       - [[#langsci-template][LangSci template]]
       - [[#jlm-template][JLM template]]
 - [[#bundled-settings][Bundled settings]]
-      - [[#optional-settings][Optional settings]]
       - [[#basic-settings][Basic settings]]
+      - [[#optional-settings][Optional settings]]
 - [[#package-settings--examples][Package settings & examples]]
       - [[#avm][AVM]]
       - [[#babel][Babel]]
@@ -31,6 +31,7 @@
       - [[#linguistics][Linguistics]]
       - [[#listings][Listings]]
       - [[#math-formulae][Math formulae]]
+      - [[#multicol][Multicol]]
       - [[#natbibbibtex][natbib/BibTeX]]
       - [[#scrarticle][Scrarticle]]
       - [[#tabular][Tabular]]
@@ -1729,29 +1730,6 @@ Remember to first add the class jlm to the set of known classes (in =init.el=).
 
 * Bundled settings
 
-** Optional settings
-
-Optional settings concern optional packages. 
-
-#+NAME: optional-settings
-#+BEGIN_SRC latex :noweb yes
-%% Tables
-<<booktabs-settings>>
-
-%% Graphics
-<<tikz-settings-input>>
-<<forest-settings-input>>
-
-%% Linguistics
-\usepackage{linguex}
-  \renewcommand{\firstrefdash}{}
-<<langsci-avm-settings-input>>
-% \usepackage[inference]{semantic} % for CCG 
-% \usepackage{packages/ccg}
-
-<<listings-settings>>
-#+END_SRC
-
 ** Basic settings
 
 Basic settings are not optional, but always required.
@@ -1787,7 +1765,7 @@ Basic settings are not optional, but always required.
   \normalem
 \usepackage{url}
   \urlstyle{tt}                   % tt,rm,sf,same
-\usepackage{tipa}	% for phonetic symbols; has to appear before fontspec
+\usepackage{tipa}	% for phonetic symbols; has to appear before fontspec (FIXME: really?)
 #+END_SRC
 
 *** Font & Encoding
@@ -1864,6 +1842,29 @@ Basic settings for when PDFLaTeX is used.
 
 %% Blindtext
 \usepackage{lipsum}
+#+END_SRC
+
+** Optional settings
+
+Optional settings concern optional packages. 
+
+#+NAME: optional-settings
+#+BEGIN_SRC latex :noweb yes
+%% Tables
+<<booktabs-settings>>
+
+%% Graphics
+<<tikz-settings-input>>
+<<forest-settings-input>>
+
+%% Linguistics
+\usepackage{linguex}
+  \renewcommand{\firstrefdash}{}
+<<langsci-avm-settings-input>>
+% \usepackage[inference]{semantic} % for CCG 
+% \usepackage{packages/ccg}
+
+<<listings-settings>>
 #+END_SRC
 
 * Package settings & examples
@@ -3474,22 +3475,16 @@ Additional settings for tabular environments.
 Issues:
 - [ ] Adjustbox needs to be tested.
 
-#+NAME: tabular-settings
+#+NAME: additional-tabular-settings
 #+BEGIN_SRC latex 
-%%%%%%%%%%%%%%%%%%%%%%%% 
-%  TABULAR SETTINGS    % 
-%%%%%%%%%%%%%%%%%%%%%%%% 
-
 %% Rotate content of tabular cell: \rot{content}
-\usepackage{adjustbox}
+\RequirePackage{adjustbox}
 \newcolumntype{R}[2]{%
   >{\adjustbox{angle=#1,lap=\width-(#2)}\bgroup}%
   l%
   <{\egroup}%
 }
 \newcommand*\rot{\multicolumn{1}{R{45}{1em}}}% no optional argument here, please!
-
-
 #+END_SRC
 
 #+NAME: tabular-example
