@@ -93,12 +93,13 @@ In order to compile these templates, press =C-c C-v t= , or evaluate the followi
 \booltrue{draftmode}
 
 \usepackage{datetime}
+
 <<basic-text-settings-input>>
 
 
-%%%%%%%%%%%%%%%%%%%%%%%% 
+%==============================
 % Optional packages & settings
-%%%%%%%%%%%%%%%%%%%%%%%% 
+%------------------------------
 
 %% Language
 \AtBeginDocument{
@@ -106,12 +107,13 @@ In order to compile these templates, press =C-c C-v t= , or evaluate the followi
 }
 
 % <<TLmacros-input>>   % the content of TLmacros.tex goes here
+
 <<optional-settings>>
 
 
-%%%%%%%%%%%%% 
+%==============================
 % Title
-%%%%%%%%%%%%% 
+%------------------------------
 
 \subject{Typ der Abschlussarbeit}
 \title{Titel}
@@ -132,9 +134,9 @@ In order to compile these templates, press =C-c C-v t= , or evaluate the followi
   \AtBeginDocument{\SetWatermarkText{DRAFT}}
 }{}
 
-%%%%%%%%%%%%%%%%%%%%%% 
+%==============================
 % Document start
-%%%%%%%%%%%%%%%%%%%%%% 
+%------------------------------
 
 \begin{document}
 
@@ -153,9 +155,9 @@ In order to compile these templates, press =C-c C-v t= , or evaluate the followi
 
 \lipsum
 
-%%%%%%%%%%%%%%%%%%% 
+%------------------------------
 % Document end
-%%%%%%%%%%%%%%%%%%% 
+%==============================
 
 \insertBib
 
@@ -173,9 +175,7 @@ In order to compile these templates, press =C-c C-v t= , or evaluate the followi
 
 #+NAME: abschlussarbeit-examples
 #+BEGIN_SRC latex :noweb yes :tangle abschlussarbeit-examples.tex
-
 <<book-examples>>
-
 #+END_SRC
 
 ** Abstract template
@@ -242,9 +242,9 @@ Remember to first add the class to the set of known classes (in =init.el=).
 
 <<abstract-settings>>
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Header
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%==============================
+% Optional packages & settings
+%------------------------------
 
 % <<TLmacros-input>>
 
@@ -280,16 +280,16 @@ Remember to first add the class to the set of known classes (in =init.el=).
 
 #+NAME: abstract-body
 #+BEGIN_SRC latex :noweb yes
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Header
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%==============================
+% Title
+%------------------------------
 
 \author{Max Mustermann (Affiliation)}
 \title{Title}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Body
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%==============================
+% Document start
+%------------------------------
 
 \begin{document}
 
@@ -303,6 +303,10 @@ Remember to first add the class to the set of known classes (in =init.el=).
 }
 
 \end{document}
+
+%------------------------------
+% Document end
+%==============================
 #+END_SRC
 
 #+NAME: abstract-examples
@@ -314,7 +318,6 @@ Remember to first add the class to the set of known classes (in =init.el=).
 \paragraph{Citation example}
 
 <<biblatex-citation-example>>
-
 #+END_SRC
 
 ** Article template
@@ -403,9 +406,9 @@ Remember to first add the class to the set of known classes (in =init.el=).
 <<basic-text-settings-input>>
 
 
-%%%%%%%%%%%%%%%%%%%%%%%% 
+%==============================
 % Optional packages & settings
-%%%%%%%%%%%%%%%%%%%%%%%% 
+%------------------------------
 
 %% Uncomment the following line for deactivating draftmode
 % \boolfalse{draftmode}           % Deactivate draftmode
@@ -423,24 +426,22 @@ Remember to first add the class to the set of known classes (in =init.el=).
 % <<TLmacros-input>>
 
 <<optional-settings>>
-
-
 #+END_SRC
 
 #+NAME: article-body
 #+BEGIN_SRC latex 
-%%%%%%%%%%%%%
-%   Title   % 
-%%%%%%%%%%%%%
+%==============================
+% Title
+%------------------------------
 
 \title{Titel over two \newlineTitle lines}
 \subject{Text type}
 \author{Max Mustermann}
 \affiliation{Affiliation, \url{some@email.address}}  
 
-%%%%%%%%%%%%%%%%%%% 
-% Document start  % 
-%%%%%%%%%%%%%%%%%%% 
+%==============================
+% Document start
+%------------------------------
 
 \begin{document}
 
@@ -458,9 +459,9 @@ This is an abstract: \lipsum[1]
 
 \lipsum
 
-%%%%%%%%%%%%%%%%%%% 
-% Document end    % 
-%%%%%%%%%%%%%%%%%%% 
+%------------------------------
+% Document end
+%==============================
 
 \insertBib
 
@@ -625,15 +626,15 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 
 <<beamer-settings-input>>
 
-%%%%%%%%%%%%%%%%%%%%%%%% 
+%==============================
 % Themes
-%%%%%%%%%%%%%%%%%%%%%%%% 
+%------------------------------
 
 <<beamer-theme-settings>>
 
-%%%%%%%%%%%%%%%%%%%%%%%% 
+%==============================
 % Optional packages & settings
-%%%%%%%%%%%%%%%%%%%%%%%% 
+%------------------------------
 
 <<optional-settings>>
 
@@ -654,9 +655,9 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 
 #+NAME: beamer-body
 #+BEGIN_SRC latex
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% HEADER
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%==============================
+% Title
+%------------------------------
 
 \title{Beamer Template}
 \subtitle{Subtitle}	
@@ -666,9 +667,9 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 %\logo{\pgfimage[width=2cm,height=1cm]{logo-emmy}}			% Logo on all slides (pdf,png,jpg,eps)
 %\titlegraphic{\includegraphics[height=1cm]{path/to/picture}}	% on title slide
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SLIDES
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%==============================
+% Slides
+%------------------------------
 
 \begin{document}
 
@@ -999,6 +1000,7 @@ A TUCO derivation:\newline
 
 <<book-settings>>
 
+
 <<book-body>>
 #+END_SRC
 
@@ -1020,9 +1022,9 @@ numbers=noenddot,
 <<basic-text-settings-input>>
 
 
-%%%%%%%%%%%%%%%%%%%%%%%% 
+%==============================
 % Optional packages & settings
-%%%%%%%%%%%%%%%%%%%%%%%% 
+%------------------------------
 
 %% Uncomment the following line for deactivating draftmode
 % \boolfalse{draftmode}           % Deactivate draftmode
@@ -1040,15 +1042,13 @@ numbers=noenddot,
 % <<TLmacros-input>>   % the content of TLmacros.tex goes here
 
 <<optional-settings>>
-
-
 #+END_SRC
 
 #+NAME: book-body
 #+BEGIN_SRC latex
-%%%%%%%%%%%%%
-%   Title   % 
-%%%%%%%%%%%%%
+%==============================
+% Title
+%------------------------------
 
 \title{Title of book}
 \author{Max Mustermann \\
@@ -1057,9 +1057,9 @@ numbers=noenddot,
 \date{\ddmmyyyydate\today, \currenttime}
 
 
-%%%%%%%%%%%%%%%%%%% 
-% Document start  % 
-%%%%%%%%%%%%%%%%%%% 
+%==============================
+% Document start
+%------------------------------
 
 \begin{document}
 
@@ -1079,9 +1079,9 @@ numbers=noenddot,
 \lipsum
 
 
-%%%%%%%%%%%%%%%%%%% 
-%  Document end   % 
-%%%%%%%%%%%%%%%%%%% 
+%------------------------------
+% Document end
+%==============================
 
 \insertBib
 
@@ -1091,13 +1091,10 @@ numbers=noenddot,
 %%% mode: latex
 %%% TeX-master: t
 %%% End:
-
-
 #+END_SRC
 
 #+NAME: book-examples
 #+BEGIN_SRC latex :noweb yes :tangle book-examples.tex
-
 \chapter{Information about this template}
 
 <<readme>>
@@ -1127,7 +1124,6 @@ numbers=noenddot,
 \section{Trees}
 
 <<forest-example>>
-
 #+END_SRC
 
 ** Hausarbeit template
@@ -1148,9 +1144,9 @@ numbers=noenddot,
 <<basic-text-settings-input>>
 
 
-%%%%%%%%%%%%%%%%%%%%%%%% 
+%==============================
 % Optional packages & settings
-%%%%%%%%%%%%%%%%%%%%%%%% 
+%------------------------------
 
 %% Uncomment the following line for deactivating draftmode
 % \boolfalse{draftmode}           % Deactivate draftmode
@@ -1165,9 +1161,9 @@ numbers=noenddot,
 <<optional-settings>>
 
 
-%%%%%%%%%%%%% 
+%==============================
 % Title
-%%%%%%%%%%%%% 
+%------------------------------
 
 \subject{Hausarbeit}
 \title{Titel over two \newlineTitle lines}	% change title
@@ -1188,9 +1184,9 @@ numbers=noenddot,
   \AtBeginDocument{\SetWatermarkText{DRAFT}}
 }{}
 
-%%%%%%%%%%%%%%%%%%%%%% 
+%==============================
 % Document start
-%%%%%%%%%%%%%%%%%%%%%% 
+%------------------------------
 
 \begin{document}
 
@@ -1205,9 +1201,9 @@ numbers=noenddot,
 
 \lipsum
 
-%%%%%%%%%%%%%%%%%%% 
+%------------------------------
 % Document end
-%%%%%%%%%%%%%%%%%%% 
+%==============================
 
 \insertBib
 
@@ -1227,9 +1223,7 @@ numbers=noenddot,
 
 #+NAME: hausarbeit-examples
 #+BEGIN_SRC latex :noweb yes :tangle hausarbeit-examples.tex
-
 <<article-examples>>
-
 #+END_SRC
 
 ** TODO Poster template
@@ -1242,6 +1236,7 @@ https://ctan.org/pkg/tikzposter
 Using [[TikZ]] for generating posters.
 
 Issues:
+- Not maintained right now.
 - [ ] ! Package pgf Error: Sorry, the requested layer 'backgroundlayer' is not part o f the layer list. Please verify that you provided \pgfsetlayers and that 'backg roundlayer' is part of this list.
 
 #+NAME: poster-template
@@ -1260,9 +1255,10 @@ Issues:
 
 <<basic-text-settings-input>>
 
-%%%%%%%%%%%%%%%%%%%%%%%% 
+
+%==============================
 % Optional packages & settings
-%%%%%%%%%%%%%%%%%%%%%%%% 
+%------------------------------
 
 % <<TLmacros-input>>
 
@@ -1274,9 +1270,9 @@ Issues:
 
 \newcommand{\affilsup}[1]{{\color{gray}$^{\text{#1}}$}}
 
-%%%%%%%%%%%%%%%%%%%%%%
-%   TITLE            % 
-%%%%%%%%%%%%%%%%%%%%%%
+%==============================
+% Title
+%------------------------------
 
 \setlength{\fboxsep}{3pt}
 \title{Title of poster}
@@ -1297,9 +1293,9 @@ Issues:
 	\raisebox{0cm}[0pt]{\@titlegraphic}
 }
 
-%%%%%%%%%%%%%%%%%%%%%%
-%   POSTERSTYLE      % 
-%%%%%%%%%%%%%%%%%%%%%%
+%==============================
+% Poster style
+%------------------------------
 
 \input{poster-style}
 \tikzposterlatexaffectionproofoff
@@ -1313,9 +1309,9 @@ Issues:
 	\fi
 }
 
-%%%%%%%%%%%%%%%%%%%%%%
-%   POSTER           % 
-%%%%%%%%%%%%%%%%%%%%%%
+%==============================
+% Poster
+%------------------------------
 
 \begin{document}
 
@@ -1355,9 +1351,9 @@ Issues:
 
 \end{columns}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%% 
-%  List of References    % 
-%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%==============================
+% List of references
+%------------------------------
 
 \defineblockstyle{noframe}{}{
 	\draw[color=white] (blockbody.south west)
@@ -1510,9 +1506,9 @@ Issues:
 
 <<basic-pdflatex-settings>>
 
-%%%%%%%%%%%%%%%%%%%%%%%% 
+%==============================
 % Optional packages & settings
-%%%%%%%%%%%%%%%%%%%%%%%% 
+%------------------------------
 
 <<optional-settings>>
 
@@ -1529,8 +1525,10 @@ Issues:
 
 https://langsci-press.org/
 
+Not maintained right now.
+
 #+NAME: langsci-paper-template-org
-#+BEGIN_SRC org :noweb yes :tangle langscibook-template/langsci-paper-template.org
+#+BEGIN_SRC org :noweb yes :tangle langsci-paper-template.org
 ,#+TITLE: Title of paper
 ,#+AUTHOR: John Doe\affiliation{Elfenbeinturm, Fantasien}
 :Settings:
@@ -1632,8 +1630,10 @@ Remember to first add the class [[https://github.com/langsci/latex][langscibook]
 
 http://jlm.ipipan.waw.pl/index.php/JLM
 
+Not maintained right now.
+
 #+NAME: jlm-article-template-org
-#+BEGIN_SRC org :noweb yes :tangle jlm-template/jlm-article-template.org
+#+BEGIN_SRC org :noweb yes :tangle jlm-article-template.org
 ,#+TITLE: Title of article
 ,#+LATEX_HEADER: \titlerunning{Title in header line}
 ,#+AUTHOR: Auhthor name
@@ -1756,9 +1756,9 @@ Basic settings are not optional, but always required.
 
 #+NAME: basic-fonts&encoding-pdflatex-settings
 #+BEGIN_SRC latex
-%%%%%%%%%%%%%%%%%%%%%%%%
-%  Font & Encoding     % 
-%%%%%%%%%%%%%%%%%%%%%%%%
+%==============================
+% Font & Encoding
+%------------------------------
 
 %% Basic font
 % \usepackage{libertine} % libertine tends to cause problems, e.g. when using tipa
@@ -1812,9 +1812,9 @@ Basic settings for when PDFLaTeX is used.
 
 #+NAME: basic-misc-settings
 #+BEGIN_SRC latex
-%%%%%%%%%%%%%%%%%%%%%%%%
-%   MISCELLANEOUS      % 
-%%%%%%%%%%%%%%%%%%%%%%%%
+%==============================
+% Miscellaneous
+%------------------------------
 
 %% Graphics
 \usepackage{graphics}
@@ -4034,7 +4034,7 @@ release_hausarbeit:
 	rm -fr temp
 #+END_SRC
 
-** JLM Makefile
+** COMMENT JLM Makefile
 
 #+NAME: jlm-makefile
 #+BEGIN_SRC makefile :noweb yes :tangle jlm-template/Makefile
@@ -4059,7 +4059,7 @@ release_jlm:
 
 #+END_SRC
 
-** Langscibook Makefile
+** COMMENT Langscibook Makefile
 
 #+NAME: langscibook-makefile
 #+BEGIN_SRC makefile :noweb yes :tangle langscibook-template/Makefile
