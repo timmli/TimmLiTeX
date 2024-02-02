@@ -1,23 +1,31 @@
 * latex-templates
 
-Collection of LaTeX settings and templates 
+My personal collection of LaTeX settings and templates.
 
 ** Features
 
-- optimized for Emacs
-- maintained in one =org-mode= file ([[file:SETUP.org][SETUP.org]])
+- Optimized for Emacs: local variables are set and there are Org files for some of the templates!
+- Maintained in on big Org file ([[file:SETUP.org][SETUP.org]])
 
 ** Included templates
 
+Currently the following templates are maintained and working:
 
-| Template                       | Repository           | Download | Overleaf |
-|--------------------------------+----------------------+----------+----------|
-| short abstract                 | [[https://github.com/timmli/text-template][text-template]]        | [[https://github.com/timmli/latex-templates/releases/download/v0.7.2/abstract-template.zip][zip]]      | [[https://www.overleaf.com/docs?snip_uri=https://github.com/timmli/latex-templates/releases/download/v0.7.2/abstract-template.zip][Overleaf]] |
-| standard article               | [[https://github.com/timmli/text-template][text-template]]        | [[https://github.com/timmli/latex-templates/releases/download/v0.7.2/article-template.zip][zip]]      | [[https://www.overleaf.com/docs?snip_uri=https://github.com/timmli/latex-templates/releases/download/v0.7.2/article-template.zip][Overleaf]] |
-| standard book                  | [[https://github.com/timmli/text-template][text-template]]        | [[https://github.com/timmli/latex-templates/releases/download/v0.7.2/book-template.zip][zip]]      |          |
-| beamer slides (Lustnau)      | [[https://github.com/timmli/beamer-template][beamer-template]]      | [[https://github.com/timmli/latex-templates/releases/download/v0.7.2/beamer-template.zip][zip]]      | [[https://www.overleaf.com/docs?snip_uri=https://github.com/timmli/latex-templates/releases/download/v0.7.2/beamer-template.zip][Overleaf]] |
-| langscibook paper              | [[https://github.com/timmli/langscibook-template][langscibook-template]] | [[https://github.com/timmli/latex-templates/releases/download/v0.7.2/langscibook-template.zip][zip]]      |          |
-| jlm article                    | [[https://github.com/timmli/jlm-template][jlm-template]]         | [[https://github.com/timmli/latex-templates/releases/download/v0.7.2/jlm-template.zip][zip]]      |          |
-| poster                         | [[https://github.com/timmli/poster-template][poster-template]]      | [[https://github.com/timmli/latex-templates/releases/download/v0.7.2/poster-template.zip][zip]]      | [[https://www.overleaf.com/docs?snip_uri=https://github.com/timmli/latex-templates/releases/download/v0.7.2/poster-template.zip][Overleaf]] |
-| Hausarbeit (for teaching)      | [[https://github.com/timmli/teaching-template][teaching-template]]    | [[https://github.com/timmli/latex-templates/releases/download/v0.7.2/hausarbeit-template.zip][zip]]      | [[https://www.overleaf.com/docs?snip_uri=https://github.com/timmli/latex-templates/releases/download/v0.7.2/hausarbeit-template.zip][Overleaf]] |
-| Abschlussarbeit (for teaching) | [[https://github.com/timmli/teaching-template][teaching-template]]    | [[https://github.com/timmli/latex-templates/releases/download/v0.7.2/essay-template.zip][zip]]      | [[https://www.overleaf.com/docs?snip_uri=https://github.com/timmli/latex-templates/releases/download/v0.7.2/abschlussarbeit-template.zip][Overleaf]] |
+| Template                       | Org file | Download | Overleaf |
+|--------------------------------+----------+----------+----------|
+| short abstract                 | ✔        | [[https://github.com/timmli/latex-templates/releases/download/v0.7.2/abstract-template.zip][zip]]      | [[https://www.overleaf.com/docs?snip_uri=https://github.com/timmli/latex-templates/releases/download/v0.7.2/abstract-template.zip][Overleaf]] |
+| standard article               | ✔        | [[https://github.com/timmli/latex-templates/releases/download/v0.7.2/article-template.zip][zip]]      | [[https://www.overleaf.com/docs?snip_uri=https://github.com/timmli/latex-templates/releases/download/v0.7.2/article-template.zip][Overleaf]] |
+| standard book                  |          | [[https://github.com/timmli/latex-templates/releases/download/v0.7.2/book-template.zip][zip]]      |          |
+| beamer slides (theme Lustnau)  | ✔        | [[https://github.com/timmli/latex-templates/releases/download/v0.7.2/beamer-template.zip][zip]]      | [[https://www.overleaf.com/docs?snip_uri=https://github.com/timmli/latex-templates/releases/download/v0.7.2/beamer-template.zip][Overleaf]] |
+| Hausarbeit (for teaching)      |          | [[https://github.com/timmli/latex-templates/releases/download/v0.7.2/hausarbeit-template.zip][zip]]      | [[https://www.overleaf.com/docs?snip_uri=https://github.com/timmli/latex-templates/releases/download/v0.7.2/hausarbeit-template.zip][Overleaf]] |
+| Abschlussarbeit (for teaching) |          | [[https://github.com/timmli/latex-templates/releases/download/v0.7.2/essay-template.zip][zip]]      | [[https://www.overleaf.com/docs?snip_uri=https://github.com/timmli/latex-templates/releases/download/v0.7.2/abschlussarbeit-template.zip][Overleaf]] |
+
+A couple of legacy templates are still available, but unmaintained:
+
+- tikzposter 
+- [[https://github.com/langsci/langscibook][langscibook]] paper (just the Org file!)
+- [[https://jlm.ipipan.waw.pl/index.php/JLM][JLM]] article (just Org file!)
+
+** A word of advice on LaTeX (since you didn't ask for it)
+
+LaTeX is a great software to typeset texts according to the golden rules of typesetting. When used right, your text will look gorgeous and your reader's eyes will just love it. But it is actually not optimal at creating content – too say the least. The writing process rather resembles the act of programming, with constantly tweaking, compiling and debugging the source code of the text. While this hacking approach can be satisfying for sure, it tends to distract from the actual purpose, namely writing good content. Therefore my (maybe surprising) advice is this: *Do not go down this rabbit hole and avoid LaTeX as long as possible!* It is fine to work on the LaTeX code only at the very last stage, when the final version of the text is being polished. But until then, just use a lightweight markup language, a convenient drawing tool and keep it simple. There are conversion tools like [[https://pandoc.org/][Pandoc]] which can transform many markup languages into LaTeX and PDF. Some editors even allow for exporting to LaTeX and PDF directly, for example, [[https://orgmode.org/][Emacs Org]].
