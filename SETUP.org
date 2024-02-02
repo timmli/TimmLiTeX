@@ -2628,9 +2628,9 @@ Issues
 
 #+NAME: biblatex-settings
 #+BEGIN_SRC latex
-%%%%%%%%%%%%%%%%%%%%%%%% 
-% BIBLATEX SETTINGS  % 
-%%%%%%%%%%%%%%%%%%%%%%%% 
+%==============================
+% BibLaTeX settings
+%------------------------------
 
 \newcommand{\mycitestyle}{muss}
 \newcommand{\mybibstyle}{muss}
@@ -2893,9 +2893,9 @@ Drawing tree-shaped graphs with TikZ.
 
 #+NAME: forest-settings-file
 #+BEGIN_SRC latex :noweb yes :tangle packages/forest-settings.tex
-%%%%%%%%%%%%%%%%%%%%%%% 
-%   FOREST SETTINGS   % 
-%%%%%%%%%%%%%%%%%%%%%%% 
+%==============================
+% Forest settings
+%------------------------------
 
 \usepackage{forest}
 
@@ -3049,8 +3049,6 @@ Drawing tree-shaped graphs with TikZ.
         edge path'={(!u1.west |- .north) -- (!ul.east |- .north)}
       }}{}}
 }
-
-
 #+END_SRC
 
 #+NAME: forest-settings-input
@@ -3142,9 +3140,9 @@ Handling cross-references and hyperlinks.
 
 #+NAME: hyperrefs-settings
 #+BEGIN_SRC latex
-%%%%%%%%%%%%%%%%%%%%%%%%%
-%   HYBPERREF SETTINGS  % 
-%%%%%%%%%%%%%%%%%%%%%%%%%
+%==============================
+% Hyperref settings
+%------------------------------
 
 \usepackage[bookmarks=true,bookmarksopen=true,%
   hyperindex=true,% Makes the page numbers of index entries into hyper-links.
@@ -3604,9 +3602,9 @@ Issues:
 
 #+NAME: tikz-settings-file
 #+BEGIN_SRC latex :noweb yes :tangle packages/tikz-settings.tex
-%%%%%%%%%%%%%%%%%%%%%%
-%   TIKZ SETTINGS    % 
-%%%%%%%%%%%%%%%%%%%%%%
+%==============================
+% TikZ settings
+%------------------------------
 
 \usepackage{tikz}
 \usepackage{tikz-dependency}
@@ -3689,7 +3687,7 @@ Add todo notes to your documents.
 
 * Package definitions
 
-** tikz-settings.sty
+** COMMENT tikz-settings.sty
 
 Some templates require it to have the tikz settings in a separate sty-file.
 
@@ -4217,10 +4215,14 @@ $clean_ex = "*.fls";
 $pdflatex = 'pdflatex -shell-escape %O %S';
 #+END_SRC
 
+** COMMENT latexmk for JLM
+
 #+NAME: jlm-latexmk
 #+BEGIN_SRC shell :noweb yes :tangle jlm-template/latexmkrc 
 $pdflatex = 'xelatex %O %S';
 #+END_SRC
+
+** COMMENT latexmk for langscibook
 
 #+NAME: langscibook-latexmk
 #+BEGIN_SRC shell :noweb yes :tangle langscibook-template/latexmkrc 
