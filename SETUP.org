@@ -532,10 +532,10 @@ https://ctan.org/pkg/beamer
 ,#+LATEX_CLASS: beamer
 ,#+LATEX_CLASS_OPTIONS: <<beamer-options-org>> 
 ,#+LATEX_COMPILER: pdflatex
-,#+LATEX_HEADER: <<beamer-settings>>
+,#+LATEX_HEADER: <<beamer-settings-input>>
+,#+LATEX_HEADER: <<beamer-theme-settings>>
+,#+LATEX_HEADER: <<optional-settings>>
 ,#+LATEX_HEADER: % <<TLmacros-input>>
-,#+LATEX_HEADER: \usetheme{Lustnau}
-,#+LATEX_HEADER: \input{beamerlogosTuebingen}
 ,#+LANGUAGE:  en
 # #+LATEX_HEADER: \AtBeginDocument{\selectlanguage{german}}
 # Just mention the link to the references file [[addbibresource:references.bib]] in order to make it available to org-ref but not override the default bibliography which is helpful when looking for references which are not yet included in the local bibliography. 
@@ -544,12 +544,6 @@ https://ctan.org/pkg/beamer
 
 ,#+BEGIN_EXPORT latex
 %\selectlanguage{german} % select german language for babel package 
-
-\setlength{\Exlabelsep}{0em}		% for linguex examples
-\setlength{\SubExleftmargin}{1,5em}	% for linguex examples
-\renewcommand\eachwordone{\sffamily}	% for glossing with linguex
-\renewcommand\eachwordtwo{\sffamily}	% for glossing with linguex
-\setlength{\Extopsep}{0em}   % vertical margin in linguex examples
 
 \newcommand{\mypause}{\pause}
 
@@ -642,16 +636,6 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 %%%%%%%%%%%%%%%%%%%%%%%% 
 
 <<optional-settings>>
-
-%% Specific linguex settings for beamer
-\RequirePackage{linguex}   % must be loaded below \usepackage[T1]{fontenc}
-\AtBeginDocument{
-  \setlength{\Exlabelsep}{0em}		% for linguex examples
-  \setlength{\SubExleftmargin}{1,5em}	% for linguex examples
-  \renewcommand\eachwordone{\sffamily}	% for glossing with linguex
-  \renewcommand\eachwordtwo{\sffamily}	% for glossing with linguex
-  % \setlength{\Extopsep}{1ex}   % vertical margin in linguex examples
-}
 
 <<listings-settings>>
 
@@ -747,7 +731,7 @@ aspectratio=169,
 
 #+NAME: beamer-options-org
 #+BEGIN_SRC latex
-[compress,xcolor={table,dvipsnames},10pt,aspectratio=43] 
+[compress,xcolor={table,dvipsnames},10pt,aspectratio=169] 
 #+END_SRC
 
 #+NAME: beamer-settings-input
@@ -1858,8 +1842,7 @@ Optional settings concern optional packages.
 <<forest-settings-input>>
 
 %% Linguistics
-\usepackage{linguex}
-  \renewcommand{\firstrefdash}{}
+<<linguex-settings-input>>
 <<langsci-avm-settings-input>>
 % \usepackage[inference]{semantic} % for CCG 
 % \usepackage{packages/ccg}
@@ -3206,6 +3189,28 @@ https://ctan.org/pkg/linguex
 
 Typeset linguistic examples.
 
+#+NAME: linguex-settings-input
+#+BEGIN_SRC latex :noweb yes 
+\input{packages/linguex-settings}
+#+END_SRC
+
+#+NAME: linguex-settings-file
+#+BEGIN_SRC latex :noweb yes :tangle packages/linguex-settings.tex
+\usepackage{linguex}
+\renewcommand{\firstrefdash}{}
+\makeatletter
+\@ifclassloaded{beamer}{%
+  \AtBeginDocument{
+    \setlength{\Exlabelsep}{0em}		% for linguex examples
+    \setlength{\SubExleftmargin}{1.5em}	% for linguex examples
+    \renewcommand\eachwordone{\sffamily}	% for glossing with linguex
+    \renewcommand\eachwordtwo{\sffamily}	% for glossing with linguex
+    % \setlength{\Extopsep}{1ex}   % vertical margin in linguex examples
+  }
+}{}
+\makeatother
+#+END_SRC
+
 #+NAME: linguex-example
 #+BEGIN_SRC latex
 \ex. This is a simple example.
@@ -4131,6 +4136,8 @@ release_poster:
 #+NAME: root-makefile
 #+BEGIN_SRC makefile :noweb yes :tangle Makefile
 SHELL := /bin/bash
+
+test_all: test_abschlussarbeit test_abstract test_article test_beamer test_book test_hausarbeit test_poster test_standalone
 
 #-------------------------------------------------------------------------------
 

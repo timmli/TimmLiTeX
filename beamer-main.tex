@@ -40,8 +40,7 @@
 \input{packages/forest-settings}
 
 %% Linguistics
-\usepackage{linguex}
-  \renewcommand{\firstrefdash}{}
+\input{packages/linguex-settings}
 \input{packages/langsci-avm-settings}
 % \usepackage[inference]{semantic} % for CCG 
 % \usepackage{packages/ccg}
@@ -53,16 +52,6 @@
 \definecolor{lightgray}{gray}{0.7}
 %% Add syntax highlighting for specific programming languages
 % \input{packages/listings-xmg-settings.tex} 
-
-%% Specific linguex settings for beamer
-\RequirePackage{linguex}   % must be loaded below \usepackage[T1]{fontenc}
-\AtBeginDocument{
-  \setlength{\Exlabelsep}{0em}		% for linguex examples
-  \setlength{\SubExleftmargin}{1,5em}	% for linguex examples
-  \renewcommand\eachwordone{\sffamily}	% for glossing with linguex
-  \renewcommand\eachwordtwo{\sffamily}	% for glossing with linguex
-  % \setlength{\Extopsep}{1ex}   % vertical margin in linguex examples
-}
 
 %% Listings settings
 \usepackage{listings}

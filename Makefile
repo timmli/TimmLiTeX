@@ -1,5 +1,7 @@
 SHELL := /bin/bash
 
+test_all: test_abschlussarbeit test_abstract test_article test_beamer test_book test_hausarbeit test_poster test_standalone
+
 #-------------------------------------------------------------------------------
 
 ABSCHLUSSARBEIT_TEST_DIR = test_abschlussarbeit

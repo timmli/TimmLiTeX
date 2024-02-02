@@ -46,8 +46,7 @@
 #+LATEX_HEADER: \input{packages/forest-settings}
 #+LATEX_HEADER: 
 #+LATEX_HEADER: %% Linguistics
-#+LATEX_HEADER: \usepackage{linguex}
-#+LATEX_HEADER:   \renewcommand{\firstrefdash}{}
+#+LATEX_HEADER: \input{packages/linguex-settings}
 #+LATEX_HEADER: \input{packages/langsci-avm-settings}
 #+LATEX_HEADER: % \usepackage[inference]{semantic} % for CCG 
 #+LATEX_HEADER: % \usepackage{packages/ccg}
