@@ -64,6 +64,24 @@ In order to compile these templates, press =C-c C-v t= , or evaluate the followi
 (org-babel-tangle)
 #+END_SRC
 
+* Version & Timestamp 
+
+#+NAME: timestamp-elisp
+#+BEGIN_SRC emacs-lisp :eval yes
+(format-time-string "%Y-%m-%d %H:%M:%S" (current-time))
+#+END_SRC
+
+#+NAME: template-version
+#+BEGIN_SRC latex 
+v0.9
+#+END_SRC
+
+#+NAME: version&timestamp-latex
+#+BEGIN_SRC latex :noweb yes
+%% Version: <<template-version>>
+%% Last modified: <<timestamp-elisp()>>
+#+END_SRC
+
 * Document templates
 
 ** COMMENT Path settings
@@ -79,6 +97,8 @@ In order to compile these templates, press =C-c C-v t= , or evaluate the followi
 
 #+NAME: abschlussarbeit-template
 #+BEGIN_SRC latex :noweb yes :tangle abschlussarbeit-main.tex
+<<version&timestamp-latex>>
+
 \documentclass[
   11pt,
   bibliography=totoc,
@@ -233,6 +253,8 @@ Remember to first add the class to the set of known classes (in =init.el=).
 
 #+NAME: abstract-template-tex
 #+BEGIN_SRC latex :noweb yes :tangle abstract-main.tex
+<<version&timestamp-latex>>
+
 \documentclass[
 <<abstract-options>>
 ]{article}
@@ -379,6 +401,8 @@ Remember to first add the class to the set of known classes (in =init.el=).
 
 #+NAME: article-template-tex
 #+BEGIN_SRC latex :noweb yes :tangle article-main.tex
+<<version&timestamp-latex>>
+
 \documentclass[
 <<article-options>>
 ]{scrartcl}
@@ -472,7 +496,6 @@ This is an abstract: \lipsum[1]
 
 #+NAME: article-examples
 #+BEGIN_SRC latex :noweb yes :tangle article-examples.tex
-
 \section{Information about this template}
 
 <<readme>>
@@ -616,6 +639,7 @@ In order to position the =\maketitle= command manually, you need to add =# org-l
 #+NAME: beamer-template-tex
 #+BEGIN_SRC latex :noweb yes :tangle beamer-main.tex
 % -*- coding: utf-8 -*-
+<<version&timestamp-latex>>
 
 \documentclass[
   <<beamer-options>>
@@ -739,6 +763,8 @@ aspectratio=169,
 
 #+NAME: beamer-settings
 #+BEGIN_SRC latex :noweb yes :tangle beamer-settings.tex
+<<version&timestamp-latex>>
+
 <<basic-pdflatex-settings>>
 
 <<basic-misc-settings>>
@@ -991,6 +1017,8 @@ A TUCO derivation:\newline
 
 #+NAME: book-template-tex
 #+BEGIN_SRC latex :noweb yes :tangle book-main.tex
+<<version&timestamp-latex>>
+
 \documentclass[
 <<book-options>>
 ]{scrbook}
@@ -1127,6 +1155,8 @@ numbers=noenddot,
 
 #+NAME: hausarbeit-template
 #+BEGIN_SRC latex :noweb yes :tangle hausarbeit-main.tex
+<<version&timestamp-latex>>
+
 \documentclass[
   11pt,
   bibliography=totoc,
@@ -1238,6 +1268,8 @@ Issues:
 
 #+NAME: poster-template
 #+BEGIN_SRC latex :noweb yes :tangle poster-main.tex
+<<version&timestamp-latex>>
+
 \documentclass[
 	17pt,%12pt, 14pt, 17pt, 20pt, 25pt
 	a1paper,%a0paper,a1paper,a2paper
@@ -1382,6 +1414,8 @@ Issues:
 
 #+NAME: poster-style
 #+BEGIN_SRC latex :noweb yes :tangle poster-style.tex
+<<version&timestamp-latex>>
+
 %\usetheme{Basic}	% Default, Rays, Basic, Simple, Envelope, Wave, Board, Autumn, and Desert
 
 \usetitlestyle[
@@ -1495,6 +1529,8 @@ Issues:
 
 #+NAME: standalone-template
 #+BEGIN_SRC latex :noweb yes :tangle standalone-main.tex
+<<version&timestamp-latex>>
+
 \documentclass[
 	%pstricks=true
 	,crop=true
@@ -1724,6 +1760,7 @@ Basic settings are not optional, but always required.
 
 #+NAME: basic-text-settings
 #+BEGIN_SRC latex :noweb yes :tangle basic-text-settings.tex
+<<version&timestamp-latex>>
 % Do not change this file!
 
 <<basic-pdflatex-settings>>
@@ -1857,6 +1894,8 @@ Typesetting feature structures in the form of attribute-value matrices.
 
 #+NAME: langsci-avm-settings-file
 #+BEGIN_SRC latex :noweb yes :tangle packages/langsci-avm-settings.tex
+<<version&timestamp-latex>>
+
 %%%%%%%%%%%%%%%%%%%%%%
 %   AVM SETTINGS     % 
 %%%%%%%%%%%%%%%%%%%%%%
@@ -1952,6 +1991,7 @@ Local Beamer themes are executed relative to the directory of the master file. T
 #+NAME: beamerthemeTuebingen.sty
 #+BEGIN_SRC latex :noweb yes :tangle beamerthemeTuebingen.sty
 \mode<presentation>
+<<version&timestamp-latex>>
 
 %% Requirement
 \RequirePackage{tikz}
@@ -1984,6 +2024,7 @@ Local Beamer themes are executed relative to the directory of the master file. T
 #+NAME: beamercolorthemeTuebingen.sty
 #+BEGIN_SRC latex :noweb yes :tangle beamercolorthemeTuebingen.sty
 \mode<presentation>
+<<version&timestamp-latex>>
 
 \definecolor{UTred}{RGB}{165,30,55} 
 \definecolor{UTgray}{RGB}{195,195,195} 
@@ -2031,6 +2072,7 @@ Local Beamer themes are executed relative to the directory of the master file. T
 #+NAME: beamerinnerthemeTuebingen.sty
 #+BEGIN_SRC latex :noweb yes :tangle beamerinnerthemeTuebingen.sty
 \mode<presentation>
+<<version&timestamp-latex>>
 
 %% General settings
 
@@ -2113,6 +2155,7 @@ Local Beamer themes are executed relative to the directory of the master file. T
 #+NAME: beamerouterthemeTuebingen.sty
 #+BEGIN_SRC latex :noweb yes :tangle beamerouterthemeTuebingen.sty
 \mode<presentation>
+<<version&timestamp-latex>>
 
 % Frame title
 \setbeamercolor{frametitle}{fg=black}
@@ -2168,6 +2211,8 @@ Local Beamer themes are executed relative to the directory of the master file. T
 
 #+NAME: beamerlogosTuebingen.tex
 #+BEGIN_SRC latex :noweb yes :tangle beamerlogosTuebingen.tex
+<<version&timestamp-latex>>
+
 \titlelogo{%
   \includegraphics[width=3.967cm, keepaspectratio=true]{graphics/UT-logo.pdf}
   \hskip0.4cm 
@@ -2209,6 +2254,7 @@ Local Beamer themes are executed relative to the directory of the master file. T
 #+NAME: beamerthemeLustnau.sty
 #+BEGIN_SRC latex :noweb yes :tangle beamerthemeLustnau.sty
 \mode<presentation>
+<<version&timestamp-latex>>
 
 \usetheme{Tuebingen}
 
@@ -2256,6 +2302,7 @@ Local Beamer themes are executed relative to the directory of the master file. T
 #+NAME: beamerthemeDuesseldorf.sty
 #+BEGIN_SRC latex :noweb yes :tangle beamerthemeDuesseldorf.sty
 \mode<presentation>
+<<version&timestamp-latex>>
 
 \usepackage{libertine} % libertine tends to cause problems, e.g. when using tipa
 \usepackage[libertine]{newtxmath}
@@ -2331,6 +2378,8 @@ Local Beamer themes are executed relative to the directory of the master file. T
 
 #+NAME: beamerlogosDuesseldorf.tex
 #+BEGIN_SRC latex :noweb yes :tangle beamerlogosDuesseldorf.tex
+<<version&timestamp-latex>>
+
 \titlegraphic{%
   \includegraphics[height=1cm]{graphics/HHU-logo}%
 }
@@ -2343,6 +2392,7 @@ Template for slides in the corporate design of the [[https://www.uni-bielefeld.d
 #+NAME: beamerthemeBielefeld.sty
 #+BEGIN_SRC latex :noweb yes :tangle beamerthemeBielefeld.sty
 \mode<presentation>
+<<version&timestamp-latex>>
 
 %% Requirement
 \RequirePackage{tikz}
@@ -2375,6 +2425,7 @@ Template for slides in the corporate design of the [[https://www.uni-bielefeld.d
 #+NAME: beamercolorthemeBielefeld.sty
 #+BEGIN_SRC latex :noweb yes :tangle beamercolorthemeBielefeld.sty
 \mode<presentation>
+<<version&timestamp-latex>>
 
 \definecolor{UBred}{RGB}{220,90,90} 
 \definecolor{UBgray}{RGB}{240,240,240} 
@@ -2422,6 +2473,7 @@ Template for slides in the corporate design of the [[https://www.uni-bielefeld.d
 #+NAME: beamerinnerthemeBielefeld.sty
 #+BEGIN_SRC latex :noweb yes :tangle beamerinnerthemeBielefeld.sty
 \mode<presentation>
+<<version&timestamp-latex>>
 
 %% General settings
 
@@ -2499,6 +2551,7 @@ Template for slides in the corporate design of the [[https://www.uni-bielefeld.d
 #+NAME: beamerouterthemeBielefeld.sty
 #+BEGIN_SRC latex :noweb yes :tangle beamerouterthemeBielefeld.sty
 \mode<presentation>
+<<version&timestamp-latex>>
 
 \setbeamertemplate{navigation symbols}{}
 \defbeamertemplate*{sidebar}{Bielefeld}{}
@@ -2581,6 +2634,8 @@ Template for slides in the corporate design of the [[https://www.uni-bielefeld.d
 
 #+NAME: beamerlogosBielefeld.tex
 #+BEGIN_SRC latex :noweb yes :tangle beamerlogosBielefeld.tex
+<<version&timestamp-latex>>
+
 \titlelogo{%
   \includegraphics[width=3.967cm, keepaspectratio=true]{graphics/UB-LiLi-logo.pdf}
 }
@@ -2890,6 +2945,8 @@ Drawing tree-shaped graphs with TikZ.
 
 #+NAME: forest-settings-file
 #+BEGIN_SRC latex :noweb yes :tangle packages/forest-settings.tex
+<<version&timestamp-latex>>
+
 %==============================
 % Forest settings
 %------------------------------
@@ -3191,6 +3248,8 @@ Typeset linguistic examples.
 
 #+NAME: linguex-settings-file
 #+BEGIN_SRC latex :noweb yes :tangle packages/linguex-settings.tex
+<<version&timestamp-latex>>
+
 \usepackage{linguex}
 \renewcommand{\firstrefdash}{}
 \makeatletter
@@ -3247,6 +3306,8 @@ Typeset program code.
 
 #+NAME: listings-settings-file
 #+BEGIN_SRC latex :noweb yes :tangle packages/listings-settings.tex
+<<version&timestamp-latex>>
+
 <<listings-settings>>
 #+END_SRC
 
@@ -3285,6 +3346,8 @@ Typeset program code.
 
 #+NAME: listings-xmg-settings-file
 #+BEGIN_SRC latex :noweb yes :tangle packages/listings-xmg-settings.tex
+<<version&timestamp-latex>>
+
 <<listings-xmg-settings>>
 #+END_SRC
 
@@ -3306,6 +3369,8 @@ Typeset program code.
 
 #+NAME: listings-duelme-settings-file
 #+BEGIN_SRC latex :noweb yes :tangle packages/listings-duelme-settings.tex
+<<version&timestamp-latex>>
+
 <<listings-duelme-settings>>
 #+END_SRC
 
@@ -3329,6 +3394,8 @@ Typeset program code.
 
 #+NAME: listings-patr-settings-file
 #+BEGIN_SRC latex :noweb yes :tangle packages/listings-patr-settings.tex
+<<version&timestamp-latex>>
+
 <<listings-patr-settings>>
 #+END_SRC
 
@@ -3391,6 +3458,8 @@ Change the layout of scrarticle from [[https://www.ctan.org/pkg/koma-script][kom
 
 #+NAME: scrarticle-settings-file
 #+BEGIN_SRC latex :noweb yes :tangle scrarticle-settings.tex
+<<version&timestamp-latex>>
+
 %%%%%%%%%%%%%%%%%%%%%%%%%% 
 %  SCRARTICLE SETTINGS   % 
 %%%%%%%%%%%%%%%%%%%%%%%%%% 
@@ -3599,6 +3668,8 @@ Issues:
 
 #+NAME: tikz-settings-file
 #+BEGIN_SRC latex :noweb yes :tangle packages/tikz-settings.tex
+<<version&timestamp-latex>>
+
 %==============================
 % TikZ settings
 %------------------------------
@@ -3679,6 +3750,8 @@ Add todo notes to your documents.
 
 #+NAME: todonotes-settings-file
 #+BEGIN_SRC latex :noweb yes :tangle packages/todonotes-settings.tex
+<<version&timestamp-latex>>
+
 <<todonotes-settings>>
 #+END_SRC
 
@@ -3711,6 +3784,8 @@ Some templates require it to have the tikz settings in a separate sty-file.
 
 #+NAME: textpos-settings.sty
 #+BEGIN_SRC latex :noweb yes :tangle packages/textpos-settings.sty
+<<version&timestamp-latex>>
+
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{textpos-settings}
 
@@ -3724,6 +3799,8 @@ Some templates require it to have the tikz settings in a separate sty-file.
 Collection of private macros on which the templates do not depend.
 
 #+BEGIN_SRC latex :noweb yes :tangle TLmacros.tex
+<<version&timestamp-latex>>
+
 <<TLmacros.tex>>
 #+END_SRC
 
@@ -4133,6 +4210,7 @@ release_poster:
 SHELL := /bin/bash
 
 test_all: test_abschlussarbeit test_abstract test_article test_beamer test_book test_hausarbeit test_poster test_standalone
+release_all: release_abschlussarbeit release_abstract release_article release_beamer release_book release_hausarbeit release_poster release_standalone
 
 #-------------------------------------------------------------------------------
 
