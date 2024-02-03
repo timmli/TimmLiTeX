@@ -1,6 +1,7 @@
 SHELL := /bin/bash
 
 test_all: test_abschlussarbeit test_abstract test_article test_beamer test_book test_hausarbeit test_poster test_standalone
+release_all: release_abschlussarbeit release_abstract release_article release_beamer release_book release_hausarbeit release_poster release_standalone
 
 #-------------------------------------------------------------------------------
 
