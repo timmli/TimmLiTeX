@@ -4,7 +4,7 @@ My personal collection of LaTeX settings and templates.
 
 ** Features
 
-- Maintained in on big Org file ([[file:SETUP.org][SETUP.org]])
+- Maintained in one big Org file ([[file:SETUP.org][SETUP.org]])
 - Optimized for Emacs: local variables are properly set and there are Org files for some of the templates!
 - New Beamer themes: Bielefeld, Düsseldorf, Lustnau, Tübingen
 - Templates for teaching (in German)

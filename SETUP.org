@@ -3544,9 +3544,9 @@ Color rows and columns of a table.
 
 *** Multirow
 
-Merge cells vertically over multiple rows. Analogous to =\multicolumns= built into LaTeX.
-
 https://ctan.org/pkg/multirow
+
+Merge cells vertically over multiple rows. Analogous to =\multicolumns= built into LaTeX.
 
 #+NAME: multirow-settings
 #+BEGIN_SRC latex
