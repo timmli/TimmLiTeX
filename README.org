@@ -9,7 +9,7 @@ My personal collection of LaTeX settings and templates.
 - New Beamer themes: Bielefeld, Düsseldorf, Lustnau, Tübingen
 - Templates for teaching (in German)
 - Focus on (computational) linguistics: linguistic examples, syntactic trees, attribute-value matrices
-- Using BibLaTeX with the [[https://github.com/timmli/biblatex-muss][MUSS]] style
+- Uses BibLaTeX with the [[https://github.com/timmli/biblatex-muss][MUSS]] style
 
 ** Included templates
 
