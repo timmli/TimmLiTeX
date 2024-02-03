@@ -5,6 +5,7 @@
 
 * Table of contents :TOC_2_gh:
 - [[#installation-with-emacs][Installation with Emacs]]
+- [[#version--timestamp][Version & Timestamp]]
 - [[#document-templates][Document templates]]
       - [[#abschlussarbeit-template][Abschlussarbeit template]]
       - [[#abstract-template][Abstract template]]
