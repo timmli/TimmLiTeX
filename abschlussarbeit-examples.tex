@@ -1,0 +1,103 @@
+\chapter{Information about this template}
+
+More \LaTeX{} templates on \url{https://github.com/timmli/latex-templates}.
+
+\chapter{Examples}
+
+\section{Citation}
+
+The following is a alist of available cite commands. See \url{https://ctan.space-pro.be/tex-archive/macros/latex/contrib/biblatex/doc/biblatex.pdf#subsection.3.9} for a more detailed description.
+
+\begin{itemize}
+\item \verb=\nocite= \nocite{Bech:63}
+\item \verb=\fullcite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline  \fullcite[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\textcite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \textcite[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\parencite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \parencite[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\parencite*[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \parencite*[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\smartcite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \smartcite[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\footcite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \footcite[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\footfullcite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline  \footfullcite[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\supercite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \supercite[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\footcitetext[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \footcitetext[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\autocite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline  \autocite[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\cite[<prenote>][<postnote>]{Nallapati:etal:16}= \newline  \cite[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\cite*[<prenote>][<postnote>]{Nallapati:etal:16}= \newline  \cite*[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\citeauthor[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \citeauthor[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\citeauthor*[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \citeauthor*[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\citeurl[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \citeurl[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\citetitle[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \citetitle[<prenote>][<postnote>]{Nallapati:etal:16}
+\item \verb=\citeyear[<prenote>][<postnote>]{Nallapati:etal:16}= \newline \citeyear[<prenote>][<postnote>]{Nallapati:etal:16}
+\end{itemize} 
+
+References are stored in \texttt{references.bib}.
+
+\section{AVM}
+
+\avm{
+  \0 [ \type{eating} \\
+    actor & \1 \\ 
+    theme & \2 ]
+}
+
+\medskip
+
+\noindent $\Rightarrow$ \url{https://github.com/langsci/langsci-avm/blob/master/langsci-avm.pdf}
+
+\section{Linguistic examples}
+
+\ex. This is a simple example.
+
+\exg. [Noch am Boden liegend$_i$], sei [auf ihn$_i$] eingetreten worden.\\
+still on.the floor lying be on him PART.kicked got\\
+`While he was still on the floor he was kicked.'\\
+(Cf. (422) in \cite{Mueller:02})
+
+\noindent $\Rightarrow$ \url{http://texdoc.net/texmf-dist/doc/latex/linguex/linguex-doc.pdf} \\
+Note the Leipzig glossing rules: \url{http://www.eva.mpg.de/lingua/resources/glossing-rules.php}
+
+\ex. \textipa{[""Ekspl@"neIS@n]}
+
+$\Rightarrow$ \url{http://en.wikibooks.org/wiki/LaTeX/Linguistics#IPA_characters}
+
+\section{Math formulae}
+
+Formulae in texts: $a^2 + b^2 = c^2$
+
+\noindent Formulae in equation environment:
+\begin{equation}
+a^2 + b^2 = c^2
+\end{equation}
+$\Rightarrow$ \url{http://en.wikibooks.org/wiki/LaTeX/Mathematics}
+
+\section{Tables}
+
+\begin{tabular}{c|c|c}
+\hline
+cell 11 & cell 12 & cell 13 \\
+\hline
+cell 21 & cell 22 & cell 23 \\
+\hline
+\end{tabular}
+
+\section{Trees}
+
+\Forest{
+  [,phantom
+    [S,name=root,red subtree
+      [AUX [\textit{does}] ]
+      [S
+        [NP]
+        [VP,name=vp[V [\textit{say}]] [S*,name=foot]]]]
+    [S,Xs=5cm,Ys=2cm
+      [NP]
+      [S,name=s
+        [NP [$\varepsilon$] ]
+        [VP 
+          [VP [V [\textit{walks}]]] 
+          [PP]]]]
+    ]
+  \draw[->,gray,thick,dashed,bend right=10](root)to(s);
+  \draw[->,gray,thick,dashed,bend right=10](foot)to(s);
+}
+
+\noindent $\Rightarrow$ \url{http://mirrors.ctan.org/graphics/pgf/contrib/forest/forest-doc.pdf}

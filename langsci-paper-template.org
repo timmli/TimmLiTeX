@@ -1,0 +1,94 @@
+#+TITLE: Title of paper
+#+AUTHOR: John Doe\affiliation{Elfenbeinturm, Fantasien}
+:Settings:
+#+FILETAGS: chooseTag
+#+CATEGORY: chooseCategory
+#+DATE: 
+#+STARTUP: nohideblocks
+#+LANGUAGE: en
+#+OPTIONS: H:5 num:t title:nil toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t ':t
+#+OPTIONS: TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+LATEX_CLASS: langscibook-paper
+#+LATEX_CLASS_OPTIONS: [output=paper,draftmode,modfonts,nonflat,nonewtxmath]
+#+LATEX_COMPILER: xelatex
+#+LATEX_HEADER: 
+#+LATEX_HEADER: \usepackage{linguex,packages/avm}
+#+LATEX_HEADER: \usepackage{amsthm}
+#+LATEX_HEADER: \usepackage{amsmath}
+#+LATEX_HEADER: \usepackage{booktabs}
+#+LATEX_HEADER: \usepackage{packages/tikz-settings} % tikz, forest, etc.
+#+LATEX_HEADER: %\input{TLmacros}
+# Just mention the link to the references file [[addbibresource:references.bib]] in order to make it available to org-ref but not override the default bibliography which is helpful when looking for references which are not yet included in the local bibliography. 
+:end: 
+# Eventually appears after \begin{document}.
+#+BEGIN_EXPORT latex
+
+\newcommand{\govR}{\ensuremath{<_G}} 
+\newcommand{\headR}{\ensuremath{<_H}}
+
+% \addto\extrasenglish{%
+  \renewcommand{\chapterautorefname}{Chapter}%
+  \renewcommand{\figureautorefname}{Figure}%
+  \renewcommand{\tableautorefname}{Table}%
+  \renewcommand{\sectionautorefname}{Section}%
+  \renewcommand{\subsectionautorefname}{Section}%
+  \renewcommand{\subsubsectionautorefname}{Section}%
+  \renewcommand{\Hfootnoteautorefname}{Footnote}%
+% }
+#+END_EXPORT
+
+# =\abstract= must appear before =\maketitle=.
+# Therefore, we set =:title nil= and call =\maketitle= explicitely.
+#+LATEX:\abstract{
+Put abstract of the paper here.
+#+LATEX:}
+
+#+BEGIN_EXPORT latex
+\maketitle                      
+#+END_EXPORT
+
+* Introduction
+
+Once upon a time ... 
+
+* List of references :ignore:
+
+@@latex:\printbibliography[heading=subbibliography,notkeyword=this]@@
+
+* COMMENT org-mode settings
+
+** Installation of =langscibook=
+
+Remember to first add the class [[https://github.com/langsci/latex][langscibook]] to the set of known classes (in =init.el=).
+
+#+BEGIN_SRC emacs-lisp :exports none
+(add-to-list 'org-latex-classes
+						 '("langscibook" 
+							 "\\documentclass{langscibook}
+				    		[NO-DEFAULT-PACKAGES]" 
+							 ("\\part{%s}" . "\\part*{%s}") 
+							 ("\\chapter{%s}" . "\\chapter*{%s}") 
+							 ("\\section{%s}" . "\\section*{%s}") 
+							 ("\\subsection{%s}" . "\\subsection*{%s}") 
+							 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+							 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+							 ))
+
+(add-to-list 'org-latex-classes
+						 '("langscibook-paper" 
+							 "\\documentclass[output=paper]{langscibook}
+				    		[NO-DEFAULT-PACKAGES]" 
+							 ("\\section{%s}" . "\\section*{%s}") 
+							 ("\\subsection{%s}" . "\\subsection*{%s}") 
+							 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+							 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+							 ))
+#+END_SRC
+
+** Local Variables
+
+# Local variables:
+# coding: utf-8
+# org-latex-with-hyperref: nil
+# org-latex-prefer-user-labels: t
+# end:

@@ -1,0 +1,123 @@
+#+TITLE: Beamer slides
+#+AUTHOR: John Doe
+#+SUBTITLE: Some subtitle
+#+FILETAGS: research
+:Settings:
+# #+DATE: 
+# #+BEAMER_HEADER: \date[]{}
+# #+BEAMER_HEADER: \institute[]{}
+# #+BEAMER_HEADER: \titlegraphic{\includegraphics[height=1cm]{path/to/picture}}	% on title slide
+#+BEAMER_HEADER: \RequirePackage{lipsum}
+#+BEAMER_HEADER: \titlegraphic{{\rmfamily \lipsum}}
+#+OPTIONS:   H:2 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t ':t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+STARTUP: beamer
+#+STARTUP: hideblocks content
+#+LATEX_CLASS: beamer
+#+LATEX_CLASS_OPTIONS: [compress,xcolor={table,dvipsnames},10pt,aspectratio=169]  
+#+LATEX_COMPILER: pdflatex
+#+LATEX_HEADER: \input{beamer-settings}
+#+LATEX_HEADER: \usetheme{Lustnau}  
+#+LATEX_HEADER: % \usetheme{Tuebingen}
+#+LATEX_HEADER: \input{beamerlogosTuebingen.tex}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % \usetheme{Bielefeld}
+#+LATEX_HEADER: % \input{beamerlogosBielefeld.tex}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % \usetheme{Duesseldorf}
+#+LATEX_HEADER: % \input{beamerlogosDuesseldorf.tex}
+#+LATEX_HEADER: %% Tables
+#+LATEX_HEADER: \usepackage{booktabs}           % Nicer tables
+#+LATEX_HEADER: 
+#+LATEX_HEADER: %% Graphics
+#+LATEX_HEADER: \input{packages/tikz-settings}
+#+LATEX_HEADER: \input{packages/forest-settings}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: %% Linguistics
+#+LATEX_HEADER: \input{packages/linguex-settings}
+#+LATEX_HEADER: \input{packages/langsci-avm-settings}
+#+LATEX_HEADER: % \usepackage[inference]{semantic} % for CCG 
+#+LATEX_HEADER: % \usepackage{packages/ccg}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: %% Listings settings
+#+LATEX_HEADER: \usepackage{listings}
+#+LATEX_HEADER: \lstset{basicstyle=\ttfamily,tabsize=2,breaklines=true}
+#+LATEX_HEADER: \RequirePackage{color}
+#+LATEX_HEADER: \definecolor{lightgray}{gray}{0.7}
+#+LATEX_HEADER: %% Add syntax highlighting for specific programming languages
+#+LATEX_HEADER: % \input{packages/listings-xmg-settings.tex} 
+#+LATEX_HEADER: % \input{TLmacros}
+#+LANGUAGE:  en
+# #+LATEX_HEADER: \AtBeginDocument{\selectlanguage{german}}
+# Just mention the link to the references file [[addbibresource:references.bib]] in order to make it available to org-ref but not override the default bibliography which is helpful when looking for references which are not yet included in the local bibliography. 
+#+COLUMNS: %40ITEM %10TAGS %9BEAMER_act(Overlays) %4BEAMER_col(Col) %20BEAMER_opt(Options)
+:end:
+
+#+BEGIN_EXPORT latex
+%\selectlanguage{german} % select german language for babel package 
+
+\newcommand{\mypause}{\pause}
+
+\definecolor{myblue}{rgb}{0,0,0.70}
+\definecolor{myred}{rgb}{0.8,0,0}
+\definecolor{mydarkgreen}{rgb}{0,0.55,0}
+
+\newcommand{\bsp}[1]{{\usebeamercolor[bg!90]{block title example}\itshape\bfseries #1}}
+\newcommand{\term}[1]{{\usebeamercolor[fg!100]{math text displayed}\scshape\bfseries #1}} 
+\newcommand{\bspcolor}[1]{{\usebeamercolor[bg!90]{block title example}\bfseries #1}}
+
+\AtBeginSection[]
+{
+ \begin{frame}{Outline} % add <beamer> to remove this from handouts
+   \tableofcontents[
+   currentsection
+   ]
+ \end{frame}
+}
+#+END_EXPORT
+
+* First section
+
+** First slide
+
+* References                                      :B_ignoreheading:
+:PROPERTIES:
+:BEAMER_env: ignoreheading
+:END:
+
+** References
+:PROPERTIES:
+:beamer_opt: allowframebreaks
+:END:
+
+\insertBib
+
+* COMMENT org-mode settings
+
+** Installation of special link types
+
+Link type for typesetting linguistic examples:
+
+#+BEGIN_SRC emacs-lisp
+(org-link-set-parameters
+ "bsp"
+ :follow (lambda (path) (message "You clicked me."))
+ :export (lambda (path desc backend)
+           (cond
+            ((eq backend 'latex)								
+						 (format "{\\bsp{%s}}" (or desc path)))
+						((eq 'html backend)
+             (format "<font color=\"blue\">%s</font>"
+                     (or desc path)))))
+ :face '(:foreground "CornflowerBlue"	:slant italic	:weight bold		)
+ :help-echo "This will be exported as example."
+ )
+#+END_SRC
+
+** Local Variables
+
+# Local variables:
+# coding: utf-8
+# org-latex-with-hyperref: t
+# org-latex-listings: listings
+# end:

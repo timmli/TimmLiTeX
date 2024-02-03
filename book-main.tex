@@ -1,0 +1,101 @@
+\documentclass[
+11pt,
+bibliography=totoc,
+numbers=noenddot,
+% draft
+]{scrbook}
+
+\usepackage{datetime}
+\RequirePackage{etoolbox}
+\newbool{draftmode}
+\booltrue{draftmode}
+
+\input{basic-text-settings}
+
+
+%==============================
+% Optional packages & settings
+%------------------------------
+
+%% Uncomment the following line for deactivating draftmode
+% \boolfalse{draftmode}           % Deactivate draftmode
+\ifbool{draftmode}{
+  \usepackage[firstpageonly=true]{draftwatermark}
+  \SetWatermarkScale{1}
+  \AtBeginDocument{\SetWatermarkText{DRAFT}}
+}{}
+
+%% Language
+\AtBeginDocument{
+  \selectlanguage{german} % which language is available depends on how babel is loaded
+}
+
+% \input{TLmacros}   % the content of TLmacros.tex goes here
+
+%% Tables
+\usepackage{booktabs}           % Nicer tables
+
+%% Graphics
+\input{packages/tikz-settings}
+\input{packages/forest-settings}
+
+%% Linguistics
+\input{packages/linguex-settings}
+\input{packages/langsci-avm-settings}
+% \usepackage[inference]{semantic} % for CCG 
+% \usepackage{packages/ccg}
+
+%% Listings settings
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily,tabsize=2,breaklines=true}
+\RequirePackage{color}
+\definecolor{lightgray}{gray}{0.7}
+%% Add syntax highlighting for specific programming languages
+% \input{packages/listings-xmg-settings.tex} 
+
+
+%==============================
+% Title
+%------------------------------
+
+\title{Title of book}
+\author{Max Mustermann \\
+  Affiliation \\
+  \url{some@mail.address} \\}  
+\date{\ddmmyyyydate\today, \currenttime}
+
+
+%==============================
+% Document start
+%------------------------------
+
+\begin{document}
+
+\maketitle
+\frontmatter
+\tableofcontents
+\mainmatter
+
+\input{book-examples}
+
+\chapter{Blindtext}
+
+\lipsum
+
+\section{Blindtext subsection}
+
+\lipsum
+
+
+%------------------------------
+% Document end
+%==============================
+
+\insertBib
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

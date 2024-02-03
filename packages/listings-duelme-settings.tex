@@ -1,0 +1,11 @@
+% Syntax highlighting for DuELME: https://duelme.clarin.inl.nl/
+
+\lstnewenvironment{duelme}{%
+  \lstset{language=,
+    numbers=left,numbersep=8pt,numberstyle=\color{lightgray},
+    % frame=l,
+    basicstyle=\small\ttfamily,%
+    xleftmargin=0.7cm,framexleftmargin=12pt,%
+    framerule=0.5mm,rulecolor=\color{lightgray},%
+    escapeinside={|\%}{\%|},%
+    commentstyle=\color{lightgray},     morekeywords={PATERN,NAME,POS,PATTERN,MAPPING,EXAMPLE,MWE,SENTENCE,DESCRIPTION,COMMENT,LISTA,LISTB,SUBJECT,OBJECT,MODIFIER,RPRON,CONJUGATION,POLARITY,EXPRESSION,CL}}}{}

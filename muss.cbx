@@ -1,0 +1,75 @@
+% File:    muss.cbx
+% Author:  Timm Lichte (http://timm-lichte.de)
+% Date:    2023-09-08T09:04:40+0200
+% Version: 0.4 (tested with BibLaTeX v3.19)
+% License: LPPL Version 1.3c
+%
+% ----------------------------------------------------------------
+% MUSS: Minimal Unified Style Sheet for Computational Linguistics
+% ----------------------------------------------------------------
+%
+% MUSS is a style sheet for BibLaTeX and comes with two files:
+%
+% - muss.bbx specifies the structure and formatting of entries in a list of references.
+% - muss.cbx (this file) specifies the look of cite commands in the text.
+%
+% Please see muss.bbx for more information on the project.
+%
+%%%%%%%%%%%%%%%%%%%%%%% 
+
+\ProvidesFile{muss.cbx}
+
+\ExecuteBibliographyOptions{
+  uniquename=minfull,           % disambiguate names only in identical lists
+  uniquelist=minyear,           % disambiguate labelname list only if labelyear is the same
+  autocite=inline,              % \autocite behaves like \parencite
+  sortcites=false,               % do not sort keys passed to a citation command 
+}
+
+% MUSS is derived from authoryear.cbx.
+% Note that by default also the definitions in biblatex.def are used.
+\RequireCitationStyle{authoryear}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%% 
+% Special symbols
+%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\renewcommand*{\nameyeardelim}{\addspace}       % print " " between author/editor and year
+\renewcommand*{\postnotedelim}{\addcolon\space} % print ": " before postnote 
+\renewcommand{\multicitedelim}{\addcomma\space} % print ", " between citations passed to a citation command 
+\renewcommand{\compcitedelim}{\multicitedelim}  % print ", " between compressed citations 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%% 
+% Field formats
+%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\DeclareFieldFormat{postnote}{#1}
+\DeclareFieldFormat{multipostnote}{#1}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%% 
+% Cite commands
+%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\DeclareCiteCommand{\fullcite}
+{\defcounter{maxnames}{\blx@maxbibnames}% show all names
+  \usebibmacro{prenote}}
+{\usedriver
+  {\DeclareNameAlias{sortname}{default}}
+  {\thefield{entrytype}}}
+{\multicitedelim}
+{\usebibmacro{postnote}}
+
+\DeclareCiteCommand{\footfullcite}[\mkbibfootnote]
+{\defcounter{maxnames}{\blx@maxbibnames}% show all names
+  \usebibmacro{prenote}}
+{\usedriver
+  {\DeclareNameAlias{sortname}{default}}
+  {\thefield{entrytype}}}
+{\multicitedelim}
+{\usebibmacro{postnote}}
+
+
+\endinput

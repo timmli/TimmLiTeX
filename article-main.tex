@@ -1,0 +1,93 @@
+\documentclass[
+11pt,twoside
+]{scrartcl}
+
+\RequirePackage{etoolbox}
+\newbool{draftmode}
+\booltrue{draftmode}
+
+\input{scrarticle-settings}
+\input{basic-text-settings}
+
+
+%==============================
+% Optional packages & settings
+%------------------------------
+
+%% Uncomment the following line for deactivating draftmode
+% \boolfalse{draftmode}           % Deactivate draftmode
+\ifbool{draftmode}{
+  \usepackage[firstpageonly=true]{draftwatermark}
+  \SetWatermarkScale{1}
+  \AtBeginDocument{\SetWatermarkText{DRAFT}}
+}{}
+
+%% Language
+\AtBeginDocument{
+  \selectlanguage{german} % which language is available depends on how babel is loaded
+}
+
+% \input{TLmacros}
+
+%% Tables
+\usepackage{booktabs}           % Nicer tables
+
+%% Graphics
+\input{packages/tikz-settings}
+\input{packages/forest-settings}
+
+%% Linguistics
+\input{packages/linguex-settings}
+\input{packages/langsci-avm-settings}
+% \usepackage[inference]{semantic} % for CCG 
+% \usepackage{packages/ccg}
+
+%% Listings settings
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily,tabsize=2,breaklines=true}
+\RequirePackage{color}
+\definecolor{lightgray}{gray}{0.7}
+%% Add syntax highlighting for specific programming languages
+% \input{packages/listings-xmg-settings.tex} 
+
+%==============================
+% Title
+%------------------------------
+
+\title{Titel over two \newlineTitle lines}
+\subject{Text type}
+\author{Max Mustermann}
+\affiliation{Affiliation, \url{some@email.address}}  
+
+%==============================
+% Document start
+%------------------------------
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}%
+This is an abstract: \lipsum[1]
+\end{abstract}
+
+% TODO
+
+\input{article-examples}
+
+\section{Blindtext}
+
+\lipsum
+
+%------------------------------
+% Document end
+%==============================
+
+\insertBib
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

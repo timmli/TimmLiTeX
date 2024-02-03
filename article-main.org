@@ -1,0 +1,100 @@
+#+TITLE: Title of paper
+#+AUTHOR: John Doe @@latex:\affiliation{Elfenbeinturm, Fantasien, \url{some@email.address}}@@
+:Settings:
+#+FILETAGS: chooseTag
+#+CATEGORY: chooseCategory
+#+DATE: 
+#+STARTUP: nohideblocks
+#+LANGUAGE: en
+#+OPTIONS: H:5 num:t toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t ':t
+#+OPTIONS: TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+LATEX_CLASS: tl-article 
+#+LATEX_CLASS_OPTIONS: [11pt,twoside]
+#+LATEX_COMPILER: pdflatex
+#+LATEX_HEADER: \RequirePackage{etoolbox}
+#+LATEX_HEADER: \newbool{draftmode}
+#+LATEX_HEADER: \booltrue{draftmode}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: \input{scrarticle-settings}
+#+LATEX_HEADER: \input{basic-text-settings}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: 
+#+LATEX_HEADER: %==============================
+#+LATEX_HEADER: % Optional packages & settings
+#+LATEX_HEADER: %------------------------------
+#+LATEX_HEADER: 
+#+LATEX_HEADER: %% Uncomment the following line for deactivating draftmode
+#+LATEX_HEADER: % \boolfalse{draftmode}           % Deactivate draftmode
+#+LATEX_HEADER: \ifbool{draftmode}{
+#+LATEX_HEADER:   \usepackage[firstpageonly=true]{draftwatermark}
+#+LATEX_HEADER:   \SetWatermarkScale{1}
+#+LATEX_HEADER:   \AtBeginDocument{\SetWatermarkText{DRAFT}}
+#+LATEX_HEADER: }{}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: %% Language
+#+LATEX_HEADER: \AtBeginDocument{
+#+LATEX_HEADER:   \selectlanguage{german} % which language is available depends on how babel is loaded
+#+LATEX_HEADER: }
+#+LATEX_HEADER: 
+#+LATEX_HEADER: % \input{TLmacros}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: %% Tables
+#+LATEX_HEADER: \usepackage{booktabs}           % Nicer tables
+#+LATEX_HEADER: 
+#+LATEX_HEADER: %% Graphics
+#+LATEX_HEADER: \input{packages/tikz-settings}
+#+LATEX_HEADER: \input{packages/forest-settings}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: %% Linguistics
+#+LATEX_HEADER: \input{packages/linguex-settings}
+#+LATEX_HEADER: \input{packages/langsci-avm-settings}
+#+LATEX_HEADER: % \usepackage[inference]{semantic} % for CCG 
+#+LATEX_HEADER: % \usepackage{packages/ccg}
+#+LATEX_HEADER: 
+#+LATEX_HEADER: %% Listings settings
+#+LATEX_HEADER: \usepackage{listings}
+#+LATEX_HEADER: \lstset{basicstyle=\ttfamily,tabsize=2,breaklines=true}
+#+LATEX_HEADER: \RequirePackage{color}
+#+LATEX_HEADER: \definecolor{lightgray}{gray}{0.7}
+#+LATEX_HEADER: %% Add syntax highlighting for specific programming languages
+#+LATEX_HEADER: % \input{packages/listings-xmg-settings.tex} 
+#+LATEX_HEADER: % \input{TLmacros}
+# Just mention the link to the references file [[addbibresource:references.bib]] in order to make it available to org-ref but not override the default bibliography which is helpful when looking for references which are not yet included in the local bibliography. 
+:end:
+
+#+BEGIN_abstract
+This is an abstract: @@latex:\lipsum[1]@@
+#+END_abstract
+
+* Introduction
+
+Once upon a time ... 
+
+* List of references :ignore:
+
+@@latex:\insertBib@@
+
+* COMMENT org-mode settings
+
+** Installation of =tl-article=
+
+Remember to first add the class to the set of known classes (in =init.el=).
+
+#+BEGIN_SRC emacs-lisp :exports none
+(add-to-list 'org-latex-classes
+         '("tl-article" 
+						"\\documentclass{scrartcl}
+						[NO-DEFAULT-PACKAGES]"
+						("\\section{%s}" . "\\section*{%s}") 
+						("\\subsection{%s}" . "\\subsection*{%s}") 
+						("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+						("\\paragraph{%s}" . "\\paragraph*{%s}")))
+#+END_SRC
+
+** Local Variables
+
+# Local variables:
+# coding: utf-8
+# org-latex-with-hyperref: nil
+# org-latex-prefer-user-labels: t
+# end:

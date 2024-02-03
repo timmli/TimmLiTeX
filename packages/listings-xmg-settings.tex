@@ -1,0 +1,28 @@
+% Syntax highlighting for XMG: https://xmg.phil.hhu.de/
+
+\lstnewenvironment{xmg}{%
+  \lstset{language=,
+    numbers=left,numbersep=8pt,numberstyle=\color{lightgray},
+    % frame=l,
+    basicstyle=\small\ttfamily,%
+    xleftmargin=0.7cm,framexleftmargin=12pt,%
+    framerule=0.5mm,rulecolor=\color{lightgray},%
+    escapeinside={|\%}{\%|},%
+    commentstyle=\color{lightgray},
+    literate={->}{{{\textbf{->}}}}1 {<-}{{{\textbf{<-}}}}1 {\{}{{{\textbf{\{}}}}1 {\}}{{{\textbf{\}}}}}1 {\;}{{{\textbf{;}}}}1 {|}{{{\textbf{|}}}}1 {=}{{{\textbf{=}}}}1 {[}{{{\textbf{[}}}}1 {]}{{{\textbf{]}}}}1 {<}{{{\textbf{<}}}}1 {>}{{{\textbf{>}}}}1 {!}{{{\textbf{!}}}}1 {?}{{{\textbf{?}}}}1 {*=}{{{\textbf{*=}}}}1,% 
+    morekeywords={node,type,feature,iface,include,class,import,export,declare,syn,sem,value, use, with, dims,frame,morph,lemma,morpho,fam,entry}
+  }}{}
+
+\lstdefinestyle{xmg}{
+  % keywordstyle = \color{HHUblue}\bfseries,
+  % stringstyle=\color{red}\ttfamily,
+  commentstyle=\color{lightgray},
+  literate={->}{{{\textbf{->}}}}1 {<-}{{{\textbf{<-}}}}1 {\{}{{{\textbf{\{}}}}1 {\}}{{{\textbf{\}}}}}1 {\;}{{{\textbf{;}}}}1 {|}{{{\textbf{|}}}}1 {=}{{{\textbf{=}}}}1 {[}{{{\textbf{[}}}}1 {]}{{{\textbf{]}}}}1 {<}{{{\textbf{<}}}}1 {>}{{{\textbf{>}}}}1 {!}{{{\textbf{!}}}}1 {?}{{{\textbf{?}}}}1 {*=}{{{\textbf{*=}}}}1  {'c}{{\'c}}1,% 
+  morekeywords={node,type,feature,iface,include,class,import,export,declare,syn,sem,value, use, with, dims,frame,morph,lemma,morpho,fam,entry}
+}
+
+\newcommand{\ixmg}{%
+  \lstinline[language=,keepspaces,%
+    literate={->}{{{\textbf{->}}}}1 {\{}{{{\textbf{\{}}}}1 {\}}{{{\textbf{\}}}}}1 {\;}{{{\textbf{;}}}}1 {|}{{{\textbf{|}}}}1 {=}{{{\textbf{=}}}}1 {[}{{{\textbf{[}}}}1 {]}{{{\textbf{]}}}}1 {<}{{{\textbf{<}}}}1 {>}{{{\textbf{>}}}}1 {!}{{{\textbf{!}}}}1 {?}{{{\textbf{?}}}}1 {*=}{{{\textbf{*=}}}}1,%
+    morekeywords={node,type,feature,include,class,import,export,declare,syn,sem,frame,morph,value, use, with, dims}
+    ]}

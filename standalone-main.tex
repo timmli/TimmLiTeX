@@ -1,0 +1,91 @@
+\documentclass[
+	%pstricks=true
+	,crop=true
+	,varwidth=\maxdimen
+	]{standalone}
+
+%%  PDFLATEX SETTINGS
+
+%==============================
+% Font & Encoding
+%------------------------------
+
+%% Basic font
+% \usepackage{libertine} % libertine tends to cause problems, e.g. when using tipa
+% \usepackage[libertine]{newtxmath}
+\usepackage{times}
+
+%% Basic font for specific classes
+\makeatletter
+\@ifclassloaded{beamer}{
+  \usepackage{libertine} % libertine tends to cause problems, e.g. when using tipa
+  \usepackage[libertine]{newtxmath}}{}
+\@ifclassloaded{tikzposter}{
+  \usepackage{DejaVuSans} 
+  \renewcommand*{\familydefault}{\sfdefault}}{}
+\makeatother
+
+%% Monospaced font
+\usepackage[scaled=0.8]{beramono}
+
+%% Micro-typographic aspects of the fonts
+\usepackage{microtype}
+
+%% Output encoding: mapping of character codes to glyphs
+\usepackage[T1]{fontenc}
+
+%% Input encoding: the encoding of characters in a source file
+\usepackage[utf8]{inputenc}% compatible with BibLaTeX
+% \usepackage{ucs}\usepackage[utf8x]{inputenc}% incompabtible with BibLaTeX
+
+%% Additional symbols
+\usepackage{latexsym,amsmath,amssymb,wasysym}
+\usepackage{marvosym}           % for thunderbolt symbol
+\usepackage{ulem}               % to cross out text
+  \normalem
+\usepackage{url}
+  \urlstyle{tt}                   % tt,rm,sf,same
+\usepackage{tipa}	% for phonetic symbols; has to appear before fontspec (FIXME: really?)
+
+%% Language
+\usepackage[german,english]{babel} % the last language in the options is loaded; the other one can be chosen with \selectlanguage
+\usepackage{iflang}                % for checking the current language name
+
+%==============================
+% Optional packages & settings
+%------------------------------
+
+%% Tables
+\usepackage{booktabs}           % Nicer tables
+
+%% Graphics
+\input{packages/tikz-settings}
+\input{packages/forest-settings}
+
+%% Linguistics
+\input{packages/linguex-settings}
+\input{packages/langsci-avm-settings}
+% \usepackage[inference]{semantic} % for CCG 
+% \usepackage{packages/ccg}
+
+%% Listings settings
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily,tabsize=2,breaklines=true}
+\RequirePackage{color}
+\definecolor{lightgray}{gray}{0.7}
+%% Add syntax highlighting for specific programming languages
+% \input{packages/listings-xmg-settings.tex} 
+
+% \input{TLmacros}
+
+\begin{document}
+
+\Forest{
+  [S
+    [NP] 
+    [VP
+      [V  [\textit{eats}] ]
+      [NP] ]]
+}
+
+\end{document}

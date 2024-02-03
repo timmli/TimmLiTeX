@@ -1,0 +1,260 @@
+% Do not change this file!
+
+%%  PDFLATEX SETTINGS
+
+%==============================
+% Font & Encoding
+%------------------------------
+
+%% Basic font
+% \usepackage{libertine} % libertine tends to cause problems, e.g. when using tipa
+% \usepackage[libertine]{newtxmath}
+\usepackage{times}
+
+%% Basic font for specific classes
+\makeatletter
+\@ifclassloaded{beamer}{
+  \usepackage{libertine} % libertine tends to cause problems, e.g. when using tipa
+  \usepackage[libertine]{newtxmath}}{}
+\@ifclassloaded{tikzposter}{
+  \usepackage{DejaVuSans} 
+  \renewcommand*{\familydefault}{\sfdefault}}{}
+\makeatother
+
+%% Monospaced font
+\usepackage[scaled=0.8]{beramono}
+
+%% Micro-typographic aspects of the fonts
+\usepackage{microtype}
+
+%% Output encoding: mapping of character codes to glyphs
+\usepackage[T1]{fontenc}
+
+%% Input encoding: the encoding of characters in a source file
+\usepackage[utf8]{inputenc}% compatible with BibLaTeX
+% \usepackage{ucs}\usepackage[utf8x]{inputenc}% incompabtible with BibLaTeX
+
+%% Additional symbols
+\usepackage{latexsym,amsmath,amssymb,wasysym}
+\usepackage{marvosym}           % for thunderbolt symbol
+\usepackage{ulem}               % to cross out text
+  \normalem
+\usepackage{url}
+  \urlstyle{tt}                   % tt,rm,sf,same
+\usepackage{tipa}	% for phonetic symbols; has to appear before fontspec (FIXME: really?)
+
+%% Language
+\usepackage[german,english]{babel} % the last language in the options is loaded; the other one can be chosen with \selectlanguage
+\usepackage{iflang}                % for checking the current language name
+
+%==============================
+% Miscellaneous
+%------------------------------
+
+%% Graphics
+\usepackage{graphics}
+
+%% Tables
+% \usepackage{arydshln} 		    % for dashed horizontal lines in tables (incompatible with avm)
+\usepackage{multirow}
+\usepackage{colortbl}
+
+%% Blindtext
+\usepackage{lipsum}
+
+%==============================
+% BibLaTeX settings
+%------------------------------
+
+\newcommand{\mycitestyle}{muss}
+\newcommand{\mybibstyle}{muss}
+
+\makeatletter
+\@ifclassloaded{beamer}{\renewcommand{\mycitestyle}{numeric-comp}}{}
+\@ifclassloaded{tikzposter}{\renewcommand{\mycitestyle}{numeric-comp}}{}
+\makeatother
+
+\usepackage[
+  bibstyle=\mybibstyle,
+  citestyle=\mycitestyle,
+  %% The remaining options are set in muss.bbx.
+  % natbib=true,
+  % refsection=chapter,
+  % maxbibnames=99,
+  % isbn=false,
+  % doi=false,
+  % eprint=false,
+  % backend=biber,
+  % sorting=ydnt,  % sort in descending chronological order
+  % indexing=cite,
+  % labelnumber,  % for numeric bibliography in beamer
+  % toc=bib    % make bibliography appear in toc, incompatible with beamer
+  ]{biblatex}
+
+%% The bibliography file is specified like this
+\addbibresource[datatype=bibtex]{references.bib}
+
+%% Command for inserting bibliography here 
+\newcommand{\insertBib}{
+  \printbibliography[
+    % notkeyword=this
+    ] 
+}
+
+%% Compat definitions to make available BibTeX macros in BibLaTeX 
+% \let\citealt=\cite
+% \let\cite=\textcite
+% \let\citep=\parencite
+% \let\citet=\cite
+% \newcommand{\citeauthoryear}[1]{\citeauthor{#1} (\citeyear{#1})}
+% \newcommand{\citealtauthoryear}[1]{\citeauthor{#1} \citeyear{#1}}
+
+% Beamer settings
+%-----------------
+\makeatletter
+\@ifclassloaded{beamer}{
+
+  %% Print ": " before postnote (numeric-comp uses comma) 
+  \renewcommand*{\postnotedelim}{\addcolon\space} 
+
+  %% Replace icons with numbers in bibliography
+  \setbeamertemplate{bibliography item}{[\thefield{labelnumber}]}
+
+  %% New command \footshortcite
+  \DeclareCiteCommand{\footshortcite}[\mkbibfootnote]
+  {\usebibmacro{prenote}%
+    \printnames[only-last-name]{author}%
+    \setunit{\adddot\space}%
+    \printfield{year}%
+    \setunit{\adddot\space}%
+    \printfield{title}}
+  {}
+  {\multicitedelim}
+  {\renewcommand*{\postnotedelim}{\adddot\space}%
+    \usebibmacro{postnote}}
+
+  \DeclareNameFormat{only-last-name}{%
+    \printtext{\namepartfamily}%
+    \ifgiveninits
+    {\addcomma\addspace\namepartgiveni}
+    {}%
+    \usebibmacro{name:andothers}}
+  
+  %% Taken from MUSS v0.4
+  \DeclareCiteCommand{\fullcite}
+  {\defcounter{maxnames}{\blx@maxbibnames}% show all names
+    \usebibmacro{prenote}}
+  {\usedriver
+    {\DeclareNameAlias{sortname}{default}}
+    {\thefield{entrytype}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+  %% Taken from numberic-comp.cbx with additions ...
+  \DeclareCiteCommand{\supercite}[\mkbibsuperscript]
+  {\color{gray}% added color
+    \usebibmacro{cite:init}%
+    \let\multicitedelim=\supercitedelim
+    \let\multicitesubentrydelim=\supercitesubentrydelim
+    \let\multiciterangedelim=\superciterangedelim
+    \let\multicitesubentryrangedelim=\supercitesubentryrangedelim
+    \iffieldundef{prenote}
+    {}
+    {\BibliographyWarning{Ignoring prenote argument}}%
+    \iffieldundef{postnote}
+    {}
+    {\BibliographyWarning{Ignoring postnote argument}}%
+    \bibopenbracket% added bracket
+  }
+  {\usebibmacro{citeindex}%
+    \usebibmacro{cite:comp}}
+  {}
+  {\usebibmacro{cite:dump}%
+    \bibclosebracket% added bracket
+  }
+  
+}{}
+\makeatother\makeatother
+
+% Tikzposter settings
+%-----------------
+\makeatletter
+\@ifclassloaded{tikzposter}{  
+
+  \DeclareFieldFormat{labelnumberwidth}{#1}
+  \defbibenvironment{bibliography}
+  {\footnotesize\noindent}
+  {\unspace}
+  {}
+  \renewbibmacro*{begentry}{%
+    \textbf{\color{HHUblue}%
+      \printtext[labelnumberwidth]{%
+        [\printfield{prefixnumber}%
+          \printfield{labelnumber}]}%
+      \space
+      % \setunit{\addspace}
+    }}
+  \renewcommand*{\finentrypunct}{\addperiod\space}
+
+  \DeclareCiteCommand{\supercite}[\mkbibsuperscript]
+  {\color{gray} % added color
+    \usebibmacro{cite:init}%
+    \let\multicitedelim=\supercitedelim
+    \iffieldundef{prenote}
+    {}
+    {\BibliographyWarning{Ignoring prenote argument}}%
+    \iffieldundef{postnote}
+    {}
+    {\BibliographyWarning{Ignoring postnote argument}}%
+    \bibopenbracket}%
+  {\usebibmacro{citeindex}%
+    \usebibmacro{cite:comp}}
+  {}
+  {\usebibmacro{cite:dump}\bibclosebracket}
+
+  \DeclareCiteCommand{\citeauthor}  % from sp-authoryear-comp.cbx; to add hyperref link  
+  {\boolfalse{citetracker}%
+    \boolfalse{pagetracker}%
+    \usebibmacro{prenote}}
+  {\ifciteindex
+    {\indexnames{labelname}}
+    {}%
+    \printtext[bibhyperref]{\printnames{labelname}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+  \DeclareCiteCommand{\citeyear}  % from sp-authoryear-comp.cbx; to add hyperref link  
+  {\boolfalse{citetracker}%
+    \boolfalse{pagetracker}%
+    \usebibmacro{prenote}}
+  {\printfield[bibhyperref]{year}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+}{}
+\makeatother
+ 
+%==============================
+% Hyperref settings
+%------------------------------
+
+\usepackage[bookmarks=true,bookmarksopen=true,%
+  hyperindex=true,% Makes the page numbers of index entries into hyper-links.
+  breaklinks=true,% Allow links to break over lines.
+  draft=false,% All hypertext options are turned off.
+  plainpages=false,% When true, forces page anchors to be named by the Arabic form of the page number.
+  pdfauthor={},% Hide author name.
+  pdfkeywords={},%
+  colorlinks=false,% Do not color the text of links and anchors.
+  pdfborder={0 0 1},% The style of box around links.
+  ]{hyperref}
+
+\IfLanguageName{english}{
+  \renewcommand{\chapterautorefname}{Chapter}%
+  \renewcommand{\figureautorefname}{Figure}%
+  \renewcommand{\tableautorefname}{Table}%
+  \renewcommand{\sectionautorefname}{Section}%
+  \renewcommand{\subsectionautorefname}{Section}%
+  \renewcommand{\subsubsectionautorefname}{Section}%
+  \renewcommand{\Hfootnoteautorefname}{Footnote}%
+}{}
