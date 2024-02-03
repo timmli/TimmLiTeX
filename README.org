@@ -8,7 +8,8 @@ My personal collection of LaTeX settings and templates.
 - Optimized for Emacs: local variables are properly set and there are Org files for some of the templates!
 - New Beamer themes: Bielefeld, Düsseldorf, Lustnau, Tübingen
 - Templates for teaching (in German)
-- Focus on linguistics and NLP (linguistic examples, syntactic trees, attribute-value matrices, ...)
+- Focus on (computational) linguistics: linguistic examples, syntactic trees, attribute-value matrices
+- Using BibLaTeX with the [[https://github.com/timmli/biblatex-muss][MUSS]] style
 
 ** Included templates
 
