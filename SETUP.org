@@ -79,6 +79,7 @@ v0.9
 
 #+NAME: version&timestamp-latex
 #+BEGIN_SRC latex :noweb yes
+%% TimmLiTeX 
 %% Version: <<template-version>>
 %% Last modified: <<timestamp-elisp()>>
 #+END_SRC
