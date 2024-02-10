@@ -1815,7 +1815,7 @@ Basic settings are not optional, but always required.
 \usepackage[scaled=0.8]{beramono}
 
 %% Micro-typographic aspects of the fonts
-\usepackage{microtype}
+<<microtype-settings>>
 
 %% Output encoding: mapping of character codes to glyphs
 \usepackage[T1]{fontenc}
@@ -1851,6 +1851,9 @@ Basic settings for when PDFLaTeX is used.
 %==============================
 % Miscellaneous
 %------------------------------
+
+%% Text columns
+<<multicol-settings>>
 
 %% Graphics
 \usepackage{graphics}
@@ -3413,6 +3416,19 @@ a^2 + b^2 = c^2
 \end{equation}
 $\Rightarrow$ \url{http://en.wikibooks.org/wiki/LaTeX/Mathematics}
 #+END_SRC
+
+** Microtype
+
+https://ctan.org/pkg/microtype
+
+Micro-typographic extensions supported by pdfLaTeX and XeLaTeX.
+
+#+NAME: microtype-settings
+#+BEGIN_SRC latex
+\usepackage{microtype}
+#+END_SRC
+
+This package also adds support for flexible letter spacing ([[https://de.wikipedia.org/wiki/Sperrsatz][Sperren]]) of words with =\textls=. Alternatively, one can use =\so= of the [[https://ctan.org/pkg/soul][soul]] package, which however tends to insert wider spaces between letters.
 
 ** Multicol
 
