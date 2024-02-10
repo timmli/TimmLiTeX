@@ -1781,8 +1781,7 @@ Basic settings are not optional, but always required.
 %% Additional symbols
 \usepackage{latexsym,amsmath,amssymb,wasysym}
 \usepackage{marvosym}           % for thunderbolt symbol
-\usepackage{ulem}               % to cross out text
-  \normalem
+<<ulem-settings>>
 \usepackage{url}
   \urlstyle{tt}                   % tt,rm,sf,same
 \usepackage{tipa}	% for phonetic symbols; has to appear before fontspec (FIXME: really?)
@@ -3772,6 +3771,28 @@ Add todo notes to your documents.
 
 <<todonotes-settings>>
 #+END_SRC
+
+** Ulem
+
+https://ctan.org/pkg/ulem
+
+Highlight text with lines.
+
+#+NAME: ulem-settings
+#+BEGIN_SRC latex
+\usepackage{ulem}               % highlight text with lines
+  \normalem                     % do not overwrite \emph
+#+END_SRC
+
+This package provides a couple of commands to highlight text with lines:
+
+- =\uline{underline text}= 
+- =\uuline{double-underline text}=
+- =\uwave{wavy underline}= 
+- =\sout{strike out}=
+- =\xout{strike out with skewed lines}= 
+- =\dashuline{dashed underline}=
+- =\dotuline{dotted underline}=
 
 * Package definitions
 
