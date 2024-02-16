@@ -535,6 +535,8 @@ This is an abstract: \lipsum[1]
 
 https://ctan.org/pkg/beamer
 
+A LaTeX class for producing slides. 
+
 #+NAME: beamer-template-org
 #+BEGIN_SRC org :noweb yes :tangle beamer-main.org
 ,#+TITLE: Beamer slides
@@ -1973,7 +1975,11 @@ Use SRC_latex{\selectlanguage}  for switching between languages.
 
 ** Beamer themes
 
-Local Beamer themes are executed relative to the directory of the master file. Therefore, in order to avoid the use of specific relative paths in the code of the themes, they must later be put in the same directory as the master file.
+https://ctan.org/pkg/beamer
+
+Themes (aka style templates) for [[Beamer]] slides.
+
+Note that local Beamer themes are executed relative to the directory of the master file. Therefore, in order to avoid the use of specific relative paths in the code of the themes, they must later be put in the same directory as the master file.
 
 *** Theme settings
 
@@ -2670,17 +2676,13 @@ Template for slides in the corporate design of the [[https://www.uni-bielefeld.d
 \titlegraphic{{\rmfamily \lipsum}}
 #+END_SRC
 
-** TODO BibLaTeX
-:LOGBOOK:
-- State "TODO"       from              [2017-08-18 Fr 08:15]
-:END:
+** BibLaTeX
 
 https://ctan.org/pkg/biblatex
 
-Citation management and formatting of bibliographies.
+Citation management and formatting of bibliographies. 
 
-Issues
-- [ ] add =\abstractTrue=
+The bibliography style I'm using is [[https://github.com/timmli/biblatex-muss][MUSS]]. 
 
 #+NAME: biblatex-settings
 #+BEGIN_SRC latex
