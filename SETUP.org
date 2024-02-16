@@ -1971,7 +1971,7 @@ This package should be loaded after encoding settings.
 \usepackage[german,english]{babel} % the last language in the options is loaded; the other one can be chosen with \selectlanguage
 #+END_SRC
 
-Use SRC_latex{\selectlanguage}  for switching between languages. 
+Use =\selectlanguage=  for switching between languages. 
 
 ** Beamer themes
 
