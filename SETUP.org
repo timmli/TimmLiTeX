@@ -1162,7 +1162,7 @@ numbers=noenddot,
 \documentclass[
   11pt,
   bibliography=totoc,
-  twoside,
+  twoside=semi, % semi: two-sided printing with one-sided (equal) margins
   ]{scrartcl}
 
 \RequirePackage{etoolbox}
