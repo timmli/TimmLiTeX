@@ -17,12 +17,12 @@ Currently the following templates are maintained and working:
 
 | Template                       | Org file | Download | Overleaf |
 |--------------------------------+----------+----------+----------|
-| short abstract                 | [[file:abstract-main.org][✔]]        | [[https://github.com/timmli/latex-templates/releases/download/v0.9/abstract-template.zip][zip]]      | [[https://www.overleaf.com/docs?snip_uri=https://github.com/timmli/latex-templates/releases/download/v0.9/abstract-template.zip][Overleaf]] |
-| standard article               | [[file:article-main.org][✔]]        | [[https://github.com/timmli/latex-templates/releases/download/v0.9/article-template.zip][zip]]      | [[https://www.overleaf.com/docs?snip_uri=https://github.com/timmli/latex-templates/releases/download/v0.9/article-template.zip][Overleaf]] |
-| standard book                  |          | [[https://github.com/timmli/latex-templates/releases/download/v0.9/book-template.zip][zip]]      |          |
-| beamer slides (theme Lustnau)  | [[file:beamer-main.org][✔]]        | [[https://github.com/timmli/latex-templates/releases/download/v0.9/beamer-template.zip][zip]]      | [[https://www.overleaf.com/docs?snip_uri=https://github.com/timmli/latex-templates/releases/download/v0.9/beamer-template.zip][Overleaf]] |
-| Hausarbeit (for teaching)      |          | [[https://github.com/timmli/latex-templates/releases/download/v0.9/hausarbeit-template.zip][zip]]      | [[https://www.overleaf.com/docs?snip_uri=https://github.com/timmli/latex-templates/releases/download/v0.9/hausarbeit-template.zip][Overleaf]] |
-| Abschlussarbeit (for teaching) |          | [[https://github.com/timmli/latex-templates/releases/download/v0.9/essay-template.zip][zip]]      | [[https://www.overleaf.com/docs?snip_uri=https://github.com/timmli/latex-templates/releases/download/v0.9/abschlussarbeit-template.zip][Overleaf]] |
+| short abstract                 | [[file:abstract-main.org][✔]]        | [[https://github.com/timmli/latex-templates/releases/download/v0.9.1/abstract-template.zip][zip]]      | [[https://www.overleaf.com/docs?snip_uri=https://github.com/timmli/latex-templates/releases/download/v0.9.1/abstract-template.zip][Overleaf]] |
+| standard article               | [[file:article-main.org][✔]]        | [[https://github.com/timmli/latex-templates/releases/download/v0.9.1/article-template.zip][zip]]      | [[https://www.overleaf.com/docs?snip_uri=https://github.com/timmli/latex-templates/releases/download/v0.9.1/article-template.zip][Overleaf]] |
+| standard book                  |          | [[https://github.com/timmli/latex-templates/releases/download/v0.9.1/book-template.zip][zip]]      |          |
+| beamer slides (theme Lustnau)  | [[file:beamer-main.org][✔]]        | [[https://github.com/timmli/latex-templates/releases/download/v0.9.1/beamer-template.zip][zip]]      | [[https://www.overleaf.com/docs?snip_uri=https://github.com/timmli/latex-templates/releases/download/v0.9.1/beamer-template.zip][Overleaf]] |
+| Hausarbeit (for teaching)      |          | [[https://github.com/timmli/latex-templates/releases/download/v0.9.1/hausarbeit-template.zip][zip]]      | [[https://www.overleaf.com/docs?snip_uri=https://github.com/timmli/latex-templates/releases/download/v0.9.1/hausarbeit-template.zip][Overleaf]] |
+| Abschlussarbeit (for teaching) |          | [[https://github.com/timmli/latex-templates/releases/download/v0.9.1/essay-template.zip][zip]]      | [[https://www.overleaf.com/docs?snip_uri=https://github.com/timmli/latex-templates/releases/download/v0.9.1/abschlussarbeit-template.zip][Overleaf]] |
 
 A couple of legacy templates are still available, but unmaintained:
 
