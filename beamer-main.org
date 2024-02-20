@@ -39,13 +39,8 @@
 #+LATEX_HEADER: % \usepackage[inference]{semantic} % for CCG 
 #+LATEX_HEADER: % \usepackage{packages/ccg}
 #+LATEX_HEADER: 
-#+LATEX_HEADER: %% Listings settings
-#+LATEX_HEADER: \usepackage{listings}
-#+LATEX_HEADER: \lstset{basicstyle=\ttfamily,tabsize=2,breaklines=true}
-#+LATEX_HEADER: \RequirePackage{color}
-#+LATEX_HEADER: \definecolor{lightgray}{gray}{0.7}
-#+LATEX_HEADER: %% Add syntax highlighting for specific programming languages
-#+LATEX_HEADER: % \input{packages/listings-xmg-settings.tex} 
+#+LATEX_HEADER: %% Code listings
+#+LATEX_HEADER: \input{packages/listings-settings}
 #+LATEX_HEADER: % \input{TLmacros}
 #+LANGUAGE:  en
 # #+LATEX_HEADER: \AtBeginDocument{\selectlanguage{german}}

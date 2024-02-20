@@ -514,6 +514,10 @@ This is an abstract: \lipsum[1]
 
 <<biblatex-citation-example>>
 
+\subsection{Code listings}
+
+<<listings-example>>
+
 \subsection{AVM}
 
 <<langsci-avm-example>>
@@ -1907,7 +1911,8 @@ Optional settings concern optional packages.
 % \usepackage[inference]{semantic} % for CCG 
 % \usepackage{packages/ccg}
 
-<<listings-settings>>
+%% Code listings
+<<listings-settings-input>>
 #+END_SRC
 
 * Package settings & examples
@@ -3319,27 +3324,38 @@ https://ctan.org/pkg/listings
 
 Typeset program code.
 
-#+NAME: listings-settings
+#+NAME: listings-settings-input
 #+BEGIN_SRC latex
-%% Listings settings
-\usepackage{listings}
-\lstset{basicstyle=\ttfamily,tabsize=2,breaklines=true}
-\RequirePackage{color}
-\definecolor{lightgray}{gray}{0.7}
-%% Add syntax highlighting for specific programming languages
-% \input{packages/listings-xmg-settings.tex} 
+\input{packages/listings-settings}
 #+END_SRC
 
 #+NAME: listings-settings-file
 #+BEGIN_SRC latex :noweb yes :tangle packages/listings-settings.tex
 <<version&timestamp-latex>>
 
-<<listings-settings>>
+%% Listings settings
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily,
+        backgroundcolor=\color{gray!20},
+        % frame=single,
+        tabsize=2,
+        breaklines=true,
+        numbers=left,
+        numbersep=4pt,
+        numberstyle=\tiny,
+        stepnumber=1,
+        firstnumber=1,
+        }
+%% Add syntax highlighting for specific programming languages
+% \input{packages/listings-xmg-settings.tex}
 #+END_SRC
 
 #+NAME: listings-xmg-settings
 #+BEGIN_SRC latex
 % Syntax highlighting for XMG: https://xmg.phil.hhu.de/
+
+\RequirePackage{color}
+\definecolor{lightgray}{gray}{0.7}
 
 \lstnewenvironment{xmg}{%
   \lstset{language=,
@@ -3367,7 +3383,6 @@ Typeset program code.
     literate={->}{{{\textbf{->}}}}1 {\{}{{{\textbf{\{}}}}1 {\}}{{{\textbf{\}}}}}1 {\;}{{{\textbf{;}}}}1 {|}{{{\textbf{|}}}}1 {=}{{{\textbf{=}}}}1 {[}{{{\textbf{[}}}}1 {]}{{{\textbf{]}}}}1 {<}{{{\textbf{<}}}}1 {>}{{{\textbf{>}}}}1 {!}{{{\textbf{!}}}}1 {?}{{{\textbf{?}}}}1 {*=}{{{\textbf{*=}}}}1,%
     morekeywords={node,type,feature,include,class,import,export,declare,syn,sem,frame,morph,value, use, with, dims}
     ]}
-
 #+END_SRC
 
 #+NAME: listings-xmg-settings-file
@@ -3381,6 +3396,9 @@ Typeset program code.
 #+BEGIN_SRC latex
 % Syntax highlighting for DuELME: https://duelme.clarin.inl.nl/
 
+\RequirePackage{color}
+\definecolor{lightgray}{gray}{0.7}
+
 \lstnewenvironment{duelme}{%
   \lstset{language=,
     numbers=left,numbersep=8pt,numberstyle=\color{lightgray},
@@ -3390,7 +3408,6 @@ Typeset program code.
     framerule=0.5mm,rulecolor=\color{lightgray},%
     escapeinside={|\%}{\%|},%
     commentstyle=\color{lightgray},     morekeywords={PATERN,NAME,POS,PATTERN,MAPPING,EXAMPLE,MWE,SENTENCE,DESCRIPTION,COMMENT,LISTA,LISTB,SUBJECT,OBJECT,MODIFIER,RPRON,CONJUGATION,POLARITY,EXPRESSION,CL}}}{}
-
 #+END_SRC
 
 #+NAME: listings-duelme-settings-file
@@ -3404,6 +3421,9 @@ Typeset program code.
 #+BEGIN_SRC latex
 % Syntax highlighting for PATR: https://en.wikipedia.org/wiki/PATR-II
 
+\RequirePackage{color}
+\definecolor{lightgray}{gray}{0.7}
+
 \lstnewenvironment{patr-listing}{%
   \lstset{language=,
     numbers=left,numbersep=8pt,numberstyle=\color{lightgray},
@@ -3415,7 +3435,6 @@ Typeset program code.
     commentstyle=\color{lightgray},
     literate={:}{{{\textbf{:}}}}1 {\{}{{{\textbf{\{}}}}1 {\}}{{{\textbf{\}}}}}1 {=}{{{\textbf{=}}}}1 {[}{{{\textbf{[}}}}1 {]}{{{\textbf{]}}}}1 {<}{{{\textbf{<}}}}1 {>}{{{\textbf{>}}}}1 {!}{{{\textbf{!}}}}1, 
     morekeywords={Define,as,Word}}}{}
-
 #+END_SRC
 
 #+NAME: listings-patr-settings-file
@@ -3423,6 +3442,25 @@ Typeset program code.
 <<version&timestamp-latex>>
 
 <<listings-patr-settings>>
+#+END_SRC
+
+Here is an example with Python code:
+
+#+NAME: listings-example
+#+BEGIN_SRC latex
+\begin{lstlisting}[language=Python,
+  % float,
+  % caption=A floating example with Python code
+  ]
+from numpy import random
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+sns.distplot(random.normal(scale=2, size=1000), hist=False, label='normal')
+sns.distplot(random.logistic(size=1000), hist=False, label='logistic')
+
+plt.show()
+\end{lstlisting}
 #+END_SRC
 
 ** Math formulae
