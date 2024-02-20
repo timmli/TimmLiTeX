@@ -79,6 +79,25 @@ cell 21 & cell 22 & cell 23 \\
 \hline
 \end{tabular}
 
+\subsection{Todonotes}
+
+The following are examples of using the todonotes package. 
+
+\begin{itemize}
+\item The most relevant command is probably \verb|\todo[<options>]{<todo>}|:
+\todo[
+  % ,author=Xavier
+  % ,color=green
+  % ,inline
+  % ,fancyline
+  % ,size=\scriptsize
+  ]{Do something!}example with \verb|\todo| 
+\item Additionally, I have defined \verb|\todoregion{<region>}{<todo>}| for highlighting the region of the todo:
+\todoregion{example}{Do something!} with \verb|\todoregion|
+\end{itemize}
+
+\noindent The list of todos can be printed with \verb|\listoftodos|.
+
 \subsection{Trees}
 
 \Forest{

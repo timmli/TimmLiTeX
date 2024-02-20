@@ -127,6 +127,9 @@ v0.9.1
 
 % <<TLmacros-input>>   % the content of TLmacros.tex goes here
 
+%% Commenting
+<<todonotes-settings-input>>
+
 <<optional-settings>>
 
 
@@ -448,6 +451,9 @@ Remember to first add the class to the set of known classes (in =init.el=).
 
 % <<TLmacros-input>>
 
+%% Commenting
+<<todonotes-settings-input>>
+
 <<optional-settings>>
 #+END_SRC
 
@@ -523,6 +529,10 @@ This is an abstract: \lipsum[1]
 \subsection{Tables}
 
 <<tabular-example>>
+
+\subsection{Todonotes}
+
+<<todonotes-example>>
 
 \subsection{Trees}
 
@@ -1070,6 +1080,9 @@ numbers=noenddot,
 
 % <<TLmacros-input>>   % the content of TLmacros.tex goes here
 
+%% Commenting
+<<todonotes-settings-input>>
+
 <<optional-settings>>
 #+END_SRC
 
@@ -1150,6 +1163,10 @@ numbers=noenddot,
 
 <<tabular-example>>
 
+\subsection{Todonotes}
+
+<<todonotes-example>>
+
 \section{Trees}
 
 <<forest-example>>
@@ -1188,6 +1205,9 @@ numbers=noenddot,
 }
 
 % <<TLmacros-input>>   % the content of TLmacros.tex goes here
+
+%% Commenting
+<<todonotes-settings-input>>
 
 <<optional-settings>>
 
@@ -3760,18 +3780,38 @@ https://tug.ctan.org/macros/latex/contrib/todonotes/todonotes.pdf
 
 Add todo notes to your documents.
 
-#+NAME: todonotes-settings
+#+NAME: todonotes-settings-input
 #+BEGIN_SRC latex
-\RequirePackage{soul}   % Required by todonotes
-\usepackage[textsize=scriptsize,textwidth=2.5cm]{todonotes}
-\newcommand{\todoregion}[2]{\hl{#1}\todo{#2}}    
+\input{packages/todonotes-settings}
 #+END_SRC
 
 #+NAME: todonotes-settings-file
 #+BEGIN_SRC latex :noweb yes :tangle packages/todonotes-settings.tex
 <<version&timestamp-latex>>
 
-<<todonotes-settings>>
+\RequirePackage{soul}   % Required by todonotes
+\usepackage[textsize=scriptsize,textwidth=2.5cm]{todonotes}
+\newcommand{\todoregion}[2]{\hl{#1}\todo{#2}}    
+#+END_SRC
+
+#+NAME: todonotes-example
+#+BEGIN_SRC latex
+The following are examples of using the todonotes package. 
+
+\begin{itemize}
+\item The most relevant command is probably \verb|\todo[<options>]{<todo>}|:
+\todo[
+  % ,author=Xavier
+  % ,color=green
+  % ,inline
+  % ,fancyline
+  % ,size=\scriptsize
+  ]{Do something!}example with \verb|\todo| 
+\item Additionally, I have defined \verb|\todoregion{<region>}{<todo>}| for highlighting the region of the todo:
+\todoregion{example}{Do something!} with \verb|\todoregion|
+\end{itemize}
+
+\noindent The list of todos can be printed with \verb|\listoftodos|.
 #+END_SRC
 
 ** Ulem

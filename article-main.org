@@ -38,6 +38,9 @@
 #+LATEX_HEADER: 
 #+LATEX_HEADER: % \input{TLmacros}
 #+LATEX_HEADER: 
+#+LATEX_HEADER: %% Commenting
+#+LATEX_HEADER: \input{packages/todonotes-settings}
+#+LATEX_HEADER: 
 #+LATEX_HEADER: %% Tables
 #+LATEX_HEADER: \usepackage{booktabs}           % Nicer tables
 #+LATEX_HEADER: 
