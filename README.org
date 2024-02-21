@@ -29,6 +29,13 @@ A couple of legacy templates are still available, but unmaintained:
 - tikzposter 
 - [[https://github.com/langsci/langscibook][langscibook]] paper (just the [[file:langsci-paper-template.org][Org file]]!)
 - [[https://jlm.ipipan.waw.pl/index.php/JLM][JLM]] article (just the [[file:jlm-article-template.org][Org file]]!)
+
+** Screenshots
+*** Beamer theme: Lustnau
+
+[[file:graphics/Lustnau-title.png]]
+
+[[file:graphics/Lustnau-blocks.png]]
   
 ** A word of advice on LaTeX (since you didn't ask for it)
 
