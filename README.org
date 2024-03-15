@@ -41,4 +41,6 @@ A couple of legacy templates are still available, but unmaintained:
 
 LaTeX is a great software to typeset texts according to the golden rules of typesetting. When used correctly, your text will look gorgeous and your reader's eyes will just love it. But it is actually not optimal at creating content – too say the least. The writing process rather resembles the act of programming, with constantly tweaking, compiling and debugging the source code of the text. While this hacking approach can be satisfying for sure, it tends to distract from the actual purpose, namely writing good content. 
 
+This blog post nails it very nicely: http://www.danielallington.net/2016/09/the-latex-fetish/
+
 Therefore my (maybe surprising) advice is this: *Do not go down this rabbit hole and avoid LaTeX as long as possible!* It is fine to work on the LaTeX code only at the very last stage, when the final version of the text is being polished. Until then, just use a lightweight markup language, a convenient drawing tool and keep it simple. There are conversion tools like [[https://pandoc.org/][Pandoc]] which can transform many markup languages into LaTeX and PDF. Some editors even allow for exporting to LaTeX and PDF directly, for example, [[https://orgmode.org/][Emacs Org]]. To see what this looks like, I have added Org files for some of the templates.
