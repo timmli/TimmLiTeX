@@ -1,4 +1,4 @@
-* latex-templates
+* TimmLiTeX
 
 My personal collection of LaTeX settings and templates.
 
