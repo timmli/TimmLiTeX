@@ -74,7 +74,7 @@ In order to compile these templates, press =C-c C-v t= , or evaluate the followi
 
 #+NAME: template-version
 #+BEGIN_SRC latex 
-v0.9.1
+v0.9.2
 #+END_SRC
 
 #+NAME: version&timestamp-latex
