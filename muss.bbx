@@ -1,7 +1,7 @@
 % File:    muss.bbx
 % Author:  Timm Lichte (http://timm-lichte.de)
-% Date:    2023-09-08T09:04:24+0200
-% Version: 0.4 (tested with BibLaTeX v3.19)
+% Date:    2026-03-13T12:55:34+0100
+% Version: 0.6 (tested with BibLaTeX v3.20)
 % License: LPPL Version 1.3c
 %
 % ----------------------------------------------------------------
@@ -82,6 +82,7 @@
   techreport       = {technical report},      % default string used when type is undefined
   thesisat         = {at},
   reportat         = {at},
+  urlseen          = {accessed on}
 }
 
 
@@ -116,10 +117,10 @@
 \DeclareFieldFormat{booktitle}{\mkbibemph{#1}}
 
 \DeclareFieldFormat{doi}{%
-  \mkbibacro{DOI}\addcolon\space%
+  % \mkbibacro{DOI}\addcolon\space%
   \ifhyperref%
-  {\href{https://doi.org/#1}{\nolinkurl{#1}}}%
-  {\nolinkurl{#1}}}%
+  {\href{https://doi.org/#1}{\nolinkurl{doi:#1}}}%
+  {\nolinkurl{doi:#1}}}%
 
 \DeclareFieldFormat{url}{%
   % \mkbibacro{URL}\addcolon\space%
